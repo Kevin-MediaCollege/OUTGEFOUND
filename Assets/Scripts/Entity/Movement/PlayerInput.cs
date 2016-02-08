@@ -24,8 +24,10 @@ public class PlayerInput : MonoBehaviour
 
 		if(vertical != 0 || horizontal != 0)
 		{
-			Vector3 input = new Vector3(horizontal, 0, vertical);
-			entityMovement.Move(input);
+			Vector3 verticalDirection = transform.forward * vertical;
+			Vector3 horizontalDirection = transform.right * horizontal;
+			
+			entityMovement.Move(verticalDirection + horizontalDirection);
 		}
 	}
 }
