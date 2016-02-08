@@ -14,7 +14,7 @@ public static class EntityUtils
 		return entity.GetComponent<EntityMovement>();
 	}
 
-	public static Transform Eyes(this Entity entity)
+	public static Transform GetEyes(this Entity entity)
 	{
 		Transform eyes = entity.transform.Find("Eyes");
 
@@ -51,6 +51,7 @@ public static class EntityUtils
 			}
 		}
 
+		Debug.LogError("[EntityUtils] No entity with tag: " + tag + " found");
 		return null;
 	}
 }
