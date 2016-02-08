@@ -15,7 +15,7 @@ public class FirstPersonCameraState : CameraState
 	protected void OnEnable()
 	{
 		player = EntityUtils.GetEntityWithTag("Player");
-		eyes = player.GetEyes();
+		eyes = player.Eyes;
 
 		Cursor.lockState = CursorLockMode.Locked;
 	}

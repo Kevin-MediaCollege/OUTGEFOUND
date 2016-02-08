@@ -12,6 +12,45 @@ public class Entity : MonoBehaviour
 		}
 	}
 
+	public Rigidbody Rigidbody
+	{
+		get
+		{
+			return GetComponent<Rigidbody>();
+		}
+	}
+
+	public EntityMovement Movement
+	{
+		get
+		{
+			return GetComponent<EntityMovement>();
+		}
+	}
+
+	public EntityHealth AddonHealth
+	{
+		get
+		{
+			return GetComponentInChildren<EntityHealth>();
+		}
+	}
+
+	public Transform Eyes
+	{
+		get
+		{
+			Transform eyes = transform.Find("Eyes");
+
+			if(eyes == null)
+			{
+				Debug.LogError("[EntityUtils] Entity doesn't have eyes!", this);
+			}
+
+			return eyes;
+		}
+	}
+
 	private static HashSet<Entity> all = new HashSet<Entity>();
 
 	[SerializeField] private string[] startingTags;
