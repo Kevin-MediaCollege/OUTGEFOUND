@@ -1,13 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\UI\Screen\ScreenSplashCompany.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\UI\Screen\ScreenSplashUnity.cs">
     <Files>
-      <File FileName="Assets\Scripts\UI\Screen\ScreenSplashCompany.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\Screen\ScreenBase.cs" Line="7" Column="3" />
+      <File FileName="Assets\Scripts\UI\Screen\ScreenSplashUnity.cs" Line="28" Column="32" />
+      <File FileName="Assets\Scripts\UI\Screen\ScreenSplashCompany.cs" Line="35" Column="4" />
+      <File FileName="Assets\Scripts\UI\Screen\ScreenBase.cs" Line="29" Column="1" />
       <File FileName="Assets\Scripts\UI\Screen\ScreenManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\UI\Screen\ScreenStart.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Utils\HOTweenHelper.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Audio\AudioManager2D.cs" Line="45" Column="21" />
+      <File FileName="Assets\Scripts\Utils\HOTweenHelper.cs" Line="27" Column="100" />
+      <File FileName="Assets\Scripts\Audio\AudioManager2D.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
