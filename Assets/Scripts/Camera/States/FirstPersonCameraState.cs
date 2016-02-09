@@ -8,14 +8,18 @@ public class FirstPersonCameraState : CameraState
 	[SerializeField] private Vector2 sensitivity = new Vector2(10, 10);
 
 	private Transform eyes;
+	private Transform weapon;
+
 	private Entity player;	
 
-	private Vector2 rotation;
+	private float yRotation;
 
 	protected void OnEnable()
 	{
 		player = EntityUtils.GetEntityWithTag("Player");
+
 		eyes = player.transform.Find("Eyes");
+		weapon = player.transform.Find("Weapon");
 
 		Cursor.lockState = CursorLockMode.Locked;
 	}
@@ -27,14 +31,12 @@ public class FirstPersonCameraState : CameraState
 		MainCamera.transform.rotation = eyes.rotation;
 
 		// Rotate the player
-		rotation.x += Input.GetAxis("Mouse X") * sensitivity.x;
-		rotation.y += Input.GetAxis("Mouse Y") * sensitivity.y;		
-		rotation.y = Mathf.Clamp(rotation.y, yConstraint.x, yConstraint.y);
+		player.transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivity.x, 0);
 
-		Quaternion xQuaternion = Quaternion.AngleAxis(rotation.x, Vector3.up);
-		Quaternion yQuaternion = Quaternion.AngleAxis(rotation.y, Vector3.left);
+		yRotation += Input.GetAxis("Mouse Y") * sensitivity.y;
+		yRotation = Mathf.Clamp(yRotation, yConstraint.x, yConstraint.y);
 
-		player.transform.localRotation = xQuaternion;
-		//MainCamera.transform.localRotation = yQuaternion;
+		eyes.localEulerAngles = new Vector3(-yRotation, eyes.localEulerAngles.y, 0);
+		weapon.localEulerAngles = new Vector3(-yRotation, weapon.localEulerAngles.y, 0);
 	}
 }
