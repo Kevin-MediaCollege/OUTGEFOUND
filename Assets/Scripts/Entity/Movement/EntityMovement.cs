@@ -10,7 +10,7 @@ public class EntityMovement : MonoBehaviour
 
 	protected void Awake()
 	{
-		rigidbody = entity.Rigidbody;
+		rigidbody = entity.GetComponent<Rigidbody>();
 	}
 
 	protected void Reset()

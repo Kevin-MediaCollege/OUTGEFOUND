@@ -9,7 +9,7 @@ public class PlayerInput : MonoBehaviour
 
 	protected void Awake()
 	{
-		entityMovement = entity.Movement;
+		entityMovement = entity.GetComponent<EntityMovement>();
 	}
 
 	protected void Reset()

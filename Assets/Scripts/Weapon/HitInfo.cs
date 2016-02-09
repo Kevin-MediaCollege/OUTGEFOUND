@@ -1,24 +1,33 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
-public struct HitInfo
+public struct ShotInfo
 {
-	public Entity source;
-	public Entity target;
+	public Entity Source { private set; get; }
+	public Damagable Target { set; get; }
 
-	public Vector3 point;
-	public Vector3 normal;
+	public Vector3 Direction { set; get; }
+	public Vector3 Point { set; get; }
+	public Vector3 Normal { set; get; }
 
-	public int damage;
+	public int Damage { set; get; }
 
-	public HitInfo(Entity source, Entity target, Vector3 point, Vector3 normal, int damage)
+	public bool HitDamagable
 	{
-		this.source = source;
-		this.target = target;
+		get
+		{
+			return Target != null;
+		}
+	}
 
-		this.point = point;
-		this.normal = normal;
+	public ShotInfo(Entity source, Damagable target, Vector3 direction, Vector3 point, Vector3 normal, int damage)
+	{
+		Source = source;
+		Target = target;
 
-		this.damage = damage;
+		Direction = direction;
+		Point = point;
+		Normal = normal;
+
+		Damage = damage;
 	}
 }

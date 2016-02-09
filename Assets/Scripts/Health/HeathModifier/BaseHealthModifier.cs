@@ -20,5 +20,5 @@ public abstract class BaseHealthModifier : MonoBehaviour, IHealthModifier
 		health.AddHealthModifier(this);
 	}
 		
-	public abstract HitInfo OnDamageReceived(HitInfo hitInfo);
+	public abstract void OnDamageReceived(ref ShotInfo shotInfo);
 }

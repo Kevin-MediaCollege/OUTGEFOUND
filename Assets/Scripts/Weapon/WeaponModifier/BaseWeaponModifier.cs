@@ -3,14 +3,7 @@ using System.Collections;
 
 public abstract class BaseWeaponModifier : MonoBehaviour, IWeaponModifier
 {
-	private Entity entity;
-	private Weapon weapon;
-
-	protected virtual void Awake()
-	{
-		entity = GetComponentInParent<Entity>();
-		weapon = entity.GetComponentInChildren<Weapon>();
-	}
+	[SerializeField] private Weapon weapon;
 
 	protected virtual void OnEnable()
 	{
@@ -22,7 +15,17 @@ public abstract class BaseWeaponModifier : MonoBehaviour, IWeaponModifier
 		weapon.RemoveWeaponModifier(this);
 	}
 
-	public abstract void OnFire();
+	protected void Reset()
+	{
+		weapon = GetComponentInParent<Weapon>();
+	}
 
-	public abstract bool CanFire();
+	public virtual void OnFire(ref ShotInfo shotInfo)
+	{
+	}
+
+	public virtual bool CanFire()
+	{
+		return true;
+	}
 }

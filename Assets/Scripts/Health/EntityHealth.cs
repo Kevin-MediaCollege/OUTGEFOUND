@@ -1,30 +1,77 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
-public class EntityHealth : MonoBehaviour
+public class EntityHealth : MonoBehaviour, IEntityInjector
 {
-	public delegate void OnDamageTaken(HitInfo hitInfo);
-	public event OnDamageTaken onDamageTakenEvent = delegate { };
-
-	public delegate void OnDeath(HitInfo hitInfo);
+	public delegate void OnDeath(ShotInfo shotInfo);
 	public event OnDeath onDeathEvent = delegate { };
 
 	public Entity Entity { private set; get; }
 
 	[SerializeField] private int startingHealth;
 
-	private HashSet<IHealthModifier> healthModifiers = new HashSet<IHealthModifier>();
-	
+	private HashSet<IHealthModifier> healthModifiers;
+
+	private Damagable damagable;
+
 	private int health;
 
 	protected void Awake()
 	{
-		Entity = GetComponentInParent<Entity>();
 		health = startingHealth;
 	}
 
-	public void Damage(HitInfo hitInfo)
+	protected void OnEnable()
+	{
+		if(damagable != null)
+		{
+			damagable.onDamageReceivedEvent += OnDamageReceived;
+		}
+	}
+
+	protected void OnDisable()
+	{
+		damagable.onDamageReceivedEvent -= OnDamageReceived;
+	}
+
+	public void Damage(int damage)
+	{
+		ShotInfo shotInfo = new ShotInfo(Entity, damagable, Vector3.zero, Vector3.zero, Vector3.zero, damage);
+		OnDamageReceived(shotInfo);
+	}
+
+	public void Kill()
+	{
+		Damage(health);
+	}
+
+	#region Modifier Callbacks
+	public void AddHealthModifier(IHealthModifier modifier)
+	{
+		if(healthModifiers == null)
+		{
+			healthModifiers = new HashSet<IHealthModifier>();
+		}
+
+		healthModifiers.Add(modifier);
+	}
+
+	public void RemoveHealthModifier(IHealthModifier modifier)
+	{
+		healthModifiers.Remove(modifier);
+	}
+	#endregion
+
+	public void RegisterEntity(Entity entity)
+	{
+		Entity = entity;
+		damagable = entity.GetComponentInChildren<Damagable>();
+		damagable.onDamageReceivedEvent += OnDamageReceived;
+	}
+
+	private void OnDamageReceived(ShotInfo shotInfo)
 	{
 		if(health <= 0)
 		{
@@ -33,29 +80,18 @@ public class EntityHealth : MonoBehaviour
 
 		foreach(IHealthModifier modifier in healthModifiers)
 		{
-			hitInfo = modifier.OnDamageReceived(hitInfo);
+			modifier.OnDamageReceived(ref shotInfo);
 		}
 
 		// Make sure health doesn't go below zero
-		hitInfo.damage = Mathf.Min(health, hitInfo.damage);
+		shotInfo.Damage = Mathf.Min(health, shotInfo.Damage);
 
-		health -= hitInfo.damage;
-		onDamageTakenEvent(hitInfo);
+		health -= shotInfo.Damage;
 
 		// Send an event to let others know the entity has died
 		if(health <= 0)
 		{
-			onDeathEvent(hitInfo);
+			onDeathEvent(shotInfo);
 		}
-	}
-
-	public void AddHealthModifier(IHealthModifier modifier)
-	{
-		healthModifiers.Add(modifier);
-	}
-
-	public void RemoveHealthModifier(IHealthModifier modifier)
-	{
-		healthModifiers.Remove(modifier);
 	}
 }

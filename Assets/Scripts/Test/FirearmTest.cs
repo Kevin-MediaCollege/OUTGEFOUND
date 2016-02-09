@@ -19,12 +19,23 @@ public class FirearmTest : MonoBehaviour
 	{
 		if(Input.GetMouseButtonDown(0))
 		{
-			weapon.TryFire();
+			weapon.StartFire();
+		}
+		else if(Input.GetMouseButtonUp(0))
+		{
+			weapon.StopFire();
 		}
 	}
 
-	private void OnFireEvent(HitInfo hitInfo)
+	private void OnFireEvent(ShotInfo shotInfo)
 	{
-		Debug.Log("Hit: " + hitInfo.target, hitInfo.target);
+		if(shotInfo.HitDamagable)
+		{
+			Debug.Log("Hit: " + shotInfo.Target.Entity, shotInfo.Target);
+		}
+		else
+		{
+			Debug.Log("Missed!");
+		}		
 	}
 }

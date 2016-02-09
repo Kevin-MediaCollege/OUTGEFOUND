@@ -19,14 +19,12 @@ public class Magazine : BaseWeaponModifier
 
 	[SerializeField] private int capacity;
 
-	protected override void Awake()
+	protected void Awake()
 	{
-		base.Awake();
-
 		Put(capacity);
 	}
 
-	public override void OnFire()
+	public override void OnFire(ref ShotInfo shotInfo)
 	{
 		Current--;
 			

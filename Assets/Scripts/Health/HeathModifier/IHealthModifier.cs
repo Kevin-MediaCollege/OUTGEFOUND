@@ -3,5 +3,5 @@ using System.Collections;
 
 public interface IHealthModifier
 {
-	HitInfo OnDamageReceived(HitInfo hitInfo);
+	void OnDamageReceived(ref ShotInfo shotInfo);
 }

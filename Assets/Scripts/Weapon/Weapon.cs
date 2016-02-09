@@ -2,74 +2,97 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public abstract class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour, IEntityInjector
 {
-	public Entity Entity { private set; get; }
+	public delegate void OnFire(ShotInfo shotInfo);
+	public event OnFire onFireEvent = delegate { };
 
-	private HashSet<IWeaponModifier> weaponModifiers = new HashSet<IWeaponModifier>();
-	private HashSet<IDamageModifier> damageModifiers = new HashSet<IDamageModifier>();
+	public Entity Wielder { private set; get; }
 
-	protected virtual void Awake()
+	[SerializeField] protected int baseDamage;
+
+	private HashSet<IWeaponModifier> weaponModifiers;
+
+	private bool firing;
+
+	protected void Update()
 	{
-		Entity = GetComponentInParent<Entity>();
-	}
-
-	public void TryFire()
-	{
-		if(CanFire())
+		if(firing)
 		{
-			Fire();
+			if(!CanFire())
+			{
+				return;
+			}
 
+			ShotInfo shotInfo;
+			GetshotInfo(out shotInfo);
+
+			// Apply all modifiers to the shot
 			foreach(IWeaponModifier modifier in weaponModifiers)
 			{
-				modifier.OnFire();
+				modifier.OnFire(ref shotInfo);
 			}
+
+			onFireEvent(shotInfo);
+
+			// Let the target know it's been damaged
+			if(shotInfo.HitDamagable)
+			{
+				shotInfo.Target.Damage(shotInfo);
+			}
+		}
+	}
+
+	public void RegisterEntity(Entity entity)
+	{
+		Wielder = entity;
+	}
+
+	public virtual void StartFire()
+	{
+		if(!firing)
+		{
+			firing = true;
+		}
+	}
+
+	public virtual void StopFire()
+	{
+		if(firing)
+		{
+			firing = false;
 		}
 	}
 
 	public bool CanFire()
 	{
-		bool result = true;
-
 		foreach(IWeaponModifier modifier in weaponModifiers)
 		{
-			result &= modifier.CanFire();
+			if(!modifier.CanFire())
+			{
+				return false;
+			}
 		}
 
-		return result;
+		return true;
 	}
 
+	#region Modifier Handlers
 	public void AddWeaponModifier(IWeaponModifier modifier)
 	{
-		weaponModifiers.Add(modifier);
-	}
+		if(weaponModifiers == null)
+		{
+			weaponModifiers = new HashSet<IWeaponModifier>();
+		}
 
-	public void AddDamageModifier(IDamageModifier modifier)
-	{
-		damageModifiers.Add(modifier);
+		weaponModifiers.Add(modifier);
 	}
 
 	public void RemoveWeaponModifier(IWeaponModifier modifier)
 	{
 		weaponModifiers.Remove(modifier);
 	}
+	#endregion
 
-	public void RemoveDamageModifier(IDamageModifier modifier)
-	{
-		damageModifiers.Remove(modifier);
-	}
-
-	protected abstract void Fire();
-
-	protected HitInfo ApplyDamageModifiers(HitInfo hitInfo)
-	{
-		HitInfo result = hitInfo;
-
-		foreach(IDamageModifier modifier in damageModifiers)
-		{
-			result = modifier.Modify(hitInfo);
-		}
-
-		return result;
-	}
+	protected abstract bool GetshotInfo(out ShotInfo shotInfo);
 }
