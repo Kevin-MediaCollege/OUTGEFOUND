@@ -23,8 +23,11 @@ public class ScreenSplashCompany : ScreenBase
 
 	public override IEnumerator OnScreenFadein()
 	{
-		HOTweenHelper.Position (backgroundRect, new Vector3 (0f, -200f, 0f), 5.4f, 0f, Holoville.HOTween.EaseType.Linear);
-		HOTweenHelper.Position (background2Rect, new Vector3 (0f, -80f, 0f), 5.4f, 0f, Holoville.HOTween.EaseType.Linear);
+		backgroundRect.anchoredPosition3D = new Vector3 (0f, 0f, 0f);
+		background2Rect.anchoredPosition3D = new Vector3 (0f, 200f, 0f);
+
+		HOTweenHelper.Position (backgroundRect, new Vector3 (0f, -200f, 0f), 6.4f, 0f, Holoville.HOTween.EaseType.Linear);
+		HOTweenHelper.Position (background2Rect, new Vector3 (0f, -100f, 0f), 6.4f, 0f, Holoville.HOTween.EaseType.Linear);
 
 		yield return new WaitForSeconds(1f);
 
@@ -92,6 +95,8 @@ public class ScreenSplashCompany : ScreenBase
 		HOTweenHelper.Fade (overlay, 0f, 1f, 0.3f, 0f);
 
 		yield return new WaitForSeconds(0.3f); 
+
+		ScreenManager.Instance.setScreen ("ScreenSplashUnity");
 	}
 
 	private IEnumerator PlayNaughtyGoatAudioDelayed()

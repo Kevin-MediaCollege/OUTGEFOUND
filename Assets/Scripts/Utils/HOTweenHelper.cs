@@ -21,4 +21,9 @@ public class HOTweenHelper
 	{
 		HOTween.To (_rect, _time, new TweenParms ().Prop ("anchoredPosition3D", new PlugVector3 (_targetPosition)).Ease (_easeType));
 	}
+
+	public static void TransformPosition(Transform _trans, Vector3 _targetPosition, float _time, float _delay, Holoville.HOTween.EaseType _easeType = Holoville.HOTween.EaseType.EaseOutElastic)
+	{
+		HOTween.To (_trans, _time, new TweenParms ().Prop ("position", new PlugVector3 (_targetPosition)).Ease (_easeType));
+	}
 }
