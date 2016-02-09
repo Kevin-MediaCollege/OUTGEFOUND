@@ -13,6 +13,8 @@ public class ScreenSplashCompany : ScreenBase
 	public RectTransform backgroundRect;
 	public RectTransform background2Rect;
 
+	[SerializeField] private AudioAsset naughtyGoatAudio;
+
 	public override void OnScreenEnter()
 	{
 		overlay.alpha = 1f;
@@ -43,10 +45,10 @@ public class ScreenSplashCompany : ScreenBase
 
 		yield return new WaitForSeconds(0.2f);
 
-		StartCoroutine ("animation");
+		StartCoroutine ("PlayAnimation");
 	}
 
-	public IEnumerator animation()
+	public IEnumerator PlayAnimation()
 	{
 		yield return new WaitForSeconds(0.3f);
 
@@ -75,7 +77,7 @@ public class ScreenSplashCompany : ScreenBase
 
 		yield return new WaitForSeconds(0.3f);
 
-		AudioManager2D.Instance.PlaySound ("naughtygoatsound", 0.15f, false, 1f);
+		StartCoroutine(PlayNaughtyGoatAudioDelayed());
 
 		for(int i = 0; i < 5; i++)
 		{
@@ -90,6 +92,13 @@ public class ScreenSplashCompany : ScreenBase
 		HOTweenHelper.Fade (overlay, 0f, 1f, 0.3f, 0f);
 
 		yield return new WaitForSeconds(0.3f); 
+	}
+
+	private IEnumerator PlayNaughtyGoatAudioDelayed()
+	{
+		yield return new WaitForSeconds(0.15f);
+
+		AudioManager.Play(naughtyGoatAudio);
 	}
 
 	void Update()
