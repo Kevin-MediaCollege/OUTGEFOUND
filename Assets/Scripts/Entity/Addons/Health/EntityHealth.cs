@@ -20,6 +20,11 @@ public class EntityHealth : MonoBehaviour, IEntityInjector
 
 	protected void Awake()
 	{
+		if(healthModifiers == null)
+		{
+			healthModifiers = new HashSet<IHealthModifier>();
+		}
+
 		health = startingHealth;
 	}
 
