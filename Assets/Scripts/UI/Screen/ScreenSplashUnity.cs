@@ -7,7 +7,7 @@ public class ScreenSplashUnity : ScreenBase
 	public CanvasGroup overlay;
 	public CanvasGroup logo;
 
-	public Transform camera;
+	public new Transform camera;
 
 	//-22.14, 14.85, 28.71
 	//26.4359, 364.8974, 0
@@ -25,10 +25,10 @@ public class ScreenSplashUnity : ScreenBase
 	{
 		yield return new WaitForSeconds (1f);
 
-		StartCoroutine (animation());
+		StartCoroutine (Animation());
 	}
 
-	public IEnumerator animation()
+	public IEnumerator Animation()
 	{
 		camera.position = new Vector3(-15.1f, 14.85f, 21.8f);
 
