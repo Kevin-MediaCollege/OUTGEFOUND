@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &106026
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 489672}
+  m_Layer: 0
+  m_Name: Modifiers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &123548
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,6 +127,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 498068}
+  - {fileID: 489672}
   - {fileID: 464604}
   m_Father: {fileID: 428766}
   m_RootOrder: 2
@@ -153,7 +169,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 426086}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &485738
 Transform:
   m_ObjectHideFlags: 1
@@ -166,6 +182,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 428766}
   m_RootOrder: 0
+--- !u!4 &489672
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106026}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 426086}
+  m_RootOrder: 1
 --- !u!4 &498068
 Transform:
   m_ObjectHideFlags: 1
@@ -313,7 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd17015b668b35e448ad22b7268cb60e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 0
+  baseDamage: 3
   barrel: {fileID: 498068}
 --- !u!136 &13694276
 CapsuleCollider:
