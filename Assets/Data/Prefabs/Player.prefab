@@ -8,6 +8,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 489672}
+  - 114: {fileID: 11417746}
+  - 114: {fileID: 11491188}
+  - 114: {fileID: 11415106}
   m_Layer: 0
   m_Name: Modifiers
   m_TagString: Untagged
@@ -27,23 +30,6 @@ GameObject:
   - 114: {fileID: 11414162}
   m_Layer: 0
   m_Name: Weapon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &123996
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 464604}
-  - 114: {fileID: 11403852}
-  - 114: {fileID: 11435808}
-  m_Layer: 0
-  m_Name: Magazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,7 +114,6 @@ Transform:
   m_Children:
   - {fileID: 498068}
   - {fileID: 489672}
-  - {fileID: 464604}
   m_Father: {fileID: 428766}
   m_RootOrder: 2
 --- !u!4 &428766
@@ -158,18 +143,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 428766}
   m_RootOrder: 1
---- !u!4 &464604
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 123996}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 426086}
-  m_RootOrder: 2
 --- !u!4 &485738
 Transform:
   m_ObjectHideFlags: 1
@@ -254,19 +227,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &11403852
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 123996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4d7f73aca932b548bdcc369bdf955bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapon: {fileID: 11473482}
-  capacity: 12
 --- !u!114 &11408882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -291,8 +251,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 362249d4221046946a3c8b2d41e15c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entity: {fileID: 11408882}
-  speed: 7500
+  speed: 10
+  gravity: 10
+  maxVelocityChange: 10
+  jumpHeight: 2
 --- !u!114 &11414162
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -305,26 +267,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 11473482}
---- !u!114 &11435808
+--- !u!114 &11415106
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 123996}
+  m_GameObject: {fileID: 106026}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1eecc8e17a1c3ba489ab928ef03682e9, type: 3}
+  m_Script: {fileID: 11500000, guid: fda994e79bfaf2d4c808b5cda96be7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magazine: {fileID: 11403852}
-  max: 24
+  weapon: {fileID: 11473482}
+--- !u!114 &11417746
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38f7424a5b408f943875f50b8beb82ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 11473482}
+  roundsPerMinute: 800
 --- !u!114 &11442370
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 144936}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0503012c2823f4e43b6c305e15ff70f1, type: 3}
   m_Name: 
@@ -343,6 +317,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseDamage: 3
   barrel: {fileID: 498068}
+--- !u!114 &11491188
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4d7f73aca932b548bdcc369bdf955bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 11473482}
+  capacity: 12
 --- !u!136 &13694276
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -15,6 +15,14 @@ public abstract class Weapon : MonoBehaviour, IEntityInjector
 
 	private bool firing;
 
+	protected void Awake()
+	{
+		if(weaponModifiers == null)
+		{
+			weaponModifiers = new HashSet<IWeaponModifier>();
+		}
+	}
+
 	protected void Update()
 	{
 		if(firing)

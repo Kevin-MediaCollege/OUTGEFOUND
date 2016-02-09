@@ -3,7 +3,7 @@ using System.Collections;
 
 public abstract class BaseWeaponModifier : MonoBehaviour, IWeaponModifier
 {
-	[SerializeField] private Weapon weapon;
+	[SerializeField] protected Weapon weapon;
 
 	protected virtual void OnEnable()
 	{
