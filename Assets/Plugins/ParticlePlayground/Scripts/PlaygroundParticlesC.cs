@@ -2037,14 +2037,14 @@ namespace ParticlePlayground {
 			Color color = new Color();
 			for (int i = 0; i<playgroundParticles.particleCache.Length; i++) {
 				color = playgroundParticles.states[to].GetColor(i%playgroundParticles.states[to].colorLength);
-				playgroundParticles.particleCache[i].color = color;
+				playgroundParticles.particleCache[i].startColor = color;
 			}
 		}
 		
 		// Set color from Color
 		public static void SetColor (PlaygroundParticlesC playgroundParticles, Color color) {
 			for (int i = 0; i<playgroundParticles.particleCache.Length; i++) {
-				playgroundParticles.particleCache[i].color = color;
+				playgroundParticles.particleCache[i].startColor = color;
 			}
 		}
 		
@@ -2111,7 +2111,7 @@ namespace ParticlePlayground {
 		public static void SetSize (PlaygroundParticlesC playgroundParticles, float size) {
 			for (int i = 0; i<playgroundParticles.particleCache.Length; i++) {
 				playgroundParticles.playgroundCache.initialSize[i] = size;
-				playgroundParticles.particleCache[i].size = size;
+				playgroundParticles.particleCache[i].startSize = size;
 			}
 		}
 		
@@ -2209,9 +2209,9 @@ namespace ParticlePlayground {
 		public static void SetAlpha (PlaygroundParticlesC playgroundParticles, float alpha) {
 			Color pColor;
 			for (int i = 0; i<playgroundParticles.particleCache.Length; i++) {
-				pColor = playgroundParticles.particleCache[i].color;
+				pColor = playgroundParticles.particleCache[i].startColor;
 				pColor.a = alpha;
-				playgroundParticles.particleCache[i].color = pColor;
+				playgroundParticles.particleCache[i].startColor = pColor;
 			}
 		}
 		
@@ -2452,7 +2452,7 @@ namespace ParticlePlayground {
 					playgroundParticles.playgroundCache.death[p] = playgroundParticles.playgroundCache.birth[p]+playgroundParticles.lifetime;
 					playgroundParticles.playgroundCache.life[p] = (playgroundParticles.playgroundCache.death[p]-playgroundParticles.playgroundCache.lifetimeOffset[p])-playgroundParticles.playgroundCache.birth[p];
 					playgroundParticles.particleCache[p].startLifetime = playgroundParticles.lifetime;
-					playgroundParticles.particleCache[p].size = 0;
+					playgroundParticles.particleCache[p].startSize = 0;
 					playgroundParticles.playgroundCache.targetPosition[p] = PlaygroundC.initialTargetPosition;
 					playgroundParticles.playgroundCache.previousTargetPosition[p] = PlaygroundC.initialTargetPosition;
 					playgroundParticles.playgroundCache.position[p] = PlaygroundC.initialTargetPosition;
@@ -2508,7 +2508,7 @@ namespace ParticlePlayground {
 		public static void SetColorAtLifetime (PlaygroundParticlesC playgroundParticles, float time) {
 			Color32 c = playgroundParticles.lifetimeColor.Evaluate(time/playgroundParticles.lifetime);
 			for (int p = 0; p<playgroundParticles.particleCount; p++)
-				playgroundParticles.particleCache[p].color = c;
+				playgroundParticles.particleCache[p].startColor = c;
 			playgroundParticles.shurikenParticleSystem.SetParticles(playgroundParticles.particleCache, playgroundParticles.particleCache.Length);
 		}
 		
@@ -2518,7 +2518,7 @@ namespace ParticlePlayground {
 			Color32 c;
 			for (int p = 0; p<playgroundParticles.particleCount; p++) {
 				c = playgroundParticles.lifetimeColor.Evaluate(playgroundParticles.playgroundCache.life[p]/playgroundParticles.lifetime);
-				playgroundParticles.particleCache[p].color = c;
+				playgroundParticles.particleCache[p].startColor = c;
 			}
 			playgroundParticles.shurikenParticleSystem.SetParticles(playgroundParticles.particleCache, playgroundParticles.particleCache.Length);
 		}
@@ -2604,7 +2604,7 @@ namespace ParticlePlayground {
 				playgroundParticles.playgroundCache.maskSorting = null;
 				
 				for (int i = 0; i<amount; i++) {
-					playgroundParticles.particleCache[i].size = 0f;
+					playgroundParticles.particleCache[i].startSize = 0f;
 					playgroundParticles.playgroundCache.rebirth[i] = true;
 					playgroundParticles.playgroundCache.simulate[i] = true;
 					playgroundParticles.playgroundCache.isNonBirthed[i] = true;
@@ -2813,7 +2813,7 @@ namespace ParticlePlayground {
 						}
 						
 						// Size
-						particleCache[p].size = (playgroundCache.maskAlpha[p]>0&&particleCache[p].position.y!=initYpos)?playgroundCache.size[p]:0;
+						particleCache[p].startSize = (playgroundCache.maskAlpha[p]>0&&particleCache[p].position.y!=initYpos)?playgroundCache.size[p]:0;
 						
 						// Rotation
 						particleCache[p].rotation = playgroundCache.rotation[p];
@@ -2842,7 +2842,7 @@ namespace ParticlePlayground {
 			for (int p = 0; p<playgroundParticles.particleCache.Length; p++) {
 				playgroundParticles.playgroundCache.previousTargetPosition[p] = position;
 				playgroundParticles.playgroundCache.targetPosition[p] = position;
-				playgroundParticles.particleCache[p].size = 0;
+				playgroundParticles.particleCache[p].startSize = 0;
 				playgroundParticles.particleCache[p].position = position;
 				playgroundParticles.playgroundCache.position[p] = position;
 				playgroundParticles.playgroundCache.collisionParticlePosition[p] = position;
@@ -3283,7 +3283,7 @@ namespace ParticlePlayground {
 				}
 				
 			} else {
-				currentColor = particleCache[p].color;
+				currentColor = particleCache[p].startColor;
 				if (playgroundCache.changedByPropertyColorKeepAlpha[p])
 					currentColor.a = Mathf.Clamp(lifetimeColor.Evaluate(colorMethod==COLORMETHOD.Lifetime?normalizedLife:normalizedP).a, 0, currentColor.a);
 			}
@@ -3600,7 +3600,7 @@ namespace ParticlePlayground {
 						if (playgroundParticles.playgroundCache.maskAlpha[maskedP]<=0 || playgroundParticles.particleMaskTime<=0) {
 							playgroundParticles.playgroundCache.isMasked[maskedP] = true;
 							playgroundParticles.playgroundCache.maskAlpha[maskedP] = 0;
-							playgroundParticles.particleCache[maskedP].size = 0;
+							playgroundParticles.particleCache[maskedP].startSize = 0;
 						} else {
 							playgroundParticles.playgroundCache.maskAlpha[maskedP] -= (1f/playgroundParticles.particleMaskTime)*playgroundParticles.localDeltaTime;
 						}
@@ -3620,7 +3620,7 @@ namespace ParticlePlayground {
 				Color32 lifetimeColor = playgroundParticles.GetParticleColor(p, normalizedLife, normalizedP);
 				
 				// Assign color to particle
-				playgroundParticles.particleCache[p].color = lifetimeColor;
+				playgroundParticles.particleCache[p].startColor = lifetimeColor;
 				
 				// Give Playground Cache its color value
 				playgroundParticles.playgroundCache.color[p] = lifetimeColor;
@@ -3798,7 +3798,7 @@ namespace ParticlePlayground {
 				}
 				
 				if (playgroundParticles.playgroundCache.birth[p]>playgroundParticles.localTime) {
-					playgroundParticles.particleCache[p].size = 0;
+					playgroundParticles.particleCache[p].startSize = 0;
 					playgroundParticles.playgroundCache.position[p] = PlaygroundC.initialTargetPosition;
 				}
 				
@@ -3991,7 +3991,7 @@ namespace ParticlePlayground {
 						if (playgroundParticles.hasTimerEvent)
 							playgroundParticles.SendEvent(EVENTTYPEC.Time, p);
 					} else {
-						playgroundParticles.particleCache[p].size = 0;
+						playgroundParticles.particleCache[p].startSize = 0;
 						playgroundParticles.playgroundCache.position[p] = PlaygroundC.initialTargetPosition;
 					}
 					
@@ -4010,7 +4010,7 @@ namespace ParticlePlayground {
 							if ((playgroundParticles.hasEvent||playgroundParticles.hasEventManipulatorGlobal||playgroundParticles.hasEventManipulatorLocal) && !playgroundParticles.playgroundCache.isNonBirthed[p])
 								SendDeathEvents(playgroundParticles, p);
 							
-							playgroundParticles.particleCache[p].size = 0;
+							playgroundParticles.particleCache[p].startSize = 0;
 							playgroundParticles.particleCache[p].velocity = zero;
 							playgroundParticles.playgroundCache.position[p] = PlaygroundC.initialTargetPosition;
 							
@@ -4053,7 +4053,7 @@ namespace ParticlePlayground {
 								Rebirth(playgroundParticles, p, playgroundParticles.internalRandom01);
 							} else {
 								playgroundParticles.particleCache[p].velocity = zero;
-								playgroundParticles.particleCache[p].size = 0;
+								playgroundParticles.particleCache[p].startSize = 0;
 								playgroundParticles.playgroundCache.position[p] = PlaygroundC.initialTargetPosition;
 							}
 						} else {
@@ -4078,7 +4078,7 @@ namespace ParticlePlayground {
 					
 					// Set particle size
 					if (!playgroundParticles.syncPositionsOnMainThread)
-						playgroundParticles.particleCache[p].size = (playgroundParticles.playgroundCache.maskAlpha[p]>0&&playgroundParticles.particleCache[p].position.y!=initYpos)?playgroundParticles.playgroundCache.size[p]:0;
+						playgroundParticles.particleCache[p].startSize = (playgroundParticles.playgroundCache.maskAlpha[p]>0&&playgroundParticles.particleCache[p].position.y!=initYpos)?playgroundParticles.playgroundCache.size[p]:0;
 					
 				} else {
 					
@@ -4715,15 +4715,15 @@ namespace ParticlePlayground {
 						if (thisManipulatorProperty.keepColorAlphas) {
 							staticColor = thisManipulatorProperty.color;
 							staticColor.a = Mathf.Clamp(playgroundParticles.lifetimeColor.Evaluate(playgroundParticles.playgroundCache.life[p]/playgroundParticles.lifetime).a, 0, staticColor.a);
-							playgroundParticles.particleCache[p].color = staticColor;
-						} else playgroundParticles.particleCache[p].color = thisManipulatorProperty.color;
+							playgroundParticles.particleCache[p].startColor = staticColor;
+						} else playgroundParticles.particleCache[p].startColor = thisManipulatorProperty.color;
 					} else {
 						if (thisManipulatorProperty.keepColorAlphas) {
 							manipulatorDistance = thisManipulator.strengthDistanceEffect>0?Vector3.SqrMagnitude (manipulatorPosition - particlePosition)/thisManipulator.strengthDistanceEffect:10f;
 							staticColor = thisManipulatorProperty.color;
 							staticColor.a = Mathf.Clamp(playgroundParticles.lifetimeColor.Evaluate(playgroundParticles.playgroundCache.life[p]/playgroundParticles.lifetime).a, 0, staticColor.a);
-							playgroundParticles.particleCache[p].color = Color.Lerp(playgroundParticles.particleCache[p].color, staticColor, (t*thisManipulatorProperty.strength*thisManipulator.strength/manipulatorDistance)/thisManipulator.strengthSmoothing);
-						} else playgroundParticles.particleCache[p].color = Color.Lerp(playgroundParticles.particleCache[p].color, thisManipulatorProperty.color, (t*thisManipulatorProperty.strength*thisManipulator.strength/manipulatorDistance)/thisManipulator.strengthSmoothing);
+							playgroundParticles.particleCache[p].startColor = Color.Lerp(playgroundParticles.particleCache[p].startColor, staticColor, (t*thisManipulatorProperty.strength*thisManipulator.strength/manipulatorDistance)/thisManipulator.strengthSmoothing);
+						} else playgroundParticles.particleCache[p].startColor = Color.Lerp(playgroundParticles.particleCache[p].startColor, thisManipulatorProperty.color, (t*thisManipulatorProperty.strength*thisManipulator.strength/manipulatorDistance)/thisManipulator.strengthSmoothing);
 						playgroundParticles.playgroundCache.changedByPropertyColorLerp[p] = true;
 					}
 					
@@ -4744,9 +4744,9 @@ namespace ParticlePlayground {
 					// Lifetime Color Property
 				case MANIPULATORPROPERTYTYPEC.LifetimeColor:
 					if (thisManipulatorProperty.transition == MANIPULATORPROPERTYTRANSITIONC.None) {
-						playgroundParticles.particleCache[p].color = thisManipulatorProperty.lifetimeColor.Evaluate(playgroundParticles.lifetime>0?playgroundParticles.playgroundCache.life[p]/playgroundParticles.lifetime:0);
+						playgroundParticles.particleCache[p].startColor = thisManipulatorProperty.lifetimeColor.Evaluate(playgroundParticles.lifetime>0?playgroundParticles.playgroundCache.life[p]/playgroundParticles.lifetime:0);
 					} else {
-						playgroundParticles.particleCache[p].color = Color.Lerp(playgroundParticles.particleCache[p].color, thisManipulatorProperty.lifetimeColor.Evaluate(playgroundParticles.lifetime>0?playgroundParticles.playgroundCache.life[p]/playgroundParticles.lifetime:0), (t*thisManipulatorProperty.strength*thisManipulator.strength/manipulatorDistance)/thisManipulator.strengthSmoothing);
+						playgroundParticles.particleCache[p].startColor = Color.Lerp(playgroundParticles.particleCache[p].startColor, thisManipulatorProperty.lifetimeColor.Evaluate(playgroundParticles.lifetime>0?playgroundParticles.playgroundCache.life[p]/playgroundParticles.lifetime:0), (t*thisManipulatorProperty.strength*thisManipulator.strength/manipulatorDistance)/thisManipulator.strengthSmoothing);
 						playgroundParticles.playgroundCache.changedByPropertyColorLerp[p] = true;
 					}
 					
@@ -5046,15 +5046,15 @@ namespace ParticlePlayground {
 					
 					// Lerp back color with previous set key
 					if (playgroundParticles.playgroundCache.changedByPropertyColorLerp[p] && thisManipulatorProperty.transition != MANIPULATORPROPERTYTRANSITIONC.None && thisManipulatorProperty.onlyColorInRange) {
-						playgroundParticles.particleCache[p].color = Color.Lerp(playgroundParticles.particleCache[p].color, playgroundParticles.lifetimeColor.Evaluate(playgroundParticles.playgroundCache.life[p]/playgroundParticles.lifetime), t*thisManipulatorProperty.strength*thisManipulator.strength);
+						playgroundParticles.particleCache[p].startColor = Color.Lerp(playgroundParticles.particleCache[p].startColor, playgroundParticles.lifetimeColor.Evaluate(playgroundParticles.playgroundCache.life[p]/playgroundParticles.lifetime), t*thisManipulatorProperty.strength*thisManipulator.strength);
 					} 
 					
 					if (thisManipulatorProperty.type == MANIPULATORPROPERTYTYPEC.LifetimeColor && !thisManipulatorProperty.onlyColorInRange) {
 						if (thisManipulatorProperty.transition == MANIPULATORPROPERTYTRANSITIONC.None) {
-							playgroundParticles.particleCache[p].color = thisManipulatorProperty.lifetimeColor.Evaluate(playgroundParticles.lifetime>0?playgroundParticles.playgroundCache.life[p]/playgroundParticles.lifetime:0);
+							playgroundParticles.particleCache[p].startColor = thisManipulatorProperty.lifetimeColor.Evaluate(playgroundParticles.lifetime>0?playgroundParticles.playgroundCache.life[p]/playgroundParticles.lifetime:0);
 						} else {
 							manipulatorDistance = thisManipulator.strengthDistanceEffect>0?Vector3.SqrMagnitude (manipulatorPosition - particlePosition)/thisManipulator.strengthDistanceEffect:10f;
-							playgroundParticles.particleCache[p].color = Color.Lerp(playgroundParticles.particleCache[p].color, thisManipulatorProperty.lifetimeColor.Evaluate(playgroundParticles.lifetime>0?playgroundParticles.playgroundCache.life[p]/playgroundParticles.lifetime:0), (t*thisManipulatorProperty.strength*thisManipulator.strength/manipulatorDistance)/thisManipulator.strengthSmoothing);
+							playgroundParticles.particleCache[p].startColor = Color.Lerp(playgroundParticles.particleCache[p].startColor, thisManipulatorProperty.lifetimeColor.Evaluate(playgroundParticles.lifetime>0?playgroundParticles.playgroundCache.life[p]/playgroundParticles.lifetime:0), (t*thisManipulatorProperty.strength*thisManipulator.strength/manipulatorDistance)/thisManipulator.strengthSmoothing);
 						}
 					}
 					
@@ -5257,7 +5257,7 @@ namespace ParticlePlayground {
 			playgroundCache.previousTargetPosition[particleId] = playgroundCache.targetPosition[particleId];
 			playgroundCache.velocity[particleId] = Vector3.zero;
 			particleCache[particleId].position = playgroundCache.position[particleId];
-			particleCache[particleId].size = 0;
+			particleCache[particleId].startSize = 0;
 			
 			// Reset manipulators influence
 			playgroundCache.changedByProperty[particleId] = false;
@@ -5398,7 +5398,7 @@ namespace ParticlePlayground {
 			
 			if (playgroundParticles.playgroundCache.rebirth[p]) {
 				
-				playgroundParticles.particleCache[p].color = playgroundParticles.GetParticleColor(p, 0f, (p*1f)/(playgroundParticles.particleCount*1f));
+				playgroundParticles.particleCache[p].startColor = playgroundParticles.GetParticleColor(p, 0f, (p*1f)/(playgroundParticles.particleCount*1f));
 				
 				// Source Scattering
 				if (playgroundParticles.applySourceScatter && playgroundParticles.source!=SOURCEC.Script) {
@@ -5447,7 +5447,7 @@ namespace ParticlePlayground {
 				}
 				
 				if (playgroundParticles.applyInitialColorOnRebirth) {
-					playgroundParticles.particleCache[p].color = playgroundParticles.playgroundCache.initialColor[p];
+					playgroundParticles.particleCache[p].startColor = playgroundParticles.playgroundCache.initialColor[p];
 					playgroundParticles.playgroundCache.color[p] = playgroundParticles.playgroundCache.initialColor[p];
 				}
 			} else {
@@ -5485,7 +5485,7 @@ namespace ParticlePlayground {
 				playgroundParticles.playgroundCache.size[p] = playgroundParticles.playgroundCache.initialSize[p]*playgroundParticles.particleArraySize.Evaluate((p*1f)/(playgroundParticles.particleCount*1f))*playgroundParticles.scale;
 			else playgroundParticles.playgroundCache.size[p] = playgroundParticles.playgroundCache.initialSize[p]*playgroundParticles.scale;
 			if (!playgroundParticles.syncPositionsOnMainThread)
-				playgroundParticles.particleCache[p].size = playgroundParticles.playgroundCache.maskAlpha[p]>0?playgroundParticles.playgroundCache.size[p]:0;
+				playgroundParticles.particleCache[p].startSize = playgroundParticles.playgroundCache.maskAlpha[p]>0?playgroundParticles.playgroundCache.size[p]:0;
 			
 			// Set color gradient id
 			if (playgroundParticles.colorSource==COLORSOURCEC.LifetimeColors && playgroundParticles.lifetimeColors.Count>0) {
@@ -5601,7 +5601,7 @@ namespace ParticlePlayground {
 						eventColor = events[i].eventColor;
 						break;
 					case EVENTINHERITANCEC.Particle:
-						eventColor = particleCache[p].color;
+						eventColor = particleCache[p].startColor;
 						break;
 					case EVENTINHERITANCEC.Source:
 						eventColor = playgroundCache.initialColor[p];
@@ -5659,7 +5659,7 @@ namespace ParticlePlayground {
 			eParticle.changedByPropertySize = playgroundCache.changedByPropertySize[p];
 			eParticle.changedByPropertyTarget = playgroundCache.changedByPropertyTarget[p];
 			eParticle.collisionParticlePosition = playgroundCache.collisionParticlePosition[p];
-			eParticle.color = particleCache[p].color;
+			eParticle.color = particleCache[p].startColor;
 			eParticle.scriptedColor = playgroundCache.scriptedColor[p];
 			eParticle.death = playgroundCache.death[p];
 			eParticle.emission = playgroundCache.emission[p];
@@ -5864,7 +5864,7 @@ namespace ParticlePlayground {
 					playgroundCache.birth[p] = tos+(playgroundCache.birth[p]-tos);
 					playgroundCache.death[p] = tos+(playgroundCache.death[p]-tos);
 					playgroundCache.size[p] = snapshots[loadPointer].settings.snapshotData.size[p];
-					particleCache[p].size = playgroundCache.size[p];
+					particleCache[p].startSize = playgroundCache.size[p];
 				}
 				lifetime = snapshots[loadPointer].settings.lifetime;
 				previousLifetimeValueMethod = lifetimeValueMethod;
@@ -6002,18 +6002,18 @@ namespace ParticlePlayground {
 							}
 							if ((loadParticleCount<particleCount && p>=loadParticleCount))
 								playgroundCache.color[p].a = (byte)Mathf.Lerp (playgroundCache.color[p].a, 0f, t);
-							particleCache[p].color = playgroundCache.color[p];
+							particleCache[p].startColor = playgroundCache.color[p];
 							
 							// Size
 							playgroundCache.size[p] = Mathf.Lerp (transitionSize[p], loadSnapshotData.size[p%loadParticleCount], t);
-							particleCache[p].size = playgroundCache.size[p];
+							particleCache[p].startSize = playgroundCache.size[p];
 							
 							// Rotation
 							playgroundCache.rotation[p] = Mathf.Lerp (transitionRotation[p], loadSnapshotData.rotation[p%loadParticleCount], t);
 							particleCache[p].rotation = playgroundCache.rotation[p];
 						} else {
 							playgroundCache.color[p].a = (byte)Mathf.Lerp (playgroundCache.color[p].a, 0, t);
-							particleCache[p].color = playgroundCache.color[p];
+							particleCache[p].startColor = playgroundCache.color[p];
 						}
 					}
 					

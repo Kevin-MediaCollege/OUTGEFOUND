@@ -50,7 +50,7 @@ class PlaygroundParticleWindowC : EditorWindow {
 	[MenuItem ("Window/Particle Playground")]
 	public static void ShowWindow () {
 		PlaygroundParticleWindowC window = GetWindow<PlaygroundParticleWindowC>();
-		window.title = "Playground";
+		window.titleContent = new GUIContent("Playground");
         window.Show();
 	}
 	
