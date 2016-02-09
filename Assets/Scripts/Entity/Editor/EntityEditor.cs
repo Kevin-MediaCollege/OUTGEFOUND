@@ -39,6 +39,6 @@ public class EntityEditor : Editor
 		position.height = EditorGUIUtility.singleLineHeight;
 
 		SerializedProperty element = prop_startingTags.GetArrayElementAtIndex(index);
-		EditorGUI.PropertyField(position, element, new GUIContent("Tag " + index));
+		EditorGUI.PropertyField(position, element, new GUIContent("Tag " + (index + 1)));
 	}
 }
