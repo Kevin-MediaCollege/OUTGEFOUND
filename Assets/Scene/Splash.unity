@@ -671,7 +671,7 @@ MonoBehaviour:
   sourceTransform: {fileID: 45280973}
   sourceTransforms:
   - transform: {fileID: 45280973}
-    instanceID: 43794
+    instanceID: 9382
     available: 1
     position: {x: 8.780995, y: -13.337786, z: 83.90036}
     localPosition: {x: 0, y: 0, z: 0}
@@ -836,15 +836,15 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  isReadyForThreadedCalculations: 0
+  isReadyForThreadedCalculations: 1
   prewarm: 0
   prewarmTime: 1
   prewarmCycles: 16
   particleTimescale: 1
-  localTime: 0
-  localDeltaTime: 0
+  localTime: 26.895617
+  localDeltaTime: 9.550514
   previousActiveState: 0
-  simulationStarted: 0.1
+  simulationStarted: 9.902827
   loopExceeded: 0
   loopExceededOnParticle: -1
 --- !u!199 &45280971
@@ -3343,7 +3343,7 @@ MonoBehaviour:
   sourceTransform: {fileID: 705965105}
   sourceTransforms:
   - transform: {fileID: 705965105}
-    instanceID: 43852
+    instanceID: 9432
     available: 1
     position: {x: 4.680996, y: -13.337786, z: 84.70036}
     localPosition: {x: 0, y: 0, z: 0}
@@ -3508,15 +3508,15 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  isReadyForThreadedCalculations: 0
+  isReadyForThreadedCalculations: 1
   prewarm: 0
   prewarmTime: 1
   prewarmCycles: 16
   particleTimescale: 1
-  localTime: 0
-  localDeltaTime: 0
+  localTime: 26.895617
+  localDeltaTime: 9.550514
   previousActiveState: 0
-  simulationStarted: 0.1
+  simulationStarted: 9.902827
   loopExceeded: 0
   loopExceededOnParticle: -1
 --- !u!199 &705965103
@@ -5150,48 +5150,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!1 &792093463
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 792093465}
-  - 114: {fileID: 792093464}
-  m_Layer: 0
-  m_Name: Main
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &792093464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 792093463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46a604f417c1a2e459d66ce8aa31287a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clips:
-  - {fileID: 8300000, guid: 3b154ccaf5cdca84aab05e9bb9fd6b03, type: 3}
---- !u!4 &792093465
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 792093463}
-  m_LocalRotation: {x: -0.2205383, y: 0.0076601976, z: -0.0017320681, w: -0.97534674}
-  m_LocalPosition: {x: -15.1, y: 5.5, z: 31.6}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 912322019}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
 --- !u!1 &880235701
 GameObject:
   m_ObjectHideFlags: 0
@@ -5336,11 +5294,11 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 912322014}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.4, y: 4.3, z: -9.4}
+  m_LocalRotation: {x: -0.2205383, y: 0.0076601976, z: -0.0017320681, w: -0.97534674}
+  m_LocalPosition: {x: -9.596443, y: 13.425849, z: 25.050056}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 792093465}
+  m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!114 &912322020
 MonoBehaviour:
@@ -5690,6 +5648,7 @@ MonoBehaviour:
   logoBaseGroup: {fileID: 488648042}
   backgroundRect: {fileID: 521793860}
   background2Rect: {fileID: 1757860323}
+  naughtyGoatAudio: {fileID: 11400000, guid: 76cbea72929716c448c5db921d2197d2, type: 2}
 --- !u!224 &1520276886
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5839,7 +5798,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!1 &1745609630
 GameObject:
   m_ObjectHideFlags: 0
@@ -6572,7 +6531,7 @@ MonoBehaviour:
   sourceTransform: {fileID: 1768829366}
   sourceTransforms:
   - transform: {fileID: 1768829366}
-    instanceID: 43968
+    instanceID: 9546
     available: 1
     position: {x: 12.0809965, y: -13.817785, z: 83.00037}
     localPosition: {x: 0, y: 0, z: 0}
@@ -6737,15 +6696,15 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  isReadyForThreadedCalculations: 0
+  isReadyForThreadedCalculations: 1
   prewarm: 0
   prewarmTime: 1
   prewarmCycles: 16
   particleTimescale: 1
-  localTime: 0
-  localDeltaTime: 0
+  localTime: 26.895617
+  localDeltaTime: 9.550514
   previousActiveState: 0
-  simulationStarted: 0.1
+  simulationStarted: 9.902827
   loopExceeded: 0
   loopExceededOnParticle: -1
 --- !u!199 &1768829364
@@ -8886,7 +8845,7 @@ MonoBehaviour:
   sourceTransform: {fileID: 1825011693}
   sourceTransforms:
   - transform: {fileID: 1825011693}
-    instanceID: 43978
+    instanceID: 9556
     available: 1
     position: {x: -18.919004, y: -13.337786, z: 67.50037}
     localPosition: {x: 0, y: 0, z: 0}
@@ -9051,15 +9010,15 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  isReadyForThreadedCalculations: 0
+  isReadyForThreadedCalculations: 1
   prewarm: 0
   prewarmTime: 1
   prewarmCycles: 16
   particleTimescale: 1
-  localTime: 0
-  localDeltaTime: 0
+  localTime: 26.895617
+  localDeltaTime: 9.550514
   previousActiveState: 0
-  simulationStarted: 0.1
+  simulationStarted: 9.902827
   loopExceeded: 0
   loopExceededOnParticle: -1
 --- !u!199 &1825011691
@@ -11200,7 +11159,7 @@ MonoBehaviour:
   sourceTransform: {fileID: 1849297072}
   sourceTransforms:
   - transform: {fileID: 1849297072}
-    instanceID: 43988
+    instanceID: 9566
     available: 1
     position: {x: -22.919003, y: -22.737785, z: 69.30036}
     localPosition: {x: 0, y: 0, z: 0}
@@ -11365,15 +11324,15 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  isReadyForThreadedCalculations: 0
+  isReadyForThreadedCalculations: 1
   prewarm: 0
   prewarmTime: 1
   prewarmCycles: 16
   particleTimescale: 1
-  localTime: 0
-  localDeltaTime: 0
+  localTime: 26.895617
+  localDeltaTime: 9.550514
   previousActiveState: 0
-  simulationStarted: 0.1
+  simulationStarted: 9.902827
   loopExceeded: 0
   loopExceededOnParticle: -1
 --- !u!199 &1849297070
@@ -13084,7 +13043,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overlay: {fileID: 1021549173}
   logo: {fileID: 2114631810}
-  camera: {fileID: 792093465}
+  camera: {fileID: 912322019}
 --- !u!1 &1950923987
 GameObject:
   m_ObjectHideFlags: 0
@@ -13120,7 +13079,7 @@ Transform:
   - {fileID: 45280973}
   - {fileID: 1825011693}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!1 &1956099891
 GameObject:
   m_ObjectHideFlags: 0
@@ -13200,67 +13159,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!1 &1979876857
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1979876860}
-  - 114: {fileID: 1979876859}
-  - 114: {fileID: 1979876858}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1979876858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1979876857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1077351063, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &1979876859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1979876857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 5
---- !u!4 &1979876860
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1979876857}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
 --- !u!1 &2114631806
 GameObject:
   m_ObjectHideFlags: 0
