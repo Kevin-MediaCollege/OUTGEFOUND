@@ -24,12 +24,8 @@ public class FirstPersonCameraState : CameraState
 		Cursor.lockState = CursorLockMode.Locked;
 	}
 
-	protected void Update()
+	protected void LateUpdate()
 	{
-		// Move the camera to the player's eyes
-		MainCamera.transform.position = eyes.position;
-		MainCamera.transform.rotation = eyes.rotation;
-
 		// Rotate the player
 		player.transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivity.x, 0);
 
@@ -38,5 +34,9 @@ public class FirstPersonCameraState : CameraState
 
 		eyes.localEulerAngles = new Vector3(-yRotation, eyes.localEulerAngles.y, 0);
 		weapon.localEulerAngles = new Vector3(-yRotation, weapon.localEulerAngles.y, 0);
+
+		// Move the camera to the player's eyes
+		MainCamera.transform.position = eyes.position;
+		MainCamera.transform.rotation = eyes.rotation;
 	}
 }

@@ -45,6 +45,7 @@ GameObject:
   - 4: {fileID: 426086}
   - 114: {fileID: 11473482}
   - 114: {fileID: 11414162}
+  - 95: {fileID: 9576904}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -60,9 +61,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 428766}
-  - 54: {fileID: 5457984}
-  - 136: {fileID: 13694276}
+  - 143: {fileID: 14374550}
   - 114: {fileID: 11408882}
+  - 114: {fileID: 11471584}
+  - 114: {fileID: 11431770}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -165,7 +167,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 107560}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.373, y: 0.337, z: 0.793}
+  m_LocalPosition: {x: 0.357, y: 0.425, z: 0.631}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children:
   - {fileID: 498068}
@@ -243,7 +245,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 493afd7eeec4fd740bbade732c2ce883, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -273,21 +275,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145108}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &5457984
-Rigidbody:
+--- !u!95 &9576904
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 144936}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
+  m_GameObject: {fileID: 123548}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11408882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -338,6 +342,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 11473482}
   roundsPerMinute: 800
+--- !u!114 &11431770
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2ff825e07f09147a2f5659732a1ffa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterController: {fileID: 14374550}
+  input: {fileID: 11471584}
+  speed: 5
+  jumpSpeed: 6
+--- !u!114 &11471584
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99eaf69567ea560408b7ab7bf534b3ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11473482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -364,18 +394,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 11473482}
   capacity: 12
---- !u!136 &13694276
-CapsuleCollider:
+--- !u!143 &14374550
+CharacterController:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 144936}
-  m_Material: {fileID: 13400000, guid: 4a512531b21468a49b2a032ef5864669, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  serializedVersion: 2
   m_Height: 2
-  m_Direction: 1
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:

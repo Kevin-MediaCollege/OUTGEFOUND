@@ -23,7 +23,7 @@ public abstract class Weapon : MonoBehaviour, IEntityInjector
 		}
 	}
 
-	protected void Update()
+	protected void FixedUpdate()
 	{
 		if(firing)
 		{
