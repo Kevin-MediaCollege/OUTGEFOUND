@@ -4,14 +4,7 @@ using System.Collections;
 public class Firearm : Weapon
 {
 	[SerializeField] private Transform barrel;
-	[SerializeField] private AudioAsset gunshotAudio;
-
-	protected override void OnFire()
-	{
-		AudioChannel channel = AudioManager.PlayAt(gunshotAudio, barrel.position);
-		channel.Pitch = Random.Range(0.7f, 1.3f);
-	}
-
+	
 	protected override bool GetshotInfo(out DamageInfo info)
 	{
 		Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
