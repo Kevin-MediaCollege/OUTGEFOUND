@@ -27,11 +27,11 @@ public class FirearmTest : MonoBehaviour
 		}
 	}
 
-	private void OnFireEvent(ShotInfo shotInfo)
+	private void OnFireEvent(DamageInfo info)
 	{
-		if(shotInfo.HitDamagable)
+		if(info.Hit)
 		{
-			Debug.Log("Hit: " + shotInfo.Target.Entity, shotInfo.Target);
+			Debug.Log("Hit: " + info.Target, info.Target);
 		}
 		else
 		{

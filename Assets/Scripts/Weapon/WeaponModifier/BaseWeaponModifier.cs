@@ -20,7 +20,7 @@ public abstract class BaseWeaponModifier : MonoBehaviour, IWeaponModifier
 		weapon = GetComponentInParent<Weapon>();
 	}
 
-	public virtual void OnFire(ref ShotInfo shotInfo)
+	public virtual void OnFire(ref DamageInfo info)
 	{
 	}
 

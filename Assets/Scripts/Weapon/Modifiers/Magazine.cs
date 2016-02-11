@@ -24,13 +24,23 @@ public class Magazine : BaseWeaponModifier
 		Put(capacity);
 	}
 
-	public override void OnFire(ref ShotInfo shotInfo)
+	// Temp reloading
+	protected void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.R))
+		{
+			Put(Capacity - Current);
+		}
+	}
+
+	public override void OnFire(ref DamageInfo info)
 	{
 		Current--;
 			
 		if(Current <= 0)
 		{
 			onMagazineEmptyEvent();
+			weapon.StopFire(true);
 		}
 	}
 

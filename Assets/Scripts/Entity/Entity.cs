@@ -14,6 +14,64 @@ public class Entity : MonoBehaviour
 
 	private static HashSet<Entity> all = new HashSet<Entity>();
 
+	#region Convenience Accessors
+	private EntityHealth health;
+	public EntityHealth Health
+	{
+		get
+		{
+			if(health == null)
+			{
+				health = GetComponentInChildren<EntityHealth>();
+			}
+
+			return health;
+		}
+	}
+
+	private EntityDeath death;
+	public EntityDeath Death
+	{
+		get
+		{
+			if(death == null)
+			{
+				death = GetComponentInChildren<EntityDeath>();
+			}
+
+			return death;
+		}
+	}
+
+	private Damagable damagable;
+	public Damagable Damagable
+	{
+		get
+		{
+			if(damagable == null)
+			{
+				damagable = GetComponentInChildren<Damagable>();
+			}
+
+			return damagable;
+		}
+	}
+
+	private Weapon weapon;
+	public Weapon Weapon
+	{
+		get
+		{
+			if(weapon == null)
+			{
+				weapon = GetComponentInChildren<Weapon>();
+			}
+
+			return weapon;
+		}
+	}
+	#endregion
+
 	[SerializeField] private string[] startingTags;
 
 	private HashSet<string> tags;

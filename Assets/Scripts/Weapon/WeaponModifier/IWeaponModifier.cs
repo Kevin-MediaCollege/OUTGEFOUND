@@ -3,7 +3,7 @@ using System.Collections;
 
 public interface IWeaponModifier
 {
-	void OnFire(ref ShotInfo shotInfo);
+	void OnFire(ref DamageInfo info);
 
 	bool CanFire();
 }

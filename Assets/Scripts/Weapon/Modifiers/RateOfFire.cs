@@ -14,7 +14,7 @@ public class RateOfFire : BaseWeaponModifier
 		return canFire;
 	}
 
-	public override void OnFire(ref ShotInfo shotInfo)
+	public override void OnFire(ref DamageInfo info)
 	{
 		canFire = false;
 		StartCoroutine("Delay");

@@ -50,6 +50,18 @@ public class AudioManager : MonoBehaviour
 		Debug.LogWarning("[AudioManager] No available audio channels for audio asset: " + audioAsset);
 		return null;
 	}
+
+	public static AudioChannel PlayAt(AudioAsset audioAsset, Vector3 point, bool loop = false)
+	{
+		AudioChannel channel = Play(audioAsset, loop);
+
+		if(channel != null)
+		{
+			channel.transform.position = point;
+		}
+
+		return channel;
+	}
 		
 	public static AudioChannel PlayRandom(AudioAssetGroup audioAssetGroup, bool loop = false)
 	{

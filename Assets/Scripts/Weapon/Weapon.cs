@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public abstract class Weapon : MonoBehaviour, IEntityInjector
 {
-	public delegate void OnFire(ShotInfo shotInfo);
-	public event OnFire onFireEvent = delegate { };
+	public delegate void OnFireEvent(DamageInfo info);
+	public event OnFireEvent onFireEvent = delegate { };
 
 	public Entity Wielder { private set; get; }
 
@@ -32,21 +32,22 @@ public abstract class Weapon : MonoBehaviour, IEntityInjector
 				return;
 			}
 
-			ShotInfo shotInfo;
-			GetshotInfo(out shotInfo);
+			DamageInfo info;
+			GetshotInfo(out info);
 
 			// Apply all modifiers to the shot
 			foreach(IWeaponModifier modifier in weaponModifiers)
 			{
-				modifier.OnFire(ref shotInfo);
+				modifier.OnFire(ref info);
 			}
 
-			onFireEvent(shotInfo);
+			onFireEvent(info);
+			OnFire();
 
 			// Let the target know it's been damaged
-			if(shotInfo.HitDamagable)
+			if(info.Hit)
 			{
-				shotInfo.Target.Damage(shotInfo);
+				info.Target.Damagable.Damage(info);
 			}
 		}
 	}
@@ -64,12 +65,16 @@ public abstract class Weapon : MonoBehaviour, IEntityInjector
 		}
 	}
 
-	public virtual void StopFire()
+	public virtual void StopFire(bool force = false)
 	{
 		if(firing)
 		{
 			firing = false;
 		}
+	}
+
+	protected virtual void OnFire()
+	{
 	}
 
 	public bool CanFire()
@@ -102,5 +107,5 @@ public abstract class Weapon : MonoBehaviour, IEntityInjector
 	}
 	#endregion
 
-	protected abstract bool GetshotInfo(out ShotInfo shotInfo);
+	protected abstract bool GetshotInfo(out DamageInfo info);
 }

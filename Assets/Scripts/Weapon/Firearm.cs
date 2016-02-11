@@ -4,21 +4,28 @@ using System.Collections;
 public class Firearm : Weapon
 {
 	[SerializeField] private Transform barrel;
+	[SerializeField] private AudioAsset gunshotAudio;
 
-	protected override bool GetshotInfo(out ShotInfo shotInfo)
+	protected override void OnFire()
 	{
-		Ray ray = new Ray(barrel.position, barrel.forward);
+		AudioChannel channel = AudioManager.PlayAt(gunshotAudio, barrel.position);
+		channel.Pitch = Random.Range(0.7f, 1.3f);
+	}
+
+	protected override bool GetshotInfo(out DamageInfo info)
+	{
+		Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 		RaycastHit hit;
 
-		shotInfo = new ShotInfo(Wielder, null, ray.direction, Vector3.zero, Vector3.zero, baseDamage);
+		info = new DamageInfo(Wielder, null, ray.direction, Vector3.zero, Vector3.zero, baseDamage);
 
 		if(Raycast(ray, out hit))
 		{
-			shotInfo.Target = hit.collider.GetComponentInParent<Damagable>();
-			shotInfo.Point = hit.point;
-			shotInfo.Normal = hit.normal;
+			info.Target = hit.collider.GetComponentInParent<Entity>();
+			info.Point = hit.point;
+			info.Normal = hit.normal;
 
-			return shotInfo.HitDamagable;
+			return info.Hit;
 		}
 
 		return false;
@@ -28,11 +35,11 @@ public class Firearm : Weapon
 	{
 		if(Physics.Raycast(ray, out hit, 100))
 		{
-			Debug.DrawRay(barrel.position, barrel.forward * hit.distance, Color.green, 7);
+			Debug.DrawRay(barrel.position, ray.direction * hit.distance, Color.green, 7);
 			return true;
 		}
 
-		Debug.DrawRay(barrel.position, barrel.forward * 100, Color.red, 7);
+		Debug.DrawRay(barrel.position, ray.direction * 100, Color.red, 7);
 		return false;
 	}
 }
