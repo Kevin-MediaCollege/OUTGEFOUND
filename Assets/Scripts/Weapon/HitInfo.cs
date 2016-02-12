@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public struct DamageInfo
+public struct HitInfo
 {
 	public Entity Source { private set; get; }
 	public Entity Target { set; get; }
@@ -8,8 +8,6 @@ public struct DamageInfo
 	public Vector3 Direction { set; get; }
 	public Vector3 Point { set; get; }
 	public Vector3 Normal { set; get; }
-
-	public int Amount { set; get; }
 
 	public bool Hit
 	{
@@ -19,7 +17,7 @@ public struct DamageInfo
 		}
 	}
 
-	public DamageInfo(Entity source, Entity target, Vector3 direction, Vector3 point, Vector3 normal, int damage)
+	public HitInfo(Entity source, Entity target, Vector3 direction, Vector3 point, Vector3 normal)
 	{
 		Source = source;
 		Target = target;
@@ -27,7 +25,5 @@ public struct DamageInfo
 		Direction = direction;
 		Point = point;
 		Normal = normal;
-
-		Amount = damage;
 	}
 }

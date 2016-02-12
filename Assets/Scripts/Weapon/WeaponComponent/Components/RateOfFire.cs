@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RateOfFire : BaseWeaponModifier
+public class RateOfFire : WeaponComponent
 {
 	[SerializeField] private int roundsPerMinute;
 	
@@ -14,7 +14,7 @@ public class RateOfFire : BaseWeaponModifier
 		return canFire;
 	}
 
-	public override void OnFire(ref DamageInfo info)
+	public override void Fire(HitInfo info)
 	{
 		canFire = false;
 		StartCoroutine("Delay");
@@ -23,7 +23,7 @@ public class RateOfFire : BaseWeaponModifier
 	private IEnumerator Delay()
 	{
 		yield return new WaitForSeconds(60f / roundsPerMinute);
-
+		
 		canFire = true;
 	}
 }

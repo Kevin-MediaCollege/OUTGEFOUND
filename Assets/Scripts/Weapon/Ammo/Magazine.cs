@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class Magazine : BaseWeaponModifier
+public class Magazine : WeaponComponent
 {
 	public delegate void OnMagazineEmpty();
 	public event OnMagazineEmpty onMagazineEmptyEvent = delegate { };
@@ -19,19 +19,14 @@ public class Magazine : BaseWeaponModifier
 
 	[SerializeField] private int capacity;
 
-	protected override void Awake()
-	{
-		base.Awake();
-
-		Put(capacity);
-	}
-
-	public override void OnFire(ref DamageInfo info)
+	public override void Fire(HitInfo info)
 	{
 		Current--;
 			
 		if(Current <= 0)
 		{
+			Debug.Log("[Magazine] Empty");
+
 			onMagazineEmptyEvent();
 			weapon.StopFire(true);
 		}

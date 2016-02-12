@@ -36,8 +36,8 @@ public class EntityDeath : EntityAddon
 		}
 	}
 
-	private void OnDamageReceived(DamageInfo info)
+	private void OnDamageReceived(HitInfo hitInfo, int damage)
 	{
-		lastSource = info.Source;
+		lastSource = hitInfo.Source;
 	}
 }

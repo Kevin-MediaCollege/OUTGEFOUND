@@ -39,8 +39,8 @@ public class EntityHealth : EntityAddon
 		}
 	}
 
-	private void OnDamageReceived(DamageInfo info)
+	private void OnDamageReceived(HitInfo hitInfo, int damage)
 	{
-		Damage(info.Amount);
+		Damage(damage);
 	}
 }

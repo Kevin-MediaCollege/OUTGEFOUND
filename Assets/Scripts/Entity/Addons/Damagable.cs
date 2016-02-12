@@ -4,37 +4,11 @@ using System;
 
 public class Damagable : EntityAddon
 {
-	public delegate void OnDamageReceived(DamageInfo info);
+	public delegate void OnDamageReceived(HitInfo hitInfo, int damage);
 	public event OnDamageReceived onDamageReceivedEvent = delegate { };
 
-	public void Damage(DamageInfo info)
+	public void Damage(HitInfo hitInfo, int damage)
 	{
-		onDamageReceivedEvent(info);
+		onDamageReceivedEvent(hitInfo, damage);
 	}
-
-#if UNITY_EDITOR
-	[ContextMenu("Damage (1)")]
-	private void Damage1()
-	{
-		Damage(new DamageInfo(Entity, Entity, Vector3.zero, Vector3.zero, Vector3.zero, 1));
-	}
-
-	[ContextMenu("Damage (5)")]
-	private void Damage5()
-	{
-		Damage(new DamageInfo(Entity, Entity, Vector3.zero, Vector3.zero, Vector3.zero, 5));
-	}
-
-	[ContextMenu("Damage (10)")]
-	private void Damage10()
-	{
-		Damage(new DamageInfo(Entity, Entity, Vector3.zero, Vector3.zero, Vector3.zero, 10));
-	}
-
-	[ContextMenu("Kill")]
-	private void Kill()
-	{
-		Damage(new DamageInfo(Entity, Entity, Vector3.zero, Vector3.zero, Vector3.zero, 10000));
-	}
-#endif
 }

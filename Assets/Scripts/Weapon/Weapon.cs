@@ -1,27 +1,17 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour, IEntityInjector
 {
-	public delegate void OnFireEvent(DamageInfo info);
-	public event OnFireEvent onFireEvent = delegate { };
+	public delegate void OnFire(HitInfo hitInfo);
+	public event OnFire onFireEvent = delegate { };
 
 	public Entity Wielder { private set; get; }
 
-	[SerializeField] protected int baseDamage;
-
-	private HashSet<IWeaponModifier> weaponModifiers;
+	private HashSet<WeaponComponent> components = new HashSet<WeaponComponent>();
 
 	private bool firing;
-
-	protected void Awake()
-	{
-		if(weaponModifiers == null)
-		{
-			weaponModifiers = new HashSet<IWeaponModifier>();
-		}
-	}
 
 	protected void FixedUpdate()
 	{
@@ -32,23 +22,13 @@ public abstract class Weapon : MonoBehaviour, IEntityInjector
 				return;
 			}
 
-			DamageInfo info;
-			GetshotInfo(out info);
-
-			// Apply all modifiers to the shot
-			foreach(IWeaponModifier modifier in weaponModifiers)
+			HitInfo hitInfo = GetHitInfo();
+			foreach(WeaponComponent component in components)
 			{
-				modifier.OnFire(ref info);
+				component.Fire(hitInfo);
 			}
 
-			onFireEvent(info);
-			OnFire();
-
-			// Let the target know it's been damaged
-			if(info.Hit)
-			{
-				info.Target.Damagable.Damage(info);
-			}
+			onFireEvent(hitInfo);
 		}
 	}
 
@@ -61,7 +41,10 @@ public abstract class Weapon : MonoBehaviour, IEntityInjector
 	{
 		if(!firing)
 		{
-			firing = true;
+			if(CanFire())
+			{
+				firing = true;
+			}			
 		}
 	}
 
@@ -73,15 +56,23 @@ public abstract class Weapon : MonoBehaviour, IEntityInjector
 		}
 	}
 
-	protected virtual void OnFire()
+	public void AddComponent(WeaponComponent component)
 	{
+		components.Add(component);
 	}
+
+	public void RemoveComponent(WeaponComponent component)
+	{
+		components.Remove(component);
+	}
+
+	protected abstract HitInfo GetHitInfo();
 
 	public bool CanFire()
 	{
-		foreach(IWeaponModifier modifier in weaponModifiers)
+		foreach(WeaponComponent component in components)
 		{
-			if(!modifier.CanFire())
+			if(!component.CanFire())
 			{
 				return false;
 			}
@@ -90,22 +81,5 @@ public abstract class Weapon : MonoBehaviour, IEntityInjector
 		return true;
 	}
 
-	#region Modifier Handlers
-	public void AddWeaponModifier(IWeaponModifier modifier)
-	{
-		if(weaponModifiers == null)
-		{
-			weaponModifiers = new HashSet<IWeaponModifier>();
-		}
-
-		weaponModifiers.Add(modifier);
-	}
-
-	public void RemoveWeaponModifier(IWeaponModifier modifier)
-	{
-		weaponModifiers.Remove(modifier);
-	}
-	#endregion
-
-	protected abstract bool GetshotInfo(out DamageInfo info);
+	
 }

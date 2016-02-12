@@ -5,17 +5,17 @@ public class FirearmTest : MonoBehaviour
 {
 	public Firearm weapon;
 
-	void OnEnable()
+	protected void OnEnable()
 	{
 		weapon.onFireEvent += OnFireEvent;
 	}
 
-	void OnDisable()
+	protected void OnDisable()
 	{
 		weapon.onFireEvent -= OnFireEvent;
 	}
 
-	void Update()
+	protected void Update()
 	{
 		if(Input.GetMouseButtonDown(0))
 		{
@@ -25,17 +25,15 @@ public class FirearmTest : MonoBehaviour
 		{
 			weapon.StopFire();
 		}
+		
+		if(Input.GetKeyDown(KeyCode.V))
+		{
+			weapon.SwitchFireMode();
+		}
 	}
 
-	private void OnFireEvent(DamageInfo info)
+	private void OnFireEvent(HitInfo hitInfo)
 	{
-		if(info.Hit)
-		{
-			Debug.Log("Hit: " + info.Target, info.Target);
-		}
-		else
-		{
-			Debug.Log("Missed!");
-		}		
+		Debug.Log(hitInfo.Hit ? "Hit: " + hitInfo.Target : "Missed");
 	}
 }
