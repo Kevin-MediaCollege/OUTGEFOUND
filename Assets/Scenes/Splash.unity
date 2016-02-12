@@ -671,7 +671,7 @@ MonoBehaviour:
   sourceTransform: {fileID: 45280973}
   sourceTransforms:
   - transform: {fileID: 45280973}
-    instanceID: 9382
+    instanceID: 26580
     available: 1
     position: {x: 8.780995, y: -13.337786, z: 83.90036}
     localPosition: {x: 0, y: 0, z: 0}
@@ -836,15 +836,15 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  isReadyForThreadedCalculations: 1
+  isReadyForThreadedCalculations: 0
   prewarm: 0
   prewarmTime: 1
   prewarmCycles: 16
   particleTimescale: 1
-  localTime: 26.895617
-  localDeltaTime: 9.550514
+  localTime: 0
+  localDeltaTime: 0
   previousActiveState: 0
-  simulationStarted: 9.902827
+  simulationStarted: 0.1
   loopExceeded: 0
   loopExceededOnParticle: -1
 --- !u!199 &45280971
@@ -3343,7 +3343,7 @@ MonoBehaviour:
   sourceTransform: {fileID: 705965105}
   sourceTransforms:
   - transform: {fileID: 705965105}
-    instanceID: 9432
+    instanceID: 26630
     available: 1
     position: {x: 4.680996, y: -13.337786, z: 84.70036}
     localPosition: {x: 0, y: 0, z: 0}
@@ -3508,15 +3508,15 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  isReadyForThreadedCalculations: 1
+  isReadyForThreadedCalculations: 0
   prewarm: 0
   prewarmTime: 1
   prewarmCycles: 16
   particleTimescale: 1
-  localTime: 26.895617
-  localDeltaTime: 9.550514
+  localTime: 0
+  localDeltaTime: 0
   previousActiveState: 0
-  simulationStarted: 9.902827
+  simulationStarted: 0.1
   loopExceeded: 0
   loopExceededOnParticle: -1
 --- !u!199 &705965103
@@ -5172,8 +5172,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 880235701}
-  m_LocalRotation: {x: -0.21296462, y: 0.5581019, z: 0.044652253, w: 0.8007338}
-  m_LocalPosition: {x: -87.26, y: -26.61, z: 25.21}
+  m_LocalRotation: {x: -0.023335852, y: -0.26313767, z: -0.1909906, w: -0.94537646}
+  m_LocalPosition: {x: -34.23, y: -8.01, z: 25.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1950923988}
@@ -5188,7 +5188,7 @@ Light:
   serializedVersion: 6
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.4
+  m_Intensity: 0.55
   m_Range: 193.2
   m_SpotAngle: 71
   m_CookieSize: 10
@@ -6531,7 +6531,7 @@ MonoBehaviour:
   sourceTransform: {fileID: 1768829366}
   sourceTransforms:
   - transform: {fileID: 1768829366}
-    instanceID: 9546
+    instanceID: 26738
     available: 1
     position: {x: 12.0809965, y: -13.817785, z: 83.00037}
     localPosition: {x: 0, y: 0, z: 0}
@@ -6696,15 +6696,15 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  isReadyForThreadedCalculations: 1
+  isReadyForThreadedCalculations: 0
   prewarm: 0
   prewarmTime: 1
   prewarmCycles: 16
   particleTimescale: 1
-  localTime: 26.895617
-  localDeltaTime: 9.550514
+  localTime: 0.052853208
+  localDeltaTime: 0
   previousActiveState: 0
-  simulationStarted: 9.902827
+  simulationStarted: 0.15279458
   loopExceeded: 0
   loopExceededOnParticle: -1
 --- !u!199 &1768829364
@@ -8845,7 +8845,7 @@ MonoBehaviour:
   sourceTransform: {fileID: 1825011693}
   sourceTransforms:
   - transform: {fileID: 1825011693}
-    instanceID: 9556
+    instanceID: 26748
     available: 1
     position: {x: -18.919004, y: -13.337786, z: 67.50037}
     localPosition: {x: 0, y: 0, z: 0}
@@ -9010,15 +9010,15 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  isReadyForThreadedCalculations: 1
+  isReadyForThreadedCalculations: 0
   prewarm: 0
   prewarmTime: 1
   prewarmCycles: 16
   particleTimescale: 1
-  localTime: 26.895617
-  localDeltaTime: 9.550514
+  localTime: 0.052794583
+  localDeltaTime: 0
   previousActiveState: 0
-  simulationStarted: 9.902827
+  simulationStarted: 0.15279458
   loopExceeded: 0
   loopExceededOnParticle: -1
 --- !u!199 &1825011691
@@ -11159,7 +11159,7 @@ MonoBehaviour:
   sourceTransform: {fileID: 1849297072}
   sourceTransforms:
   - transform: {fileID: 1849297072}
-    instanceID: 9566
+    instanceID: 26758
     available: 1
     position: {x: -22.919003, y: -22.737785, z: 69.30036}
     localPosition: {x: 0, y: 0, z: 0}
@@ -11324,15 +11324,15 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  isReadyForThreadedCalculations: 1
+  isReadyForThreadedCalculations: 0
   prewarm: 0
   prewarmTime: 1
   prewarmCycles: 16
   particleTimescale: 1
-  localTime: 26.895617
-  localDeltaTime: 9.550514
+  localTime: 0.052853208
+  localDeltaTime: 0
   previousActiveState: 0
-  simulationStarted: 9.902827
+  simulationStarted: 0.15279458
   loopExceeded: 0
   loopExceededOnParticle: -1
 --- !u!199 &1849297070
