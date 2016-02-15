@@ -80,6 +80,4 @@ public abstract class Weapon : MonoBehaviour, IEntityInjector
 
 		return true;
 	}
-
-	
 }
