@@ -28,8 +28,8 @@ public class EntityHealth : EntityAddon
 	{
 		Entity.Damagable.onDamageReceivedEvent -= OnDamageReceived;
 	}
-
-	public void Damage(int damage)
+	
+	private void OnDamageReceived(HitInfo hitInfo, int damage)
 	{
 		if(Current > 0)
 		{
@@ -37,10 +37,5 @@ public class EntityHealth : EntityAddon
 			damage = Mathf.Min(Current, damage);
 			Current -= damage;
 		}
-	}
-
-	private void OnDamageReceived(HitInfo hitInfo, int damage)
-	{
-		Damage(damage);
 	}
 }
