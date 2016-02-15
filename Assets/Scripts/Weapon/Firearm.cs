@@ -120,8 +120,7 @@ public class Firearm : Weapon
 		{
 			channel.Pitch = UnityEngine.Random.Range(gunShotPitchRange.x, gunShotPitchRange.y);
 		}
-
-		muzzleFlash.enabled = true;
+		
 		StartCoroutine("ShowMuzzleFlash");
 
 		if(currentFireMode == FireMode.Burst)
@@ -172,13 +171,19 @@ public class Firearm : Weapon
 
 	private IEnumerator ShowMuzzleFlash()
 	{
+		Vector3 euler = muzzleFlash.transform.eulerAngles;
+		euler.z = UnityEngine.Random.Range(0f, 360f);
+		muzzleFlash.transform.eulerAngles = euler;
+
+		muzzleFlash.enabled = true;
+
 		yield return new WaitForSeconds(muzzleFlashDisplayDuration);
+
 		muzzleFlash.enabled = false;
 	}
 
 	private bool HasFireMode(FireMode fireMode)
 	{
-		Debug.Log(fireMode + " " + ((fireModes & fireMode) == fireMode));
 		return (fireModes & fireMode) == fireMode;
 	}
 }
