@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ScreenSplashUnity : ScreenBase 
 {
@@ -42,7 +43,7 @@ public class ScreenSplashUnity : ScreenBase
 
 		yield return new WaitForSeconds (4f);
 
-		ScreenManager.Instance.setScreen ("ScreenSplashCompany");
+		ScreenManager.Instance.setScreen("ScreenSplashCompany");
 	}
 
 	public override IEnumerator OnScreenFadeout()
@@ -58,6 +59,7 @@ public class ScreenSplashUnity : ScreenBase
 
 	public override void OnScreenExit()
 	{
+		SceneManager.LoadSceneAsync("Game");
 	}
 
 	public override string getScreenName()

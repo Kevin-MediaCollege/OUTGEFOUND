@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ScreenSplashCompany : ScreenBase 
 {
@@ -17,6 +18,11 @@ public class ScreenSplashCompany : ScreenBase
 
 	public override void OnScreenEnter()
 	{
+		if(SceneManager.sceneCount == 1)
+		{
+			SceneManager.LoadSceneAsync("Core", LoadSceneMode.Additive);
+		}
+
 		overlay.alpha = 1f;
 		goatPrintSize = rectList[2].sizeDelta;
 	}
