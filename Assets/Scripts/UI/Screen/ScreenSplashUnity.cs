@@ -24,7 +24,7 @@ public class ScreenSplashUnity : ScreenBase
 
 	public override IEnumerator OnScreenFadein()
 	{
-		yield return new WaitForSeconds (1f);
+		yield return null;
 
 		StartCoroutine (Animation());
 	}

@@ -4,16 +4,20 @@ using System.Collections;
 public class ScreenStart : ScreenBase 
 {
 	public CanvasGroup group;
+	public CanvasGroup overlay;
 
 	public override void OnScreenEnter()
 	{
-		Debug.Log ("enter");
+		overlay.alpha = 1f;
 	}
 
 	public override IEnumerator OnScreenFadein()
 	{
-		Debug.Log ("fadein");
-		yield break;
+		yield return new WaitForSeconds (0.2f);
+
+		HOTweenHelper.Fade (overlay, 1f, 0f, 0.8f, 0f);
+
+		yield return new WaitForSeconds (0.8f);
 	}
 
 	void Update()
