@@ -51,14 +51,14 @@ public class ScreenSplashUnity : ScreenBase
 
 		yield return new WaitForSeconds (1.5f);
 
-		SceneManager.LoadSceneAsync("Menu");
+		StartCoroutine(GotoMenu());
 	}
 
 	void Update()
 	{
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
-			SceneManager.LoadSceneAsync("Menu");
+			StartCoroutine(GotoMenu());
 		}
 	}
 
@@ -74,5 +74,16 @@ public class ScreenSplashUnity : ScreenBase
 	public override string getScreenName()
 	{
 		return "ScreenSplashUnity";
+	}
+
+	private IEnumerator GotoMenu()
+	{
+		AsyncOperation async = SceneManager.LoadSceneAsync("Menu");
+		while(!async.isDone)
+		{
+			yield return null;
+		}
+		
+		SceneManager.UnloadScene("Splash");
 	}
 }
