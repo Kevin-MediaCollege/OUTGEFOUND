@@ -114,7 +114,10 @@ public class ScreenSplashCompany : ScreenBase
 
 	void Update()
 	{
-		
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			ScreenManager.Instance.setScreen ("ScreenSplashUnity", true);
+		}
 	}
 
 	public override IEnumerator OnScreenFadeout()

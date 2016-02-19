@@ -43,23 +43,32 @@ public class ScreenSplashUnity : ScreenBase
 
 		yield return new WaitForSeconds (4f);
 
-		ScreenManager.Instance.setScreen("ScreenSplashCompany");
-	}
-
-	public override IEnumerator OnScreenFadeout()
-	{
 		HOTweenHelper.Fade (overlay, 0f, 1f, 2.5f, 0f);
 
 		yield return new WaitForSeconds (1.5f);
 
 		HOTweenHelper.Fade (logo, 1f, 0f, 1f, 0f);
 
-		yield return new WaitForSeconds (2.0f);
+		yield return new WaitForSeconds (1.5f);
+
+		SceneManager.LoadSceneAsync("Menu");
+	}
+
+	void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			SceneManager.LoadSceneAsync("Menu");
+		}
+	}
+
+	public override IEnumerator OnScreenFadeout()
+	{
+		yield break;
 	}
 
 	public override void OnScreenExit()
 	{
-		SceneManager.LoadSceneAsync("Game");
 	}
 
 	public override string getScreenName()

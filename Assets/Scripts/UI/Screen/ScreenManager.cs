@@ -28,7 +28,7 @@ public class ScreenManager : MonoBehaviour
 		setScreen (startScreen);
 	}
 
-	public void setScreen(string _name)
+	public void setScreen(string _name, bool _skipFadeout = false)
 	{
 		if(!isSwitching)
 		{
@@ -36,16 +36,24 @@ public class ScreenManager : MonoBehaviour
 			if(screen != null)
 			{
 				isSwitching = true;
-				StartCoroutine (switchScreen (screen));
+				StartCoroutine (switchScreen (screen, _skipFadeout));
 			}
 		}
 	}
 
-	private IEnumerator switchScreen(ScreenBase _screen)
+	private IEnumerator switchScreen(ScreenBase _screen, bool _skipFadeout)
 	{
 		if(currentScreen != null)
 		{
-			yield return StartCoroutine (currentScreen.OnScreenFadeout ());
+			if (_skipFadeout) 
+			{
+				StopAllCoroutines ();
+			}
+			else
+			{
+				yield return StartCoroutine (currentScreen.OnScreenFadeout ());
+			}
+
 			currentScreen.OnScreenExit ();
 			currentScreen.gameObject.SetActive (false);
 		}
