@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class FirstPersonCamera : MonoBehaviour
+public class FirstPersonCamera : CameraState
 {
 	[SerializeField] private Vector2 yConstraint = new Vector2(-70, 70);
 	[SerializeField] private Vector2 sensitivity = new Vector2(10, 10);
@@ -13,15 +13,16 @@ public class FirstPersonCamera : MonoBehaviour
 
 	private float yRotation;
 
-	protected void OnEnable()
+	public override void Start()
 	{
 		player = EntityUtils.GetEntityWithTag("Player");
 		weapon = player.transform.Find("Weapon");
 
 		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
 	}
 
-	protected void LateUpdate()
+	public override void ApplyCameraState()
 	{
 		// Rotate the player
 		player.transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivity.x, 0);
@@ -35,5 +36,11 @@ public class FirstPersonCamera : MonoBehaviour
 		// Move the camera to the player's eyes
 		Camera.main.transform.position = transform.position;
 		Camera.main.transform.rotation = transform.rotation;
+	}
+
+	public override void Stop()
+	{
+		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;
 	}
 }

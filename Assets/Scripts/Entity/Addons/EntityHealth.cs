@@ -28,6 +28,12 @@ public class EntityHealth : EntityAddon
 	{
 		Entity.Damagable.onDamageReceivedEvent -= OnDamageReceived;
 	}
+
+	public void Heal(int amount)
+	{
+		Current += amount;
+		Debug.Log("Healed player for: " + amount);
+	}
 	
 	private void OnDamageReceived(HitInfo hitInfo, int damage)
 	{
