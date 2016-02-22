@@ -427,7 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6964e97ef3ae4244bbceb5dc65fb2da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yConstraint: {x: -50, y: 30}
+  yConstraint: {x: -90, y: 90}
   sensitivity: {x: 10, y: 6}
 --- !u!114 &11491956
 MonoBehaviour:
