@@ -13,11 +13,11 @@ public class ScreenStart : ScreenBase
 
 	public override IEnumerator OnScreenFadein()
 	{
-		yield return new WaitForSeconds (0.2f);
+		yield return new WaitForSeconds (0.1f);
 
-		HOTweenHelper.Fade (overlay, 1f, 0f, 0.8f, 0f);
+		HOTweenHelper.Fade (overlay, 1f, 0f, 0.5f, 0f);
 
-		yield return new WaitForSeconds (0.8f);
+		yield return new WaitForSeconds (0.5f);
 	}
 
 	void Update()
