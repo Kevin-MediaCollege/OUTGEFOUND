@@ -50,6 +50,7 @@ GameObject:
   - 95: {fileID: 9556350}
   - 143: {fileID: 14374550}
   - 114: {fileID: 11408882}
+  - 114: {fileID: 11463618}
   - 114: {fileID: 11431770}
   - 114: {fileID: 11491956}
   m_Layer: 0
@@ -404,6 +405,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
+--- !u!114 &11463618
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75562f687293d394b98854ea41bf7ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactiveBehaviours:
+  - {fileID: 11431770}
+  - {fileID: 11424912}
 --- !u!114 &11472060
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -424,10 +439,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 170740}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6964e97ef3ae4244bbceb5dc65fb2da, type: 3}
+  m_Script: {fileID: 11500000, guid: 4622843c03b66da45ab10050bd5ddf54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yConstraint: {x: -50, y: 30}
+  yConstraint: {x: -90, y: 90}
   sensitivity: {x: 10, y: 6}
 --- !u!114 &11491956
 MonoBehaviour:
