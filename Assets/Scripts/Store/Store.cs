@@ -25,16 +25,18 @@ public class Store : MonoBehaviour
 
 	[SerializeField] private float interactionRange = 3;
 
-	[SerializeField] private Canvas storeUI;
-	[SerializeField] private CameraState storeCameraState;
-
 	[SerializeField] private Transform playerPosition;
+	[SerializeField] private Canvas storeUI;
 
-	private Vector3 origPlayerPosition;
+	private CameraStateManager cameraStateManager;
+
 	private Quaternion origPlayerRotation;
+	private Vector3 origPlayerPosition;
 
 	protected void Awake()
 	{
+		cameraStateManager = Dependency.Get<CameraStateManager>();
+
 		storeUI.enabled = false;
 	}
 
@@ -72,7 +74,7 @@ public class Store : MonoBehaviour
 	public void Open()
 	{
 		storeUI.enabled = true;
-		CameraStateManager.SetCurrentState(storeCameraState);
+		cameraStateManager.SetCurrentState(0);
 
 		Entity player = EntityUtils.GetEntityWithTag("Player");
 		origPlayerPosition = player.transform.position;
@@ -80,22 +82,16 @@ public class Store : MonoBehaviour
 
 		player.transform.position = playerPosition.position;
 		player.transform.rotation = playerPosition.rotation;
-		
-		// Disable player interaction
-		player.GetComponent<InteractiveObject>().DisableInteraction();
 	}
 
 	public void Close()
 	{
 		storeUI.enabled = false;
-		CameraStateManager.SetCurrentState(null);
+		cameraStateManager.SetToDefaultState();
 
 		Entity player = EntityUtils.GetEntityWithTag("Player");
 
 		player.transform.position = origPlayerPosition;
 		player.transform.rotation = origPlayerRotation;
-
-		// Enable player interaction
-		player.GetComponent<InteractiveObject>().EnableInteraction();
 	}
 }

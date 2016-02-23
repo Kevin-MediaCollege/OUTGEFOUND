@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EntityMovement : MonoBehaviour
+public abstract class EntityMovement : MonoBehaviour
 {
 	public bool Jumping
 	{
@@ -19,31 +19,20 @@ public class EntityMovement : MonoBehaviour
 		}
 	}
 
-	[SerializeField] private CharacterController characterController;
-	[SerializeField] private InputController input;
-
-	[SerializeField] private float speed;
-	[SerializeField] private float jumpSpeed;
-
-	private float verticalSpeed;
-
-	protected void Update()
+	public bool Crouching
 	{
-		Vector3 velocityX = transform.right * input.InputX * speed;
-		Vector3 velocityZ = transform.forward * input.InputZ * speed;
-
-		if(characterController.isGrounded)
+		get
 		{
-			verticalSpeed = input.Jump ? jumpSpeed : 0;
+			return crouching;
 		}
-		else
-		{
-			verticalSpeed += Physics.gravity.y * Time.deltaTime;
-		}		
-
-		Vector3 velocity = velocityX + velocityZ;
-		velocity.y = verticalSpeed;
-
-		characterController.Move(velocity * Time.deltaTime);
 	}
+	
+	[SerializeField] protected InputController input;
+
+	[SerializeField] protected float speed;
+	[SerializeField] protected float jumpSpeed;
+
+	protected float verticalSpeed;
+
+	protected bool crouching;
 }

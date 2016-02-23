@@ -12,15 +12,17 @@ public class Firearm : Weapon
 		SemiAutomatic	= 4
 	}
 
+	public Vector3 BarrelPosition
+	{
+		get
+		{
+			return barrel.position;
+		}
+	}
+
 	[SerializeField] private Transform barrel;
-
-	[SerializeField] private AudioAsset gunShot;
-	[SerializeField] private Vector2 gunShotPitchRange;
-
-	[SerializeField] private SpriteRenderer muzzleFlash;
-	[SerializeField] private float muzzleFlashDisplayDuration;
-
 	[SerializeField] private FireMode fireModes;
+	[SerializeField] private Magazine magazine;
 
 	[SerializeField] private int shotsPerBurst;
 
@@ -60,11 +62,11 @@ public class Firearm : Weapon
 		}
 	}
 
-	public override void StopFire(bool force = false)
+	public override void StopFire()
 	{
 		if(currentFireMode == FireMode.Burst)
 		{
-			if(force || currentShotCount >= shotsPerBurst)
+			if(currentShotCount >= shotsPerBurst)
 			{
 				base.StopFire();
 			}
@@ -115,13 +117,10 @@ public class Firearm : Weapon
 
 	protected virtual void OnFireEvent(HitInfo hitInfo)
 	{
-		AudioChannel channel = AudioManager.PlayAt(gunShot, barrel.position);
-		if(channel != null)
+		if(!magazine.Fire(this))
 		{
-			channel.Pitch = UnityEngine.Random.Range(gunShotPitchRange.x, gunShotPitchRange.y);
+			base.StopFire();
 		}
-		
-		StartCoroutine("ShowMuzzleFlash");
 
 		if(currentFireMode == FireMode.Burst)
 		{
@@ -139,7 +138,7 @@ public class Firearm : Weapon
 
 	protected override HitInfo GetHitInfo()
 	{
-		HitInfo hitInfo = new HitInfo(Wielder, null, Vector3.zero, Vector3.zero, Vector3.zero);
+		HitInfo hitInfo = new HitInfo(Entity, null, Vector3.zero, Vector3.zero, Vector3.zero);
 
 		// Raycast from the camera forward
 		Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f));
@@ -167,19 +166,6 @@ public class Firearm : Weapon
 		}
 
 		return hitInfo;
-	}
-
-	private IEnumerator ShowMuzzleFlash()
-	{
-		Vector3 euler = muzzleFlash.transform.eulerAngles;
-		euler.z = UnityEngine.Random.Range(0f, 360f);
-		muzzleFlash.transform.eulerAngles = euler;
-
-		muzzleFlash.enabled = true;
-
-		yield return new WaitForSeconds(muzzleFlashDisplayDuration);
-
-		muzzleFlash.enabled = false;
 	}
 
 	private bool HasFireMode(FireMode fireMode)

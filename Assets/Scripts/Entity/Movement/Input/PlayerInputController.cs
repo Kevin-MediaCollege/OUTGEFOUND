@@ -27,4 +27,12 @@ public class PlayerInputController : InputController
 			return Input.GetKey(KeyCode.Space);
 		}
 	}
+
+	public override bool Crouch
+	{
+		get
+		{
+			return Input.GetKey(KeyCode.C);
+		}
+	}
 }

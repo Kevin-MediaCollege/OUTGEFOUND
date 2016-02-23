@@ -2,9 +2,9 @@
 using System.Collections;
 using System;
 
-public class StoreCamera : CameraState
+public class StoreCamera : MonoBehaviour
 {
-	public override void Start()
+	/*public override void Start()
 	{
 		Cursor.lockState = CursorLockMode.Confined;
 		Cursor.visible = true;
@@ -20,5 +20,5 @@ public class StoreCamera : CameraState
 	{
 		Cursor.lockState = CursorLockMode.None;
 		Cursor.visible = true;
-	}
+	}*/
 }

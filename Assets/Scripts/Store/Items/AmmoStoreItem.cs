@@ -6,6 +6,6 @@ public class AmmoStoreItem : StoreItem
 {
 	public override void Purchase()
 	{
-		Entity player = EntityUtils.GetEntityWithTag("Player");
+	//	Entity player = EntityUtils.GetEntityWithTag("Player");
 	}
 }

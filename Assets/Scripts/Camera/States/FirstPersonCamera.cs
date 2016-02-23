@@ -2,45 +2,47 @@
 using System.Collections;
 using System;
 
-public class FirstPersonCamera : CameraState
+public class FirstPersonCamera : MonoBehaviour
 {
 	[SerializeField] private Vector2 yConstraint = new Vector2(-70, 70);
 	[SerializeField] private Vector2 sensitivity = new Vector2(10, 10);
 
 	private Transform weapon;
-
-	private Entity player;	
+	private Transform player;
+	private Transform eyes;
 
 	private float yRotation;
 
-	public override void Start()
+	protected void OnEnable()
 	{
-		player = EntityUtils.GetEntityWithTag("Player");
-		weapon = player.transform.Find("Weapon");
+		player = EntityUtils.GetEntityWithTag("Player").transform;
+
+		weapon = player.Find("Weapon");
+		eyes = player.Find("Eyes");		
 
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
 	}
 
-	public override void ApplyCameraState()
+	protected void OnDisable()
+	{
+		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;
+	}
+
+	protected void FixedUpdate()
 	{
 		// Rotate the player
-		player.transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivity.x, 0);
+		player.Rotate(0, Input.GetAxis("Mouse X") * sensitivity.x, 0);
 
 		yRotation += Input.GetAxis("Mouse Y") * sensitivity.y;
 		yRotation = Mathf.Clamp(yRotation, yConstraint.x, yConstraint.y);
 
-		transform.localEulerAngles = new Vector3(-yRotation, transform.localEulerAngles.y, 0);
+		eyes.localEulerAngles = new Vector3(-yRotation, transform.localEulerAngles.y, 0);
 		weapon.localEulerAngles = new Vector3(-yRotation, weapon.localEulerAngles.y, 0);
 
 		// Move the camera to the player's eyes
-		Camera.main.transform.position = transform.position;
-		Camera.main.transform.rotation = transform.rotation;
-	}
-
-	public override void Stop()
-	{
-		Cursor.lockState = CursorLockMode.None;
-		Cursor.visible = true;
+		Camera.main.transform.position = eyes.position;
+		Camera.main.transform.rotation = eyes.rotation;
 	}
 }

@@ -1,47 +1,64 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using System;
 
-public class EntityHealth : EntityAddon
+public class EntityHealth : IDependency
 {
-	public int Starting
+	public delegate void OnHit(DamageInfo damageInfo);
+	public event OnHit onHitEvent = delegate { };
+
+	public delegate void OnDeath(DamageInfo damageInfo);
+	public event OnDeath onDeathEvent = delegate { };
+
+	private Dictionary<Entity, EntityHealthData> data;
+
+	public EntityHealth()
 	{
-		get
+		data = new Dictionary<Entity, EntityHealthData>();
+	}
+
+	public void Add(Entity entity, EntityHealthData healthData)
+	{
+		data.Add(entity, healthData);
+	}
+
+	public void Remove(Entity entity)
+	{
+		data.Remove(entity);
+	}
+
+	public void Heal(Entity entity)
+	{
+		if(CanDamage(entity))
 		{
-			return startingHealth;
+			EntityHealthData d = data[entity];
+			d.CurrentHealth = d.StartingHealth;
 		}
 	}
 
-	public int Current { private set; get; }
-
-	[SerializeField] private int startingHealth;
-
-	protected void Awake()
+	public void Damage(DamageInfo damageInfo)
 	{
-		Current = startingHealth;
-	}
-
-	protected void OnEnable()
-	{
-		Entity.Damagable.onDamageReceivedEvent += OnDamageReceived;
-	}
-
-	protected void OnDisable()
-	{
-		Entity.Damagable.onDamageReceivedEvent -= OnDamageReceived;
-	}
-
-	public void Heal(int amount)
-	{
-		Current += amount;
-		Debug.Log("Healed player for: " + amount);
-	}
-	
-	private void OnDamageReceived(HitInfo hitInfo, int damage)
-	{
-		if(Current > 0)
+		if(CanDamage(damageInfo.Target))
 		{
-			// Make sure health doesn't go below zero
-			damage = Mathf.Min(Current, damage);
-			Current -= damage;
+			EntityHealthData d = data[damageInfo.Target];
+
+			if(d.CurrentHealth > 0)
+			{
+				d.CurrentHealth -= damageInfo.Damage;
+
+				onHitEvent(damageInfo);
+
+				if(d.CurrentHealth <= 0)
+				{
+					onDeathEvent(damageInfo);
+				}
+			}
 		}
+	}
+
+	public bool CanDamage(Entity entity)
+	{
+		return data.ContainsKey(entity);
 	}
 }

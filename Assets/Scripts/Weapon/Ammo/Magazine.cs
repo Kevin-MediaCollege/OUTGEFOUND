@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class Magazine : WeaponComponent
+public class Magazine : MonoBehaviour
 {
 	public delegate void OnMagazineEmpty();
 	public event OnMagazineEmpty onMagazineEmptyEvent = delegate { };
@@ -19,22 +19,17 @@ public class Magazine : WeaponComponent
 
 	[SerializeField] private int capacity;
 
-	public override void Fire(HitInfo info)
+	public bool Fire(Firearm firearm)
 	{
 		Current--;
-			
+
 		if(Current <= 0)
 		{
-			Debug.Log("[Magazine] Empty");
-
 			onMagazineEmptyEvent();
-			weapon.StopFire(true);
+			return false;
 		}
-	}
 
-	public override bool CanFire()
-	{
-		return Current > 0;
+		return true;
 	}
 
 	public void Put(int amount)

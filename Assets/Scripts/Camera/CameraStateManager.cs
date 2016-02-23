@@ -1,38 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraStateManager : MonoBehaviour
+public class CameraStateManager : IDependency
 {
-	public static CameraState CurrentState { private set; get; }
+	private GameObject currentStateObject;
 
-	private static CameraStateManager instance;
-
-	[SerializeField] private CameraState defaultState;
-
-	protected void Awake()
+	public void SetToDefaultState()
 	{
-		instance = this;
-		CurrentState = defaultState;
+		SetCurrentState(-1);
 	}
 
-	protected void LateUpdate()
+	public void SetCurrentState(int state)
 	{
-		CurrentState.ApplyCameraState();
-	}
+		GameObject newstate = CameraStates.GetById(state);
 
-	public static void SetCurrentState(CameraState cameraState)
-	{
-		if(cameraState == CurrentState)
+		if(currentStateObject != null)
 		{
-			return;
+			Object.Destroy(currentStateObject);
 		}
 
-		if(CurrentState != null)
-		{
-			CurrentState.Stop();
-		}
-
-		CurrentState = cameraState ?? instance.defaultState;
-		CurrentState.Start();
+		currentStateObject = Object.Instantiate(newstate);
 	}
 }
