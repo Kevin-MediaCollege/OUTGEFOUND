@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-
-public struct DamageInfo
+﻿public struct DamageInfo
 {
-	public Entity Source { private set; get; }
-	public Entity Target { private set; get; }
+	public HitInfo Hit { private set; get; }
 
-	public int Damage { set; get; }
+	public float Damage { set; get; }
 
-	public DamageInfo(Entity source, Entity target, int damage)
+	public DamageInfo(HitInfo hit, float damage)
 	{
-		Source = source;
-		Target = target;
-
+		Hit = hit;
 		Damage = damage;
 	}
 }

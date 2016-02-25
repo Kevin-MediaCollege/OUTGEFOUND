@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 468820}
   - 114: {fileID: 11424164}
+  - 114: {fileID: 11470178}
   m_Layer: 0
   m_Name: Addons
   m_TagString: Untagged
@@ -43,6 +44,7 @@ GameObject:
   - 4: {fileID: 475646}
   - 136: {fileID: 13685094}
   - 114: {fileID: 11464590}
+  - 114: {fileID: 11432316}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -133,6 +135,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 10
+  bloodParticlePrefab: {fileID: 172532, guid: cf80f31b305e04240939ea44874bd256, type: 2}
+--- !u!114 &11432316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172cb9d6f6a3db14f86cd4be8d555cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11464590
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -146,6 +160,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingTags:
   - Enemy
+--- !u!114 &11470178
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d2b758844a416a419a087ea9c845d10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &13685094
 CapsuleCollider:
   m_ObjectHideFlags: 1

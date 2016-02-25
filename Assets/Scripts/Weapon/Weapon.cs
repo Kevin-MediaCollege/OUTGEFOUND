@@ -1,59 +1,79 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour, IEntityInjector
 {
-	public delegate void OnFire(HitInfo hitInfo);
-	public event OnFire onFireEvent = delegate { };
-
 	public Entity Entity { set; get; }
 
-	[SerializeField] private int damage;
+	public WeaponUpgrade Upgrade { protected set; get; }
 
-	private EntityHealth health;
-	private bool firing;
+	public GameObject Model { private set; get; }
 
-	protected void Awake()
+	[SerializeField] protected WeaponUpgrade baseUpgrade;
+	[SerializeField] protected WeaponUpgrade[] upgradeData;
+
+	private List<WeaponModifier> modifiers = new List<WeaponModifier>();
+	
+	protected virtual void Awake()
 	{
-		health = Dependency.Get<EntityHealth>();
+		SetUpgrade(baseUpgrade);
 	}
 
-	protected void FixedUpdate()
+	public bool Fire()
 	{
-		if(firing)
+		if(!CanFire())
 		{
-			if(!CanFire())
-			{
-				return;
-			}
-
-			HitInfo hitInfo = GetHitInfo();
-			onFireEvent(hitInfo);
-
-			if(hitInfo.Hit)
-			{
-				DamageInfo damageInfo = new DamageInfo(hitInfo.Source, hitInfo.Target, damage);
-				health.Damage(damageInfo);
-			}
+			return false;
 		}
-	}
 
-	public virtual void StartFire()
-	{
-		if(CanFire())
+		HitInfo hitInfo = ConstructHitInfo();
+		GlobalEvents.Invoke(new WeaponFireEvent(this, hitInfo));
+		
+		if(hitInfo.Hit)
 		{
-			firing = true;
+			// TODO: Apply damage modifiers
+			DamageInfo damageInfo = new DamageInfo(hitInfo, Upgrade.BaseDamage);
+			GlobalEvents.Invoke(new DamageEvent(damageInfo));
 		}
-	}
 
-	public virtual void StopFire()
-	{
-		firing = false;
+		return true;
 	}
 
 	public bool CanFire()
 	{
+		foreach(WeaponModifier modifier in modifiers)
+		{
+			if(!modifier.CanFire())
+			{
+				return false;
+			}
+		}
+
 		return true;
 	}
 
-	protected abstract HitInfo GetHitInfo();	
+	public void AddModifier(WeaponModifier modifier)
+	{
+		modifiers.Add(modifier);
+	}
+
+	public void RemoveModifier(WeaponModifier modifier)
+	{
+		modifiers.Remove(modifier);
+	}
+
+	protected abstract HitInfo ConstructHitInfo();
+
+	protected virtual void SetUpgrade(WeaponUpgrade upgrade)
+	{
+		Upgrade = upgrade;
+
+		if(Model != null)
+		{
+			Destroy(Model);
+		}
+
+		Model = Instantiate(upgrade.Model);
+		Model.transform.SetParent(transform, false);
+	}
 }

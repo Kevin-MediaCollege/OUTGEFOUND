@@ -1,64 +1,78 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System;
+﻿using System;
+using UnityEngine;
 
-public class EntityHealth : IDependency
+public class EntityHealth : MonoBehaviour, IEntityInjector
 {
-	public delegate void OnHit(DamageInfo damageInfo);
-	public event OnHit onHitEvent = delegate { };
-
-	public delegate void OnDeath(DamageInfo damageInfo);
-	public event OnDeath onDeathEvent = delegate { };
-
-	private Dictionary<Entity, EntityHealthData> data;
-
-	public EntityHealth()
+	public float StartingHealth
 	{
-		data = new Dictionary<Entity, EntityHealthData>();
-	}
-
-	public void Add(Entity entity, EntityHealthData healthData)
-	{
-		data.Add(entity, healthData);
-	}
-
-	public void Remove(Entity entity)
-	{
-		data.Remove(entity);
-	}
-
-	public void Heal(Entity entity)
-	{
-		if(CanDamage(entity))
+		get
 		{
-			EntityHealthData d = data[entity];
-			d.CurrentHealth = d.StartingHealth;
+			return startingHealth;
 		}
 	}
 
-	public void Damage(DamageInfo damageInfo)
+	public float CurrentHealth { set; get; }
+
+	public Entity Entity { set; get; }
+
+	[SerializeField] private float startingHealth;
+	[SerializeField] private GameObject bloodParticlePrefab;
+
+	protected void Awake()
 	{
-		if(CanDamage(damageInfo.Target))
+		CurrentHealth = startingHealth;
+	}
+
+	protected void OnEnable()
+	{
+		GlobalEvents.AddListener<DamageEvent>(OnDamageEvent);
+	}
+
+	protected void OnDisable()
+	{
+		GlobalEvents.RemoveListener<DamageEvent>(OnDamageEvent);
+	}
+
+	private void OnDamageEvent(DamageEvent evt)
+	{
+		if(evt.DamageInfo.Hit.Target == Entity)
 		{
-			EntityHealthData d = data[damageInfo.Target];
+			CurrentHealth -= evt.DamageInfo.Damage;
 
-			if(d.CurrentHealth > 0)
+			GameObject bloodParticle = Instantiate(bloodParticlePrefab);
+			bloodParticle.transform.position = evt.DamageInfo.Hit.Point;
+			bloodParticle.transform.rotation = Quaternion.FromToRotation(transform.forward, evt.DamageInfo.Hit.Normal) * transform.rotation;
+
+			if(CurrentHealth <= 0)
 			{
-				d.CurrentHealth -= damageInfo.Damage;
-
-				onHitEvent(damageInfo);
-
-				if(d.CurrentHealth <= 0)
-				{
-					onDeathEvent(damageInfo);
-				}
+				GlobalEvents.Invoke(new EntityDeathEvent(evt.DamageInfo));
 			}
 		}
 	}
 
-	public bool CanDamage(Entity entity)
+#if UNITY_EDITOR
+	[ContextMenu("Heal")]
+	private void Heal()
 	{
-		return data.ContainsKey(entity);
+		CurrentHealth = StartingHealth;
 	}
+
+	[ContextMenu("Damage")]
+	private void Damage()
+	{
+		HitInfo hitInfo = new HitInfo(Entity, Entity);
+		DamageInfo damageInfo = new DamageInfo(hitInfo, 1);
+
+		GlobalEvents.Invoke(new DamageEvent(damageInfo));
+	}
+
+	[ContextMenu("Kill")]
+	private void Kill()
+	{
+		HitInfo hitInfo = new HitInfo(Entity, Entity);
+		DamageInfo damageInfo = new DamageInfo(hitInfo, CurrentHealth);
+
+		GlobalEvents.Invoke(new DamageEvent(damageInfo));
+	}
+#endif
 }

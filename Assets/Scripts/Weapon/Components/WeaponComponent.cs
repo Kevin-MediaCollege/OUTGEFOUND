@@ -5,20 +5,28 @@ public abstract class WeaponComponent : MonoBehaviour
 {
 	protected Weapon weapon;
 
-	protected void Awake()
+	protected virtual void Awake()
 	{
 		weapon = GetComponent<Weapon>() ?? GetComponentInParent<Weapon>();
 	}
 
-	protected void OnEnable()
+	protected virtual void OnEnable()
 	{
-		weapon.onFireEvent += OnFire;
+		GlobalEvents.AddListener<WeaponFireEvent>(OnWeaponFireEvent);
 	}
 
-	protected void OnDisable()
+	protected virtual void OnDisable()
 	{
-		weapon.onFireEvent -= OnFire;
+		GlobalEvents.RemoveListener<WeaponFireEvent>(OnWeaponFireEvent);
 	}
 
 	protected abstract void OnFire(HitInfo hitInfo);
+
+	private void OnWeaponFireEvent(WeaponFireEvent evt)
+	{
+		if(evt.Weapon == weapon)
+		{
+			OnFire(evt.HitInfo);
+		}
+	}
 }

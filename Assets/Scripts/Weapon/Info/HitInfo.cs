@@ -9,22 +9,25 @@ public struct HitInfo
 	public Vector3 Point { set; get; }
 	public Vector3 Normal { set; get; }
 
+	public string Tag { set; get; }
+
 	public bool Hit
 	{
 		get
 		{
-			EntityHealth health = Dependency.Get<EntityHealth>();
-			return Target != null && health.CanDamage(Target);
+			return Target != null && Target.GetComponent<Damagable>() != null;
 		}
 	}
 
-	public HitInfo(Entity source, Entity target, Vector3 direction, Vector3 point, Vector3 normal)
+	public HitInfo(Entity source, Entity target)
 	{
 		Source = source;
 		Target = target;
 
-		Direction = direction;
-		Point = point;
-		Normal = normal;
+		Direction = Vector3.zero;
+		Point = Vector3.zero;
+		Normal = Vector3.zero;
+
+		Tag = "";
 	}
 }

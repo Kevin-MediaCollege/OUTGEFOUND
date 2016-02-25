@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public class CameraStates : ScriptableObjectManager<CameraStates>
+public class CameraStates : ScriptableObjectSingleton<CameraStates>
 {
 	[SerializeField] private GameObject[] states;
 	[SerializeField] private GameObject defaultState;
