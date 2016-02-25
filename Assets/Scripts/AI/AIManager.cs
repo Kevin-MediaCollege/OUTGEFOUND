@@ -33,7 +33,7 @@ public class AIManager : MonoBehaviour
 
 		for(int i = nextLogicUpdate; i < end; i++)
 		{
-			aiList[i].onLogicUpdate();
+			//aiList[i].onLogicUpdate();
 			nextLogicUpdate++;
 		}
 	}
