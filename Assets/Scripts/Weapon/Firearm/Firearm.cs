@@ -15,7 +15,7 @@ public class Firearm : Weapon
 	{
 		base.Awake();
 
-		fireMode = ((FirearmUpgrade)Upgrade).FireModes;
+		SwitchFireMode();
 	}
 
 	protected void Update()
@@ -27,6 +27,11 @@ public class Firearm : Weapon
 		else if(Input.GetMouseButtonUp(0))
 		{
 			StopFire();
+		}
+		
+		if(Input.GetKeyDown(KeyCode.V))
+		{
+			SwitchFireMode();
 		}
 	}
 
@@ -104,14 +109,6 @@ public class Firearm : Weapon
 
 		return hitInfo;
 	}
-
-	protected override void SetUpgrade(WeaponUpgrade upgrade)
-	{
-		base.SetUpgrade(upgrade);
-
-		barrel = Model.transform.Find("Barrel");
-	}
-
 	private void StartFire()
 	{
 		if(!firing)
@@ -132,5 +129,61 @@ public class Firearm : Weapon
 				break;
 			}
 		}
+	}
+
+	private void SwitchFireMode()
+	{
+		if(fireMode == FireMode.Automatic)
+		{
+			if(!SetFireMode(FireMode.Burst))
+			{
+				SetFireMode(FireMode.SemiAutomatic);
+			}
+		}
+		else if(fireMode == FireMode.Burst)
+		{
+			if(!SetFireMode(FireMode.SemiAutomatic))
+			{
+				SetFireMode(FireMode.Automatic);
+			}
+		}
+		else if(fireMode == FireMode.SemiAutomatic)
+		{
+			if(!SetFireMode(FireMode.Automatic))
+			{
+				SetFireMode(FireMode.Burst);
+			}
+		}
+		else
+		{
+			if(!SetFireMode(FireMode.Automatic) && !!SetFireMode(FireMode.Burst) && !SetFireMode(FireMode.SemiAutomatic))
+			{
+				Debug.LogError("No available fire modes");
+			}
+		}
+	}
+
+	protected override void SetUpgrade(WeaponUpgrade upgrade)
+	{
+		base.SetUpgrade(upgrade);
+
+		barrel = Model.transform.Find("Barrel");
+	}
+
+	private bool SetFireMode(FireMode fireMode)
+	{
+		if(HasFireMode(fireMode))
+		{
+			this.fireMode = fireMode;
+			Debug.Log(this.fireMode);
+			return true;
+		}
+
+		return false;
+	}
+
+	private bool HasFireMode(FireMode fireMode)
+	{
+		return (((FirearmUpgrade)Upgrade).FireModes & fireMode) == fireMode;
 	}
 }

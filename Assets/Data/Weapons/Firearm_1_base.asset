@@ -18,9 +18,9 @@ MonoBehaviour:
     Limbs: 1
   baseDamage: 1
   rateOfFire: 240
-  fireModes: 1
+  fireModes: -1
   reloadSpeed: 1
-  bulletSpread: 0
+  bulletSpread: 0.015
   maxRange: 650
   magazineCapacity: 30
-  shotsPerBurst: 120
+  shotsPerBurst: 3

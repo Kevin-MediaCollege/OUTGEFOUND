@@ -25,6 +25,7 @@ public class StockPile : WeaponModifier
 	[SerializeField] private Magazine magazine;
 
 	private int current;
+	private bool reloading;
 
 	protected void Start()
 	{
@@ -34,9 +35,9 @@ public class StockPile : WeaponModifier
 
 	protected void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.R))
+		if(!reloading && Input.GetKeyDown(KeyCode.R))
 		{
-			Reload();
+			StartCoroutine("ReloadDelay");
 		}
 	}
 
@@ -52,5 +53,15 @@ public class StockPile : WeaponModifier
 		
 		current -= amount;
 		magazine.Put(amount);		
+	}
+
+	private IEnumerator ReloadDelay()
+	{
+		magazine.Deduct(magazine.Current);
+
+		yield return new WaitForSeconds(((FirearmUpgrade)weapon.Upgrade).ReloadSpeed);
+
+		Reload();
+		reloading = false;
 	}
 }

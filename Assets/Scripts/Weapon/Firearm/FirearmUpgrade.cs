@@ -60,7 +60,7 @@ public class FirearmUpgrade : WeaponUpgrade
 		}
 	}
 
-	[SerializeField] private FireMode fireModes;
+	[SerializeField, EnumFlags] private FireMode fireModes;
 
 	[SerializeField] private float reloadSpeed;
 	[SerializeField] private float bulletSpread;

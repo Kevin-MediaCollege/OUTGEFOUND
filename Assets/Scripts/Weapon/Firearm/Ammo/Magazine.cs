@@ -21,4 +21,9 @@ public class Magazine : WeaponModifier
 	{
 		Current += amount;
 	}
+
+	public void Deduct(int amount)
+	{
+		Current -= amount;
+	}
 }
