@@ -5,9 +5,12 @@ using System.Collections.Generic;
 public class CoverManager : MonoBehaviour 
 {
 	public static CoverManager instance;
+
+	//List
 	private List<CoverBase> coverList;
 	private int coverListLength;
 
+	//Update
 	private int nextCover = 0;
 	private int updatesPerFrame = 20;
 	private bool updatingEnabled = true;
