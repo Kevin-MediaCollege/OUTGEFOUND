@@ -21,14 +21,14 @@ public abstract class Weapon : MonoBehaviour, IEntityInjector
 
 	protected virtual void OnEnable()
 	{
-		GlobalEvents.AddListener<StartWeaponFireEvent>(OnStartFireEvent);
-		GlobalEvents.AddListener<StopWeaponFireEvent>(OnStopFireEvent);
+		Entity.Events.AddListener<StartWeaponFireEvent>(OnStartFireEvent);
+		Entity.Events.AddListener<StopWeaponFireEvent>(OnStopFireEvent);
 	}
 
 	protected virtual void OnDisable()
 	{
-		GlobalEvents.RemoveListener<StartWeaponFireEvent>(OnStartFireEvent);
-		GlobalEvents.RemoveListener<StopWeaponFireEvent>(OnStopFireEvent);
+		Entity.Events.RemoveListener<StartWeaponFireEvent>(OnStartFireEvent);
+		Entity.Events.RemoveListener<StopWeaponFireEvent>(OnStopFireEvent);
 	}
 
 	public virtual void StartFire()
@@ -93,7 +93,10 @@ public abstract class Weapon : MonoBehaviour, IEntityInjector
 			}
 
 			DamageInfo damageInfo = new DamageInfo(hitInfo, damage);
-			GlobalEvents.Invoke(new DamageEvent(damageInfo));
+			DamageEvent damageEvent = new DamageEvent(damageInfo);
+
+			GlobalEvents.Invoke(damageEvent);
+			Entity.Events.Invoke(damageEvent);
 		}
 
 		return true;

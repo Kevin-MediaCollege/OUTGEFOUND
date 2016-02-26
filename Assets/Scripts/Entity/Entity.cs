@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(LocalEvents))]
 public class Entity : MonoBehaviour
 {
 	public static IEnumerable<Entity> All
@@ -13,6 +14,20 @@ public class Entity : MonoBehaviour
 	}
 
 	private static HashSet<Entity> all = new HashSet<Entity>();
+
+	private LocalEvents events;
+	public IEventDispatcher Events
+	{
+		get
+		{
+			if(events == null)
+			{
+				events = GetComponent<LocalEvents>();
+			}
+
+			return events;
+		}
+	}
 
 	[SerializeField] private string[] startingTags;
 
@@ -45,11 +60,15 @@ public class Entity : MonoBehaviour
 	protected void OnEnable()
 	{
 		all.Add(this);
+
+		GlobalEvents.Invoke(new EntityActivatedEvent(this));
 	}
 
 	protected void OnDisable()
 	{
 		all.Remove(this);
+
+		GlobalEvents.Invoke(new EntityDeactivatedEvent(this));
 	}
 	#endregion
 

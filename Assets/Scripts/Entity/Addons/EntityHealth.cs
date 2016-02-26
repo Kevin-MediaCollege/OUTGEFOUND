@@ -45,7 +45,7 @@ public class EntityHealth : MonoBehaviour, IEntityInjector
 
 			if(CurrentHealth <= 0)
 			{
-				GlobalEvents.Invoke(new EntityDeathEvent(evt.DamageInfo));
+				GlobalEvents.Invoke(new EntityDiedEvent(evt.DamageInfo));
 			}
 		}
 	}

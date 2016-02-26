@@ -37,14 +37,14 @@ public class StockPile : WeaponModifier
 	{
 		base.OnEnable();
 
-		GlobalEvents.AddListener<ReloadWeaponEvent>(OnReloadEvent);
+		weapon.Entity.Events.AddListener<ReloadWeaponEvent>(OnReloadEvent);
 	}
 
 	protected override void OnDisable()
 	{
 		base.OnDisable();
 
-		GlobalEvents.RemoveListener<ReloadWeaponEvent>(OnReloadEvent);
+		weapon.Entity.Events.RemoveListener<ReloadWeaponEvent>(OnReloadEvent);
 	}
 
 	public void Add(int amount)
@@ -58,7 +58,9 @@ public class StockPile : WeaponModifier
 		amount = Mathf.Min(amount, current);
 		
 		current -= amount;
-		magazine.Put(amount);		
+		magazine.Put(amount);
+
+		weapon.Entity.Events.Invoke(new ReloadedEvent(weapon));
 	}
 
 	private IEnumerator ReloadDelay()

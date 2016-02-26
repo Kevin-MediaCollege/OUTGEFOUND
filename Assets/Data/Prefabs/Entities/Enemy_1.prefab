@@ -121,6 +121,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 475646}
+  - 114: {fileID: 11477028}
   - 114: {fileID: 11464590}
   - 114: {fileID: 11432316}
   - 114: {fileID: 11476620}
@@ -178,6 +179,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &186934
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 471268}
+  m_Layer: 0
+  m_Name: Eyes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &407314
 Transform:
   m_ObjectHideFlags: 1
@@ -208,7 +224,7 @@ Transform:
   - {fileID: 473556}
   - {fileID: 407314}
   m_Father: {fileID: 475646}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &449860
 Transform:
   m_ObjectHideFlags: 1
@@ -229,6 +245,18 @@ Transform:
   m_GameObject: {fileID: 111906}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 475646}
+  m_RootOrder: 2
+--- !u!4 &471268
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186934}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.851, z: 0.047}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 475646}
@@ -268,6 +296,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 483860}
+  - {fileID: 471268}
   - {fileID: 468820}
   - {fileID: 426246}
   m_Father: {fileID: 0}
@@ -413,6 +442,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 15
+--- !u!114 &11477028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9581d603c6762f46b6e86019e863c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &13665470
 CapsuleCollider:
   m_ObjectHideFlags: 1

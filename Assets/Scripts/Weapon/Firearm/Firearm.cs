@@ -22,14 +22,14 @@ public class Firearm : Weapon
 	{
 		base.OnEnable();
 
-		GlobalEvents.AddListener<SwitchFireModeEvent>(OnSwitchFireModeEvent);
+		Entity.Events.AddListener<SwitchFireModeEvent>(OnSwitchFireModeEvent);
 	}
 
 	protected override void OnDisable()
 	{
 		base.OnDisable();
 
-		GlobalEvents.RemoveListener<SwitchFireModeEvent>(OnSwitchFireModeEvent);
+		Entity.Events.RemoveListener<SwitchFireModeEvent>(OnSwitchFireModeEvent);
 	}
 
 	protected void FixedUpdate()
@@ -109,7 +109,7 @@ public class Firearm : Weapon
 		}
 		else
 		{
-			if(!SetFireMode(FireMode.Automatic) && !!SetFireMode(FireMode.Burst) && !SetFireMode(FireMode.SemiAutomatic))
+			if(!SetFireMode(FireMode.Automatic) && !SetFireMode(FireMode.Burst) && !SetFireMode(FireMode.SemiAutomatic))
 			{
 				Debug.LogError("No available fire modes");
 			}
@@ -122,14 +122,13 @@ public class Firearm : Weapon
 		FirearmUpgrade fUpgrade = (FirearmUpgrade)Upgrade;
 
 		// Apply bullet spread
-		Vector2 rayPosition = new Vector2(0.5f, 0.5f);
-		rayPosition += Random.insideUnitCircle * fUpgrade.BulletSpread;
-
-		// Raycast from the camera forward
-		Ray ray = Camera.main.ViewportPointToRay(rayPosition);
+		Vector3 rayDirection = barrel.forward;
+		rayDirection += Random.insideUnitSphere * fUpgrade.BulletSpread;
+		
+		Ray ray = new Ray(barrel.position, rayDirection);
 		RaycastHit hit;
 
-		if(Physics.Raycast(ray, out hit, 1000))
+		if(Physics.Raycast(ray, out hit, fUpgrade.MaxRange))
 		{
 			// Raycast from the barrel to the hit point
 			Vector3 direction = (hit.point - barrel.position).normalized;

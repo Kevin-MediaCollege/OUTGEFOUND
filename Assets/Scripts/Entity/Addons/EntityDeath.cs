@@ -7,17 +7,17 @@ public class EntityDeath : MonoBehaviour, IEntityInjector
 
 	protected void OnEnable()
 	{
-		GlobalEvents.AddListener<EntityDeathEvent>(OnDeathEvent);
+		GlobalEvents.AddListener<EntityDiedEvent>(OnDeathEvent);
 	}
 
 	protected void OnDisable()
 	{
-		GlobalEvents.RemoveListener<EntityDeathEvent>(OnDeathEvent);
+		GlobalEvents.RemoveListener<EntityDiedEvent>(OnDeathEvent);
 	}
 
-	private void OnDeathEvent(EntityDeathEvent evt)
+	private void OnDeathEvent(EntityDiedEvent evt)
 	{
-		if(evt.DamageInfo.Hit.Target == Entity)
+		if(evt.Entity == Entity)
 		{
 			Destroy(Entity.gameObject);
 		}

@@ -2,9 +2,6 @@
 
 public class Magazine : WeaponModifier
 {
-	public delegate void OnMagazineEmpty();
-	public event OnMagazineEmpty onMagazineEmptyEvent = delegate { };
-	
 	public int Current { private set; get; }
 
 	public override void OnFire(HitInfo hitInfo)
@@ -13,7 +10,7 @@ public class Magazine : WeaponModifier
 
 		if(Current <= 0)
 		{
-			onMagazineEmptyEvent();
+			weapon.Entity.Events.Invoke(new MagazineEmptyEvent(weapon));
 		}
 	}
 

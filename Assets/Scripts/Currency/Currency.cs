@@ -12,17 +12,17 @@ public class Currency : IDependency
 
 	public void Create()
 	{
-		GlobalEvents.AddListener<EntityDeathEvent>(OnEntityDeathEvent);
+		GlobalEvents.AddListener<EntityDiedEvent>(OnEntityDeathEvent);
 	}
 
 	public void Destroy()
 	{
-		GlobalEvents.RemoveListener<EntityDeathEvent>(OnEntityDeathEvent);
+		GlobalEvents.RemoveListener<EntityDiedEvent>(OnEntityDeathEvent);
 	}
 
-	private void OnEntityDeathEvent(EntityDeathEvent evt)
+	private void OnEntityDeathEvent(EntityDiedEvent evt)
 	{
-		Entity target = evt.DamageInfo.Hit.Target;
+		Entity target = evt.Entity;
 
 		// Reset if the player dies
 		if(target.HasTag("Player"))
