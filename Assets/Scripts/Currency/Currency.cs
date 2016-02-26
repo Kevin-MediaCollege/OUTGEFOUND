@@ -3,22 +3,39 @@ using System.Collections.Generic;
 
 public class Currency : IDependency
 {
-	public const int STARTING_AMOUNT = 0;
-
-	public int Amount { private set; get; }
+	public int Amount { set; get; }
 
 	public Currency()
 	{
-		Amount = STARTING_AMOUNT;
+		Amount = 0;
 	}
 
-	public void Add(int amount)
+	public void Create()
 	{
-		Amount += amount;
+		GlobalEvents.AddListener<EntityDeathEvent>(OnEntityDeathEvent);
 	}
 
-	public void Remove(int amount)
+	public void Destroy()
 	{
-		Amount -= amount;
+		GlobalEvents.RemoveListener<EntityDeathEvent>(OnEntityDeathEvent);
+	}
+
+	private void OnEntityDeathEvent(EntityDeathEvent evt)
+	{
+		Entity target = evt.DamageInfo.Hit.Target;
+
+		// Reset if the player dies
+		if(target.HasTag("Player"))
+		{
+			Amount = 0;
+		}
+		// Add currency if the target is an enemy
+		else if(target.HasTag("Enemy"))
+		{
+			EnemyValue value = target.GetComponent<EnemyValue>();
+			Amount += value.Value;
+		}
+
+		UnityEngine.Debug.Log(Amount);
 	}
 }
