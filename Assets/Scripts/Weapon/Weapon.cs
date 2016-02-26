@@ -76,8 +76,23 @@ public abstract class Weapon : MonoBehaviour, IEntityInjector
 
 		if(hitInfo.Hit)
 		{
-			// TODO: Apply damage modifiers
-			DamageInfo damageInfo = new DamageInfo(hitInfo, Upgrade.BaseDamage);
+			float damage = Upgrade.BaseDamage;
+
+			// Apply damage modifiers
+			if(hitInfo.Tag == "Head")
+			{
+				damage *= Upgrade.DamageMultipliers.Head;
+			}
+			else if(hitInfo.Tag == "Body")
+			{
+				damage *= Upgrade.DamageMultipliers.Body;
+			}
+			else if(hitInfo.Tag == "Limb")
+			{
+				damage *= Upgrade.DamageMultipliers.Limbs;
+			}
+
+			DamageInfo damageInfo = new DamageInfo(hitInfo, damage);
 			GlobalEvents.Invoke(new DamageEvent(damageInfo));
 		}
 

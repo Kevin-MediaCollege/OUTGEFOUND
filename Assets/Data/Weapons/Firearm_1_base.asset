@@ -13,9 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 189022, guid: 972e8f3ad15e6704f99dd3319ac264cf, type: 2}
   damageMultipliers:
-    Head: 1
+    Head: 1.5
     Body: 1
-    Limbs: 1
+    Limbs: 0.7
   baseDamage: 1
   rateOfFire: 240
   fireModes: -1
