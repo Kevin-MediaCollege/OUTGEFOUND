@@ -5,14 +5,8 @@ using System.Collections.Generic;
 public class AIManager : MonoBehaviour 
 {
 	public static AIManager instance;
-
-	//List
 	private List<AIBase> aiList;
 	private int aiListLength;
-
-	//Logic
-	private int nextLogicUpdate;
-	private int logicUpdatesPerFrame = 20;
 
 	void Awake()
 	{
@@ -22,20 +16,7 @@ public class AIManager : MonoBehaviour
 
 	void Update()
 	{
-		updateLogic();
-	}
-
-	private void updateLogic()
-	{
-		nextLogicUpdate = nextLogicUpdate >= aiListLength ? 0 : nextLogicUpdate;
-		int end = nextLogicUpdate + logicUpdatesPerFrame;
-		end = end >= aiListLength ? aiListLength : end;
-
-		for(int i = nextLogicUpdate; i < end; i++)
-		{
-			//aiList[i].onLogicUpdate();
-			nextLogicUpdate++;
-		}
+		
 	}
 
 	public void addAI(AIBase _ai)
