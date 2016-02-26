@@ -243,14 +243,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 68991310}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90ab266766fc84741985226341b9aefe, type: 3}
+  m_Script: {fileID: 11500000, guid: 95b5edbf020cd404c9040e03f21cdd00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  a: {fileID: 62855256}
-  b: {fileID: 1432864660}
-  c: {fileID: 150194302}
-  agentA: {fileID: 62855257}
-  agentB: {fileID: 1432864661}
 --- !u!1 &79948260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1110,6 +1105,7 @@ GameObject:
   - 33: {fileID: 1432864659}
   - 135: {fileID: 1432864658}
   - 23: {fileID: 1432864657}
+  - 114: {fileID: 1432864662}
   - 195: {fileID: 1432864661}
   m_Layer: 0
   m_Name: B
@@ -1195,6 +1191,18 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1432864662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1432864656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf4ccdec7c0d8754db3b0acd25ba4202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 1432864661}
 --- !u!1 &1710095842
 GameObject:
   m_ObjectHideFlags: 0

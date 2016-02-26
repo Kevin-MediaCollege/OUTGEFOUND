@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TaskBase
+public class TaskMoveCloser : TaskBase
 {
 	public virtual IEnumerator runTask()
 	{

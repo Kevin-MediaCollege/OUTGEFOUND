@@ -3,6 +3,8 @@ using System.Collections;
 
 public class AIBase : MonoBehaviour 
 {
+	public NavMeshAgent agent;
+
 	public virtual void init()
 	{
 	}
