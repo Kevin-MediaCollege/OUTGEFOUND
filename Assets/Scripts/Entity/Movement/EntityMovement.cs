@@ -26,8 +26,6 @@ public abstract class EntityMovement : MonoBehaviour
 			return crouching;
 		}
 	}
-	
-	[SerializeField] protected InputController input;
 
 	[SerializeField] protected float speed;
 	[SerializeField] protected float jumpSpeed;

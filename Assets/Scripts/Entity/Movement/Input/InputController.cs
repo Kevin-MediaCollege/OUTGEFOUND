@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 
-public abstract class InputController : MonoBehaviour
+public abstract class InputController : MonoBehaviour, IEntityInjector
 {
-	public abstract float InputX { get; }
-
-	public abstract float InputZ { get; }
+	public Entity Entity { set; get; }
 
 	public abstract bool Jump { get; }
 

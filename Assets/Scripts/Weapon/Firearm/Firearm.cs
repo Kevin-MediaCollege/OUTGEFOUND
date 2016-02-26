@@ -18,21 +18,18 @@ public class Firearm : Weapon
 		SwitchFireMode();
 	}
 
-	protected void Update()
+	protected override void OnEnable()
 	{
-		if(Input.GetMouseButtonDown(0))
-		{
-			StartFire();
-		}
-		else if(Input.GetMouseButtonUp(0))
-		{
-			StopFire();
-		}
-		
-		if(Input.GetKeyDown(KeyCode.V))
-		{
-			SwitchFireMode();
-		}
+		base.OnEnable();
+
+		GlobalEvents.AddListener<SwitchFireModeEvent>(OnSwitchFireModeEvent);
+	}
+
+	protected override void OnDisable()
+	{
+		base.OnDisable();
+
+		GlobalEvents.RemoveListener<SwitchFireModeEvent>(OnSwitchFireModeEvent);
 	}
 
 	protected void FixedUpdate()
@@ -65,51 +62,7 @@ public class Firearm : Weapon
 		}
 	}
 
-	protected override HitInfo ConstructHitInfo()
-	{
-		HitInfo hitInfo = new HitInfo(Entity, null);
-		FirearmUpgrade fUpgrade = (FirearmUpgrade)Upgrade;
-
-		// Apply bullet spread
-		Vector2 rayPosition = new Vector2(0.5f, 0.5f);
-		rayPosition += Random.insideUnitCircle * fUpgrade.BulletSpread;
-
-		// Raycast from the camera forward
-		Ray ray = Camera.main.ViewportPointToRay(rayPosition);
-		RaycastHit hit;
-
-		if(Physics.Raycast(ray, out hit, 1000))
-		{
-			// Raycast from the barrel to the hit point
-			Vector3 direction = (hit.point - barrel.position).normalized;
-			ray = new Ray(barrel.position, hit.point - barrel.position);
-
-			if(Physics.Raycast(ray, out hit, fUpgrade.MaxRange))
-			{				
-				hitInfo.Direction = ray.direction;
-				hitInfo.Target = hit.collider.GetComponentInParent<Entity>();
-				hitInfo.Point = hit.point;
-				hitInfo.Normal = hit.normal;
-				hitInfo.Tag = hit.collider.tag;
-
-				if(hitInfo.Hit)
-				{
-					Debug.DrawRay(barrel.position, direction * hit.distance, Color.green, 7);
-				}
-				else
-				{
-					Debug.DrawRay(barrel.position, direction * fUpgrade.MaxRange, Color.red, 7);
-				}
-			}
-			else
-			{
-				Debug.DrawRay(barrel.position, direction * fUpgrade.MaxRange, Color.red, 7);
-			}
-		}
-
-		return hitInfo;
-	}
-	private void StartFire()
+	public override void StartFire()
 	{
 		if(!firing)
 		{
@@ -118,7 +71,7 @@ public class Firearm : Weapon
 		}
 	}
 
-	private void StopFire()
+	public override void StopFire()
 	{
 		if(firing)
 		{
@@ -131,7 +84,7 @@ public class Firearm : Weapon
 		}
 	}
 
-	private void SwitchFireMode()
+	public void SwitchFireMode()
 	{
 		if(fireMode == FireMode.Automatic)
 		{
@@ -163,6 +116,50 @@ public class Firearm : Weapon
 		}
 	}
 
+	protected override HitInfo ConstructHitInfo()
+	{
+		HitInfo hitInfo = new HitInfo(Entity, null);
+		FirearmUpgrade fUpgrade = (FirearmUpgrade)Upgrade;
+
+		// Apply bullet spread
+		Vector2 rayPosition = new Vector2(0.5f, 0.5f);
+		rayPosition += Random.insideUnitCircle * fUpgrade.BulletSpread;
+
+		// Raycast from the camera forward
+		Ray ray = Camera.main.ViewportPointToRay(rayPosition);
+		RaycastHit hit;
+
+		if(Physics.Raycast(ray, out hit, 1000))
+		{
+			// Raycast from the barrel to the hit point
+			Vector3 direction = (hit.point - barrel.position).normalized;
+			ray = new Ray(barrel.position, hit.point - barrel.position);
+
+			if(Physics.Raycast(ray, out hit, fUpgrade.MaxRange))
+			{
+				hitInfo.Direction = ray.direction;
+				hitInfo.Target = hit.collider.GetComponentInParent<Entity>();
+				hitInfo.Point = hit.point;
+				hitInfo.Normal = hit.normal;
+				hitInfo.Tag = hit.collider.tag;
+
+				if(hitInfo.Hit)
+				{
+					Debug.DrawRay(barrel.position, direction * hit.distance, Color.green, 7);
+				}
+				else
+				{
+					Debug.DrawRay(barrel.position, direction * fUpgrade.MaxRange, Color.red, 7);
+				}
+			}
+			else
+			{
+				Debug.DrawRay(barrel.position, direction * fUpgrade.MaxRange, Color.red, 7);
+			}
+		}
+
+		return hitInfo;
+	}
 	protected override void SetUpgrade(WeaponUpgrade upgrade)
 	{
 		base.SetUpgrade(upgrade);
@@ -185,5 +182,13 @@ public class Firearm : Weapon
 	private bool HasFireMode(FireMode fireMode)
 	{
 		return (((FirearmUpgrade)Upgrade).FireModes & fireMode) == fireMode;
+	}
+
+	private void OnSwitchFireModeEvent(SwitchFireModeEvent evt)
+	{
+		if(evt.Entity == Entity)
+		{
+			SwitchFireMode();
+		}
 	}
 }

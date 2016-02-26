@@ -19,24 +19,24 @@ public abstract class Weapon : MonoBehaviour, IEntityInjector
 		SetUpgrade(baseUpgrade);
 	}
 
-	public bool Fire()
+	protected virtual void OnEnable()
 	{
-		if(!CanFire())
-		{
-			return false;
-		}
+		GlobalEvents.AddListener<StartWeaponFireEvent>(OnStartFireEvent);
+		GlobalEvents.AddListener<StopWeaponFireEvent>(OnStopFireEvent);
+	}
 
-		HitInfo hitInfo = ConstructHitInfo();
-		GlobalEvents.Invoke(new WeaponFireEvent(this, hitInfo));
-		
-		if(hitInfo.Hit)
-		{
-			// TODO: Apply damage modifiers
-			DamageInfo damageInfo = new DamageInfo(hitInfo, Upgrade.BaseDamage);
-			GlobalEvents.Invoke(new DamageEvent(damageInfo));
-		}
+	protected virtual void OnDisable()
+	{
+		GlobalEvents.RemoveListener<StartWeaponFireEvent>(OnStartFireEvent);
+		GlobalEvents.RemoveListener<StopWeaponFireEvent>(OnStopFireEvent);
+	}
 
-		return true;
+	public virtual void StartFire()
+	{
+	}
+
+	public virtual void StopFire()
+	{
 	}
 
 	public bool CanFire()
@@ -64,6 +64,26 @@ public abstract class Weapon : MonoBehaviour, IEntityInjector
 
 	protected abstract HitInfo ConstructHitInfo();
 
+	protected bool Fire()
+	{
+		if(!CanFire())
+		{
+			return false;
+		}
+
+		HitInfo hitInfo = ConstructHitInfo();
+		GlobalEvents.Invoke(new WeaponFireEvent(this, hitInfo));
+
+		if(hitInfo.Hit)
+		{
+			// TODO: Apply damage modifiers
+			DamageInfo damageInfo = new DamageInfo(hitInfo, Upgrade.BaseDamage);
+			GlobalEvents.Invoke(new DamageEvent(damageInfo));
+		}
+
+		return true;
+	}
+
 	protected virtual void SetUpgrade(WeaponUpgrade upgrade)
 	{
 		Upgrade = upgrade;
@@ -75,5 +95,21 @@ public abstract class Weapon : MonoBehaviour, IEntityInjector
 
 		Model = Instantiate(upgrade.Model);
 		Model.transform.SetParent(transform, false);
+	}
+
+	private void OnStartFireEvent(StartWeaponFireEvent evt)
+	{
+		if(evt.Entity == Entity)
+		{
+			StartFire();
+		};
+	}
+
+	private void OnStopFireEvent(StopWeaponFireEvent evt)
+	{
+		if(evt.Entity == Entity)
+		{
+			StopFire();
+		}
 	}
 }

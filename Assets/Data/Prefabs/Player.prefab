@@ -245,10 +245,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b6b0176c57441e4eba1729b21c64611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: {fileID: 11491956}
   speed: 5
   jumpSpeed: 6.5
   characterController: {fileID: 14374550}
+  playerInputController: {fileID: 11491956}
 --- !u!114 &11434994
 MonoBehaviour:
   m_ObjectHideFlags: 1

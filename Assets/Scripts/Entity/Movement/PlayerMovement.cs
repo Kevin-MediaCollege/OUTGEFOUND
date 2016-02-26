@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerMovement : EntityMovement
 {
 	[SerializeField] private CharacterController characterController;
+	[SerializeField] private PlayerInputController playerInputController;
 
 	protected void Awake()
 	{
@@ -12,12 +13,12 @@ public class PlayerMovement : EntityMovement
 
 	protected void FixedUpdate()
 	{
-		Vector3 velocityX = transform.right * input.InputX * speed;
-		Vector3 velocityZ = transform.forward * input.InputZ * speed;
+		Vector3 velocityX = transform.right * playerInputController.InputX * speed;
+		Vector3 velocityZ = transform.forward * playerInputController.InputZ * speed;
 
 		if(characterController.isGrounded)
 		{
-			verticalSpeed = input.Jump ? jumpSpeed : 0;
+			verticalSpeed = playerInputController.Jump ? jumpSpeed : 0;
 		}
 		else
 		{

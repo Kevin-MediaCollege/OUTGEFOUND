@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInputController : InputController
 {
-	public override float InputX
+	public float InputX
 	{
 		get
 		{
@@ -12,13 +12,14 @@ public class PlayerInputController : InputController
 		}
 	}
 
-	public override float InputZ
+	public float InputZ
 	{
 		get
 		{
 			return Input.GetAxis("Vertical");
 		}
 	}
+
 
 	public override bool Jump
 	{
@@ -33,6 +34,23 @@ public class PlayerInputController : InputController
 		get
 		{
 			return Input.GetKey(KeyCode.C);
+		}
+	}
+
+	protected void Update()
+	{
+		if(Input.GetMouseButtonDown(0))
+		{
+			GlobalEvents.Invoke(new StartWeaponFireEvent(Entity));
+		}
+		else if(Input.GetMouseButtonUp(0))
+		{
+			GlobalEvents.Invoke(new StopWeaponFireEvent(Entity));
+		}
+
+		if(Input.GetKeyDown(KeyCode.V))
+		{
+			GlobalEvents.Invoke(new SwitchFireModeEvent(Entity));
 		}
 	}
 }
