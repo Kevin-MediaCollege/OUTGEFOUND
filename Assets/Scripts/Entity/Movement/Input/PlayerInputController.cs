@@ -52,5 +52,10 @@ public class PlayerInputController : InputController
 		{
 			GlobalEvents.Invoke(new SwitchFireModeEvent(Entity));
 		}
+
+		if(Input.GetKeyDown(KeyCode.R))
+		{
+			GlobalEvents.Invoke(new ReloadWeaponEvent(Entity));
+		}
 	}
 }

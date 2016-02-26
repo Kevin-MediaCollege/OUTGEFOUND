@@ -33,12 +33,18 @@ public class StockPile : WeaponModifier
 		Reload();
 	}
 
-	protected void Update()
+	protected override void OnEnable()
 	{
-		if(!reloading && Input.GetKeyDown(KeyCode.R))
-		{
-			StartCoroutine("ReloadDelay");
-		}
+		base.OnEnable();
+
+		GlobalEvents.AddListener<ReloadWeaponEvent>(OnReloadEvent);
+	}
+
+	protected override void OnDisable()
+	{
+		base.OnDisable();
+
+		GlobalEvents.RemoveListener<ReloadWeaponEvent>(OnReloadEvent);
 	}
 
 	public void Add(int amount)
@@ -57,11 +63,20 @@ public class StockPile : WeaponModifier
 
 	private IEnumerator ReloadDelay()
 	{
+		reloading = true;
 		magazine.Deduct(magazine.Current);
 
 		yield return new WaitForSeconds(((FirearmUpgrade)weapon.Upgrade).ReloadSpeed);
 
 		Reload();
 		reloading = false;
+	}
+
+	private void OnReloadEvent(ReloadWeaponEvent evt)
+	{
+		if(!reloading && evt.Entity == weapon.Entity)
+		{
+			StartCoroutine("ReloadDelay");
+		}
 	}
 }

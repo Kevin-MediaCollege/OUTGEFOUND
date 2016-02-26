@@ -10,14 +10,14 @@ public abstract class WeaponModifier : MonoBehaviour
 		weapon = GetComponent<Weapon>() ?? GetComponentInParent<Weapon>();
 	}
 
-	protected void OnEnable()
+	protected virtual void OnEnable()
 	{
 		weapon.AddModifier(this);
 
 		GlobalEvents.AddListener<WeaponFireEvent>(OnFireEvent);
 	}
 
-	protected void OnDisable()
+	protected virtual void OnDisable()
 	{
 		weapon.RemoveModifier(this);
 
