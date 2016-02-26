@@ -3,8 +3,16 @@ using System.Collections;
 
 public class TaskMoveCloser : TaskBase
 {
-	public virtual IEnumerator runTask()
+	public TaskMoveCloser()
 	{
-		yield return new WaitForSeconds (1f);
+		
+	}
+
+	public virtual IEnumerator runTask(AIBase _ai)
+	{
+		while(true)
+		{
+			yield return new WaitForSeconds (0.5f);
+		}
 	}
 }
