@@ -633,9 +633,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionRange: 5
-  storeUI: {fileID: 22336928}
-  storeCameraState: {fileID: 11495948}
   playerPosition: {fileID: 423626}
+  storeUI: {fileID: 22336928}
 --- !u!114 &11422802
 MonoBehaviour:
   m_ObjectHideFlags: 1
