@@ -502,6 +502,7 @@ MonoBehaviour:
   start: 60
   max: 90
   magazine: {fileID: 11457712}
+  reloadAudio: {fileID: 11400000, guid: 7cbde8978b1b7b24ca575a45a7354bab, type: 2}
 --- !u!114 &11457712
 MonoBehaviour:
   m_ObjectHideFlags: 1

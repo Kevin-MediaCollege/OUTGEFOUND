@@ -23,6 +23,7 @@ public class StockPile : WeaponModifier
 	[SerializeField] private int max;
 
 	[SerializeField] private Magazine magazine;
+	[SerializeField] private AudioAsset reloadAudio;
 
 	private int current;
 	private bool reloading;
@@ -67,6 +68,8 @@ public class StockPile : WeaponModifier
 	{
 		reloading = true;
 		magazine.Deduct(magazine.Current);
+
+		AudioManager.PlayAt(reloadAudio, weapon.transform.position);
 
 		yield return new WaitForSeconds(((FirearmUpgrade)weapon.Upgrade).ReloadSpeed);
 
