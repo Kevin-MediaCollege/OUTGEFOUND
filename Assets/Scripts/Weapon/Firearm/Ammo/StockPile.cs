@@ -39,6 +39,7 @@ public class StockPile : WeaponModifier
 		base.OnEnable();
 
 		weapon.Entity.Events.AddListener<ReloadWeaponEvent>(OnReloadEvent);
+		weapon.Entity.Events.AddListener<RefillAmmoEvent>(OnRefillAmmoEvent);
 	}
 
 	protected override void OnDisable()
@@ -46,6 +47,7 @@ public class StockPile : WeaponModifier
 		base.OnDisable();
 
 		weapon.Entity.Events.RemoveListener<ReloadWeaponEvent>(OnReloadEvent);
+		weapon.Entity.Events.RemoveListener<RefillAmmoEvent>(OnRefillAmmoEvent);
 	}
 
 	public void Add(int amount)
@@ -79,9 +81,15 @@ public class StockPile : WeaponModifier
 
 	private void OnReloadEvent(ReloadWeaponEvent evt)
 	{
-		if(!reloading && evt.Entity == weapon.Entity)
+		if(!reloading)
 		{
 			StartCoroutine("ReloadDelay");
 		}
+	}
+
+	private void OnRefillAmmoEvent(RefillAmmoEvent evt)
+	{
+		current = max;
+		Debug.Log("RESTORED AMMO");
 	}
 }

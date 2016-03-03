@@ -84,6 +84,8 @@ GameObject:
   - 114: {fileID: 11431770}
   - 114: {fileID: 11491956}
   - 114: {fileID: 11404734}
+  - 114: {fileID: 11493474}
+  - 114: {fileID: 11439422}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -488,6 +490,19 @@ MonoBehaviour:
   baseUpgrade: {fileID: 11400000, guid: 55d71b6fef6dc9f44a7ac11c4ff674ba, type: 2}
   upgradeData: []
   magazine: {fileID: 11457712}
+--- !u!114 &11439422
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89ae2ad135bcc1f4196ec35c1efb02e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 20
+  bloodParticlePrefab: {fileID: 172532, guid: cf80f31b305e04240939ea44874bd256, type: 2}
 --- !u!114 &11441368
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -546,6 +561,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c72a38f195fffe04c9b06ca9742bec41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11493474
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d2b758844a416a419a087ea9c845d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!143 &14374550

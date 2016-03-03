@@ -25,11 +25,15 @@ public class EntityHealth : MonoBehaviour, IEntityInjector
 
 	protected void OnEnable()
 	{
+		Entity.Events.AddListener<RefillHealthEvent>(OnRefillHealthEvent);
+
 		GlobalEvents.AddListener<DamageEvent>(OnDamageEvent);
 	}
 
 	protected void OnDisable()
 	{
+		Entity.Events.RemoveListener<RefillHealthEvent>(OnRefillHealthEvent);
+
 		GlobalEvents.RemoveListener<DamageEvent>(OnDamageEvent);
 	}
 
@@ -48,6 +52,12 @@ public class EntityHealth : MonoBehaviour, IEntityInjector
 				GlobalEvents.Invoke(new EntityDiedEvent(evt.DamageInfo));
 			}
 		}
+	}
+
+	private void OnRefillHealthEvent(RefillHealthEvent evt)
+	{
+		CurrentHealth = StartingHealth;
+		Debug.Log("RESTORED HEALTH");
 	}
 
 #if UNITY_EDITOR
