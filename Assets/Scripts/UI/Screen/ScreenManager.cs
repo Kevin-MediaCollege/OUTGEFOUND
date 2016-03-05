@@ -3,20 +3,27 @@ using System.Collections;
 
 public class ScreenManager : MonoBehaviour 
 {
-	public static ScreenManager Instance;
-
-	public ScreenBase[] screenList;
-	private int screenListLenght;
-	private bool isSwitching;
-	public string startScreen;
-	public ScreenBase currentScreen {
-		private set;
-		get;
+	private static ScreenManager instance;
+	public static ScreenManager Instance
+	{
+		get
+		{
+			return instance;
+		}
 	}
 
-	void Awake()
+	public ScreenBase CurrentScreen { private set; get; }
+
+	[SerializeField] private ScreenBase[] screenList;	
+	[SerializeField] private string startScreen;
+
+	private int screenListLenght;
+
+	private bool isSwitching;
+
+	protected void Awake()
 	{
-		Instance = this;
+		instance = this;
 		isSwitching = false;
 
 		screenListLenght = screenList.Length;
@@ -25,56 +32,59 @@ public class ScreenManager : MonoBehaviour
 			screenList [i].gameObject.SetActive (false);
 		}
 
-		setScreen (startScreen);
+		SetScreen(startScreen);
 	}
 
-	public void setScreen(string _name, bool _skipFadeout = false)
+	public void SetScreen(string name, bool skipFadeout = false)
 	{
 		if(!isSwitching)
 		{
-			ScreenBase screen = getScreenByName (_name);
+			ScreenBase screen = GetScreenByName (name);
 			if(screen != null)
 			{
 				isSwitching = true;
-				StartCoroutine (switchScreen (screen, _skipFadeout));
+				StartCoroutine (SwitchScreen (screen, skipFadeout));
 			}
 		}
 	}
 
-	private IEnumerator switchScreen(ScreenBase _screen, bool _skipFadeout)
+	private IEnumerator SwitchScreen(ScreenBase screen, bool skipFadeout)
 	{
-		if(currentScreen != null)
+		if(CurrentScreen != null)
 		{
-			if (_skipFadeout) 
+			if (skipFadeout) 
 			{
 				StopAllCoroutines ();
 			}
 			else
 			{
-				yield return StartCoroutine (currentScreen.OnScreenFadeout ());
+				yield return StartCoroutine (CurrentScreen.OnScreenFadeOut ());
 			}
 
-			currentScreen.OnScreenExit ();
-			currentScreen.gameObject.SetActive (false);
+			CurrentScreen.OnScreenExit ();
+			CurrentScreen.gameObject.SetActive (false);
 		}
 
-		currentScreen = _screen;
-		currentScreen.gameObject.SetActive (true);
-		currentScreen.OnScreenEnter();
-		yield return StartCoroutine (currentScreen.OnScreenFadein ());
+		CurrentScreen = screen;
+		CurrentScreen.gameObject.SetActive (true);
+		CurrentScreen.OnScreenEnter();
+
+		yield return StartCoroutine (CurrentScreen.OnScreenFadeIn ());
+
 		isSwitching = false;
 	}
 
-	private ScreenBase getScreenByName(string _name)
+	private ScreenBase GetScreenByName(string name)
 	{
 		for(int i = 0; i < screenListLenght; i++)
 		{
-			if(_name == screenList[i].getScreenName())
+			if(name == screenList[i].Name)
 			{
 				return screenList[i];
 			}
 		}
-		Debug.LogError ("ScreenName: " + _name + " not found!");
+
+		Debug.LogError("ScreenName: " + name + " not found!");
 		return null;
 	}
 }

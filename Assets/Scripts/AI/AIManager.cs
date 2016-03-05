@@ -4,47 +4,52 @@ using System.Collections.Generic;
 
 public class AIManager : MonoBehaviour 
 {
-	public static AIManager instance;
+	private static AIManager instance;
+	public static AIManager Instance
+	{
+		get
+		{
+			return instance;
+		}
+	}
+
 	private List<AIBase> aiList;
 	private int aiListLength;
 
 	public Vector3 lastKnownPlayerPosition;
 
-	void Awake()
+	protected void Awake()
 	{
 		instance = this;
 		aiList = new List<AIBase>();
-
-		GlobalEvents.AddListener<WeaponFireEvent> (onWeaponFired);
+	}
+	
+	protected void OnEnable()
+	{
+		GlobalEvents.AddListener<FireEvent>(OnWeaponFireEvent);
 	}
 
-	void Update()
+	protected void OnDisable()
 	{
-		
+		GlobalEvents.RemoveListener<FireEvent>(OnWeaponFireEvent);
 	}
-
-	public void onWeaponFired(WeaponFireEvent _event)
+	public void AddAI(AIBase ai)
 	{
-		if(_event.Weapon.Entity.HasTag("Player"))
-		{
-			lastKnownPlayerPosition = _event.Weapon.Entity.gameObject.transform.position;
-		}
-	}
-
-	public void addAI(AIBase _ai)
-	{
-		aiList.Add (_ai);
+		aiList.Add (ai);
 		aiListLength++;
 	}
 
-	public void removeAI(AIBase _ai)
+	public void RemoveAI(AIBase ai)
 	{
-		aiList.Remove (_ai);
+		aiList.Remove(ai);
 		aiListLength--;
 	}
 
-	void OnDestroy()
+	private void OnWeaponFireEvent(FireEvent evt)
 	{
-		GlobalEvents.RemoveListener<WeaponFireEvent> (onWeaponFired);
+		if(evt.Firearm.Entity.HasTag("Player"))
+		{
+			lastKnownPlayerPosition = evt.Firearm.Entity.transform.position;
+		}
 	}
 }

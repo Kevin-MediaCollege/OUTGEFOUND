@@ -41,14 +41,14 @@ public class PlayerInputController : InputController
 	{
 		if(Input.GetMouseButtonDown(0))
 		{
-			Entity.Events.Invoke(new StartWeaponFireEvent(Entity));
+			Entity.Events.Invoke(new StartFireEvent());
 		}
 		else if(Input.GetMouseButtonUp(0))
 		{
-			Entity.Events.Invoke(new StopWeaponFireEvent(Entity));
+			Entity.Events.Invoke(new StopFireEvent());
 		}
 
-		if(Input.GetKeyDown(KeyCode.V))
+		/*if(Input.GetKeyDown(KeyCode.V))
 		{
 			Entity.Events.Invoke(new SwitchFireModeEvent(Entity));
 		}
@@ -56,6 +56,6 @@ public class PlayerInputController : InputController
 		if(Input.GetKeyDown(KeyCode.R))
 		{
 			Entity.Events.Invoke(new ReloadWeaponEvent(Entity));
-		}
+		}*/
 	}
 }

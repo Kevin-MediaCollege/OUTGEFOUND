@@ -2,32 +2,51 @@
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System;
 
 public class ScreenSplashCompany : ScreenBase 
 {
-	public CanvasGroup overlay;
-	private Vector2 goatPrintSize;
-	public CanvasGroup[] groupList;
-	public RectTransform[] rectList;
-	public RectTransform logoBaseRect;
-	public CanvasGroup logoBaseGroup;
-	public RectTransform backgroundRect;
-	public RectTransform background2Rect;
+	public override string Name
+	{
+		get
+		{
+			return "ScreenSplashCompany";
+		}
+	}
 
+	[SerializeField] private CanvasGroup overlay;
 	[SerializeField] private AudioAsset naughtyGoatAudio;
+
+	[SerializeField] private CanvasGroup[] groupList;
+	[SerializeField] private RectTransform[] rectList;
+	[SerializeField] private RectTransform logoBaseRect;
+	[SerializeField] private CanvasGroup logoBaseGroup;
+	[SerializeField] private RectTransform backgroundRect;
+	[SerializeField] private RectTransform background2Rect;
+
+	private AudioChannel naughtyGoatAudioChannel;
+	private Vector2 goatPrintSize;
+
+	protected void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			if(naughtyGoatAudioChannel != null)
+			{
+				naughtyGoatAudioChannel.Stop();
+			}
+
+			ScreenManager.Instance.SetScreen("ScreenSplashUnity", true);
+		}
+	}
 
 	public override void OnScreenEnter()
 	{
-		if(SceneManager.sceneCount == 1)
-		{
-			SceneManager.LoadSceneAsync("Core", LoadSceneMode.Additive);
-		}
-
 		overlay.alpha = 1f;
 		goatPrintSize = rectList[2].sizeDelta;
 	}
 
-	public override IEnumerator OnScreenFadein()
+	public override IEnumerator OnScreenFadeIn()
 	{
 		backgroundRect.anchoredPosition3D = new Vector3 (0f, 0f, 0f);
 		background2Rect.anchoredPosition3D = new Vector3 (0f, 200f, 0f);
@@ -54,7 +73,7 @@ public class ScreenSplashCompany : ScreenBase
 
 		yield return new WaitForSeconds(0.2f);
 
-		StartCoroutine ("PlayAnimation");
+		StartCoroutine("PlayAnimation");
 	}
 
 	public IEnumerator PlayAnimation()
@@ -102,36 +121,21 @@ public class ScreenSplashCompany : ScreenBase
 
 		yield return new WaitForSeconds(0.3f); 
 
-		ScreenManager.Instance.setScreen ("ScreenSplashUnity");
+		ScreenManager.Instance.SetScreen("ScreenSplashUnity");
 	}
 
 	private IEnumerator PlayNaughtyGoatAudioDelayed()
 	{
 		yield return new WaitForSeconds(0.15f);
 
-		AudioManager.Play(naughtyGoatAudio);
+		naughtyGoatAudioChannel = AudioManager.Play(naughtyGoatAudio);
 	}
-
-	void Update()
-	{
-		if(Input.GetKeyDown(KeyCode.Space))
-		{
-			ScreenManager.Instance.setScreen ("ScreenSplashUnity", true);
-		}
-	}
-
-	public override IEnumerator OnScreenFadeout()
+	public override IEnumerator OnScreenFadeOut()
 	{
 		yield break;
 	}
 
 	public override void OnScreenExit()
 	{
-		
-	}
-
-	public override string getScreenName()
-	{
-		return "ScreenSplashCompany";
 	}
 }

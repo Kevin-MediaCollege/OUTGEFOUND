@@ -2,13 +2,24 @@
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System;
 
 public class ScreenSplashUnity : ScreenBase 
 {
-	public CanvasGroup overlay;
-	public CanvasGroup logo;
+	public override string Name
+	{
+		get
+		{
+			return "ScreenSplashUnity";
+		}
+	}
 
-	public new Transform camera;
+	[SerializeField] private CanvasGroup overlay;
+	[SerializeField] private CanvasGroup logo;
+
+	[SerializeField] private new Transform camera;
+
+	private SceneLoader sceneLoader;
 
 	//-22.14, 14.85, 28.71
 	//26.4359, 364.8974, 0
@@ -16,20 +27,41 @@ public class ScreenSplashUnity : ScreenBase
 	//-2.6, 14.85, 26.9
 	//26.4359, 347.54, 0
 
+	protected void Awake()
+	{
+		sceneLoader = Dependency.Get<SceneLoader>();
+	}
+
+	protected void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			sceneLoader.Load("Menus");
+		}
+	}
+
 	public override void OnScreenEnter()
 	{
 		overlay.alpha = 1f;
 		logo.alpha = 0f;
 	}
 
-	public override IEnumerator OnScreenFadein()
+	public override IEnumerator OnScreenFadeIn()
 	{
 		yield return null;
 
 		StartCoroutine (Animation());
 	}
+	public override IEnumerator OnScreenFadeOut()
+	{
+		yield break;
+	}
 
-	public IEnumerator Animation()
+	public override void OnScreenExit()
+	{
+	}
+
+	private IEnumerator Animation()
 	{
 		camera.position = new Vector3(-15.1f, 14.85f, 21.8f);
 
@@ -51,39 +83,6 @@ public class ScreenSplashUnity : ScreenBase
 
 		yield return new WaitForSeconds (1.5f);
 
-		StartCoroutine(GotoMenu());
-	}
-
-	void Update()
-	{
-		if(Input.GetKeyDown(KeyCode.Space))
-		{
-			StartCoroutine(GotoMenu());
-		}
-	}
-
-	public override IEnumerator OnScreenFadeout()
-	{
-		yield break;
-	}
-
-	public override void OnScreenExit()
-	{
-	}
-
-	public override string getScreenName()
-	{
-		return "ScreenSplashUnity";
-	}
-
-	private IEnumerator GotoMenu()
-	{
-		AsyncOperation async = SceneManager.LoadSceneAsync("Menu");
-		while(!async.isDone)
-		{
-			yield return null;
-		}
-		
-		SceneManager.UnloadScene("Splash");
+		sceneLoader.Load("Menus");
 	}
 }
