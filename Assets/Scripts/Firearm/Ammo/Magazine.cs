@@ -2,7 +2,7 @@
 
 public class Magazine : MonoBehaviour
 {
-	public int Remaining { private set; get; }
+	public int Remaining { set; get; }
 
 	public int Capacity
 	{
@@ -33,10 +33,5 @@ public class Magazine : MonoBehaviour
 	protected void Awake()
 	{
 		Remaining = capacity;
-	}
-
-	public void Fire()
-	{
-		Remaining--;
 	}
 }

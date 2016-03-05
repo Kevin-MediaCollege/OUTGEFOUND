@@ -60,15 +60,23 @@ public class Firearm : MonoBehaviour, IEntityInjector
 	[SerializeField] private AudioAsset fireAudio;
 	[SerializeField] private SpriteRenderer muzzleFlash;
 
-	[SerializeField] private float damage;
+	[SerializeField] private AudioAsset reloadAudio;
 	[SerializeField] private float reloadSpeed;
+
+	[SerializeField] private AudioAsset clipEmptyAudio;
+
+	[SerializeField] private float damage;	
 	[SerializeField] private float bulletSpread;
 	[SerializeField] private float range;
 
 	[SerializeField] private int roundsPerMinute;
 
 	private FirearmAimController aimController;
+
 	private Magazine magazine;
+	private AmmoStockPile stockPile;
+
+	private bool reloading;
 
 	protected void Awake()
 	{
@@ -78,19 +86,23 @@ public class Firearm : MonoBehaviour, IEntityInjector
 	protected void Start()
 	{
 		aimController = transform.GetComponentInParent<FirearmAimController>();
+
 		magazine = transform.GetComponentInParent<Magazine>();
+		stockPile = transform.GetComponentInParent<AmmoStockPile>();
 	}
 
 	protected void OnEnable()
 	{
 		Entity.Events.AddListener<StartFireEvent>(OnStartFireEvent);
 		Entity.Events.AddListener<StopFireEvent>(OnStopFireEvent);
+		Entity.Events.AddListener<ReloadEvent>(OnReloadEvent);
 	}
 
 	protected void OnDisable()
 	{
 		Entity.Events.RemoveListener<StartFireEvent>(OnStartFireEvent);
 		Entity.Events.RemoveListener<StopFireEvent>(OnStopFireEvent);
+		Entity.Events.RemoveListener<ReloadEvent>(OnReloadEvent);
 	}
 
 	private void OnStartFireEvent(StartFireEvent evt)
@@ -103,13 +115,26 @@ public class Firearm : MonoBehaviour, IEntityInjector
 		StopCoroutine("Fire");
 	}
 
+	private void OnReloadEvent(ReloadEvent evt)
+	{
+		if(!reloading && stockPile.Current > 0)
+		{
+			reloading = true;
+
+			stockPile.Current += magazine.Remaining;
+			magazine.Remaining = 0;
+
+			StartCoroutine("Reload");
+		}
+	}
+
 	private IEnumerator Fire()
 	{
 		while(true)
 		{
 			if(magazine.Empty)
 			{
-				// TODO: Play mag empty sound clip
+				AudioManager.PlayAt(clipEmptyAudio, barrel.position);
 				yield break;
 			}
 
@@ -122,13 +147,27 @@ public class Firearm : MonoBehaviour, IEntityInjector
 				DamageEvent damageEvent = new DamageEvent(damageInfo);
 
 				GlobalEvents.Invoke(damageEvent);
-				Entity.Events.Invoke(damageEvent);
+				hitInfo.Target.Events.Invoke(damageEvent);
 			}
 
 			PostFire(hitInfo);
 
 			yield return new WaitForSeconds(60f / roundsPerMinute);
 		}
+	}
+
+	private IEnumerator Reload()
+	{
+		int count = Mathf.Min(magazine.Capacity, stockPile.Current);
+
+		AudioManager.PlayAt(reloadAudio, barrel.position);
+
+		yield return new WaitForSeconds(reloadSpeed);
+
+		magazine.Remaining = count;
+		stockPile.Current -= count;
+
+		reloading = false;
 	}
 
 	private IEnumerator DisplayMuzzleFlash()
@@ -188,7 +227,7 @@ public class Firearm : MonoBehaviour, IEntityInjector
 			audioChannel.Pitch = Random.Range(0.7f, 1.3f);
 		}
 
-		magazine.Fire();
+		magazine.Remaining--;
 
 		StopCoroutine("DisplayMuzzleFlash");
 		StartCoroutine("DisplayMuzzleFlash");

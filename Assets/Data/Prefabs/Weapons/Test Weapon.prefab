@@ -139,8 +139,10 @@ MonoBehaviour:
   barrel: {fileID: 458900}
   fireAudio: {fileID: 11400000, guid: d02eb87387469bd45929e5444c36bde2, type: 2}
   muzzleFlash: {fileID: 21266002}
-  damage: 1
+  reloadAudio: {fileID: 11400000, guid: 7cbde8978b1b7b24ca575a45a7354bab, type: 2}
   reloadSpeed: 1
+  clipEmptyAudio: {fileID: 0}
+  damage: 1
   bulletSpread: 0.01
   range: 1000
   roundsPerMinute: 600

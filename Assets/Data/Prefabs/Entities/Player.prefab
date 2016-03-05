@@ -65,6 +65,7 @@ GameObject:
   - 4: {fileID: 443042}
   - 20: {fileID: 2098290}
   - 114: {fileID: 11410420}
+  - 114: {fileID: 11453882}
   - 114: {fileID: 11441642}
   m_Layer: 0
   m_Name: Weapon
@@ -321,7 +322,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 20
-  bloodParticlePrefab: {fileID: 172532, guid: cf80f31b305e04240939ea44874bd256, type: 2}
 --- !u!114 &11441642
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -333,6 +333,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 356c0f211f571a944b904ac4f5f41f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11453882
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a873f1282c57a9b4dabed719c977bd46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  start: 60
+  capacity: 90
 --- !u!114 &11491956
 MonoBehaviour:
   m_ObjectHideFlags: 1

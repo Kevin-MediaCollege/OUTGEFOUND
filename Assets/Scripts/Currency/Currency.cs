@@ -35,7 +35,5 @@ public class Currency : IDependency
 			EnemyValue value = target.GetComponent<EnemyValue>();
 			Amount += value.Value;
 		}
-
-		UnityEngine.Debug.Log(Amount);
 	}
 }

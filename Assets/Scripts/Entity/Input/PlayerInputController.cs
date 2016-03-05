@@ -51,11 +51,11 @@ public class PlayerInputController : InputController
 		/*if(Input.GetKeyDown(KeyCode.V))
 		{
 			Entity.Events.Invoke(new SwitchFireModeEvent(Entity));
-		}
+		}*/
 
 		if(Input.GetKeyDown(KeyCode.R))
 		{
-			Entity.Events.Invoke(new ReloadWeaponEvent(Entity));
-		}*/
+			Entity.Events.Invoke(new ReloadEvent());
+		}
 	}
 }
