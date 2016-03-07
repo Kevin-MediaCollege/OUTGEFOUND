@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TaskBase
+public class TaskHumanGuard
 {
-	public virtual IEnumerator runTask(AIBase _ai)
+	public IEnumerator runTask(AIHuman _human)
 	{
 		yield return new WaitForSeconds (1f);
 	}

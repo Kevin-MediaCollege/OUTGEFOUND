@@ -22,14 +22,18 @@ public class CoverBase : MonoBehaviour
 	[HideInInspector]
 	public bool isSafe;
 
-	void Awake()
-	{
-		
-	}
+	[HideInInspector]
+	public bool isUsefull;
+
+	[HideInInspector]
+	public bool occupied;
 
 	void Start()
 	{
 		CoverManager.instance.addCover (this);
+		occupied = false;
+		isUsefull = false;
+		isSafe = false;
 	}
 
 	void OnDrawGizmosSelected()
@@ -47,6 +51,9 @@ public class CoverBase : MonoBehaviour
 		Gizmos.color = new Color(0f, 0f, 1f);
 		Gizmos.DrawLine(gameObject.transform.position, gameObject.transform.position + new Vector3(Mathf.Sin((gameObject.transform.eulerAngles.y + coverAngle) * Mathf.PI / 180f) * 5f, 0f, Mathf.Cos((gameObject.transform.eulerAngles.y + coverAngle) * Mathf.PI / 180f) * 5f));
 		Gizmos.DrawLine(gameObject.transform.position, gameObject.transform.position + new Vector3(Mathf.Sin((gameObject.transform.eulerAngles.y - coverAngle) * Mathf.PI / 180f) * 5f, 0f, Mathf.Cos((gameObject.transform.eulerAngles.y - coverAngle) * Mathf.PI / 180f) * 5f));
+
+		Gizmos.color = new Color(1f, 0f, 0f);
+		Gizmos.DrawLine(gameObject.transform.position, gameObject.transform.position + new Vector3(0f, coverSizeY + 0.5f, 0f));
 	}
 
 	public float getAngle()
