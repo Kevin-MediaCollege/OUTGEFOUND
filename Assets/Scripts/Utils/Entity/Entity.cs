@@ -43,18 +43,6 @@ public class Entity : MonoBehaviour
 		{
 			tags.Add(tag);
 		}
-
-		// Register entity in children
-		Component[] interactors = GetComponentsInChildren<Component>(true);
-		foreach(Component interactor in interactors)
-		{
-			IEntityInjector injector = interactor as IEntityInjector;
-
-			if(injector != null)
-			{
-				injector.Entity = this;
-			}
-		}
 	}
 
 	protected void OnEnable()

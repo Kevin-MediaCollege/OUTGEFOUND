@@ -14,8 +14,10 @@ public class EntityHealth : BaseEntityAddon
 
 	[SerializeField] private float startingHealth;
 
-	protected void Awake()
+	protected override void Awake()
 	{
+		base.Awake();
+
 		CurrentHealth = startingHealth;
 	}
 

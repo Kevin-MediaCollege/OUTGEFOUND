@@ -47,9 +47,9 @@ public class AIManager : MonoBehaviour
 
 	private void OnWeaponFireEvent(FireEvent evt)
 	{
-		if(evt.Firearm.Entity.HasTag("Player"))
+		if(evt.Firearm.Wielder.HasTag("Player"))
 		{
-			lastKnownPlayerPosition = evt.Firearm.Entity.transform.position;
+			lastKnownPlayerPosition = evt.Firearm.Wielder.transform.position;
 		}
 	}
 }
