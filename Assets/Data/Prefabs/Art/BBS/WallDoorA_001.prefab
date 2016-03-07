@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 65
   m_IsActive: 1
 --- !u!1 &119106
 GameObject:
@@ -34,7 +34,7 @@ GameObject:
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 65
   m_IsActive: 1
 --- !u!1 &129536
 GameObject:
@@ -49,7 +49,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 65
   m_IsActive: 1
 --- !u!1 &132076
 GameObject:
@@ -67,7 +67,7 @@ GameObject:
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 65
   m_IsActive: 1
 --- !u!1 &148838
 GameObject:
@@ -84,7 +84,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 65
   m_IsActive: 1
 --- !u!1 &153826
 GameObject:
@@ -99,7 +99,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 65
   m_IsActive: 1
 --- !u!1 &171216
 GameObject:
@@ -117,7 +117,7 @@ GameObject:
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 65
   m_IsActive: 1
 --- !u!1 &190416
 GameObject:
@@ -132,7 +132,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 65
   m_IsActive: 1
 --- !u!1 &197768
 GameObject:
@@ -150,7 +150,7 @@ GameObject:
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 65
   m_IsActive: 1
 --- !u!4 &409864
 Transform:
@@ -210,8 +210,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 148838}
-  m_LocalRotation: {x: 0, y: 0.7071158, z: 0, w: -0.7070977}
-  m_LocalPosition: {x: -10.774, y: 1.654, z: 17.953}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 409864}
