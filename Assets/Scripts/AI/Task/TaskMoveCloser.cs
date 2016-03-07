@@ -8,7 +8,7 @@ public class TaskMoveCloser : TaskBase
 		
 	}
 
-	public virtual IEnumerator runTask(AIBase _ai)
+	public override IEnumerator runTask(AIBase _ai)
 	{
 		while(true)
 		{

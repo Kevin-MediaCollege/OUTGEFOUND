@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class EntityHealth : MonoBehaviour, IEntityInjector
+public class EntityHealth : BaseEntityAddon
 {
 	public float StartingHealth
 	{
@@ -13,10 +12,7 @@ public class EntityHealth : MonoBehaviour, IEntityInjector
 
 	public float CurrentHealth { set; get; }
 
-	public Entity Entity { set; get; }
-
 	[SerializeField] private float startingHealth;
-	[SerializeField] private GameObject bloodParticlePrefab;
 
 	protected void Awake()
 	{
@@ -25,11 +21,15 @@ public class EntityHealth : MonoBehaviour, IEntityInjector
 
 	protected void OnEnable()
 	{
+		Entity.Events.AddListener<RefillHealthEvent>(OnRefillHealthEvent);
+
 		GlobalEvents.AddListener<DamageEvent>(OnDamageEvent);
 	}
 
 	protected void OnDisable()
 	{
+		Entity.Events.RemoveListener<RefillHealthEvent>(OnRefillHealthEvent);
+
 		GlobalEvents.RemoveListener<DamageEvent>(OnDamageEvent);
 	}
 
@@ -38,16 +38,12 @@ public class EntityHealth : MonoBehaviour, IEntityInjector
 		if(evt.DamageInfo.Hit.Target == Entity)
 		{
 			CurrentHealth -= evt.DamageInfo.Damage;
-
-			GameObject bloodParticle = Instantiate(bloodParticlePrefab);
-			bloodParticle.transform.position = evt.DamageInfo.Hit.Point;
-			bloodParticle.transform.rotation = Quaternion.FromToRotation(transform.forward, evt.DamageInfo.Hit.Normal) * transform.rotation;
-
-			if(CurrentHealth <= 0)
-			{
-				GlobalEvents.Invoke(new EntityDiedEvent(evt.DamageInfo));
-			}
 		}
+	}
+
+	private void OnRefillHealthEvent(RefillHealthEvent evt)
+	{
+		CurrentHealth = StartingHealth;
 	}
 
 #if UNITY_EDITOR
@@ -57,20 +53,22 @@ public class EntityHealth : MonoBehaviour, IEntityInjector
 		CurrentHealth = StartingHealth;
 	}
 
-	[ContextMenu("Damage")]
-	private void Damage()
+	[ContextMenu("Damage (1)")]
+	private void Damage1()
 	{
-		HitInfo hitInfo = new HitInfo(Entity, Entity);
-		DamageInfo damageInfo = new DamageInfo(hitInfo, 1);
-
-		GlobalEvents.Invoke(new DamageEvent(damageInfo));
+		Damage(1);
 	}
 
-	[ContextMenu("Kill")]
-	private void Kill()
+	[ContextMenu("Damage (5)")]
+	private void Damage5()
+	{
+		Damage(5);
+	}
+
+	private void Damage(float damage)
 	{
 		HitInfo hitInfo = new HitInfo(Entity, Entity);
-		DamageInfo damageInfo = new DamageInfo(hitInfo, CurrentHealth);
+		DamageInfo damageInfo = new DamageInfo(hitInfo, damage);
 
 		GlobalEvents.Invoke(new DamageEvent(damageInfo));
 	}

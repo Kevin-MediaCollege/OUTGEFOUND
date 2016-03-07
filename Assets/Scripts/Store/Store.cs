@@ -1,97 +1,66 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Store : MonoBehaviour
+public abstract class Store : MonoBehaviour
 {
-	public bool IsPlayerInRange
-	{
-		get
-		{
-			Entity player = EntityUtils.GetEntityWithTag("Player");
-
-			if(player != null)
-			{
-				float distance2 = (player.transform.position - transform.position).sqrMagnitude;
-
-				if(distance2 < interactionRange * interactionRange)
-				{
-					return true;
-				}
-			}
-
-			return false;
-		}
-	}
-
-	[SerializeField] private float interactionRange = 3;
-
-	[SerializeField] private Transform playerPosition;
 	[SerializeField] private Canvas storeUI;
+	[SerializeField] private int price;
 
-	private CameraStateManager cameraStateManager;
+	private Currency currency;
 
-	private Quaternion origPlayerRotation;
-	private Vector3 origPlayerPosition;
+	private bool inRange;
 
 	protected void Awake()
 	{
-		cameraStateManager = Dependency.Get<CameraStateManager>();
-
+		currency = Dependency.Get<Currency>();
 		storeUI.enabled = false;
 	}
 
 	protected void Update()
 	{
-		if(IsPlayerInRange)
+		if(inRange && Input.GetKeyDown(KeyCode.F))
 		{
-			if(Input.GetKeyDown(KeyCode.F))
-			{
-				Open();
-			}
-			else if(Input.GetKeyDown(KeyCode.Escape))
-			{
-				Close();
-			}
+			TryPurchase();
 		}
 	}
 
-	protected void OnDrawGizmos()
+	protected void OnTriggerEnter(Collider collider)
 	{
-		float angle = 360f / 60;
-		Quaternion rotation = Quaternion.Euler(0f, angle, 0f);
+		OnTriggerUpdate(collider, true);
+	}
 
-		Vector3 direction = interactionRange * Vector3.forward;
-		Vector3 position = transform.position + new Vector3(0, 0.25f, 0);
+	protected void OnTriggerExit(Collider collider)
+	{
+		OnTriggerUpdate(collider, false);
+	}
 
-		for(int i = 0; i < 60; i++)
+	protected virtual bool CanPurchase()
+	{
+		return true;
+	}
+
+	protected virtual void Purchase()
+	{
+	}
+
+	private void OnTriggerUpdate(Collider collider, bool entered)
+	{
+		Entity entity = collider.GetComponent<Entity>();
+
+		if(entity != null && entity.HasTag("Player"))
 		{
-			Vector3 nextDir = rotation * direction;
-			Gizmos.DrawLine(position + direction, position + nextDir);
-			direction = nextDir;
+			storeUI.enabled = entered;
+			inRange = entered;
 		}
 	}
-	
-	public void Open()
+
+	private void TryPurchase()
 	{
-		storeUI.enabled = true;
-		cameraStateManager.SetCurrentState(0);
+		if(currency.Amount >= price && CanPurchase())
+		{
+			Purchase();
 
-		Entity player = EntityUtils.GetEntityWithTag("Player");
-		origPlayerPosition = player.transform.position;
-		origPlayerRotation = player.transform.rotation;
-
-		player.transform.position = playerPosition.position;
-		player.transform.rotation = playerPosition.rotation;
-	}
-
-	public void Close()
-	{
-		storeUI.enabled = false;
-		cameraStateManager.SetToDefaultState();
-
-		Entity player = EntityUtils.GetEntityWithTag("Player");
-
-		player.transform.position = origPlayerPosition;
-		player.transform.rotation = origPlayerRotation;
+			currency.Amount -= price;
+		}
 	}
 }

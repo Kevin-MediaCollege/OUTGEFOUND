@@ -1,25 +1,42 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EntityDeath : MonoBehaviour, IEntityInjector
+[RequireComponent(typeof(EntityHealth))]
+public class EntityDeath : BaseEntityAddon
 {
-	public Entity Entity { set; get; }
+	private EntityHealth health;
 
-	protected void OnEnable()
+	private bool dead;
+
+	protected void Awake()
 	{
-		GlobalEvents.AddListener<EntityDiedEvent>(OnDeathEvent);
+		health = GetComponent<EntityHealth>();
 	}
 
-	protected void OnDisable()
+	protected void LateUpdate()
 	{
-		GlobalEvents.RemoveListener<EntityDiedEvent>(OnDeathEvent);
-	}
-
-	private void OnDeathEvent(EntityDiedEvent evt)
-	{
-		if(evt.Entity == Entity)
+		if(!dead && health.CurrentHealth <= 0)
 		{
+			dead = true;
+
+			EntityDiedEvent evt = new EntityDiedEvent(Entity);
+
+			GlobalEvents.Invoke(evt);
+			Entity.Events.Invoke(evt);
+
+			// Temp
 			Destroy(Entity.gameObject);
 		}
 	}
+
+#if UNITY_EDITOR
+	[ContextMenu("Kill")]
+	private void Kill()
+	{
+		HitInfo hitInfo = new HitInfo(Entity, Entity);
+		DamageInfo damageInfo = new DamageInfo(hitInfo, health.CurrentHealth);
+
+		GlobalEvents.Invoke(new DamageEvent(damageInfo));
+	}
+#endif
 }

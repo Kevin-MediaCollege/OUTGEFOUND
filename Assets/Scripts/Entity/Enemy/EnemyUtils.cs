@@ -30,7 +30,7 @@ public static class EnemyUtils
 	{
 		get
 		{
-			return Player.transform.Find("Shoot Target").position;
+			return Player.transform.Find("AI Target").position;
 		}
 	}
 }
