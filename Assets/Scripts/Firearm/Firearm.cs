@@ -117,11 +117,21 @@ public class Firearm : MonoBehaviour, IEntityInjector
 
 	private void OnReloadEvent(ReloadEvent evt)
 	{
-		if(!reloading && stockPile.Current > 0)
+		if(!reloading)
 		{
 			reloading = true;
 
-			stockPile.Current += magazine.Remaining;
+			if(stockPile != null)
+			{
+				if(stockPile.Current <= 0)
+				{
+					reloading = false;
+					return;
+				}
+
+				stockPile.Current += magazine.Remaining;
+			}
+			
 			magazine.Remaining = 0;
 
 			StartCoroutine("Reload");
@@ -158,14 +168,18 @@ public class Firearm : MonoBehaviour, IEntityInjector
 
 	private IEnumerator Reload()
 	{
-		int count = Mathf.Min(magazine.Capacity, stockPile.Current);
+		int count = stockPile != null ? Mathf.Min(magazine.Capacity, stockPile.Current) : magazine.Capacity;
 
 		AudioManager.PlayAt(reloadAudio, barrel.position);
 
 		yield return new WaitForSeconds(reloadSpeed);
 
 		magazine.Remaining = count;
-		stockPile.Current -= count;
+
+		if(stockPile != null)
+		{
+			stockPile.Current -= count;
+		}
 
 		reloading = false;
 	}
