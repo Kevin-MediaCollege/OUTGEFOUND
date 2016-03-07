@@ -61,7 +61,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 406604}
   - 135: {fileID: 13506910}
-  - 114: {fileID: 11479414}
   - 114: {fileID: 11427106}
   m_Layer: 0
   m_Name: Ammo Store
@@ -208,18 +207,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Press F to refill ammo
---- !u!114 &11479414
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 171892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e351be636ecd05141b046dc5cbfc2c75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingTags: []
 --- !u!135 &13506910
 SphereCollider:
   m_ObjectHideFlags: 1
