@@ -11,5 +11,9 @@ public class GameStarter : MonoBehaviour
 		{
 			sceneLoader.Load("SplashScreen");
 		}
+		else
+		{
+			Destroy(gameObject);
+		}
 	}
 }
