@@ -15,4 +15,9 @@ public class AIMovement : EntityMovement
 
 		return false;
 	}
+
+	public void Stop()
+	{
+		navMeshAgent.Stop();
+	}
 }
