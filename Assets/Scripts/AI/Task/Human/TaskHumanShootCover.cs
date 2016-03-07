@@ -9,18 +9,20 @@ public class TaskHumanShootCover
 		{
 			yield return new WaitForSeconds (0.25f);
 
-			_human.movement.shootAtPlayer();
+			_human.transform.LookAt(EnemyUtils.PlayerCenter);
+			_human.Entity.Events.Invoke(new StartFireEvent());
 
-			if(!_human.canSeePlayer())
+			if(!_human.canSeePlayer() || !_human.currentCover.isSafe)
 			{
-				break;
-			}
-			if(!_human.currentCover.isSafe)
-			{
+				_human.Entity.Events.Invoke(new StopFireEvent());
 				break;
 			}
 
-			//reload if mag empty
+			if(_human.Entity.GetMagazine().Remaining == 0)
+			{
+				_human.Entity.Events.Invoke(new ReloadEvent());
+				break;
+			}
 		}
 	}
 }

@@ -6,7 +6,11 @@ public class TaskHumanTrack
 	public IEnumerator runTask(AIHuman _human)
 	{
 		Vector3 last = LastKnownPosition.instance.getPosition();
-		_human.movement.MoveTo(last);
+
+		if(!_human.movement.MoveTo(last))
+		{
+			yield break;
+		}
 
 		while(true)
 		{
@@ -16,19 +20,19 @@ public class TaskHumanTrack
 
 				if(_human.canSeePlayer()) //player visible
 				{
-					_human.movement.stopMoving();
+					_human.movement.Stop();
 					yield break;
 				}
 				if(Vector3.Distance(_human.gameObject.transform.position, last) < 3f) //walk complete
 				{
-					_human.movement.stopMoving();
+					_human.movement.Stop();
 					yield break;
 				}
 			}
 
 			if(LastKnownPosition.instance.getPosition() != last) //player position changed
 			{
-				_human.movement.stopMoving();
+				_human.movement.Stop();
 				break;
 			}
 		}

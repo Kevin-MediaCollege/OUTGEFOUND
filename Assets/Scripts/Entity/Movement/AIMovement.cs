@@ -3,6 +3,14 @@ using System.Collections;
 
 public class AIMovement : EntityMovement
 {
+	public float RemainingDistance
+	{
+		get
+		{
+			return navMeshAgent.remainingDistance;
+		}
+	}
+
 	[SerializeField] private NavMeshAgent navMeshAgent;
 
 	public bool MoveTo(Vector3 point)
@@ -10,54 +18,17 @@ public class AIMovement : EntityMovement
 		if(navMeshAgent.SetDestination(point))
 		{
 			navMeshAgent.speed = speed;
+			navMeshAgent.Resume();
+
 			return true;
 		}
 
+		Stop();
 		return false;
 	}
-	
-	public void shootAtPlayer()
-	{
-		gameObject.transform.LookAt(getPlayerPosition());
-	}
 
-	public void stopShooting()
-	{
-		
-	}
-
-	public void reloadWeapon()
-	{
-		
-	}
-
-	public int getBulletsLeft()
-	{
-		return 0;
-	}
-
-	public float getMovingDistance()
-	{
-		return navMeshAgent.remainingDistance;
-	}
-
-	public void stopMoving()
+	public void Stop()
 	{
 		navMeshAgent.Stop();
-	}
-
-	public Vector3 getHeadPosition()
-	{
-		return Vector3.zero;//head.transform.position;
-	}
-
-	public Vector3 getPlayerHeadPosition()
-	{
-		return Vector3.zero;//playerHead.transform.position;
-	}
-
-	public Vector3 getPlayerPosition()
-	{
-		return Vector3.zero;//playerHead.transform.position;
 	}
 }

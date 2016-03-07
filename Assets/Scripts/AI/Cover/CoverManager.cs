@@ -15,9 +15,6 @@ public class CoverManager : MonoBehaviour
 	private int updatesPerFrame = 5;
 	private bool updatingEnabled = true;
 
-	public GameObject temp_playerFeetPosition;
-	public GameObject temp_playerHeadPosition;
-
 	void Awake () 
 	{
 		instance = this;
@@ -31,8 +28,8 @@ public class CoverManager : MonoBehaviour
 			nextCover = nextCover >= coverListLength ? 0 : nextCover;
 			int end = nextCover + updatesPerFrame;
 			end = end >= coverListLength ? coverListLength : end;
-			Vector3 playerFeet = temp_playerFeetPosition.transform.position;//EntityUtils.GetEntityWithTag ("Player").gameObject.transform.position;
-			Vector3 playerHead = temp_playerHeadPosition.transform.position;
+			Vector3 playerFeet = EnemyUtils.Player.transform.position;
+			Vector3 playerHead = EnemyUtils.Player.GetEyes().position;
 
 			for(int i = nextCover; i < end; i++)
 			{

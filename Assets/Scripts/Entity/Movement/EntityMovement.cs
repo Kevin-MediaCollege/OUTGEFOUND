@@ -3,6 +3,8 @@ using System.Collections;
 
 public abstract class EntityMovement : MonoBehaviour
 {
+	public Entity Entity { private set; get; }
+
 	public bool Jumping
 	{
 		get
@@ -33,4 +35,9 @@ public abstract class EntityMovement : MonoBehaviour
 	protected float verticalSpeed;
 
 	protected bool crouching;
+
+	protected virtual void Awake()
+	{
+		Entity = GetComponent<Entity>() ?? GetComponentInParent<Entity>();
+	}
 }

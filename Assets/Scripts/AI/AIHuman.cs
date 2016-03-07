@@ -19,7 +19,8 @@ public class AIHuman : AIBase
 		while(true)
 		{
 			testShooting = false;
-
+			Vector3 playerPosition = EnemyUtils.Player.transform.position;
+			
 			if(!LastKnownPosition.instance.hasBeenSeen()) //has player been seen recently?
 			{
 				if(currentCover != null) //is in cover?
@@ -50,7 +51,7 @@ public class AIHuman : AIBase
 			}
 			else if (canSeePlayer()) //is player visible?
 			{
-				if((currentCover = CoverManager.instance.getClosestCover(gameObject.transform.position, movement.getPlayerPosition())) != null) //any empty cover nearby?
+				if((currentCover = CoverManager.instance.getClosestCover(gameObject.transform.position, playerPosition)) != null) //any empty cover nearby?
 				{
 					//Debug.Log("NEW TASK: Walk to cover");
 					currentCover.occupied = true;
@@ -64,7 +65,7 @@ public class AIHuman : AIBase
 					yield return (new TaskHumanShoot()).runTask(this);
 				}
 			}
-			else if(Vector3.Distance(gameObject.transform.position, movement.getPlayerPosition()) < 2f) //is human close to last known position? TODO: or player can see last known position?
+			else if(Vector3.Distance(gameObject.transform.position, playerPosition) < 2f) //is human close to last known position? TODO: or player can see last known position?
 			{
 				//Debug.Log("NEW TASK: guard");
 				checkRemoveCover();
@@ -84,16 +85,20 @@ public class AIHuman : AIBase
 
 	public bool canSeePlayer()
 	{
-		float dist = Vector3.Distance(movement.getHeadPosition(), movement.getPlayerHeadPosition());
-		RaycastHit[] hits = Physics.RaycastAll(movement.getHeadPosition(), movement.getPlayerHeadPosition() - movement.getHeadPosition(), dist);
-		int l = hits.Length;
-		for(int i = 0; i < l; i++)
+		Vector3 eyePosition = movement.Entity.GetEyes().position;
+		Vector3 playerPosition = EnemyUtils.PlayerCenter;
+		Vector3 direction = (playerPosition - eyePosition).normalized;
+		
+		RaycastHit[] hits = Physics.RaycastAll(eyePosition, direction, Vector3.Distance(eyePosition, playerPosition));
+		
+		foreach(RaycastHit hit in hits)
 		{
-			if(hits[i].collider.gameObject.CompareTag("Wall"))
+			if(hit.collider.CompareTag("Wall"))
 			{
 				return false;
 			}
 		}
+
 		return true;
 	}
 
@@ -114,7 +119,7 @@ public class AIHuman : AIBase
 			if(testDelay < 0f)
 			{
 				Gizmos.color = new Color(1f, 0f, 0f);
-				Gizmos.DrawLine(movement.getHeadPosition(), movement.getPlayerHeadPosition());
+				Gizmos.DrawLine(movement.Entity.GetEyes().position, EnemyUtils.PlayerCenter);
 				testDelay = 0.35f;
 			}
 		}

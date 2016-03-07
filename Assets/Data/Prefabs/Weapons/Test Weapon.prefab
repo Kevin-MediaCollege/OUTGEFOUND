@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 405450}
   - 114: {fileID: 11435006}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Test Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ GameObject:
   - 4: {fileID: 477840}
   - 33: {fileID: 3344358}
   - 23: {fileID: 2351322}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Art
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 458900}
   - 212: {fileID: 21266002}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,6 +189,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

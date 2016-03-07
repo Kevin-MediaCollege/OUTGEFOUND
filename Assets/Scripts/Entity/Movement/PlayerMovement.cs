@@ -6,8 +6,10 @@ public class PlayerMovement : EntityMovement
 	[SerializeField] private CharacterController characterController;
 	[SerializeField] private PlayerInputController playerInputController;
 
-	protected void Awake()
+	protected override void Awake()
 	{
+		base.Awake();
+
 		Dependency.Get<CameraStateManager>().SetToDefaultState();
 	}
 

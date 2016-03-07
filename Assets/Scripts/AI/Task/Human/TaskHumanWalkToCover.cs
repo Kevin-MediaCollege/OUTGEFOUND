@@ -11,7 +11,7 @@ public class TaskHumanWalkToCover
 		{
 			yield return new WaitForSeconds(0.25f);
 
-			if(_human.movement.getMovingDistance() < 0.5f)
+			if(_human.movement.RemainingDistance < 0.5f)
 			{
 				break;
 			}
