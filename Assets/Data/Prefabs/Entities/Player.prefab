@@ -67,6 +67,7 @@ GameObject:
   - 114: {fileID: 11410420}
   - 114: {fileID: 11453882}
   - 114: {fileID: 11441642}
+  - 114: {fileID: 11467064}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -346,6 +347,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: 60
   capacity: 90
+--- !u!114 &11467064
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02aa13506476e534e8d16235c227a0f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingWeapon: {fileID: 11435006, guid: db8a8be039e1e134f994c3f784517c47, type: 2}
+  anchor: {fileID: 480792}
 --- !u!114 &11491956
 MonoBehaviour:
   m_ObjectHideFlags: 1

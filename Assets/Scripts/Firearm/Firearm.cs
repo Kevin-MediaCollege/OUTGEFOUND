@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Firearm : MonoBehaviour, IEntityInjector
+public class Firearm : MonoBehaviour
 {
-	public Entity Entity { set; get; }
+	public Entity Wielder { private set; get; }
 
 	public Transform Barrel
 	{
@@ -93,16 +93,21 @@ public class Firearm : MonoBehaviour, IEntityInjector
 
 	protected void OnEnable()
 	{
-		Entity.Events.AddListener<StartFireEvent>(OnStartFireEvent);
-		Entity.Events.AddListener<StopFireEvent>(OnStopFireEvent);
-		Entity.Events.AddListener<ReloadEvent>(OnReloadEvent);
+		if(Wielder == null)
+		{
+			Wielder = GetComponent<Entity>() ?? GetComponentInParent<Entity>();
+		}
+
+		Wielder.Events.AddListener<StartFireEvent>(OnStartFireEvent);
+		Wielder.Events.AddListener<StopFireEvent>(OnStopFireEvent);
+		Wielder.Events.AddListener<ReloadEvent>(OnReloadEvent);
 	}
 
 	protected void OnDisable()
 	{
-		Entity.Events.RemoveListener<StartFireEvent>(OnStartFireEvent);
-		Entity.Events.RemoveListener<StopFireEvent>(OnStopFireEvent);
-		Entity.Events.RemoveListener<ReloadEvent>(OnReloadEvent);
+		Wielder.Events.RemoveListener<StartFireEvent>(OnStartFireEvent);
+		Wielder.Events.RemoveListener<StopFireEvent>(OnStopFireEvent);
+		Wielder.Events.RemoveListener<ReloadEvent>(OnReloadEvent);
 	}
 
 	private void OnStartFireEvent(StartFireEvent evt)
@@ -251,7 +256,7 @@ public class Firearm : MonoBehaviour, IEntityInjector
 
 	private HitInfo ConstructHitInfo()
 	{
-		HitInfo hitInfo = new HitInfo(Entity);
+		HitInfo hitInfo = new HitInfo(Wielder);
 
 		RaycastHit raycastHit;
 		Vector3 direction;

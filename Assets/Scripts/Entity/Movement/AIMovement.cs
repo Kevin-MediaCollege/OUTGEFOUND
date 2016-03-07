@@ -15,9 +15,49 @@ public class AIMovement : EntityMovement
 
 		return false;
 	}
+	
+	public void shootAtPlayer()
+	{
+		gameObject.transform.LookAt(getPlayerPosition());
+	}
 
-	public void Stop()
+	public void stopShooting()
+	{
+		
+	}
+
+	public void reloadWeapon()
+	{
+		
+	}
+
+	public int getBulletsLeft()
+	{
+		return 0;
+	}
+
+	public float getMovingDistance()
+	{
+		return navMeshAgent.remainingDistance;
+	}
+
+	public void stopMoving()
 	{
 		navMeshAgent.Stop();
+	}
+
+	public Vector3 getHeadPosition()
+	{
+		return Vector3.zero;//head.transform.position;
+	}
+
+	public Vector3 getPlayerHeadPosition()
+	{
+		return Vector3.zero;//playerHead.transform.position;
+	}
+
+	public Vector3 getPlayerPosition()
+	{
+		return Vector3.zero;//playerHead.transform.position;
 	}
 }

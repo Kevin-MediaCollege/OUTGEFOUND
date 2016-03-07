@@ -8,8 +8,10 @@ public class EntityDeath : BaseEntityAddon
 
 	private bool dead;
 
-	protected void Awake()
+	protected override void Awake()
 	{
+		base.Awake();
+
 		health = GetComponent<EntityHealth>();
 	}
 
