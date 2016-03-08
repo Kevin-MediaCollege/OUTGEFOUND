@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Listens for the death of it's parent entity, and does something when that happens
+/// </summary>
 public class EnemyDeathBehaviour : MonoBehaviour
 {
 	private Entity entity;

@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Input controller for the player
+/// </summary>
 public class PlayerInputController : InputController
 {
 	public float InputX

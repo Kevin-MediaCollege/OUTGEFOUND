@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
-
+﻿/// <summary>
+/// The ammo store
+/// </summary>
 public class AmmoStore : Store
 {
 	protected override void Purchase()

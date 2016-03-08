@@ -2,6 +2,9 @@
 using System.Collections;
 using System;
 
+/// <summary>
+/// The first-person camera behaviour
+/// </summary>
 public class FirstPersonCamera : MonoBehaviour
 {
 	[SerializeField] private Vector2 yConstraint = new Vector2(-70, 70);

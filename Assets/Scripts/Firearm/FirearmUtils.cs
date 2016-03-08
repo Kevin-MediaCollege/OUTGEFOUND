@@ -1,6 +1,8 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// A collection of useful firearm utilities
+/// </summary>
 public static class FirearmUtils
 {
 	private static float lastGunshotTime;

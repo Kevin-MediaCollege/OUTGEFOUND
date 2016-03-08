@@ -1,4 +1,7 @@
-﻿public struct DamageInfo
+﻿/// <summary>
+/// Contains information about the damage an entity received
+/// </summary>
+public struct DamageInfo
 {
 	public HitInfo Hit { private set; get; }
 

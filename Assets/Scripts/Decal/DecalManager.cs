@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Dependency for managing bullet impact decals
+/// </summary>
 public class DecalManager : IDependency
 {
 	private DecalManagerHelper helper;

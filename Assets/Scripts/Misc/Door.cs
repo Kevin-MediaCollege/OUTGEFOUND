@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/// <summary>
+/// A door
+/// </summary>
 public class Door : MonoBehaviour
 {
 	[SerializeField] private Animator animator;

@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Player aim controller, makes the player aim at the crosshair
+/// </summary>
 public class PlayerAimController : FirearmAimController
 {
 	public override Vector3 GetAimDirection(Firearm firearm, out RaycastHit hit)

@@ -1,5 +1,3 @@
-﻿using System.Collections;
-
-public class RefillHealthEvent : IEvent
+﻿public class RefillHealthEvent : IEvent
 {
 }

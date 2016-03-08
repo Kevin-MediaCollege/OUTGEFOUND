@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Contains information about a gunshot
+/// </summary>
 public struct HitInfo
 {
 	public Entity Source { private set; get; }

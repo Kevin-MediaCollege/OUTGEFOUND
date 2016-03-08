@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿/// <summary>
+/// Manage the amount of currency (points) the player has
+/// </summary>
 public class Currency : IDependency
 {
 	public int Amount { set; get; }

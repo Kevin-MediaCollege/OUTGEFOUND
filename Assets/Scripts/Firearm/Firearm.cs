@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
+/// <summary>
+/// The firearm
+/// </summary>
 public class Firearm : MonoBehaviour
 {
 	public const int MAX_AUDIO_CHANNELS = 3;

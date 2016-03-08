@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/// <summary>
+/// AI movement controller
+/// </summary>
 public class AIMovement : EntityMovement
 {
 	public float RemainingDistance

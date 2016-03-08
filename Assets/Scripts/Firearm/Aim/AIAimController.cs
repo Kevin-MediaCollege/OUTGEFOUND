@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// AI aim controller, makes the AI aim at the player
+/// </summary>
 public class AIAimController : FirearmAimController
 {
 	public override Vector3 GetAimDirection(Firearm firearm, out RaycastHit hit)

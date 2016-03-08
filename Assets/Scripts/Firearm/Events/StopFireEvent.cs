@@ -1,5 +1,3 @@
-﻿using System.Collections;
-
-public class StopFireEvent : IEvent
+﻿public class StopFireEvent : IEvent
 {
 }

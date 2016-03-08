@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System;
 
+/// <summary>
+/// Spawn blood particles if the parent entity received damage
+/// </summary>
 public class EntityBloodParticle : BaseEntityAddon
 {
 	[SerializeField] private GameObject bloodParticlePrefab;

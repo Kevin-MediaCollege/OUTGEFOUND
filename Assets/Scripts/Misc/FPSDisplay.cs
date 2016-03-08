@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/// <summary>
+/// Display the current FPS
+/// </summary>
 public class FPSDisplay : MonoBehaviour
 {
 	private const float REFRESH_RATE = 0.5f;

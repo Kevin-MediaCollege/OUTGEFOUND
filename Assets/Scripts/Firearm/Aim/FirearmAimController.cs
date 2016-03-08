@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/// <summary>
+/// Base firearm aim controller
+/// </summary>
 public abstract class FirearmAimController : MonoBehaviour
 {
 	[SerializeField] protected LayerMask layerMask;

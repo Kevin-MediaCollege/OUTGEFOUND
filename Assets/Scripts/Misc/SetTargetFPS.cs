@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/// <summary>
+/// Set the target FPS
+/// </summary>
 public class SetTargetFPS : MonoBehaviour
 {
 	[SerializeField] private int targetFrameRate;

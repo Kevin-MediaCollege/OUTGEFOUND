@@ -2,6 +2,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Manages the (un)loading of the game
+/// </summary>
 public class GameDependency : IDependency
 {
 	private SceneLoader sceneLoader;

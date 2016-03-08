@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
+/// <summary>
+/// Contains a list of all available Camera States
+/// </summary>
 public class CameraStates : ScriptableObjectSingleton<CameraStates>
 {
 	[SerializeField] private GameObject[] states;

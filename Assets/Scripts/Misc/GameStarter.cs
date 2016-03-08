@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Start the game when loading from the Common scene
+/// </summary>
 public class GameStarter : MonoBehaviour
 {
 	protected void Start()

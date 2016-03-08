@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/// <summary>
+/// Spawns weapons
+/// </summary>
 public class WeaponSpawner : MonoBehaviour
 {
 	[SerializeField] private Firearm startingWeapon;

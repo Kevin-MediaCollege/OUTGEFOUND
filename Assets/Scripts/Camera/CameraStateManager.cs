@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/// <summary>
+/// Manage the MainCamera state, allows for different camera states, such as a first person state and a cutscene state
+/// </summary>
 public class CameraStateManager : IDependency
 {
 	private GameObject currentStateObject;

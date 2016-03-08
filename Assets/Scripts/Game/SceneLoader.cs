@@ -2,6 +2,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Manages the loading of scenes
+/// </summary>
 public class SceneLoader : IDependency
 {
 	public bool Loading { private set; get; }

@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Helper behaviour for managing bullet impact decals
+/// </summary>
 public class DecalManagerHelper : MonoBehaviour
 {
 	private MeshFilter meshFilter;

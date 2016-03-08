@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// A stockpile for ammo
+/// </summary>
 public class AmmoStockPile : MonoBehaviour
 {
 	public int Capacity
