@@ -820,10 +820,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 11477718, guid: adcc739dc1c55e342a0deab59d4d4d71, type: 2}
-      propertyPath: speed
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 164780, guid: adcc739dc1c55e342a0deab59d4d4d71, type: 2}
       propertyPath: m_Name
       value: Enemy_1 (1)
