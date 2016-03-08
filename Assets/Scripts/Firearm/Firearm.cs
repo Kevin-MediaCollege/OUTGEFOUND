@@ -254,7 +254,7 @@ public class Firearm : MonoBehaviour
 		AudioChannel channel = audioManager.PlayAt(fireAudio, barrel.position);
 		if(channel != null)
 		{
-			channel.Pitch = Random.Range(0.7f, 1.3f);
+			channel.Pitch = Random.Range(0.8f, 1.2f);
 		}
 
 		magazine.Remaining--;
