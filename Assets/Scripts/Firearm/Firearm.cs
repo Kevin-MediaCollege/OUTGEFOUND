@@ -251,7 +251,7 @@ public class Firearm : MonoBehaviour
 		StopCoroutine("DisplayMuzzleFlash");
 		StartCoroutine("DisplayMuzzleFlash");
 
-		GlobalEvents.Invoke(new SpawnDecalEvent(hitInfo.Point, hitInfo.Normal));
+		GlobalEvents.Invoke(new SpawnDecalEvent(hitInfo.Point, hitInfo.Normal, hitInfo.Tag));
 	}
 
 	private HitInfo ConstructHitInfo()

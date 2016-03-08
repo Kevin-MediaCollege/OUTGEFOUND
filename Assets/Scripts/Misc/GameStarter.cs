@@ -7,13 +7,17 @@ public class GameStarter : MonoBehaviour
 	{
 		SceneLoader sceneLoader = Dependency.Get<SceneLoader>();
 
+#if !UNITY_EDITOR
+		sceneLoader.Load("SplashScreen");
+#else
 		if(SceneManager.sceneCount == 1)
 		{
 			sceneLoader.Load("SplashScreen");
 		}
 		else
 		{
-			Destroy(gameObject);
+			Dependency.Get<GameDependency>().Start();
 		}
+#endif
 	}
 }
