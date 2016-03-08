@@ -17,8 +17,6 @@ public class WeaponSpawner : MonoBehaviour
 
 		if(isPlayer)
 		{
-			weapon.transform.localScale *= 2;
-
 			int layer = LayerMask.NameToLayer("Player Weapon");
 
 			foreach(Transform t in weapon.GetComponentsInChildren<Transform>(true))
