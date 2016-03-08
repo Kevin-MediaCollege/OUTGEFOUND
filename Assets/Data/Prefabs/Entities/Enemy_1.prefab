@@ -529,6 +529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingTags:
   - Enemy
+  - AI
 --- !u!114 &11470178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -589,7 +590,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 11477718}
-  currentCover: {fileID: 0}
 --- !u!136 &13665470
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -696,6 +696,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: startingTags.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -714,6 +718,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: startingTags.Array.data[1]
+      value: AI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
