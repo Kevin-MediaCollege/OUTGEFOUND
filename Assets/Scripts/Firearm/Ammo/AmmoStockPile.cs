@@ -29,6 +29,6 @@ public class AmmoStockPile : MonoBehaviour
 
 	protected void Awake()
 	{
-		current = capacity + start;
+		current = start;
 	}
 }
