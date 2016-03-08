@@ -240,17 +240,17 @@ public class Firearm : MonoBehaviour
 		// Apply damage modifiers
 		if(hitInfo.Tag == "Head")
 		{
-			damage *= damageMultipliers.Head;
+			damageToApply *= damageMultipliers.Head;
 		}
 		else if(hitInfo.Tag == "Body")
 		{
-			damage *= damageMultipliers.Body;
+			damageToApply *= damageMultipliers.Body;
 		}
 		else if(hitInfo.Tag == "Limb")
 		{
-			damage *= damageMultipliers.Limbs;
+			damageToApply *= damageMultipliers.Limbs;
 		}
-
+		
 		return damageToApply;
 	}
 
