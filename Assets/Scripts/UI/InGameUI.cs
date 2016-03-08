@@ -19,6 +19,11 @@ public class InGameUI : MonoBehaviour
 		GlobalEvents.AddListener<EntityDiedEvent> (onEntityDied);
 	}
 
+	void OnDisable()
+	{
+		GlobalEvents.RemoveListener<EntityDiedEvent> (onEntityDied);
+	}
+
 	void Update () 
 	{
 		
