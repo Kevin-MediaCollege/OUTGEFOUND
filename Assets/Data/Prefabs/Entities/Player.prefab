@@ -378,8 +378,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a873f1282c57a9b4dabed719c977bd46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: 60
-  capacity: 90
+  start: 240
+  capacity: 270
 --- !u!114 &11457416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -498,6 +498,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: start
+      value: 240
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: capacity
+      value: 270
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
