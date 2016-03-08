@@ -32,8 +32,23 @@ public class Currency : IDependency
 		// Add currency if the target is an enemy
 		else if(target.HasTag("Enemy"))
 		{
-			EnemyValue value = target.GetComponent<EnemyValue>();
-			Amount += value.Value;
+			string tag = evt.DamageInfo.Hit.Tag;
+
+			switch(tag)
+			{
+			case "Head":
+				AddCurrency(250);
+				break;
+			default:
+				AddCurrency(100);
+				break;
+			}
 		}
+	}
+
+	private void AddCurrency(int amount)
+	{
+		Amount += amount;
+		GlobalEvents.Invoke(new CurrencyReceivedEvent(amount));
 	}
 }
