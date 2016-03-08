@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class AudioManager : IDependency
 {
-	public int NUM_CHANNELS = 256;
+	public int NUM_CHANNELS = 128;
 	
 	private HashSet<AudioChannel> channels;
 	private Transform helperObject;
