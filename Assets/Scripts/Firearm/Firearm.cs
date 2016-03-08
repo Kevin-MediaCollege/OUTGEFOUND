@@ -251,7 +251,7 @@ public class Firearm : MonoBehaviour
 
 	private void PostFire(HitInfo hitInfo)
 	{
-		AudioChannel channel = audioManager.PlayAt(fireAudio, barrel.position);
+		AudioChannel channel = FirearmUtils.PlayGunshot(audioManager, fireAudio, barrel.position);
 		if(channel != null)
 		{
 			channel.Pitch = Random.Range(0.8f, 1.2f);
