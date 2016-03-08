@@ -14,10 +14,23 @@ public class DecalManagerHelper : MonoBehaviour
 	}
 
 	private List<Decal> decals;
+	private MeshFilter meshFilter;
+	private MeshRenderer meshRenderer;
 
 	protected void Awake()
 	{
 		decals = new List<Decal>();
+
+		meshFilter = gameObject.AddComponent<MeshFilter>();
+		meshRenderer = gameObject.AddComponent<MeshRenderer>();
+		createMesh();
+	}
+
+	private void createMesh()
+	{
+		Mesh mesh = new Mesh();
+
+		meshFilter.mesh = mesh;
 	}
 
 	protected void OnEnable()

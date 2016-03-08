@@ -129,6 +129,7 @@ public class ScreenSplashCompany : ScreenBase
 		yield return new WaitForSeconds(0.15f);
 
 		naughtyGoatAudioChannel = AudioManager.Play(naughtyGoatAudio);
+		naughtyGoatAudioChannel.Volume = 0.5f;
 	}
 	public override IEnumerator OnScreenFadeOut()
 	{
