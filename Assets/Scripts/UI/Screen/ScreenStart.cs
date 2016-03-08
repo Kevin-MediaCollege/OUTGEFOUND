@@ -19,7 +19,9 @@ public class ScreenStart : ScreenBase
 	{
 		if(Input.anyKeyDown)
 		{
-			ScreenManager.Instance.SetScreen("ScreenMainMenu");
+			GameDependency game = Dependency.Get<GameDependency>();
+			game.Start();
+			//ScreenManager.Instance.SetScreen("ScreenMainMenu");
 		}
 	}
 

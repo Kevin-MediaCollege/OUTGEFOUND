@@ -19,8 +19,8 @@ public class ScreenMainMenu : ScreenBase
 	{
 		if(Input.anyKeyDown)
 		{
-			GameDependency game = Dependency.Get<GameDependency>();
-			game.Start();
+			//GameDependency game = Dependency.Get<GameDependency>();
+			//game.Start();
 		}
 	}
 
