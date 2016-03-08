@@ -42,6 +42,7 @@ GameObject:
   - 114: {fileID: 11424164}
   - 114: {fileID: 11470178}
   - 114: {fileID: 11405170}
+  - 114: {fileID: 11480096}
   m_Layer: 0
   m_Name: Addons
   m_TagString: Untagged
@@ -370,7 +371,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 164780}
   m_LocalRotation: {x: 0, y: -0.87789947, z: 0, w: 0.478845}
-  m_LocalPosition: {x: -3.07, y: 1.2, z: 17.18}
+  m_LocalPosition: {x: -3.06, y: 1.2, z: 30.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 483860}
@@ -597,6 +598,17 @@ MonoBehaviour:
   speed: 5
   jumpSpeed: 0
   navMeshAgent: {fileID: 19584216}
+--- !u!114 &11480096
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f80c3accd4cc04cbf425088deefb1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11494434
 MonoBehaviour:
   m_ObjectHideFlags: 1
