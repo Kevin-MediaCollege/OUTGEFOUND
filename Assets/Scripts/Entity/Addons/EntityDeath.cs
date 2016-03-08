@@ -36,8 +36,8 @@ public class EntityDeath : BaseEntityAddon
 			GlobalEvents.Invoke(evt);
 			Entity.Events.Invoke(evt);
 
-			// Temp
-			Destroy(Entity.gameObject);
+			// Mark the entity as dead
+			Entity.AddTag("Dead");
 		}
 	}
 
