@@ -217,7 +217,7 @@ public class Firearm : MonoBehaviour
 
 		// Draw debug ray
 		bool damagable = raycastHit.collider.GetComponentInParent<Damagable>() != null;
-		Debug.DrawRay(barrel.position, direction * range, damagable ? Color.green : Color.red, 7);
+		Debug.DrawRay(barrel.position, direction * range, damagable ? Color.green : Color.red, 3);
 
 		return damagable;
 	}
