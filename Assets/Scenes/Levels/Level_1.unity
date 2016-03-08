@@ -8388,8 +8388,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e084ff01e981cc544839f1ba0f264fd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text_credits: {fileID: 452768913}
   text_scorePopup: {fileID: 1243193988}
   text_scorePopupGroup: {fileID: 1243193990}
+  text_ammoCurrent: {fileID: 875350612}
+  text_ammoLeft: {fileID: 614701603}
 --- !u!1001 &967250894
 Prefab:
   m_ObjectHideFlags: 0
@@ -10412,7 +10415,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 104}
+  m_AnchoredPosition: {x: 0, y: 90}
   m_SizeDelta: {x: 300, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1243193987
@@ -10450,7 +10453,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 2dd03cdf94af6834082524cabf42a33e, type: 3}
-    m_FontSize: 70
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 7
