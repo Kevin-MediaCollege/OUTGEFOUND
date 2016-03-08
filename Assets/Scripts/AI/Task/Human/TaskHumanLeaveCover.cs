@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TaskHumanLeaveCover
+public class TaskHumanLeaveCover : TaskHuman
 {
-	public IEnumerator runTask(AIHuman _human)
+	public override IEnumerator RunTask(AIHuman _ai)
 	{
-		_human.currentCover = null;
-		yield return new WaitForSeconds (0.5f);
+		_ai.currentCover = null;
+
+		yield return new WaitForSeconds(0.5f);
 	}
 }

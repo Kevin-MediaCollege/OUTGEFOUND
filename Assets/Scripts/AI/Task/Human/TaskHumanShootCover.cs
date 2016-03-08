@@ -1,30 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TaskHumanShootCover
+public class TaskHumanShootCover : TaskHuman
 {
-	public IEnumerator runTask(AIHuman _human)
+	public override IEnumerator RunTask(AIHuman _ai)
 	{
 		for(int i = 0; i < 16; i++)
 		{
 			yield return new WaitForSeconds (0.25f);
 
-			_human.transform.LookAt(EnemyUtils.PlayerCenter);
-			Vector3 euler = _human.transform.rotation.eulerAngles;
+			_ai.transform.LookAt(EnemyUtils.PlayerCenter);
+			Vector3 euler = _ai.transform.rotation.eulerAngles;
 			euler.x = 0;
-			_human.transform.rotation = Quaternion.Euler(euler);
+			_ai.transform.rotation = Quaternion.Euler(euler);
 
-			_human.Entity.Events.Invoke(new StartFireEvent());
+			_ai.Entity.Events.Invoke(new StartFireEvent());
 
-			if(!_human.canSeePlayer() || !_human.currentCover.isSafe)
+			if(!_ai.canSeePlayer() || !_ai.currentCover.isSafe)
 			{
-				_human.Entity.Events.Invoke(new StopFireEvent());
+				_ai.Entity.Events.Invoke(new StopFireEvent());
 				break;
 			}
 
-			if(_human.Entity.GetMagazine().Remaining == 0)
+			if(_ai.Entity.GetMagazine().Remaining == 0)
 			{
-				_human.Entity.Events.Invoke(new ReloadEvent());
+				_ai.Entity.Events.Invoke(new ReloadEvent());
 				break;
 			}
 		}

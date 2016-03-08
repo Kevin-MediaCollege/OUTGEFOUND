@@ -1,27 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AIBase : MonoBehaviour 
+public abstract class AIBase : MonoBehaviour 
 {
 	public Entity Entity { private set; get; }
 
-	public AIMovement movement;
+	public AIMovement Movement
+	{
+		get
+		{
+			return movement;
+		}
+	}
 
-	protected void Awake()
+	[SerializeField] private AIMovement movement;
+
+	protected virtual void Awake()
 	{
 		Entity = GetComponent<Entity>() ?? GetComponentInParent<Entity>();
 	}
 
-	public virtual void init()
+	public abstract IEnumerator Run();
+
+	public bool MoveTo(Vector3 point)
 	{
+		return movement.MoveTo(point);
 	}
 
-	public virtual IEnumerator run()
+	public void Stop()
 	{
-		yield break;
-	}
-
-	public virtual void destory()
-	{
+		movement.Stop();
 	}
 }

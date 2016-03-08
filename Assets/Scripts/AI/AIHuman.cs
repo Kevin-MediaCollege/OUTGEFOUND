@@ -6,33 +6,43 @@ public class AIHuman : AIBase
 	[HideInInspector]
 	public CoverBase currentCover;
 
-	private bool testShooting = false;
-	private float testDelay = 0f;
+	private LastKnownPosition lastKnownPosition;
 
-	void Start()
+	private float testDelay;
+
+	private bool testShooting = false;
+
+	protected override void Awake()
 	{
-		StartCoroutine("run");
+		base.Awake();
+
+		lastKnownPosition = Dependency.Get<LastKnownPosition>();
 	}
 
-	public override IEnumerator run()
+	protected void Start()
+	{
+		StartCoroutine("Run");
+	}
+
+	public override IEnumerator Run()
 	{
 		while(true)
 		{
 			testShooting = false;
 			Vector3 playerPosition = EnemyUtils.Player.transform.position;
 			
-			if(!LastKnownPosition.instance.hasBeenSeen()) //has player been seen recently?
+			if(!lastKnownPosition.Seen) //has player been seen recently?
 			{
 				if(currentCover != null) //is in cover?
 				{
 					//Debug.Log("NEW TASK: leave cover");
-					yield return (new TaskHumanLeaveCover()).runTask(this);
+					yield return (new TaskHumanLeaveCover()).RunTask(this);
 				}
 				else
 				{
 					//Debug.Log("NEW TASK: guard");
 					checkRemoveCover();
-					yield return (new TaskHumanGuard()).runTask(this);	
+					yield return (new TaskHumanGuard()).RunTask(this);	
 				}
 			}
 			else if(currentCover != null) //is in cover?
@@ -41,12 +51,12 @@ public class AIHuman : AIBase
 				{
 					//Debug.Log("NEW TASK: shoot at player from cover");
 					testShooting = true;
-					yield return (new TaskHumanShootCover()).runTask(this);
+					yield return (new TaskHumanShootCover()).RunTask(this);
 				}
 				else
 				{
 					//Debug.Log("NEW TASK: leave cover");
-					yield return (new TaskHumanLeaveCover()).runTask(this);
+					yield return (new TaskHumanLeaveCover()).RunTask(this);
 				}
 			}
 			else if (canSeePlayer()) //is player visible?
@@ -55,27 +65,29 @@ public class AIHuman : AIBase
 				{
 					//Debug.Log("NEW TASK: Walk to cover");
 					currentCover.occupied = true;
-					yield return (new TaskHumanWalkToCover()).runTask(this, currentCover.gameObject.transform.position);
+
+					TaskHumanWalkToCover task = new TaskHumanWalkToCover(currentCover.transform.position);
+					yield return task.RunTask(this);
 				}
 				else
 				{
 					//Debug.Log("NEW TASK: shoot at player");
 					testShooting = true;
 					checkRemoveCover();
-					yield return (new TaskHumanShoot()).runTask(this);
+					yield return (new TaskHumanShoot()).RunTask(this);
 				}
 			}
 			else if(Vector3.Distance(gameObject.transform.position, playerPosition) < 2f) //is human close to last known position? TODO: or player can see last known position?
 			{
 				//Debug.Log("NEW TASK: guard");
 				checkRemoveCover();
-				yield return (new TaskHumanGuard()).runTask(this);
+				yield return (new TaskHumanGuard()).RunTask(this);
 			}
 			else
 			{
 				//Debug.Log("NEW TASK: track player");
 				checkRemoveCover();
-				yield return (new TaskHumanTrack()).runTask(this);
+				yield return (new TaskHumanTrack()).RunTask(this);
 			}
 
 			//while safety
@@ -85,7 +97,7 @@ public class AIHuman : AIBase
 
 	public bool canSeePlayer()
 	{
-		Vector3 eyePosition = movement.Entity.GetEyes().position;
+		Vector3 eyePosition = Entity.GetEyes().position;
 		Vector3 playerPosition = EnemyUtils.PlayerCenter;
 		Vector3 direction = (playerPosition - eyePosition).normalized;
 		
@@ -119,7 +131,7 @@ public class AIHuman : AIBase
 			if(testDelay < 0f)
 			{
 				Gizmos.color = new Color(1f, 0f, 0f);
-				Gizmos.DrawLine(movement.Entity.GetEyes().position, EnemyUtils.PlayerCenter);
+				Gizmos.DrawLine(Entity.GetEyes().position, EnemyUtils.PlayerCenter);
 				testDelay = 0.35f;
 			}
 		}

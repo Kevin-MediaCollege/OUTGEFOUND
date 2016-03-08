@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TaskHumanGuard
+public class TaskHumanGuard : TaskHuman
 {
-	public IEnumerator runTask(AIHuman _human)
+	public override IEnumerator RunTask(AIHuman _ai)
 	{
-		yield return new WaitForSeconds (1f);
+		yield return new WaitForSeconds(1f);
 	}
 }

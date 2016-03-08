@@ -9,6 +9,7 @@ public class GameDependency : IDependency
 
 	private Currency currency;
 	private DecalManager decalManager;
+	private AIManager aiManager;
 
 	public GameDependency()
 	{
@@ -17,6 +18,7 @@ public class GameDependency : IDependency
 
 		currency = Dependency.Get<Currency>();
 		decalManager = Dependency.Get<DecalManager>();
+		aiManager = Dependency.Get<AIManager>();
 	}
 
 	public void Start()
@@ -33,6 +35,7 @@ public class GameDependency : IDependency
 
 		currency.Destroy();
 		decalManager.Destroy();
+		aiManager.Destroy();
 
 		sceneLoader.Load("Menu");
 	}
@@ -46,6 +49,7 @@ public class GameDependency : IDependency
 
 		currency.Create();
 		decalManager.Create();
+		aiManager.Create();
 
 		GlobalEvents.Invoke(new GameStartedEvent());
 	}

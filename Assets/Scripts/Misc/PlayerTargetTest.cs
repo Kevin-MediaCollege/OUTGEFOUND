@@ -3,8 +3,15 @@ using System.Collections;
 
 public class PlayerTargetTest : MonoBehaviour
 {
+	private LastKnownPosition lastKnownPosition;
+
+	protected void Awake()
+	{
+		lastKnownPosition = Dependency.Get<LastKnownPosition>();
+	}
+
 	protected void FixedUpdate()
 	{
-		LastKnownPosition.instance.setPosition(transform.position);
+		lastKnownPosition.Position = transform.position;
 	}
 }

@@ -1,10 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 
-public class TaskBase
+public abstract class TaskBase
 {
-	public virtual IEnumerator runTask(AIBase _ai)
-	{
-		yield return new WaitForSeconds (1f);
-	}
+	public abstract IEnumerator RunTask(AIBase _ai);
 }

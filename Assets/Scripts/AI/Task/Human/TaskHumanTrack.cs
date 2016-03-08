@@ -1,13 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TaskHumanTrack
+public class TaskHumanTrack : TaskHuman
 {
-	public IEnumerator runTask(AIHuman _human)
-	{
-		Vector3 last = LastKnownPosition.instance.getPosition();
+	private LastKnownPosition lastKnowPosition;
 
-		if(!_human.movement.MoveTo(last))
+	public TaskHumanTrack()
+	{
+		lastKnowPosition = Dependency.Get<LastKnownPosition>();
+	}
+
+	public override IEnumerator RunTask(AIHuman _ai)
+	{
+		Vector3 last = lastKnowPosition.Position;
+
+		if(!_ai.MoveTo(last))
 		{
 			yield break;
 		}
@@ -18,21 +25,21 @@ public class TaskHumanTrack
 			{
 				yield return new WaitForSeconds(0.25f);
 
-				if(_human.canSeePlayer()) //player visible
+				if(_ai.canSeePlayer()) //player visible
 				{
-					_human.movement.Stop();
+					_ai.Stop();
 					yield break;
 				}
-				if(Vector3.Distance(_human.gameObject.transform.position, last) < 3f) //walk complete
+				if(Vector3.Distance(_ai.transform.position, lastKnowPosition.Position) < 3f) //walk complete
 				{
-					_human.movement.Stop();
+					_ai.Stop();
 					yield break;
 				}
 			}
 
-			if(LastKnownPosition.instance.getPosition() != last) //player position changed
+			if(lastKnowPosition.Position != last) //player position changed
 			{
-				_human.movement.Stop();
+				_ai.Stop();
 				break;
 			}
 		}

@@ -2,54 +2,62 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class AIManager : MonoBehaviour 
+public class AIManager : IDependency 
 {
-	private static AIManager instance;
-	public static AIManager Instance
+	public IEnumerable<Entity> All
 	{
 		get
 		{
-			return instance;
+			return all;
 		}
 	}
 
-	private List<AIBase> aiList;
-	private int aiListLength;
+	private HashSet<Entity> all;
+	private LastKnownPosition lastKnownPosition;
 
-	public Vector3 lastKnownPlayerPosition;
-
-	protected void Awake()
+	public AIManager()
 	{
-		instance = this;
-		aiList = new List<AIBase>();
+		all = new HashSet<Entity>();
+		lastKnownPosition = Dependency.Get<LastKnownPosition>();
 	}
-	
-	protected void OnEnable()
+
+	public void Create()
 	{
 		GlobalEvents.AddListener<FireEvent>(OnWeaponFireEvent);
+		GlobalEvents.AddListener<EntityActivatedEvent>(OnEntityActivatedEvent);
+		GlobalEvents.AddListener<EntityDeactivatedEvent>(OnEntityDeactivatedEvent);
 	}
 
-	protected void OnDisable()
+	public void Destroy()
 	{
-		GlobalEvents.RemoveListener<FireEvent>(OnWeaponFireEvent);
-	}
-	public void AddAI(AIBase ai)
-	{
-		aiList.Add (ai);
-		aiListLength++;
-	}
+		GlobalEvents.AddListener<FireEvent>(OnWeaponFireEvent);
+		GlobalEvents.AddListener<EntityActivatedEvent>(OnEntityActivatedEvent);
+		GlobalEvents.AddListener<EntityDeactivatedEvent>(OnEntityDeactivatedEvent);
 
-	public void RemoveAI(AIBase ai)
-	{
-		aiList.Remove(ai);
-		aiListLength--;
+		all.Clear();
 	}
 
 	private void OnWeaponFireEvent(FireEvent evt)
 	{
 		if(evt.Firearm.Wielder.HasTag("Player"))
 		{
-			lastKnownPlayerPosition = evt.Firearm.Wielder.transform.position;
+			lastKnownPosition.Position = evt.Firearm.Wielder.transform.position;
+		}
+	}
+
+	private void OnEntityActivatedEvent(EntityActivatedEvent evt)
+	{
+		if(evt.Entity.HasTag("AI"))
+		{
+			all.Add(evt.Entity);
+		}
+	}
+
+	private void OnEntityDeactivatedEvent(EntityDeactivatedEvent evt)
+	{
+		if(evt.Entity.HasTag("AI"))
+		{
+			all.Remove(evt.Entity);
 		}
 	}
 }

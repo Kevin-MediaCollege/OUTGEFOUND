@@ -1,37 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LastKnownPosition : MonoBehaviour 
+public class LastKnownPosition : IDependency 
 {
-	public static LastKnownPosition instance;
+	public bool Seen { set; get; }
 
 	private Vector3 position;
-	private bool seen;
-
-	void Awake()
+	public Vector3 Position
 	{
-		instance = this;
-		seen = false;
-	}
-
-	public bool hasBeenSeen()
-	{
-		return seen;
-	}
-
-	public void setPosition(Vector3 _pos)
-	{
-		position = _pos;
-		seen = true;
-	}
-
-	public Vector3 getPosition()
-	{
-		return position;
-	}
-
-	public void disappear()
-	{
-		seen = false;
+		set
+		{
+			position = value;
+			Seen = true;
+		}
+		get
+		{
+			return position;
+		}
 	}
 }
