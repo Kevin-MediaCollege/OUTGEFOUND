@@ -165,7 +165,7 @@ public class Firearm : MonoBehaviour
 
 			HitInfo hitInfo = ConstructHitInfo();
 			GlobalEvents.Invoke(new FireEvent(this, hitInfo));
-
+			
 			if(hitInfo.Hit)
 			{
 				DamageInfo damageInfo = new DamageInfo(hitInfo, CalculateDamage(hitInfo));
@@ -285,13 +285,9 @@ public class Firearm : MonoBehaviour
 		hitInfo.Normal = raycastHit.normal;
 
 		if(raycastHit.collider != null)
-		{			
+		{
 			hitInfo.Tag = raycastHit.collider.tag;
-
-			if(raycastHit.collider.GetComponent<Damagable>() != null)
-			{
-				hitInfo.Target = raycastHit.collider.GetComponentInParent<Entity>();
-			}
+			hitInfo.Target = raycastHit.collider.GetComponentInParent<Entity>();
 		}
 
 		return hitInfo;
