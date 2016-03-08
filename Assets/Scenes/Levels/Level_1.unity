@@ -1623,10 +1623,6 @@ Prefab:
       propertyPath: m_Name
       value: WallA_002 (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 437692, guid: 857e842b6794deb4385c584c231f313a, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 857e842b6794deb4385c584c231f313a, type: 2}
   m_IsPrefabParent: 0
@@ -16311,10 +16307,6 @@ Prefab:
     - target: {fileID: 475646, guid: adcc739dc1c55e342a0deab59d4d4d71, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11477718, guid: adcc739dc1c55e342a0deab59d4d4d71, type: 2}
-      propertyPath: speed
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: adcc739dc1c55e342a0deab59d4d4d71, type: 2}

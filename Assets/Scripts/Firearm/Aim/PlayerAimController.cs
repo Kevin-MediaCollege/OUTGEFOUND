@@ -15,7 +15,7 @@ public class PlayerAimController : FirearmAimController
 
 			ray = new Ray(barrel, hit.point - barrel);
 
-			if(Physics.Raycast(ray, out hit, firearm.Range))
+			if(Physics.Raycast(ray, out hit, firearm.Range, layerMask))
 			{
 				return direction;
 			}

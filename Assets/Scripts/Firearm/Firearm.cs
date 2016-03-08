@@ -217,15 +217,20 @@ public class Firearm : MonoBehaviour
 	{
 		direction = aimController.GetAimDirection(this, out raycastHit);
 
-		// Apply bullet spread
-		Vector3 spread = Random.insideUnitCircle;
-		direction += spread * bulletSpread;
+		if(raycastHit.collider != null)
+		{
+			// Apply bullet spread
+			Vector3 spread = Random.insideUnitCircle;
+			direction += spread * bulletSpread;
 
-		// Draw debug ray
-		bool damagable = raycastHit.collider.GetComponentInParent<Damagable>() != null;
-		Debug.DrawRay(barrel.position, direction * range, damagable ? Color.green : Color.red, 3);
+			// Draw debug ray
+			bool damagable = raycastHit.collider.GetComponentInParent<Damagable>() != null;
+			Debug.DrawRay(barrel.position, direction * raycastHit.distance, damagable ? Color.green : Color.red, 3);
 
-		return damagable;
+			return damagable;
+		}
+
+		return false;
 	}
 
 	private float CalculateDamage(HitInfo hitInfo)
