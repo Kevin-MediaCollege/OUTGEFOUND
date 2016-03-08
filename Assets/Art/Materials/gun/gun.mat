@@ -10,7 +10,7 @@ Material:
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _METALLICGLOSSMAP _NORMALMAP
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -19,14 +19,14 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: b9fcda5cfe34edf4cbb45f8459ca018a, type: 3}
+          m_Texture: {fileID: 2800000, guid: a30c845ed850b2e49b118653623c7ec3, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _BumpMap
         second:
-          m_Texture: {fileID: 2800000, guid: 531687b20f68c32428eba55b4d62978a, type: 3}
+          m_Texture: {fileID: 2800000, guid: b2b0bc636a3a1ad4e97fea3f3eecde5d, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -75,7 +75,7 @@ Material:
         first:
           name: _MetallicGlossMap
         second:
-          m_Texture: {fileID: 2800000, guid: 41a9757145494ab4c90a47c5606ce36d, type: 3}
+          m_Texture: {fileID: 2800000, guid: c03bca4585d46eb4094fb709b8bd545e, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
