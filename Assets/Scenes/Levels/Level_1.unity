@@ -307,7 +307,7 @@ LightmapSettings:
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
     serializedVersion: 3
-    m_Resolution: 1
+    m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
     m_TextureHeight: 1024
@@ -319,7 +319,7 @@ LightmapSettings:
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
     m_ReflectionCompression: 2
-  m_LightingDataAsset: {fileID: 112000262, guid: 12c8e8f350018054abc01067e4086c6b,
+  m_LightingDataAsset: {fileID: 112000264, guid: f2b59aabb309eba4d967df9d7f69da5f,
     type: 2}
   m_RuntimeCPUUsage: 100
 --- !u!196 &4
