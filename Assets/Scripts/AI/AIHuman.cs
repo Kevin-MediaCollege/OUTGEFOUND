@@ -3,10 +3,10 @@ using System.Collections;
 
 public class AIHuman : AIBase 
 {
-	[HideInInspector]
-	public CoverBase currentCover;
+	public CoverBase CurrentCover { set; get; }
 
 	private LastKnownPosition lastKnownPosition;
+	private CoverManager coverManager;
 
 	private float testDelay;
 
@@ -17,11 +17,17 @@ public class AIHuman : AIBase
 		base.Awake();
 
 		lastKnownPosition = Dependency.Get<LastKnownPosition>();
+		coverManager = Dependency.Get<CoverManager>();
 	}
 
-	protected void Start()
+	protected void OnEnable()
 	{
 		StartCoroutine("Run");
+	}
+
+	protected void OnDisable()
+	{
+		StopCoroutine("Run");
 	}
 
 	public override IEnumerator Run()
@@ -33,7 +39,7 @@ public class AIHuman : AIBase
 			
 			if(!lastKnownPosition.Seen) //has player been seen recently?
 			{
-				if(currentCover != null) //is in cover?
+				if(CurrentCover != null) //is in cover?
 				{
 					//Debug.Log("NEW TASK: leave cover");
 					yield return (new TaskHumanLeaveCover()).RunTask(this);
@@ -41,13 +47,13 @@ public class AIHuman : AIBase
 				else
 				{
 					//Debug.Log("NEW TASK: guard");
-					checkRemoveCover();
+					CheckRemoveCover();
 					yield return (new TaskHumanGuard()).RunTask(this);	
 				}
 			}
-			else if(currentCover != null) //is in cover?
+			else if(CurrentCover != null) //is in cover?
 			{
-				if(currentCover.isUsefull && currentCover.isSafe) //is player visible from cover? && is cover safe?
+				if(CurrentCover.IsUsefull && CurrentCover.IsSafe) //is player visible from cover? && is cover safe?
 				{
 					//Debug.Log("NEW TASK: shoot at player from cover");
 					testShooting = true;
@@ -59,43 +65,42 @@ public class AIHuman : AIBase
 					yield return (new TaskHumanLeaveCover()).RunTask(this);
 				}
 			}
-			else if (canSeePlayer()) //is player visible?
+			else if (CanSeePlayer()) //is player visible?
 			{
-				if((currentCover = CoverManager.instance.getClosestCover(gameObject.transform.position, playerPosition)) != null) //any empty cover nearby?
+				if((CurrentCover = coverManager.GetNearestCover(transform.position, playerPosition)) != null) //any empty cover nearby?
 				{
 					//Debug.Log("NEW TASK: Walk to cover");
-					currentCover.occupied = true;
+					CurrentCover.Occupant = Entity;
 
-					TaskHumanWalkToCover task = new TaskHumanWalkToCover(currentCover.transform.position);
+					TaskHumanWalkToCover task = new TaskHumanWalkToCover(CurrentCover.transform.position);
 					yield return task.RunTask(this);
 				}
 				else
 				{
 					//Debug.Log("NEW TASK: shoot at player");
 					testShooting = true;
-					checkRemoveCover();
+					CheckRemoveCover();
 					yield return (new TaskHumanShoot()).RunTask(this);
 				}
 			}
-			else if(Vector3.Distance(gameObject.transform.position, playerPosition) < 2f) //is human close to last known position? TODO: or player can see last known position?
+			else if(Vector3.Distance(transform.position, playerPosition) < 2f) //is human close to last known position? TODO: or player can see last known position?
 			{
 				//Debug.Log("NEW TASK: guard");
-				checkRemoveCover();
+				CheckRemoveCover();
 				yield return (new TaskHumanGuard()).RunTask(this);
 			}
 			else
 			{
 				//Debug.Log("NEW TASK: track player");
-				checkRemoveCover();
+				CheckRemoveCover();
 				yield return (new TaskHumanTrack()).RunTask(this);
 			}
-
-			//while safety
+			
 			yield return null;
 		}
 	}
 
-	public bool canSeePlayer()
+	public bool CanSeePlayer()
 	{
 		Vector3 eyePosition = Entity.GetEyes().position;
 		Vector3 playerPosition = EnemyUtils.PlayerCenter;
@@ -114,16 +119,16 @@ public class AIHuman : AIBase
 		return true;
 	}
 
-	public void checkRemoveCover()
+	public void CheckRemoveCover()
 	{
-		if(currentCover != null)
+		if(CurrentCover != null)
 		{
-			currentCover.occupied = false;
-			currentCover = null;
+			CurrentCover.Occupant = null;
+			CurrentCover = null;
 		}
 	}
 
-	void OnDrawGizmos()
+	protected void OnDrawGizmos()
 	{
 		if(testShooting)
 		{

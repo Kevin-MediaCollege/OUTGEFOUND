@@ -16,7 +16,7 @@ public class TaskHumanShootCover : TaskHuman
 
 			_ai.Entity.Events.Invoke(new StartFireEvent());
 
-			if(!_ai.canSeePlayer() || !_ai.currentCover.isSafe)
+			if(!_ai.CanSeePlayer() || !_ai.CurrentCover.IsSafe)
 			{
 				_ai.Entity.Events.Invoke(new StopFireEvent());
 				break;

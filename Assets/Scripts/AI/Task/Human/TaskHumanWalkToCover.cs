@@ -23,7 +23,7 @@ public class TaskHumanWalkToCover : TaskHuman
 				break;
 			}
 
-			if(!_ai.currentCover.isSafe)
+			if(!_ai.CurrentCover.IsSafe)
 			{
 				break;
 			}

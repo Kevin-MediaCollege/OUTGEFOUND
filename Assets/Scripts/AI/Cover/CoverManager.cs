@@ -2,77 +2,89 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class CoverManager : MonoBehaviour 
+public class CoverManager : IDependency 
 {
-	public static CoverManager instance;
+	private List<CoverBase> all;
 
-	//List
-	private List<CoverBase> coverList;
-	private int coverListLength;
+	private CoroutineRunner coroutineRunner;
 
-	//Update
 	private int nextCover = 0;
 	private int updatesPerFrame = 5;
+
 	private bool updatingEnabled = true;
 
-	void Awake () 
+	public CoverManager() 
 	{
-		instance = this;
-		coverList = new List<CoverBase>();
+		all = new List<CoverBase>();
+
+		coroutineRunner = Dependency.Get<CoroutineRunner>();
 	}
 
-	void Update()
+	public void Create()
+	{
+		coroutineRunner.StartCoroutine(Update());
+	}
+
+	public void Destroy()
+	{
+		coroutineRunner.StopCoroutine(Update());
+	}
+
+	private IEnumerator Update()
 	{
 		if(updatingEnabled)
 		{
-			nextCover = nextCover >= coverListLength ? 0 : nextCover;
+			nextCover = nextCover >= all.Count ? 0 : nextCover;
 			int end = nextCover + updatesPerFrame;
-			end = end >= coverListLength ? coverListLength : end;
+			end = end >= all.Count ? all.Count : end;
 			Vector3 playerFeet = EnemyUtils.Player.transform.position;
 			Vector3 playerHead = EnemyUtils.Player.GetEyes().position;
 
 			for(int i = nextCover; i < end; i++)
 			{
-				updateCover (coverList[i], playerFeet, playerHead);
+				UpdateCover(all[i], playerFeet, playerHead);
 				nextCover++;
 			}
 
 			int c = 0;
 			int c2 = 0;
-			for(int j = 0; j < coverListLength; j++)
+
+			foreach(CoverBase cover in all)
 			{
-				if(coverList[j].isUsefull)
+				if(cover.IsUsefull)
 				{
 					c++;
-					if(coverList[j].isSafe)
+
+					if(cover.IsSafe)
 					{
 						c2++;
 					}
 				}
 			}
 		}
+
+		yield return null;
 	}
 
-	public void addCover(CoverBase _cover)
+	public void AddCover(CoverBase _cover)
 	{
-		coverList.Add (_cover);
-		coverListLength++;
+		all.Add(_cover);
 	}
 
-	public CoverBase getClosestCover(Vector3 _current, Vector3 _player)
+	public CoverBase GetNearestCover(Vector3 _current, Vector3 _player)
 	{
 		CoverBase cover = null;
 		float closest = Vector3.Distance(_current, _player);
 
-		for (int i = 0; i < coverListLength; i++)
+		foreach(CoverBase c in all)
 		{
-			if (coverList[i].isSafe && coverList[i].isUsefull && !coverList[i].occupied) 
+			if (c.IsSafe && c.IsUsefull && !c.IsOccupied) 
 			{
-				float dist = Vector3.Distance (_current, coverList [i].gameObject.transform.position);
+				float dist = Vector3.Distance (_current, c.transform.position);
 				if(dist < closest)
 				{
 					closest = dist;
-					cover = coverList [i];
+					cover = c;
 				}
 			}
 		}
@@ -80,53 +92,38 @@ public class CoverManager : MonoBehaviour
 		return cover;
 	}
 
-	public void updateCover(CoverBase _cover, Vector3 _playerPos, Vector3 _playerHead)
+	public void UpdateCover(CoverBase _cover, Vector3 _playerPos, Vector3 _playerHead)
 	{
-		_cover.isUsefull = true;
-		Vector3 start = _cover.transform.position + new Vector3(0f, _cover.coverSizeY + 0.5f, 0f);
+		_cover.IsUsefull = true;
+		Vector3 start = _cover.transform.position + new Vector3(0f, _cover.Size.y + 0.5f, 0f);
 		float dist = Vector3.Distance(start, _playerHead);
 
 		if(dist < 5f)
 		{
-			_cover.isSafe = false;
-			_cover.isUsefull = false;
+			_cover.IsSafe = false;
+			_cover.IsUsefull = false;
 			return;
 		}
 
-		_cover.isSafe = Mathf.Abs ((_cover.getAngle () - RotationHelper.fixRotation (_cover.getAngle (), 
-			RotationHelper.rotationToPoint (_cover.gameObject.transform.position, _playerPos)))) < _cover.coverAngle ? true : false;
+		_cover.IsSafe = Mathf.Abs ((_cover.Angle - RotationHelper.fixRotation (_cover.Angle, 
+			RotationHelper.rotationToPoint (_cover.gameObject.transform.position, _playerPos)))) < _cover.CoverAngle ? true : false;
 
-		if(!_cover.isSafe)
+		if(!_cover.IsSafe)
 		{
-			_cover.isUsefull = false;
+			_cover.IsUsefull = false;
 			return;
 		}
 
-		_cover.isUsefull = true;
+		_cover.IsUsefull = true;
 		RaycastHit[] hits = Physics.RaycastAll(start, _playerHead - start, dist);
 		int l = hits.Length;
 		for(int i = 0; i < l; i++)
 		{
 			if(hits[i].collider.gameObject.CompareTag("Wall"))
 			{
-				_cover.isUsefull = false;
+				_cover.IsUsefull = false;
 				break;
 			}
 		}
 	}
-
-	/*
-	void OnDrawGizmosSelected()
-	{
-		for(int j = 0; j < coverListLength; j++)
-		{
-			if(coverList[j].isSafe && coverList[j].isUsefull)
-			{
-				Gizmos.color = new Color(0f, 1f, 0f);
-				Gizmos.DrawLine(coverList[j].transform.position + new Vector3(0f, coverList[j].coverSizeY + 0.5f, 0f), temp_playerHeadPosition.transform.position);
-				Gizmos.DrawCube(coverList[j].transform.position, new Vector3(0.4f, 0.4f, 0.4f));
-			}
-		}
-	}
-	*/
 }

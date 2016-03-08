@@ -25,7 +25,7 @@ public class TaskHumanTrack : TaskHuman
 			{
 				yield return new WaitForSeconds(0.25f);
 
-				if(_ai.canSeePlayer()) //player visible
+				if(_ai.CanSeePlayer()) //player visible
 				{
 					_ai.Stop();
 					yield break;

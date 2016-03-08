@@ -3,40 +3,66 @@ using System.Collections;
 
 public class CoverBase : MonoBehaviour 
 {
+	public Vector2 Size
+	{
+		get
+		{
+			return new Vector2(coverSizeX, coverSizeY);
+		}
+	}
+
+	public Entity Occupant { set; get; }
+
+	public float CoverAngle
+	{
+		get
+		{
+			return coverAngle;
+		}
+	}
+
+	public float Angle
+	{
+		get
+		{
+			return transform.eulerAngles.y;
+		}
+	}
+
+	public bool IsSafe { set; get; }
+
+	public bool IsUsefull { set; get; }
+
+	public bool IsOccupied
+	{
+		get
+		{
+			return Occupant != null;
+		}
+	}
+
 	[Header("Height of the cover.")]
 	[Range(0.2f, 3f)]
-	public float coverSizeX;
+	[SerializeField] private float coverSizeX;
 
 	[Header("Width of the cover.")]
 	[Range(0.2f, 3f)]
-	public float coverSizeY;
+	[SerializeField] private float coverSizeY;
 
 	[Header("Distance from player position to cover")]
 	[Range(0.3f, 1.5f)]
-	public float coverOffset;
+	[SerializeField] private float coverOffset;
 
 	[Header("Safe to take cover angle")]
 	[Range(10f, 90f)]
-	public float coverAngle;
+	[SerializeField] private float coverAngle;
 
-	[HideInInspector]
-	public bool isSafe;
-
-	[HideInInspector]
-	public bool isUsefull;
-
-	[HideInInspector]
-	public bool occupied;
-
-	void Start()
+	protected void Awake()
 	{
-		CoverManager.instance.addCover (this);
-		occupied = false;
-		isUsefull = false;
-		isSafe = false;
+		Dependency.Get<CoverManager>().AddCover(this);
 	}
 
-	void OnDrawGizmosSelected()
+	protected void OnDrawGizmosSelected()
 	{
 		Vector3 left = gameObject.transform.position + (gameObject.transform.forward * coverOffset) + (gameObject.transform.right * coverSizeX);
 		Vector3 right = gameObject.transform.position + (gameObject.transform.forward * coverOffset) + (-(gameObject.transform.right * coverSizeX));
@@ -54,10 +80,5 @@ public class CoverBase : MonoBehaviour
 
 		Gizmos.color = new Color(1f, 0f, 0f);
 		Gizmos.DrawLine(gameObject.transform.position, gameObject.transform.position + new Vector3(0f, coverSizeY + 0.5f, 0f));
-	}
-
-	public float getAngle()
-	{
-		return gameObject.transform.eulerAngles.y;
 	}
 }

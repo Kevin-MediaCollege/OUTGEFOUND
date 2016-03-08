@@ -16,7 +16,7 @@ public class TaskHumanShoot : TaskHuman
 
 			_ai.Entity.Events.Invoke(new StartFireEvent());
 
-			if(!_ai.canSeePlayer())
+			if(!_ai.CanSeePlayer())
 			{
 				_ai.Entity.Events.Invoke(new StopFireEvent());
 				break;
