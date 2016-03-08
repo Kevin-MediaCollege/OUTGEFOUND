@@ -129,6 +129,11 @@ public class Firearm : MonoBehaviour
 	{
 		if(!reloading)
 		{
+			if(magazine.Full)
+			{
+				return;
+			}
+
 			reloading = true;
 
 			if(stockPile != null)
