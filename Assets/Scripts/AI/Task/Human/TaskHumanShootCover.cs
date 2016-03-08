@@ -13,6 +13,7 @@ public class TaskHumanShootCover
 			Vector3 euler = _human.transform.rotation.eulerAngles;
 			euler.x = 0;
 			_human.transform.rotation = Quaternion.Euler(euler);
+
 			_human.Entity.Events.Invoke(new StartFireEvent());
 
 			if(!_human.canSeePlayer() || !_human.currentCover.isSafe)
