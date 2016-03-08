@@ -13,7 +13,11 @@ public class PlayerAimController : FirearmAimController
 			Vector3 barrel = firearm.Barrel.position;
 			Vector3 direction = (hit.point - barrel).normalized;
 
-			ray = new Ray(barrel, hit.point - barrel);
+			// Apply bullet spread
+			Vector3 spread = Random.insideUnitCircle;
+			direction += spread * firearm.BulletSpread;
+
+			ray = new Ray(barrel, direction);
 
 			if(Physics.Raycast(ray, out hit, firearm.Range, layerMask))
 			{

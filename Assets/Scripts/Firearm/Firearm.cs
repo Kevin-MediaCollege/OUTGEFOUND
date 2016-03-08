@@ -166,6 +166,8 @@ public class Firearm : MonoBehaviour
 			HitInfo hitInfo = ConstructHitInfo();
 			GlobalEvents.Invoke(new FireEvent(this, hitInfo));
 
+			Debug.Log(hitInfo.Point + " " + hitInfo.Normal);
+
 			if(hitInfo.Hit)
 			{
 				DamageInfo damageInfo = new DamageInfo(hitInfo, CalculateDamage(hitInfo));
@@ -218,24 +220,20 @@ public class Firearm : MonoBehaviour
 		muzzleFlash.enabled = false;
 	}
 
-	private bool CalculateHit(out RaycastHit raycastHit, out Vector3 direction)
+	private void CalculateHit(out RaycastHit raycastHit, out Vector3 direction)
 	{
 		direction = aimController.GetAimDirection(this, out raycastHit);
 
 		if(raycastHit.collider != null)
 		{
-			// Apply bullet spread
-			Vector3 spread = Random.insideUnitCircle;
-			direction += spread * bulletSpread;
-
 			// Draw debug ray
 			bool damagable = raycastHit.collider.GetComponentInParent<Damagable>() != null;
 			Debug.DrawRay(barrel.position, direction * raycastHit.distance, damagable ? Color.green : Color.red, 3);
-
-			return damagable;
 		}
-
-		return false;
+		else
+		{
+			Debug.DrawRay(barrel.position, direction * raycastHit.distance, Color.red, 3);
+		}
 	}
 
 	private float CalculateDamage(HitInfo hitInfo)
@@ -282,13 +280,20 @@ public class Firearm : MonoBehaviour
 		RaycastHit raycastHit;
 		Vector3 direction;
 
-		if(CalculateHit(out raycastHit, out direction))
-		{
-			hitInfo.Target = raycastHit.collider.GetComponentInParent<Entity>();
-			hitInfo.Direction = direction;
-			hitInfo.Point = raycastHit.point;
-			hitInfo.Normal = raycastHit.normal;
+		CalculateHit(out raycastHit, out direction);
+
+		hitInfo.Direction = direction;
+		hitInfo.Point = raycastHit.point;
+		hitInfo.Normal = raycastHit.normal;
+
+		if(raycastHit.collider != null)
+		{			
 			hitInfo.Tag = raycastHit.collider.tag;
+
+			if(raycastHit.collider.GetComponent<Damagable>() != null)
+			{
+				hitInfo.Target = raycastHit.collider.GetComponentInParent<Entity>();
+			}
 		}
 
 		return hitInfo;
