@@ -46,7 +46,7 @@ public class InGameUI : MonoBehaviour
 	{
 		text_ammoCurrent.text = "" + playerMagazine.Remaining;
 		text_ammoLeft.text = "" + playerStockPile.Current;
-		text_credits.text = "" + playerCurrency.Amount;
+		text_credits.text = playerCurrency.Amount + " CR";
 	}
 
 	private IEnumerator showScorePopup()
