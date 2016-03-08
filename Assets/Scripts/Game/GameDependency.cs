@@ -25,6 +25,8 @@ public class GameDependency : IDependency
 
 	public void Start()
 	{
+		GlobalEvents.AddListener<EntityDiedEvent>(OnEntityDiedEvent);
+
 		// Hardcode Level_1 because we probably won't have more levels
 		sceneLoader.Load("Level_1");
 
@@ -33,6 +35,7 @@ public class GameDependency : IDependency
 
 	public void Stop()
 	{
+		GlobalEvents.RemoveListener<EntityDiedEvent>(OnEntityDiedEvent);
 		GlobalEvents.Invoke(new GameStoppedEvent());
 
 		currency.Destroy();
@@ -40,7 +43,7 @@ public class GameDependency : IDependency
 		aiManager.Destroy();
 		coverManager.Destroy();
 
-		sceneLoader.Load("Menu");
+		sceneLoader.Load("Menus");
 	}
 
 	private IEnumerator WaitForGameLoad()
@@ -56,5 +59,14 @@ public class GameDependency : IDependency
 		coverManager.Destroy();
 
 		GlobalEvents.Invoke(new GameStartedEvent());
+	}
+
+	private void OnEntityDiedEvent(EntityDiedEvent evt)
+	{
+		if(evt.Entity.HasTag("Player"))
+		{
+			// The player died, go back to the menu
+			Stop();
+		}
 	}
 }
