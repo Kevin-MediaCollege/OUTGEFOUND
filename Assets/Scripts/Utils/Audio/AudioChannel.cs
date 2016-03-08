@@ -57,6 +57,7 @@ public class AudioChannel : MonoBehaviour
 	{
 		AudioSource = GetComponent<AudioSource>();
 		AudioSource.playOnAwake = false;
+		AudioSource.maxDistance = 10;
 	}
 
 	public void Play(AudioAsset audioAsset, bool loop = false)
