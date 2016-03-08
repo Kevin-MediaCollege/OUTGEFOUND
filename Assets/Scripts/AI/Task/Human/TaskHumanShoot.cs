@@ -10,6 +10,10 @@ public class TaskHumanShoot
 			yield return new WaitForSeconds (0.25f);
 
 			_human.transform.LookAt(EnemyUtils.PlayerCenter);
+			Vector3 euler = _human.transform.rotation.eulerAngles;
+			euler.x = 0;
+			_human.transform.rotation = Quaternion.Euler(euler);
+
 			_human.Entity.Events.Invoke(new StartFireEvent());
 
 			if(!_human.canSeePlayer())
