@@ -172,7 +172,13 @@ public class Firearm : MonoBehaviour
 
 			PostFire(hitInfo);
 
-			yield return new WaitForSeconds(60f / roundsPerMinute);
+			float downTime = 60f / roundsPerMinute;
+			if(Wielder.HasTag("Enemy"))
+			{
+				downTime += Random.Range(0, 0.1f);
+			}
+			
+			yield return new WaitForSeconds(downTime);
 		}
 	}
 
