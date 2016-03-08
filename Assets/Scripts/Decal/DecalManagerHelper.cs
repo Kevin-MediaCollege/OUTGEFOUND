@@ -6,23 +6,67 @@ public class DecalManagerHelper : MonoBehaviour
 {
 	private MeshFilter meshFilter;
 	private MeshRenderer meshRenderer;
-	private int decalLenght;
-	private int nextDecal;
+	private Mesh mesh;
+	private Vector3[] verts;
+	private int[] tris;
+	private Vector2[] uvs;
+
+	private int poolLenght;
+	private int nextPool;
+
+	private bool meshUpdated;
 
 	protected void Awake()
 	{
 		meshFilter = gameObject.AddComponent<MeshFilter>();
 		meshRenderer = gameObject.AddComponent<MeshRenderer>();
+		meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+		meshRenderer.material = Resources.Load("DecalMaterial") as Material;
+
 		createMesh();
 	}
 
 	private void createMesh()
 	{
-		Mesh mesh = new Mesh();
+		mesh = meshFilter.mesh;
 
-		//Quaternion * Vector3.forward
+		poolLenght = 256;
+		nextPool = 0;
+		meshUpdated = true;
 
-		meshFilter.mesh = mesh;
+		verts = new Vector3[poolLenght * 4];
+		tris = new int[poolLenght * 6];
+		uvs = new Vector2[poolLenght * 4];
+
+		int i4, i6;
+		Vector3 invisible = new Vector3(1000f, 1000f, 1000f);
+		for(int i = 0; i < poolLenght; i++)
+		{
+			i4 = i * 4;
+			i6 = i * 6;
+
+			verts[i4]     = invisible;
+			verts[i4 + 1] = invisible;
+			verts[i4 + 2] = invisible;
+			verts[i4 + 3] = invisible;
+
+			tris[i6]     = 0 + i4;
+			tris[i6 + 1] = 1 + i4;
+			tris[i6 + 2] = 2 + i4;
+			tris[i6 + 3] = 2 + i4;
+			tris[i6 + 4] = 1 + i4;
+			tris[i6 + 5] = 3 + i4;
+
+			uvs[i4]     = new Vector2(0f, 0f);
+			uvs[i4 + 1] = new Vector2(1f, 0f);
+			uvs[i4 + 2] = new Vector2(0f, 1f);
+			uvs[i4 + 3] = new Vector2(1f, 1f);
+		}
+
+		mesh.vertices = verts;
+		mesh.triangles = tris;
+		mesh.uv = uvs;
+		mesh.bounds = new Bounds(new Vector3(0f, 0f, 0f), new Vector3(1000f, 1000f, 1000f));
 	}
 
 	protected void OnEnable()
@@ -37,22 +81,24 @@ public class DecalManagerHelper : MonoBehaviour
 
 	protected void Update()
 	{
-
+		if(meshUpdated)
+		{
+			mesh.vertices = verts;
+			mesh.UploadMeshData(false);
+			meshUpdated = false;
+		}
 	}
 
 	private void OnSpawnDecalEvent(SpawnDecalEvent evt)
 	{
-		/*
-		decal.position = evt.Position;
-		decal.normal = evt.Normal;
-		decal.tag = evt.Tag;
-		*/
-
+		if(evt.Normal == Vector3.zero || evt.Tag != "Wall") { return; }
+			
 		Quaternion q = Quaternion.LookRotation (-evt.Normal);
-
-		//(q * Vector3.left) + (q * Vector3.top)
-		//(q * Vector3.right) + (q * Vector3.top)
-		//(q * Vector3.left) + (q * Vector3.down)
-		//(q * Vector3.right) + (q * Vector3.down)
+		verts[nextPool * 4]     = evt.Position + (q * (Vector3.left * 0.1f)) + (q * (Vector3.up * 0.1f));
+		verts[nextPool * 4 + 1] = evt.Position + (q * (Vector3.right * 0.1f)) + (q * (Vector3.up * 0.1f));
+		verts[nextPool * 4 + 2] = evt.Position + (q * (Vector3.left * 0.1f)) + (q * (Vector3.down * 0.1f));
+		verts[nextPool * 4 + 3] = evt.Position + (q * (Vector3.right * 0.1f)) + (q * (Vector3.down * 0.1f));
+		nextPool = nextPool >= poolLenght - 1 ? 0 : nextPool + 1;
+		meshUpdated = true;
 	}
 }

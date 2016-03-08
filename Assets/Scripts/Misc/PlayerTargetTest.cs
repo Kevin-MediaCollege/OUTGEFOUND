@@ -12,6 +12,6 @@ public class PlayerTargetTest : MonoBehaviour
 
 	protected void FixedUpdate()
 	{
-		lastKnownPosition.Position = transform.position;
+		//lastKnownPosition.Position = transform.position;
 	}
 }
