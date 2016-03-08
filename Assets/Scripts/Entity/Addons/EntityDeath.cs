@@ -15,13 +15,23 @@ public class EntityDeath : BaseEntityAddon
 		health = GetComponent<EntityHealth>();
 	}
 
-	protected void LateUpdate()
+	protected void OnEnable()
+	{
+		health.onDamageReceivedEvent += OnDamageReceived;
+	}
+
+	protected void OnDisable()
+	{
+		health.onDamageReceivedEvent -= OnDamageReceived;
+	}
+
+	private void OnDamageReceived(DamageInfo damageInfo)
 	{
 		if(!dead && health.CurrentHealth <= 0)
 		{
 			dead = true;
-
-			EntityDiedEvent evt = new EntityDiedEvent(Entity);
+			
+			EntityDiedEvent evt = new EntityDiedEvent(damageInfo, Entity);
 
 			GlobalEvents.Invoke(evt);
 			Entity.Events.Invoke(evt);

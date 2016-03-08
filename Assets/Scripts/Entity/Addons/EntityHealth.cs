@@ -2,6 +2,9 @@
 
 public class EntityHealth : BaseEntityAddon
 {
+	public delegate void OnDamageReceived(DamageInfo damageInfo);
+	public event OnDamageReceived onDamageReceivedEvent = delegate { };
+
 	public float StartingHealth
 	{
 		get
@@ -40,6 +43,7 @@ public class EntityHealth : BaseEntityAddon
 		if(evt.DamageInfo.Hit.Target == Entity)
 		{
 			CurrentHealth -= evt.DamageInfo.Damage;
+			onDamageReceivedEvent(evt.DamageInfo);
 		}
 	}
 
