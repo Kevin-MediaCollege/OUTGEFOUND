@@ -166,8 +166,6 @@ public class Firearm : MonoBehaviour
 			HitInfo hitInfo = ConstructHitInfo();
 			GlobalEvents.Invoke(new FireEvent(this, hitInfo));
 
-			Debug.Log(hitInfo.Point + " " + hitInfo.Normal);
-
 			if(hitInfo.Hit)
 			{
 				DamageInfo damageInfo = new DamageInfo(hitInfo, CalculateDamage(hitInfo));
