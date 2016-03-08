@@ -24,8 +24,15 @@ public class ScreenSplashCompany : ScreenBase
 	[SerializeField] private RectTransform backgroundRect;
 	[SerializeField] private RectTransform background2Rect;
 
+	private AudioManager audioManager;
 	private AudioChannel naughtyGoatAudioChannel;
+
 	private Vector2 goatPrintSize;
+
+	protected void Awake()
+	{
+		audioManager = Dependency.Get<AudioManager>();
+	}
 
 	protected void Update()
 	{
@@ -128,7 +135,7 @@ public class ScreenSplashCompany : ScreenBase
 	{
 		yield return new WaitForSeconds(0.15f);
 
-		naughtyGoatAudioChannel = AudioManager.Play(naughtyGoatAudio);
+		naughtyGoatAudioChannel = audioManager.Play(naughtyGoatAudio);
 	}
 	public override IEnumerator OnScreenFadeOut()
 	{

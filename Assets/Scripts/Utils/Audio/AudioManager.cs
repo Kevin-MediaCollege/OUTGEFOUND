@@ -1,45 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : IDependency
 {
-	private static AudioManager instance;
-
-	public int NumChannels
-	{
-		set
-		{
-			numChannels = value;
-		}
-		get
-		{
-			return numChannels;
-		}
-	}
-
-	[SerializeField] private int numChannels;
-
+	public int NUM_CHANNELS = 256;
+	
 	private HashSet<AudioChannel> channels;
+	private Transform helperObject;
 
-	protected void Awake()
+	public AudioManager()
 	{
 		channels = new HashSet<AudioChannel>();
-		instance = this;
+		helperObject = new GameObject("AudioManager").transform;
+		helperObject.gameObject.AddComponent<KeepInScene>();
 
-		for(int i = 0; i < NumChannels; i++)
+
+		for(int i = 0; i < NUM_CHANNELS; i++)
 		{
 			CreateChannel();
 		}
 	}
 
-	public static AudioChannel Play(AudioAsset audioAsset, bool loop = false)
+	public AudioChannel Play(AudioAsset audioAsset, bool loop = false)
 	{
 		if(audioAsset == null)
 		{
 			return null;
 		}
 
-		AudioChannel channel = instance.GetAvailableChannel();
+		AudioChannel channel = GetAvailableChannel();
 
 		if(channel != null)
 		{
@@ -51,7 +40,7 @@ public class AudioManager : MonoBehaviour
 		return null;
 	}
 
-	public static AudioChannel PlayAt(AudioAsset audioAsset, Vector3 point, bool loop = false)
+	public AudioChannel PlayAt(AudioAsset audioAsset, Vector3 point, bool loop = false)
 	{
 		AudioChannel channel = Play(audioAsset, loop);
 
@@ -63,7 +52,7 @@ public class AudioManager : MonoBehaviour
 		return channel;
 	}
 		
-	public static AudioChannel PlayRandom(AudioAssetGroup audioAssetGroup, bool loop = false)
+	public AudioChannel PlayRandom(AudioAssetGroup audioAssetGroup, bool loop = false)
 	{
 		if(audioAssetGroup == null)
 		{
@@ -76,9 +65,9 @@ public class AudioManager : MonoBehaviour
 		return Play(target, loop);
 	}
 
-	public static void StopAll(AudioAssetType type, bool includeClaimedChannels = false)
+	public void StopAll(AudioAssetType type, bool includeClaimedChannels = false)
 	{
-		foreach(AudioChannel channel in instance.channels)
+		foreach(AudioChannel channel in channels)
 		{
 			if(includeClaimedChannels && channel.IsClaimed)
 			{
@@ -92,9 +81,9 @@ public class AudioManager : MonoBehaviour
 		}
 	}
 
-	public static void StopAll(bool includeClaimedChannels = false)
+	public void StopAll(bool includeClaimedChannels = false)
 	{
-		foreach(AudioChannel channel in instance.channels)
+		foreach(AudioChannel channel in channels)
 		{
 			if(includeClaimedChannels && channel.IsClaimed)
 			{
@@ -119,12 +108,12 @@ public class AudioManager : MonoBehaviour
 
 	private AudioChannel CreateChannel()
 	{
-		if(channels.Count < NumChannels)
+		if(channels.Count < NUM_CHANNELS)
 		{
 			GameObject obj = new GameObject("Audio Channel " + channels.Count);
 			AudioChannel channel = obj.AddComponent<AudioChannel>();
 
-			obj.transform.SetParent(transform);
+			obj.transform.SetParent(helperObject);
 			channels.Add(channel);
 
 			return channel;

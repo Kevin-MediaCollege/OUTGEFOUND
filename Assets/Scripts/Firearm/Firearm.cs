@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Firearm : MonoBehaviour
 {
+	public const int MAX_AUDIO_CHANNELS = 3;
+
 	public Entity Wielder { private set; get; }
 
 	public Transform Barrel
@@ -72,6 +75,7 @@ public class Firearm : MonoBehaviour
 	[SerializeField] private int roundsPerMinute;
 
 	private FirearmAimController aimController;
+	private AudioManager audioManager;
 
 	private Magazine magazine;
 	private AmmoStockPile stockPile;
@@ -80,6 +84,7 @@ public class Firearm : MonoBehaviour
 
 	protected void Awake()
 	{
+		audioManager = Dependency.Get<AudioManager>();
 		muzzleFlash.enabled = false;
 	}
 
@@ -149,7 +154,7 @@ public class Firearm : MonoBehaviour
 		{
 			if(magazine.Empty)
 			{
-				AudioManager.PlayAt(clipEmptyAudio, barrel.position);
+				audioManager.PlayAt(clipEmptyAudio, barrel.position);
 				yield break;
 			}
 
@@ -175,7 +180,7 @@ public class Firearm : MonoBehaviour
 	{
 		int count = stockPile != null ? Mathf.Min(magazine.Capacity, stockPile.Current) : magazine.Capacity;
 
-		AudioManager.PlayAt(reloadAudio, barrel.position);
+		audioManager.PlayAt(reloadAudio, barrel.position);
 
 		yield return new WaitForSeconds(reloadSpeed);
 
@@ -240,10 +245,10 @@ public class Firearm : MonoBehaviour
 
 	private void PostFire(HitInfo hitInfo)
 	{
-		AudioChannel audioChannel = AudioManager.PlayAt(fireAudio, barrel.position);
-		if(audioChannel != null)
+		AudioChannel channel = audioManager.PlayAt(fireAudio, barrel.position);
+		if(channel != null)
 		{
-			audioChannel.Pitch = Random.Range(0.7f, 1.3f);
+			channel.Pitch = Random.Range(0.7f, 1.3f);
 		}
 
 		magazine.Remaining--;
