@@ -94,10 +94,10 @@ public class DecalManagerHelper : MonoBehaviour
 		if(evt.Normal == Vector3.zero || evt.Tag != "Wall") { return; }
 			
 		Quaternion q = Quaternion.LookRotation (-evt.Normal);
-		verts[nextPool * 4]     = evt.Position + (q * (Vector3.left * 0.1f)) + (q * (Vector3.up * 0.1f));
-		verts[nextPool * 4 + 1] = evt.Position + (q * (Vector3.right * 0.1f)) + (q * (Vector3.up * 0.1f));
-		verts[nextPool * 4 + 2] = evt.Position + (q * (Vector3.left * 0.1f)) + (q * (Vector3.down * 0.1f));
-		verts[nextPool * 4 + 3] = evt.Position + (q * (Vector3.right * 0.1f)) + (q * (Vector3.down * 0.1f));
+		verts[nextPool * 4]     = evt.Position + (q * (Vector3.left * 0.1f)) + (q * (Vector3.up * 0.1f)) + q * (Vector3.back * 0.01f);
+		verts[nextPool * 4 + 1] = evt.Position + (q * (Vector3.right * 0.1f)) + (q * (Vector3.up * 0.1f)) + q * (Vector3.back * 0.01f);
+		verts[nextPool * 4 + 2] = evt.Position + (q * (Vector3.left * 0.1f)) + (q * (Vector3.down * 0.1f)) + q * (Vector3.back * 0.01f);
+		verts[nextPool * 4 + 3] = evt.Position + (q * (Vector3.right * 0.1f)) + (q * (Vector3.down * 0.1f)) + q * (Vector3.back * 0.01f);
 		nextPool = nextPool >= poolLenght - 1 ? 0 : nextPool + 1;
 		meshUpdated = true;
 	}
