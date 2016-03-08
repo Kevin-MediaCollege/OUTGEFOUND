@@ -30,7 +30,7 @@ public class DecalManagerHelper : MonoBehaviour
 	{
 		mesh = meshFilter.mesh;
 
-		poolLenght = 256;
+		poolLenght = 1024;
 		nextPool = 0;
 		meshUpdated = true;
 
@@ -92,13 +92,14 @@ public class DecalManagerHelper : MonoBehaviour
 	private void OnSpawnDecalEvent(SpawnDecalEvent evt)
 	{
 		if(evt.Normal == Vector3.zero || evt.Tag != "Wall") { return; }
-			
+
+		float size = 0.07f + UnityEngine.Random.Range(0f, 0.02f);
 		Quaternion q = Quaternion.LookRotation (-evt.Normal);
 		q.eulerAngles = new Vector3(q.eulerAngles.x, q.eulerAngles.y, q.eulerAngles.z + UnityEngine.Random.Range(0f, 360f));
-		verts[nextPool * 4]     = evt.Position + (q * (Vector3.left * 0.1f)) + (q * (Vector3.up * 0.1f)) + q * (Vector3.back * 0.01f);
-		verts[nextPool * 4 + 1] = evt.Position + (q * (Vector3.right * 0.1f)) + (q * (Vector3.up * 0.1f)) + q * (Vector3.back * 0.01f);
-		verts[nextPool * 4 + 2] = evt.Position + (q * (Vector3.left * 0.1f)) + (q * (Vector3.down * 0.1f)) + q * (Vector3.back * 0.01f);
-		verts[nextPool * 4 + 3] = evt.Position + (q * (Vector3.right * 0.1f)) + (q * (Vector3.down * 0.1f)) + q * (Vector3.back * 0.01f);
+		verts[nextPool * 4]     = evt.Position + (q * (Vector3.left * size)) + (q * (Vector3.up * size)) + q * (Vector3.back * 0.01f);
+		verts[nextPool * 4 + 1] = evt.Position + (q * (Vector3.right * size)) + (q * (Vector3.up * size)) + q * (Vector3.back * 0.01f);
+		verts[nextPool * 4 + 2] = evt.Position + (q * (Vector3.left * size)) + (q * (Vector3.down * size)) + q * (Vector3.back * 0.01f);
+		verts[nextPool * 4 + 3] = evt.Position + (q * (Vector3.right * size)) + (q * (Vector3.down * size)) + q * (Vector3.back * 0.01f);
 		nextPool = nextPool >= poolLenght - 1 ? 0 : nextPool + 1;
 		meshUpdated = true;
 	}
