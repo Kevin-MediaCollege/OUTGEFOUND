@@ -13,8 +13,8 @@ public class AIAimController : FirearmAimController
 
 		Ray ray = new Ray(barrel, direction);
 		RaycastHit[] hits = Physics.RaycastAll(ray, firearm.Range, layerMask);
-		hit = hits[0];
-
+		hit = new RaycastHit();
+		
 		foreach(RaycastHit h in hits)
 		{
 			Entity entity = h.collider.GetComponentInParent<Entity>();
