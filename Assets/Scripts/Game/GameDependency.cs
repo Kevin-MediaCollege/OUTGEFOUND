@@ -31,7 +31,7 @@ public class GameDependency : IDependency
 		GlobalEvents.AddListener<EntityDiedEvent>(OnEntityDiedEvent);
 
 		// Hardcode Level_1 because we probably won't have more levels
-		sceneLoader.Load("Level_1");
+		//sceneLoader.Load("Level_1");
 
 		coroutineRunner.StartCoroutine(WaitForGameLoad());
 	}
