@@ -1,7 +1,7 @@
 ﻿/// <summary>
 /// Manage the amount of currency (points) the player has
 /// </summary>
-public class Currency : IDependency
+public class Currency : IGameDependency
 {
 	public int Amount { set; get; }
 
@@ -10,12 +10,12 @@ public class Currency : IDependency
 		Amount = 0;
 	}
 
-	public void Create()
+	public void Start()
 	{
 		GlobalEvents.AddListener<EntityDiedEvent>(OnEntityDeathEvent);
 	}
 
-	public void Destroy()
+	public void Stop()
 	{
 		GlobalEvents.RemoveListener<EntityDiedEvent>(OnEntityDeathEvent);
 	}

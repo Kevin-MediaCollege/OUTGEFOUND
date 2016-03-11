@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class AIManager : IDependency 
+public class AIManager : IGameDependency 
 {
 	public IEnumerable<Entity> All
 	{
@@ -21,14 +21,14 @@ public class AIManager : IDependency
 		lastKnownPosition = Dependency.Get<LastKnownPosition>();
 	}
 
-	public void Create()
+	public void Start()
 	{
 		GlobalEvents.AddListener<FireEvent>(OnWeaponFireEvent);
 		GlobalEvents.AddListener<EntityActivatedEvent>(OnEntityActivatedEvent);
 		GlobalEvents.AddListener<EntityDeactivatedEvent>(OnEntityDeactivatedEvent);
 	}
 
-	public void Destroy()
+	public void Stop()
 	{
 		GlobalEvents.AddListener<FireEvent>(OnWeaponFireEvent);
 		GlobalEvents.AddListener<EntityActivatedEvent>(OnEntityActivatedEvent);

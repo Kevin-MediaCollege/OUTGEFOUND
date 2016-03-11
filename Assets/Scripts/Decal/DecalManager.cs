@@ -3,18 +3,21 @@
 /// <summary>
 /// Dependency for managing bullet impact decals
 /// </summary>
-public class DecalManager : IDependency
+public class DecalManager : IGameDependency
 {
 	private DecalManagerHelper helper;
 
-	public void Create()
+	public void Start()
 	{
 		GameObject helperObject = new GameObject("Decal Manager Helper");
 		helper = helperObject.AddComponent<DecalManagerHelper>();
 	}
 
-	public void Destroy()
+	public void Stop()
 	{
-		Object.Destroy(helper.gameObject);
+		if(helper.gameObject != null)
+		{
+			Object.Destroy(helper.gameObject);
+		}
 	}
 }

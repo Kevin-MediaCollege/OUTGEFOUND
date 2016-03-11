@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
 
-public class ScreenStart : ScreenBase 
+public class ScreenStart : ScreenBase, ICommunicant
 {
 	public override string Name
 	{
@@ -15,14 +14,20 @@ public class ScreenStart : ScreenBase
 	[SerializeField] private CanvasGroup group;
 	[SerializeField] private CanvasGroup overlay;
 
+	private IEventDispatcher eventDispatcher;
+
 	protected void Update()
 	{
 		if(Input.anyKeyDown)
 		{
-			GameDependency game = Dependency.Get<GameDependency>();
-			game.Start();
+			eventDispatcher.Invoke(new StateStartGameEvent());
 			//ScreenManager.Instance.SetScreen("ScreenMainMenu");
 		}
+	}
+
+	public void RegisterEventDispatcher(IEventDispatcher eventDispatcher)
+	{
+		this.eventDispatcher = eventDispatcher;
 	}
 
 	public override void OnScreenEnter()
