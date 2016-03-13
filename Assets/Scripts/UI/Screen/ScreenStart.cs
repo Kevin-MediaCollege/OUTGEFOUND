@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ScreenStart : ScreenBase, ICommunicant
+public class ScreenStart : ScreenBase
 {
 	public override string Name
 	{
@@ -14,20 +14,12 @@ public class ScreenStart : ScreenBase, ICommunicant
 	[SerializeField] private CanvasGroup group;
 	[SerializeField] private CanvasGroup overlay;
 
-	private IEventDispatcher eventDispatcher;
-
 	protected void Update()
 	{
 		if(Input.anyKeyDown)
 		{
-			eventDispatcher.Invoke(new StateStartGameEvent());
-			//ScreenManager.Instance.SetScreen("ScreenMainMenu");
+			ScreenManager.Instance.SetScreen("ScreenMainMenu");
 		}
-	}
-
-	public void RegisterEventDispatcher(IEventDispatcher eventDispatcher)
-	{
-		this.eventDispatcher = eventDispatcher;
 	}
 
 	public override void OnScreenEnter()
@@ -45,6 +37,10 @@ public class ScreenStart : ScreenBase, ICommunicant
 	}
 	public override IEnumerator OnScreenFadeOut()
 	{
+		HOTweenHelper.Fade(group, 1f, 0f, 0.2f, 0f);
+
+		yield return MenuCamera.instance.flyFromTo("Start", "Menu");
+
 		yield break;
 	}
 
