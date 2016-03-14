@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
 
-public class ScreenStart : ScreenBase 
+public class ScreenStart : ScreenBase
 {
 	public override string Name
 	{
@@ -38,6 +37,10 @@ public class ScreenStart : ScreenBase
 	}
 	public override IEnumerator OnScreenFadeOut()
 	{
+		HOTweenHelper.Fade(group, 1f, 0f, 0.2f, 0f);
+
+		yield return MenuCamera.instance.flyFromTo("Start", "Menu");
+
 		yield break;
 	}
 

@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// A magazine for a Firearm
+/// </summary>
 public class Magazine : MonoBehaviour
 {
 	public int Remaining { set; get; }

@@ -1,17 +1,23 @@
 ﻿using UnityEngine;
 
-public class DecalManager : IDependency
+/// <summary>
+/// Dependency for managing bullet impact decals
+/// </summary>
+public class DecalManager : IGameDependency
 {
 	private DecalManagerHelper helper;
 
-	public void Create()
+	public void Start()
 	{
 		GameObject helperObject = new GameObject("Decal Manager Helper");
 		helper = helperObject.AddComponent<DecalManagerHelper>();
 	}
 
-	public void Destroy()
+	public void Stop()
 	{
-		Object.Destroy(helper.gameObject);
+		if(helper != null)
+		{
+			Object.Destroy(helper.gameObject);
+		}
 	}
 }

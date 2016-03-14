@@ -1,9 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// The firearm
+/// </summary>
 public class Firearm : MonoBehaviour
 {
+	public const int MAX_AUDIO_CHANNELS = 3;
+
 	public Entity Wielder { private set; get; }
+
+	public FireMode FireMode { private set; get; }
 
 	public Transform Barrel
 	{
@@ -72,14 +79,19 @@ public class Firearm : MonoBehaviour
 	[SerializeField] private int roundsPerMinute;
 
 	private FirearmAimController aimController;
+	private AudioManager audioManager;
 
 	private Magazine magazine;
 	private AmmoStockPile stockPile;
 
+	private int burstId;
+
+	private bool shooting;
 	private bool reloading;
 
 	protected void Awake()
 	{
+		audioManager = Dependency.Get<AudioManager>();
 		muzzleFlash.enabled = false;
 	}
 
@@ -89,6 +101,8 @@ public class Firearm : MonoBehaviour
 
 		magazine = transform.GetComponentInParent<Magazine>();
 		stockPile = transform.GetComponentInParent<AmmoStockPile>();
+
+		FireMode = FirearmUtils.GetAvailableFireMode(fireModes);
 	}
 
 	protected void OnEnable()
@@ -101,6 +115,7 @@ public class Firearm : MonoBehaviour
 		Wielder.Events.AddListener<StartFireEvent>(OnStartFireEvent);
 		Wielder.Events.AddListener<StopFireEvent>(OnStopFireEvent);
 		Wielder.Events.AddListener<ReloadEvent>(OnReloadEvent);
+		Wielder.Events.AddListener<SwitchFireModeEvent>(OnSwitchFireModeEvent);
 	}
 
 	protected void OnDisable()
@@ -108,22 +123,36 @@ public class Firearm : MonoBehaviour
 		Wielder.Events.RemoveListener<StartFireEvent>(OnStartFireEvent);
 		Wielder.Events.RemoveListener<StopFireEvent>(OnStopFireEvent);
 		Wielder.Events.RemoveListener<ReloadEvent>(OnReloadEvent);
+		Wielder.Events.RemoveListener<SwitchFireModeEvent>(OnSwitchFireModeEvent);
 	}
 
 	private void OnStartFireEvent(StartFireEvent evt)
 	{
-		StartCoroutine("Fire");
+		if(!shooting)
+		{
+			shooting = true;
+			StartCoroutine("Fire");
+		}
 	}
 
 	private void OnStopFireEvent(StopFireEvent evt)
 	{
-		StopCoroutine("Fire");
+		if(shooting && FireMode != FireMode.Burst3)
+		{
+			StopCoroutine("Fire");
+			shooting = false;
+		}
 	}
 
 	private void OnReloadEvent(ReloadEvent evt)
 	{
 		if(!reloading)
 		{
+			if(magazine.Full)
+			{
+				return;
+			}
+
 			reloading = true;
 
 			if(stockPile != null)
@@ -143,19 +172,28 @@ public class Firearm : MonoBehaviour
 		}
 	}
 
+	private void OnSwitchFireModeEvent(SwitchFireModeEvent evt)
+	{
+		FireMode = FirearmUtils.GetNextFireMode(fireModes, FireMode);
+	}
+
 	private IEnumerator Fire()
 	{
+		burstId = 0;
+
 		while(true)
 		{
 			if(magazine.Empty)
 			{
-				AudioManager.PlayAt(clipEmptyAudio, barrel.position);
+				audioManager.PlayAt(clipEmptyAudio, barrel.position);
+				shooting = false;
 				yield break;
 			}
 
 			HitInfo hitInfo = ConstructHitInfo();
 			GlobalEvents.Invoke(new FireEvent(this, hitInfo));
-
+			burstId++;
+			
 			if(hitInfo.Hit)
 			{
 				DamageInfo damageInfo = new DamageInfo(hitInfo, CalculateDamage(hitInfo));
@@ -167,7 +205,19 @@ public class Firearm : MonoBehaviour
 
 			PostFire(hitInfo);
 
-			yield return new WaitForSeconds(60f / roundsPerMinute);
+			float downTime = 60f / roundsPerMinute;
+			if(Wielder.HasTag("Enemy"))
+			{
+				downTime += Random.Range(0, 0.1f);
+			}
+
+			if((FireMode == FireMode.Burst3 && burstId == 3) || FireMode == FireMode.SemiAutomatic)
+			{
+				shooting = false;
+				yield break;
+			}
+			
+			yield return new WaitForSeconds(downTime);
 		}
 	}
 
@@ -175,7 +225,7 @@ public class Firearm : MonoBehaviour
 	{
 		int count = stockPile != null ? Mathf.Min(magazine.Capacity, stockPile.Current) : magazine.Capacity;
 
-		AudioManager.PlayAt(reloadAudio, barrel.position);
+		audioManager.PlayAt(reloadAudio, barrel.position);
 
 		yield return new WaitForSeconds(reloadSpeed);
 
@@ -202,19 +252,20 @@ public class Firearm : MonoBehaviour
 		muzzleFlash.enabled = false;
 	}
 
-	private bool CalculateHit(out RaycastHit raycastHit, out Vector3 direction)
+	private void CalculateHit(out RaycastHit raycastHit, out Vector3 direction)
 	{
 		direction = aimController.GetAimDirection(this, out raycastHit);
 
-		// Apply bullet spread
-		Vector3 spread = Random.insideUnitCircle;
-		direction += spread * bulletSpread;
-
-		// Draw debug ray
-		bool damagable = raycastHit.collider.GetComponentInParent<Damagable>() != null;
-		Debug.DrawRay(barrel.position, direction * range, damagable ? Color.green : Color.red, 7);
-
-		return damagable;
+		if(raycastHit.collider != null)
+		{
+			// Draw debug ray
+			bool damagable = raycastHit.collider.GetComponentInParent<Damagable>() != null;
+			Debug.DrawRay(barrel.position, direction * raycastHit.distance, damagable ? Color.green : Color.red, 3);
+		}
+		else
+		{
+			Debug.DrawRay(barrel.position, direction * raycastHit.distance, Color.red, 3);
+		}
 	}
 
 	private float CalculateDamage(HitInfo hitInfo)
@@ -224,26 +275,26 @@ public class Firearm : MonoBehaviour
 		// Apply damage modifiers
 		if(hitInfo.Tag == "Head")
 		{
-			damage *= damageMultipliers.Head;
+			damageToApply *= damageMultipliers.Head;
 		}
 		else if(hitInfo.Tag == "Body")
 		{
-			damage *= damageMultipliers.Body;
+			damageToApply *= damageMultipliers.Body;
 		}
 		else if(hitInfo.Tag == "Limb")
 		{
-			damage *= damageMultipliers.Limbs;
+			damageToApply *= damageMultipliers.Limbs;
 		}
-
+		
 		return damageToApply;
 	}
 
 	private void PostFire(HitInfo hitInfo)
 	{
-		AudioChannel audioChannel = AudioManager.PlayAt(fireAudio, barrel.position);
-		if(audioChannel != null)
+		AudioChannel channel = FirearmUtils.PlayGunshot(audioManager, fireAudio, barrel.position);
+		if(channel != null)
 		{
-			audioChannel.Pitch = Random.Range(0.7f, 1.3f);
+			channel.Pitch = Random.Range(0.8f, 1.2f);
 		}
 
 		magazine.Remaining--;
@@ -261,13 +312,16 @@ public class Firearm : MonoBehaviour
 		RaycastHit raycastHit;
 		Vector3 direction;
 
-		if(CalculateHit(out raycastHit, out direction))
+		CalculateHit(out raycastHit, out direction);
+
+		hitInfo.Direction = direction;
+		hitInfo.Point = raycastHit.point;
+		hitInfo.Normal = raycastHit.normal;
+
+		if(raycastHit.collider != null)
 		{
-			hitInfo.Target = raycastHit.collider.GetComponentInParent<Entity>();
-			hitInfo.Direction = direction;
-			hitInfo.Point = raycastHit.point;
-			hitInfo.Normal = raycastHit.normal;
 			hitInfo.Tag = raycastHit.collider.tag;
+			hitInfo.Target = raycastHit.collider.GetComponentInParent<Entity>();
 		}
 
 		return hitInfo;

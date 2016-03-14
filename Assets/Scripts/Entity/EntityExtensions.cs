@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Useful extension methods for Entity
+/// </summary>
 public static class EntityExtensions
 {
 	public static Magazine GetMagazine(this Entity entity)

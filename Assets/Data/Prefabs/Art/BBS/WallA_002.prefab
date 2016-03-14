@@ -13,7 +13,7 @@ GameObject:
   - 65: {fileID: 6586820}
   m_Layer: 0
   m_Name: WallA_002
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -54,8 +54,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 196526}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.00009432463, y: 0.7071077, z: -0.00009432474, w: 0.7071059}
+  m_LocalPosition: {x: -10.292951, y: 4.6538734, z: 14.949998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 453452}

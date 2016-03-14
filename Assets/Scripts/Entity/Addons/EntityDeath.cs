@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/// <summary>
+/// Allows an entity to die. Sends an event when the health <= 0
+/// </summary>
 [RequireComponent(typeof(EntityHealth))]
 public class EntityDeath : BaseEntityAddon
 {
@@ -36,8 +38,8 @@ public class EntityDeath : BaseEntityAddon
 			GlobalEvents.Invoke(evt);
 			Entity.Events.Invoke(evt);
 
-			// Temp
-			Destroy(Entity.gameObject);
+			// Mark the entity as dead
+			Entity.AddTag("Dead");
 		}
 	}
 

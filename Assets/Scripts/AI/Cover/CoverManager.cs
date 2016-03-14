@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class CoverManager : IDependency 
+public class CoverManager : IGameDependency 
 {
 	private List<CoverBase> all;
 
@@ -20,12 +20,12 @@ public class CoverManager : IDependency
 		coroutineRunner = Dependency.Get<CoroutineRunner>();
 	}
 
-	public void Create()
+	public void Start()
 	{
 		coroutineRunner.StartCoroutine(Update());
 	}
 
-	public void Destroy()
+	public void Stop()
 	{
 		coroutineRunner.StopCoroutine(Update());
 	}

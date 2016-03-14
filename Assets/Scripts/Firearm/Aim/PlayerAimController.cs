@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Player aim controller, makes the player aim at the crosshair
+/// </summary>
 public class PlayerAimController : FirearmAimController
 {
 	public override Vector3 GetAimDirection(Firearm firearm, out RaycastHit hit)
@@ -13,9 +16,13 @@ public class PlayerAimController : FirearmAimController
 			Vector3 barrel = firearm.Barrel.position;
 			Vector3 direction = (hit.point - barrel).normalized;
 
-			ray = new Ray(barrel, hit.point - barrel);
+			// Apply bullet spread
+			Vector3 spread = Random.insideUnitCircle;
+			direction += spread * firearm.BulletSpread;
 
-			if(Physics.Raycast(ray, out hit, firearm.Range))
+			ray = new Ray(barrel, direction);
+
+			if(Physics.Raycast(ray, out hit, firearm.Range, layerMask))
 			{
 				return direction;
 			}

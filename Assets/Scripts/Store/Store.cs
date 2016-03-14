@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/// <summary>
+/// The base of stores
+/// </summary>
 public abstract class Store : MonoBehaviour
 {
 	[SerializeField] private Canvas storeUI;

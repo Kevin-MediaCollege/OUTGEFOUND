@@ -1,5 +1,6 @@
-﻿using System.Collections;
-
+﻿/// <summary>
+/// The health store
+/// </summary>
 public class HealthStore : Store
 {
 	protected override void Purchase()

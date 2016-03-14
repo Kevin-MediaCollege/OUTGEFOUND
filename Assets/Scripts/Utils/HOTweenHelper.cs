@@ -2,6 +2,7 @@
 using System.Collections;
 using Holoville.HOTween;
 using Holoville.HOTween.Core.Easing;
+using Holoville.HOTween.Plugins;
 using Holoville.HOTween.Plugins.Core;
 
 public class HOTweenHelper 
@@ -30,5 +31,10 @@ public class HOTweenHelper
 	public static Tweener TransformPosition(Transform _trans, Vector3 _targetPosition, float _time, float _delay, Holoville.HOTween.EaseType _easeType = Holoville.HOTween.EaseType.EaseOutElastic)
 	{
 		return HOTween.To (_trans, _time, new TweenParms ().Prop ("position", new PlugVector3 (_targetPosition)).Ease (_easeType));
+	}
+
+	public static Tweener Rotate(Transform _trans, Quaternion _targetQuaternion, float _time, float _delay, Holoville.HOTween.EaseType _easeType = Holoville.HOTween.EaseType.EaseInOutCubic)
+	{
+		return HOTween.To (_trans, _time, new TweenParms ().Prop ("rotation", new PlugQuaternion (_targetQuaternion)).Ease (_easeType));
 	}
 }

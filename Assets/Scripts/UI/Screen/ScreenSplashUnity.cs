@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
-using UnityEngine.SceneManagement;
-using System;
 
-public class ScreenSplashUnity : ScreenBase 
+public class ScreenSplashUnity : ScreenBase , ICommunicant
 {
 	public override string Name
 	{
@@ -19,25 +16,25 @@ public class ScreenSplashUnity : ScreenBase
 
 	[SerializeField] private new Transform camera;
 
-	private SceneLoader sceneLoader;
-
 	//-22.14, 14.85, 28.71
 	//26.4359, 364.8974, 0
 
 	//-2.6, 14.85, 26.9
 	//26.4359, 347.54, 0
 
-	protected void Awake()
-	{
-		sceneLoader = Dependency.Get<SceneLoader>();
-	}
+	private IEventDispatcher eventDispatcher;
 
 	protected void Update()
 	{
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
-			sceneLoader.Load("Menus");
+			eventDispatcher.Invoke(new StateContinueEvent());
 		}
+	}
+
+	public void RegisterEventDispatcher(IEventDispatcher eventDispatcher)
+	{
+		this.eventDispatcher = eventDispatcher;
 	}
 
 	public override void OnScreenEnter()
@@ -83,6 +80,6 @@ public class ScreenSplashUnity : ScreenBase
 
 		yield return new WaitForSeconds (1.5f);
 
-		sceneLoader.Load("Menus");
+		eventDispatcher.Invoke(new StateContinueEvent());
 	}
 }

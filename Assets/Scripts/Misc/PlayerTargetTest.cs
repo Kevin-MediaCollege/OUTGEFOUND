@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/// <summary>
+/// Test to get AI to see the player
+/// </summary>
 public class PlayerTargetTest : MonoBehaviour
 {
 	private LastKnownPosition lastKnownPosition;

@@ -49,7 +49,7 @@ GameObject:
   - 114: {fileID: 11493474}
   - 114: {fileID: 11439422}
   - 114: {fileID: 11457416}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,6 +72,22 @@ GameObject:
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &164084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 440598}
+  - 136: {fileID: 13692308}
+  m_Layer: 12
+  m_Name: Colliders
+  m_TagString: Body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,8 +148,21 @@ Transform:
   - {fileID: 450566}
   - {fileID: 410156}
   - {fileID: 443042}
+  - {fileID: 440598}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &440598
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164084}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 428766}
+  m_RootOrder: 4
 --- !u!4 &443042
 Transform:
   m_ObjectHideFlags: 1
@@ -323,7 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ae2ad135bcc1f4196ec35c1efb02e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 20
+  startingHealth: 100
 --- !u!114 &11441642
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -335,6 +364,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 356c0f211f571a944b904ac4f5f41f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4097
 --- !u!114 &11453882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -346,8 +378,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a873f1282c57a9b4dabed719c977bd46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: 60
-  capacity: 90
+  start: 240
+  capacity: 270
 --- !u!114 &11457416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -389,11 +421,24 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 144936}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d2b758844a416a419a087ea9c845d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &13692308
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164084}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!143 &14374550
 CharacterController:
   m_ObjectHideFlags: 1
@@ -404,7 +449,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
+  m_Height: 1.8
   m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -453,6 +498,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: start
+      value: 240
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: capacity
+      value: 270
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

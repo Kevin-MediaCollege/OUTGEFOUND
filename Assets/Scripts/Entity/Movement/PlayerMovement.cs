@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/// <summary>
+/// Player movement controller
+/// </summary>
 public class PlayerMovement : EntityMovement
 {
 	[SerializeField] private CharacterController characterController;

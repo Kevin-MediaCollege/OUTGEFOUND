@@ -1,5 +1,3 @@
-﻿using System.Collections;
-
-public class RefillAmmoEvent : IEvent
+﻿public class RefillAmmoEvent : IEvent
 {
 }

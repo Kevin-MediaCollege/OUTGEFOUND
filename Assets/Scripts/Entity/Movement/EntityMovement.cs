@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/// <summary>
+/// Base movement controller
+/// </summary>
 public abstract class EntityMovement : MonoBehaviour
 {
 	public Entity Entity { private set; get; }

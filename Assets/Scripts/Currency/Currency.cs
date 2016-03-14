@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-public class Currency : IDependency
+﻿/// <summary>
+/// Manage the amount of currency (points) the player has
+/// </summary>
+public class Currency : IGameDependency
 {
 	public int Amount { set; get; }
 
@@ -10,12 +10,12 @@ public class Currency : IDependency
 		Amount = 0;
 	}
 
-	public void Create()
+	public void Start()
 	{
 		GlobalEvents.AddListener<EntityDiedEvent>(OnEntityDeathEvent);
 	}
 
-	public void Destroy()
+	public void Stop()
 	{
 		GlobalEvents.RemoveListener<EntityDiedEvent>(OnEntityDeathEvent);
 	}
@@ -30,10 +30,25 @@ public class Currency : IDependency
 			Amount = 0;
 		}
 		// Add currency if the target is an enemy
-		else if(target.HasTag("Enemy"))
+		else if(target.HasTag("Enemy") && evt.DamageInfo.Hit.Source.HasTag("Player"))
 		{
-			EnemyValue value = target.GetComponent<EnemyValue>();
-			Amount += value.Value;
+			string tag = evt.DamageInfo.Hit.Tag;
+
+			switch(tag)
+			{
+			case "Head":
+				AddCurrency(250);
+				break;
+			default:
+				AddCurrency(100);
+				break;
+			}
 		}
+	}
+
+	private void AddCurrency(int amount)
+	{
+		Amount += amount;
+		GlobalEvents.Invoke(new CurrencyReceivedEvent(amount));
 	}
 }

@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Give an entity health. This does *not* allow it to die, you need an EntityDead component for that.
+/// EntityHealth just keeps track of the entities current health
+/// </summary>
 public class EntityHealth : BaseEntityAddon
 {
 	public delegate void OnDamageReceived(DamageInfo damageInfo);

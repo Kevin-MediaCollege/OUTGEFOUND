@@ -1,5 +1,3 @@
-﻿using System.Collections;
-
-public class GameStartedEvent : IEvent
+﻿public class GameStartedEvent : IEvent
 {
 }

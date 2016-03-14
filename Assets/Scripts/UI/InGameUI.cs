@@ -23,33 +23,34 @@ public class InGameUI : MonoBehaviour
 	public Text text_ammoCurrent;
 	public Text text_ammoLeft;
 
-	void Awake ()
+	protected void Awake()
 	{
 		text_scorePopupGroup.alpha = 0f;
+
+		playerEntity = EntityUtils.GetEntityWithTag("Player");
+		playerMagazine = playerEntity.GetMagazine();
+		playerStockPile = playerEntity.GetStockPile();
+		playerCurrency = Dependency.Get<Currency>();
 	}
 
-	void OnEnable()
+	protected void OnEnable()
 	{
-		GlobalEvents.AddListener<EntityDiedEvent> (onEntityDied);
-		playerEntity = EntityUtils.GetEntityWithTag ("Player");
-		playerMagazine = playerEntity.GetMagazine ();
-		playerStockPile = playerEntity.GetStockPile ();
-		playerCurrency = Dependency.Get<Currency> ();
+		GlobalEvents.AddListener<CurrencyReceivedEvent>(OnCurrencyReceivedEvent);
 	}
 
-	void OnDisable()
+	protected void OnDisable()
 	{
-		GlobalEvents.RemoveListener<EntityDiedEvent> (onEntityDied);
+		GlobalEvents.RemoveListener<CurrencyReceivedEvent>(OnCurrencyReceivedEvent);
 	}
 
-	void Update () 
+	protected void Update() 
 	{
 		text_ammoCurrent.text = "" + playerMagazine.Remaining;
 		text_ammoLeft.text = "" + playerStockPile.Current;
-		text_credits.text = "" + playerCurrency.Amount;
+		text_credits.text = playerCurrency.Amount + " CR";
 	}
 
-	private IEnumerator showScorePopup()
+	private IEnumerator ShowScorePopup()
 	{
 		if(text_scorePopupScaleTween != null && !text_scorePopupScaleTween.isComplete)
 		{
@@ -70,13 +71,11 @@ public class InGameUI : MonoBehaviour
 		text_scorePopupFadeTween = HOTweenHelper.Fade (text_scorePopupGroup, 1f, 0f, 0.5f, 0f);
 	}
 
-	private void onEntityDied(EntityDiedEvent e)
+	private void OnCurrencyReceivedEvent(CurrencyReceivedEvent evt)
 	{
-		if(e.DamageInfo.Hit.Source == playerEntity)
-		{
-			text_scorePopup.text = e.DamageInfo.Hit.Tag == "Head" ? "+250" : "+100";
-			StopCoroutine ("showScorePopup");
-			StartCoroutine ("showScorePopup");
-		}
+		text_scorePopup.text = "+" + evt.Amount;
+
+		StopCoroutine("ShowScorePopup");
+		StartCoroutine("ShowScorePopup");
 	}
 }
