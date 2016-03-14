@@ -54,7 +54,7 @@ public class Crosshair : MonoBehaviour
 		{
 			Vector2 target = part.original;
 
-			float offset = firearm.RecoilOffset * 300;
+			float offset = firearm.RecoilOffset * 500;
 			target += part.direction * offset;
 			target += part.direction * characterController.velocity.magnitude * 3;
 
