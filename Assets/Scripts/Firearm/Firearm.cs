@@ -12,6 +12,10 @@ public class Firearm : MonoBehaviour
 
 	public FireMode FireMode { private set; get; }
 
+	public float RecoilOffset { private set; get; }
+
+	public bool Firing { private set; get; }
+
 	public Transform Barrel
 	{
 		get
@@ -84,9 +88,10 @@ public class Firearm : MonoBehaviour
 	private Magazine magazine;
 	private AmmoStockPile stockPile;
 
-	private int burstId;
+	private float targetRecoilOffset;
 
-	private bool shooting;
+	private int burstId;
+	
 	private bool reloading;
 
 	protected void Awake()
@@ -116,10 +121,16 @@ public class Firearm : MonoBehaviour
 		Wielder.Events.AddListener<StopFireEvent>(OnStopFireEvent);
 		Wielder.Events.AddListener<ReloadEvent>(OnReloadEvent);
 		Wielder.Events.AddListener<SwitchFireModeEvent>(OnSwitchFireModeEvent);
+
+		StartCoroutine("HandleRecoil");
+		StartCoroutine("RecoilReset");
 	}
 
 	protected void OnDisable()
 	{
+		StopCoroutine("HandleRecoil");
+		StopCoroutine("RecoilReset");
+
 		Wielder.Events.RemoveListener<StartFireEvent>(OnStartFireEvent);
 		Wielder.Events.RemoveListener<StopFireEvent>(OnStopFireEvent);
 		Wielder.Events.RemoveListener<ReloadEvent>(OnReloadEvent);
@@ -128,19 +139,35 @@ public class Firearm : MonoBehaviour
 
 	private void OnStartFireEvent(StartFireEvent evt)
 	{
-		if(!shooting)
-		{
-			shooting = true;
-			StartCoroutine("Fire");
-		}
+		StartFire();
 	}
 
 	private void OnStopFireEvent(StopFireEvent evt)
 	{
-		if(shooting && FireMode != FireMode.Burst3)
+		if(FireMode != FireMode.Burst3)
+		{
+			StopFire();
+		}
+	}
+
+	private void StartFire()
+	{
+		if(!Firing)
+		{
+			burstId = 0;
+			Firing = true;
+
+			StartCoroutine("Fire");
+		}
+	}
+
+	private void StopFire()
+	{
+		if(Firing)
 		{
 			StopCoroutine("Fire");
-			shooting = false;
+
+			Firing = false;
 		}
 	}
 
@@ -179,20 +206,20 @@ public class Firearm : MonoBehaviour
 
 	private IEnumerator Fire()
 	{
-		burstId = 0;
-
 		while(true)
 		{
 			if(magazine.Empty)
 			{
 				audioManager.PlayAt(clipEmptyAudio, barrel.position);
-				shooting = false;
+				StopFire();
 				yield break;
 			}
 
 			HitInfo hitInfo = ConstructHitInfo();
 			GlobalEvents.Invoke(new FireEvent(this, hitInfo));
+
 			burstId++;
+			targetRecoilOffset += 0.01f;
 			
 			if(hitInfo.Hit)
 			{
@@ -213,11 +240,46 @@ public class Firearm : MonoBehaviour
 
 			if((FireMode == FireMode.Burst3 && burstId == 3) || FireMode == FireMode.SemiAutomatic)
 			{
-				shooting = false;
+				StopFire();
 				yield break;
 			}
 			
 			yield return new WaitForSeconds(downTime);
+		}
+	}
+
+	private IEnumerator RecoilReset()
+	{
+		while(true)
+		{
+			if(Firing)
+			{
+				targetRecoilOffset -= 0.03f;
+			}
+			else
+			{
+				targetRecoilOffset -= 0.5f;
+			}
+
+			targetRecoilOffset = Mathf.Clamp(targetRecoilOffset, 0, 100);
+			yield return new WaitForSeconds(0.1f);
+		}
+	}
+
+	private IEnumerator HandleRecoil()
+	{
+		while(true)
+		{
+			float currentRecoilTarget = targetRecoilOffset;
+			float time = Time.time;
+
+			while(currentRecoilTarget == targetRecoilOffset)
+			{
+				RecoilOffset = Mathf.Lerp(RecoilOffset, targetRecoilOffset, Time.time - time);
+				yield return null;
+			}
+
+			yield return null;
 		}
 	}
 
@@ -252,9 +314,9 @@ public class Firearm : MonoBehaviour
 		muzzleFlash.enabled = false;
 	}
 
-	private void CalculateHit(out RaycastHit raycastHit, out Vector3 direction)
+	private void CalculateHit(out RaycastHit raycastHit, out Vector3 direction, float recoilOffset)
 	{
-		direction = aimController.GetAimDirection(this, out raycastHit);
+		direction = aimController.GetAimDirection(this, out raycastHit, recoilOffset);
 
 		if(raycastHit.collider != null)
 		{
@@ -312,7 +374,7 @@ public class Firearm : MonoBehaviour
 		RaycastHit raycastHit;
 		Vector3 direction;
 
-		CalculateHit(out raycastHit, out direction);
+		CalculateHit(out raycastHit, out direction, RecoilOffset);
 
 		hitInfo.Direction = direction;
 		hitInfo.Point = raycastHit.point;

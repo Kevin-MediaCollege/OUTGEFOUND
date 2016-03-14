@@ -1149,7 +1149,7 @@ RectTransform:
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 1368996770}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 32, y: 0}
@@ -3591,7 +3591,7 @@ RectTransform:
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 1368996770}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 32}
@@ -9121,6 +9121,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 1368996770}
+  - 114: {fileID: 1368996771}
   m_Layer: 5
   m_Name: Crosshair
   m_TagString: Untagged
@@ -9138,10 +9139,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 129105138}
-  - {fileID: 382726151}
   - {fileID: 430786544}
+  - {fileID: 382726151}
   - {fileID: 1626788112}
+  - {fileID: 129105138}
   m_Father: {fileID: 586714179}
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -9149,6 +9150,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 128, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1368996771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1368996769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ba2a36429f186d4b9bbeca0fd79fa54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parts:
+  - transform: {fileID: 430786544}
+    direction: {x: 0, y: 1}
+  - transform: {fileID: 382726151}
+    direction: {x: -1, y: 0}
+  - transform: {fileID: 1626788112}
+    direction: {x: 0, y: -1}
+  - transform: {fileID: 129105138}
+    direction: {x: 1, y: 0}
 --- !u!1001 &1381204119
 Prefab:
   m_ObjectHideFlags: 0
@@ -10551,7 +10572,7 @@ RectTransform:
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 1368996770}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -32}
