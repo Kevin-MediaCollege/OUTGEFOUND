@@ -28,7 +28,7 @@ public class MenuCameraPath : MonoBehaviour
 		CurveData ccd = curve.getDataAt(0f);
 		CurveData ncd;
 
-		Gizmos.color = new Color(0.3f, 1f, 0.3f, 1f);
+		Gizmos.color = new Color(1f, 0.3f, 0.3f, 1f);
 		for(int i = 0; i < 20; i++)
 		{
 			ncd = curve.getDataAt((i / 20f) * lenght);

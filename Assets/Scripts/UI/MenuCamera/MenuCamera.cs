@@ -53,6 +53,8 @@ public class MenuCamera : MonoBehaviour
 			_b = prepareB;
 		}
 
+		Debug.LogWarning ("Fly From To: " + _a + " " + _b);
+
 		MenuCameraPosition start = getPointFromName(_a);
 		MenuCameraPath path = getPathFromPoints(start, getPointFromName(_b));
 
@@ -92,6 +94,7 @@ public class MenuCamera : MonoBehaviour
 		_name = _name.ToLower();
 		for(int i = 0; i < pointsLenght; i++)
 		{
+			Debug.Log (points[i].gameObject.name.ToLower() + " " + _name);
 			if(points[i].gameObject.name.ToLower() == _name)
 			{
 				return points[i];

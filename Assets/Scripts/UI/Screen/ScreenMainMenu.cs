@@ -42,6 +42,9 @@ public class ScreenMainMenu : ScreenBase, ICommunicant
 
 	void onButtonOptions (Touchable _sender, UnityEngine.EventSystems.PointerEventData _eventData)
 	{
+		door_options.SetBool("Open", true);
+		MenuCamera.instance.prepare("Menu", "Options");
+		ScreenManager.Instance.SetScreen("ScreenOptions");
 	}
 
 	void onButtonCredits (Touchable _sender, UnityEngine.EventSystems.PointerEventData _eventData)

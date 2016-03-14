@@ -1,42 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ScreenCredits : ScreenBase 
+public class ScreenOptions : ScreenBase 
 {
 	public override string Name
 	{
 		get
 		{
-			return "ScreenCredits";
+			return "ScreenOptions";
 		}
 	}
 
 	public CanvasGroup group;
 
 	public Touchable buttonBack;
-	public Touchable buttonEaster;
 
-	public Animator door_credits;
-	public Animator door_easter;
+	public Animator door;
 
 	void Awake()
 	{
 		buttonBack.OnPointerDownEvent += OnBackButton;
-		buttonEaster.OnPointerDownEvent += OnEasterButton;
 	}
 
 	void OnBackButton (Touchable _sender, UnityEngine.EventSystems.PointerEventData _eventData)
 	{
-		door_credits.SetBool("Open", false);
-		MenuCamera.instance.prepare("Credits", "Menu");
 		ScreenManager.Instance.SetScreen("ScreenMainMenu");
-	}
-
-	void OnEasterButton (Touchable _sender, UnityEngine.EventSystems.PointerEventData _eventData)
-	{
-		door_easter.SetBool("Open", true);
-		MenuCamera.instance.prepare("Credits", "Easter");
-		ScreenManager.Instance.SetScreen("ScreenEasteregg");
 	}
 
 	public override void OnScreenEnter()
@@ -56,6 +44,7 @@ public class ScreenCredits : ScreenBase
 	public override IEnumerator OnScreenFadeOut()
 	{
 		HOTweenHelper.Fade(group, 1f, 0f, 0.2f, 0f);
-		yield return MenuCamera.instance.flyFromTo("", "");
+		door.SetBool("Open", false);
+		yield return MenuCamera.instance.flyFromTo("Options", "Menu");
 	}
 }
