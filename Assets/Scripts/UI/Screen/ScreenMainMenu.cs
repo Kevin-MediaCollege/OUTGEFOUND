@@ -14,6 +14,7 @@ public class ScreenMainMenu : ScreenBase, ICommunicant
 	}
 
 	public CanvasGroup group;
+	public RectTransform rect;
 
 	public Touchable buttonLevel;
 	public Touchable buttonOptions;
@@ -21,8 +22,9 @@ public class ScreenMainMenu : ScreenBase, ICommunicant
 
 	public Animator door_credits;
 	public Animator door_options;
+	public Animator door_play;
 
-	private IEventDispatcher eventDispatcher;
+	//private IEventDispatcher eventDispatcher;
 
 	void Awake()
 	{
@@ -37,7 +39,12 @@ public class ScreenMainMenu : ScreenBase, ICommunicant
 
 	void onButtonLevel (Touchable _sender, UnityEngine.EventSystems.PointerEventData _eventData)
 	{
-		eventDispatcher.Invoke(new StateStartGameEvent());
+		//eventDispatcher.Invoke(new StateStartGameEvent());
+
+		buttonLevel.Interactable = false;
+		buttonOptions.Interactable = false;
+		buttonCredits.Interactable = false;
+		StartCoroutine("startLevel");
 	}
 
 	void onButtonOptions (Touchable _sender, UnityEngine.EventSystems.PointerEventData _eventData)
@@ -56,12 +63,14 @@ public class ScreenMainMenu : ScreenBase, ICommunicant
 
 	public void RegisterEventDispatcher(IEventDispatcher eventDispatcher)
 	{
-		this.eventDispatcher = eventDispatcher;
+		//this.eventDispatcher = eventDispatcher;
 	}
 
 	public override void OnScreenEnter()
 	{
+		rect.anchoredPosition3D = new Vector3(-620f, 0f, 0f);
 		HOTweenHelper.Fade(group, 0f, 1f, 0.2f, 0f);
+		HOTweenHelper.Position(rect, new Vector3(0f, 0f, 0f), 0.2f, 0f, Holoville.HOTween.EaseType.EaseOutCubic);
 	}
 
 	public override void OnScreenExit()
@@ -76,9 +85,23 @@ public class ScreenMainMenu : ScreenBase, ICommunicant
 	public override IEnumerator OnScreenFadeOut()
 	{
 		HOTweenHelper.Fade(group, 1f, 0f, 0.2f, 0f);
-
+		HOTweenHelper.Position(rect, new Vector3(-620f, 0f, 0f), 0.2f, 0f, Holoville.HOTween.EaseType.EaseOutCubic);
+		yield return new WaitForSeconds(0.1f);
 		yield return MenuCamera.instance.flyFromTo("", "");
+	}
 
-		yield break;
+	public IEnumerator startLevel()
+	{
+		HOTweenHelper.Fade(group, 1f, 0f, 0.2f, 0f);
+		HOTweenHelper.Position(rect, new Vector3(-620f, 0f, 0f), 0.2f, 0f, Holoville.HOTween.EaseType.EaseOutCubic);
+		yield return new WaitForSeconds(0.1f);
+		StartCoroutine("openDoorDelayed");
+		yield return MenuCamera.instance.flyFromTo("Menu", "Play", 4f);
+	}
+
+	public IEnumerator openDoorDelayed()
+	{
+		yield return new WaitForSeconds(2f);
+		door_play.SetBool("Open", true);
 	}
 }

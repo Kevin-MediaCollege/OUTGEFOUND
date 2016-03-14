@@ -11,7 +11,7 @@ public enum TouchableState
 	Disabled
 }
 
-public class Touchable : MonoBehaviour, IPointerDownHandler, IPointerExitHandler, IPointerUpHandler, IDragHandler
+public class Touchable : MonoBehaviour, IPointerDownHandler, IPointerExitHandler, IPointerUpHandler, IDragHandler, IPointerEnterHandler
 {
 	//--------------------------------------------------------------------------------//
 	public Sprite PressedSprite = null;
@@ -30,6 +30,9 @@ public class Touchable : MonoBehaviour, IPointerDownHandler, IPointerExitHandler
 
 	public delegate void OnPointerMoveHandler (Touchable _sender, PointerEventData _eventData);
 	public event OnPointerMoveHandler OnPointerMoveEvent = delegate {};
+
+	public delegate void OnPointerEnterHandler (Touchable _sender, PointerEventData _eventData);
+	public event OnPointerEnterHandler OnPointerEnterEvent = delegate {};
 
 	public Canvas Canvas { get; private set; }
 	public Camera Camera { get; private set; }
@@ -91,21 +94,19 @@ public class Touchable : MonoBehaviour, IPointerDownHandler, IPointerExitHandler
 		OnPointerUpEvent(this, eventData);
 	}
 
+	public virtual void OnPointerEnter (PointerEventData eventData)
+	{
+		if (Interactable)
+			OnPointerEnterEvent(this, eventData);
+	}
+
 	public virtual void OnPointerExit (PointerEventData eventData)
 	{
-		if (!pointers.Contains(eventData.pointerId))
-			return;
-
-		if (CancelPointerWhenItExits)
-		{
-			if (Interactable)
-				SetState(TouchableState.Normal);
-
-			pointers.Remove(eventData.pointerId);
-		}
-
 		if (Interactable)
+		{
+			SetState(TouchableState.Normal);
 			OnPointerExitEvent(this, eventData);
+		}
 	}
 
 	public virtual void OnDrag (PointerEventData eventData)

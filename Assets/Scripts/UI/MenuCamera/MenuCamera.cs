@@ -45,15 +45,13 @@ public class MenuCamera : MonoBehaviour
 		prepareB = _b;
 	}
 
-	public IEnumerator flyFromTo(string _a, string _b)
+	public IEnumerator flyFromTo(string _a, string _b, float _speed = 1f)
 	{
 		if(string.IsNullOrEmpty(_a) && string.IsNullOrEmpty(_b)) 
 		{
 			_a = prepareA;
 			_b = prepareB;
 		}
-
-		Debug.LogWarning ("Fly From To: " + _a + " " + _b);
 
 		MenuCameraPosition start = getPointFromName(_a);
 		MenuCameraPath path = getPathFromPoints(start, getPointFromName(_b));
@@ -69,11 +67,11 @@ public class MenuCamera : MonoBehaviour
 		bool inverted = path.start == start ? false : true;
 		float progress = 0f;
 
-		HOTweenHelper.Rotate(cam.transform, inverted ? path.start.transform.rotation : path.end.transform.rotation, 1f, 0f, Holoville.HOTween.EaseType.EaseInOutCubic);
+		HOTweenHelper.Rotate(cam.transform, inverted ? path.start.transform.rotation : path.end.transform.rotation, 1f * _speed, 0f, Holoville.HOTween.EaseType.EaseInOutCubic);
 
 		while(progress < 1f)
 		{
-			progress += Time.deltaTime;	
+			progress += Time.deltaTime / _speed;	
 			updateCamera(inverted ? 1f - progress : progress, curve);
 
 			yield return null;
@@ -94,7 +92,6 @@ public class MenuCamera : MonoBehaviour
 		_name = _name.ToLower();
 		for(int i = 0; i < pointsLenght; i++)
 		{
-			Debug.Log (points[i].gameObject.name.ToLower() + " " + _name);
 			if(points[i].gameObject.name.ToLower() == _name)
 			{
 				return points[i];
