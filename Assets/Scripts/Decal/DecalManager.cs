@@ -15,7 +15,7 @@ public class DecalManager : IGameDependency
 
 	public void Stop()
 	{
-		if(helper.gameObject != null)
+		if(helper != null)
 		{
 			Object.Destroy(helper.gameObject);
 		}
