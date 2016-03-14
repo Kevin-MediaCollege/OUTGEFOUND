@@ -49,10 +49,10 @@ public class PlayerInputController : InputController
 			Entity.Events.Invoke(new StopFireEvent());
 		}
 
-		/*if(Input.GetKeyDown(KeyCode.V))
+		if(Input.GetKeyDown(KeyCode.V))
 		{
-			Entity.Events.Invoke(new SwitchFireModeEvent(Entity));
-		}*/
+			Entity.Events.Invoke(new SwitchFireModeEvent());
+		}
 
 		if(Input.GetKeyDown(KeyCode.R))
 		{

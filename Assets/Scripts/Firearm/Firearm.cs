@@ -10,6 +10,8 @@ public class Firearm : MonoBehaviour
 
 	public Entity Wielder { private set; get; }
 
+	public FireMode FireMode { private set; get; }
+
 	public Transform Barrel
 	{
 		get
@@ -82,6 +84,9 @@ public class Firearm : MonoBehaviour
 	private Magazine magazine;
 	private AmmoStockPile stockPile;
 
+	private int burstId;
+
+	private bool shooting;
 	private bool reloading;
 
 	protected void Awake()
@@ -96,6 +101,8 @@ public class Firearm : MonoBehaviour
 
 		magazine = transform.GetComponentInParent<Magazine>();
 		stockPile = transform.GetComponentInParent<AmmoStockPile>();
+
+		FireMode = FirearmUtils.GetAvailableFireMode(fireModes);
 	}
 
 	protected void OnEnable()
@@ -108,6 +115,7 @@ public class Firearm : MonoBehaviour
 		Wielder.Events.AddListener<StartFireEvent>(OnStartFireEvent);
 		Wielder.Events.AddListener<StopFireEvent>(OnStopFireEvent);
 		Wielder.Events.AddListener<ReloadEvent>(OnReloadEvent);
+		Wielder.Events.AddListener<SwitchFireModeEvent>(OnSwitchFireModeEvent);
 	}
 
 	protected void OnDisable()
@@ -115,16 +123,25 @@ public class Firearm : MonoBehaviour
 		Wielder.Events.RemoveListener<StartFireEvent>(OnStartFireEvent);
 		Wielder.Events.RemoveListener<StopFireEvent>(OnStopFireEvent);
 		Wielder.Events.RemoveListener<ReloadEvent>(OnReloadEvent);
+		Wielder.Events.RemoveListener<SwitchFireModeEvent>(OnSwitchFireModeEvent);
 	}
 
 	private void OnStartFireEvent(StartFireEvent evt)
 	{
-		StartCoroutine("Fire");
+		if(!shooting)
+		{
+			shooting = true;
+			StartCoroutine("Fire");
+		}
 	}
 
 	private void OnStopFireEvent(StopFireEvent evt)
 	{
-		StopCoroutine("Fire");
+		if(shooting && FireMode != FireMode.Burst3)
+		{
+			StopCoroutine("Fire");
+			shooting = false;
+		}
 	}
 
 	private void OnReloadEvent(ReloadEvent evt)
@@ -155,18 +172,27 @@ public class Firearm : MonoBehaviour
 		}
 	}
 
+	private void OnSwitchFireModeEvent(SwitchFireModeEvent evt)
+	{
+		FireMode = FirearmUtils.GetNextFireMode(fireModes, FireMode);
+	}
+
 	private IEnumerator Fire()
 	{
+		burstId = 0;
+
 		while(true)
 		{
 			if(magazine.Empty)
 			{
 				audioManager.PlayAt(clipEmptyAudio, barrel.position);
+				shooting = false;
 				yield break;
 			}
 
 			HitInfo hitInfo = ConstructHitInfo();
 			GlobalEvents.Invoke(new FireEvent(this, hitInfo));
+			burstId++;
 			
 			if(hitInfo.Hit)
 			{
@@ -183,6 +209,12 @@ public class Firearm : MonoBehaviour
 			if(Wielder.HasTag("Enemy"))
 			{
 				downTime += Random.Range(0, 0.1f);
+			}
+
+			if((FireMode == FireMode.Burst3 && burstId == 3) || FireMode == FireMode.SemiAutomatic)
+			{
+				shooting = false;
+				yield break;
 			}
 			
 			yield return new WaitForSeconds(downTime);
