@@ -110,7 +110,7 @@ public class AIHuman : AIBase
 		
 		foreach(RaycastHit hit in hits)
 		{
-			if(hit.collider.CompareTag("Wall"))
+			if(hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Obstacle"))
 			{
 				return false;
 			}

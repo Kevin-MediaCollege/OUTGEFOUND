@@ -31,7 +31,7 @@ public class EnemySpawnPoint : MonoBehaviour
 		int c = 0;
 		for(int i = 0; i < l; i++)
 		{
-			if (hits [i].collider.gameObject.CompareTag ("Wall")) 
+			if (hits[i].collider.CompareTag ("Wall") || hits[i].collider.CompareTag("Obstacle")) 
 			{
 				c++;
 			}
