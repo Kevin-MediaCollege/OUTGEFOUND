@@ -19,6 +19,7 @@ public class EnemySpawnManager : MonoBehaviour
 	{
 		pointsLenght = points.Length;
 		nextSpawnCheck = 0;
+		enemyObject.SetActive (false);
 	}
 
 	void Update()
@@ -43,10 +44,13 @@ public class EnemySpawnManager : MonoBehaviour
 		{
 			GameObject g = GameObject.Instantiate (enemyObject);
 			g.transform.SetParent (enemyParent.transform);
-
-			//CHEAP FIX DIE NIET WERKT HELP
 			g.transform.position = points [nextSpawnCheck].transform.position + new Vector3 (0f, 1f, 0f);
+			g.SetActive (true);
 			testDelay = 8f;
 		}
+	}
+
+	public Vector3 getRandomSpawnpoint()
+	{
 	}
 }
