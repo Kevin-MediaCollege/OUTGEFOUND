@@ -49,6 +49,19 @@ public class PlayerInputController : InputController
 			Entity.Events.Invoke(new StopFireEvent());
 		}
 
+		if(Input.GetMouseButtonDown(1))
+		{
+			if(!Dependency.Get<AimDownSightController>().IsAimingDownSight)
+			{
+				Entity.Events.Invoke(new StartAimDownSightEvent());
+			}
+			else
+			{
+				Entity.Events.Invoke(new StopAimDownSightEvent());
+			}
+		}
+		
+
 		if(Input.GetKeyDown(KeyCode.V))
 		{
 			Entity.Events.Invoke(new SwitchFireModeEvent());
