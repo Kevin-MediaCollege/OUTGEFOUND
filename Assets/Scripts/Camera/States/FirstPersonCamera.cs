@@ -36,9 +36,9 @@ public class FirstPersonCamera : MonoBehaviour
 	protected void FixedUpdate()
 	{
 		// Rotate the player
-		player.Rotate(0, Input.GetAxis("Mouse X") * sensitivity.x, 0);
+		player.Rotate(0, (Input.GetAxis("Mouse X") * sensitivity.x) * Time.deltaTime, 0);
 
-		yRotation += Input.GetAxis("Mouse Y") * sensitivity.y;
+		yRotation += (Input.GetAxis("Mouse Y") * sensitivity.y) * Time.deltaTime;
 		yRotation = Mathf.Clamp(yRotation, yConstraint.x, yConstraint.y);
 
 		eyes.localEulerAngles = new Vector3(-yRotation, transform.localEulerAngles.y, 0);
