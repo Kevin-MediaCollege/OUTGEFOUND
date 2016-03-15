@@ -66,7 +66,7 @@ LightmapSettings:
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
     m_ReflectionCompression: 2
-  m_LightingDataAsset: {fileID: 112000141, guid: 44863574e80ccf7428e95298f3b58dd2,
+  m_LightingDataAsset: {fileID: 112000265, guid: 44863574e80ccf7428e95298f3b58dd2,
     type: 2}
   m_RuntimeCPUUsage: 75
 --- !u!196 &4
@@ -248,12 +248,12 @@ GameObject:
   - 114: {fileID: 32129814}
   - 225: {fileID: 32129813}
   m_Layer: 5
-  m_Name: ScreenStart_overlay
+  m_Name: ScreenMainMenu_overlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!225 &32129813
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -308,7 +308,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 595048769}
+  m_Father: {fileID: 219059191}
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2032,6 +2032,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 595821270}
+  - {fileID: 32129816}
   m_Father: {fileID: 418052206}
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2058,6 +2059,7 @@ MonoBehaviour:
   door_credits: {fileID: 1446639809}
   door_options: {fileID: 2057192031}
   door_play: {fileID: 2055258833}
+  overlay: {fileID: 32129813}
 --- !u!1001 &219332310
 Prefab:
   m_ObjectHideFlags: 0
@@ -5591,7 +5593,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1867953348}
-  - {fileID: 32129816}
   m_Father: {fileID: 418052206}
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}

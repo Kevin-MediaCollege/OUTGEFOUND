@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System;
 using UnityEngine.Serialization;
 
-public class ScreenMainMenu : ScreenBase, ICommunicant
+public class ScreenMainMenu : ScreenBase
 {
 	public override string Name
 	{
@@ -24,13 +25,14 @@ public class ScreenMainMenu : ScreenBase, ICommunicant
 	public Animator door_options;
 	public Animator door_play;
 
-	//private IEventDispatcher eventDispatcher;
+	public CanvasGroup overlay;
 
 	void Awake()
 	{
 		buttonLevel.OnPointerDownEvent += onButtonLevel;
 		buttonOptions.OnPointerDownEvent += onButtonOptions;
 		buttonCredits.OnPointerDownEvent += onButtonCredits;
+		overlay.gameObject.SetActive (false);
 	}
 
 	void Update()
@@ -39,8 +41,6 @@ public class ScreenMainMenu : ScreenBase, ICommunicant
 
 	void onButtonLevel (Touchable _sender, UnityEngine.EventSystems.PointerEventData _eventData)
 	{
-		//eventDispatcher.Invoke(new StateStartGameEvent());
-
 		buttonLevel.Interactable = false;
 		buttonOptions.Interactable = false;
 		buttonCredits.Interactable = false;
@@ -59,11 +59,6 @@ public class ScreenMainMenu : ScreenBase, ICommunicant
 		door_credits.SetBool("Open", true);
 		MenuCamera.instance.prepare("Menu", "Credits");
 		ScreenManager.Instance.SetScreen("ScreenCredits");
-	}
-
-	public void RegisterEventDispatcher(IEventDispatcher eventDispatcher)
-	{
-		//this.eventDispatcher = eventDispatcher;
 	}
 
 	public override void OnScreenEnter()
@@ -97,11 +92,15 @@ public class ScreenMainMenu : ScreenBase, ICommunicant
 		yield return new WaitForSeconds(0.1f);
 		StartCoroutine("openDoorDelayed");
 		yield return MenuCamera.instance.flyFromTo("Menu", "Play", 4f);
+		SceneManager.LoadScene ("Loading Screen");
 	}
 
 	public IEnumerator openDoorDelayed()
 	{
 		yield return new WaitForSeconds(2f);
 		door_play.SetBool("Open", true);
+		yield return new WaitForSeconds(1f);
+		overlay.gameObject.SetActive (true);
+		HOTweenHelper.Fade (overlay, 0f, 1f, 0.5f, 0f);
 	}
 }
