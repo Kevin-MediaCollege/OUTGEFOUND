@@ -441,9 +441,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aim: {fileID: 11422438}
+  layers:
+    serializedVersion: 2
+    m_Bits: 4097
   damage: 1
   barrel: {fileID: 430286}
-  fireModes: 1
   range: 100
 --- !u!114 &11427896
 MonoBehaviour:
@@ -626,6 +628,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: range
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: layers.m_Bits
+      value: 4097
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

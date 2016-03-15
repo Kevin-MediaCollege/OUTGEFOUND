@@ -28,7 +28,7 @@ public class Firearm : Weapon
 		Ray ray = new Ray(Position, direction);
 		RaycastHit hit;
 		
-		if(Physics.Raycast(ray, out hit, range))
+		if(Physics.Raycast(ray, out hit, range, layers))
 		{
 			Entity target = null;
 			string tag = "Untagged";

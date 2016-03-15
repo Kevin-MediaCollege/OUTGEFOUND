@@ -6,7 +6,7 @@ public class FirearmAI : Firearm
 	protected override HitInfo GetHitInfo(Vector3 direction)
 	{
 		Ray ray = new Ray(Position, direction);
-		RaycastHit[] hits = Physics.RaycastAll(ray, range);
+		RaycastHit[] hits = Physics.RaycastAll(ray, range, layers);
 
 		foreach(RaycastHit hit in hits)
 		{
