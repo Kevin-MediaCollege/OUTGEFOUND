@@ -30,9 +30,9 @@ public class AIManager : IGameDependency
 
 	public void Stop()
 	{
-		GlobalEvents.AddListener<WeaponFireEvent>(OnWeaponFireEvent);
-		GlobalEvents.AddListener<EntityActivatedEvent>(OnEntityActivatedEvent);
-		GlobalEvents.AddListener<EntityDeactivatedEvent>(OnEntityDeactivatedEvent);
+		GlobalEvents.RemoveListener<WeaponFireEvent>(OnWeaponFireEvent);
+		GlobalEvents.RemoveListener<EntityActivatedEvent>(OnEntityActivatedEvent);
+		GlobalEvents.RemoveListener<EntityDeactivatedEvent>(OnEntityDeactivatedEvent);
 
 		all.Clear();
 	}
