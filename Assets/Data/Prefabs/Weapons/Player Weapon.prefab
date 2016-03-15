@@ -454,6 +454,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aim: {fileID: 11446438}
+  layers:
+    serializedVersion: 2
+    m_Bits: 4097
   damage: 1
   barrel: {fileID: 430286}
   range: 100

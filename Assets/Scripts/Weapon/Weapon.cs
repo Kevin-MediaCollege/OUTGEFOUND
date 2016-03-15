@@ -10,6 +10,7 @@ public class Weapon : MonoBehaviour
 	private HashSet<WeaponComponent> components = new HashSet<WeaponComponent>();
 
 	[SerializeField] protected WeaponAim aim;
+	[SerializeField] protected LayerMask layers;
 
 	[SerializeField] protected float damage;
 
