@@ -28,7 +28,7 @@ GameObject:
   - 64: {fileID: 6488286}
   m_Layer: 0
   m_Name: WallCornerA_002
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

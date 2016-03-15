@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 415242}
   - 33: {fileID: 3304480}
   - 23: {fileID: 2300868}
+  - 64: {fileID: 6430926}
   m_Layer: 0
   m_Name: ScreenA_002
   m_TagString: Wall
@@ -42,6 +43,7 @@ GameObject:
   - 4: {fileID: 440804}
   - 33: {fileID: 3381868}
   - 23: {fileID: 2379550}
+  - 64: {fileID: 6464134}
   m_Layer: 0
   m_Name: ScreenGlassA_002
   m_TagString: Wall
@@ -152,6 +154,30 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174224}
+  m_Mesh: {fileID: 4300002, guid: 9b51a408db7c30343845ca9e75a6ce57, type: 3}
+--- !u!64 &6430926
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107816}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 9b51a408db7c30343845ca9e75a6ce57, type: 3}
+--- !u!64 &6464134
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174224}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
   m_Mesh: {fileID: 4300002, guid: 9b51a408db7c30343845ca9e75a6ce57, type: 3}
 --- !u!1001 &100100000
 Prefab:
