@@ -92,7 +92,6 @@ public class ScreenMainMenu : ScreenBase
 		yield return new WaitForSeconds(0.1f);
 		StartCoroutine("openDoorDelayed");
 		yield return MenuCamera.instance.flyFromTo("Menu", "Play", 4f);
-		SceneManager.LoadScene ("Loading Screen");
 	}
 
 	public IEnumerator openDoorDelayed()
@@ -101,6 +100,8 @@ public class ScreenMainMenu : ScreenBase
 		door_play.SetBool("Open", true);
 		yield return new WaitForSeconds(1f);
 		overlay.gameObject.SetActive (true);
-		HOTweenHelper.Fade (overlay, 0f, 1f, 0.5f, 0f);
+		HOTweenHelper.Fade (overlay, 0f, 1f, 0.4f, 0f);
+		yield return new WaitForSeconds(0.4f);
+		SceneManager.LoadScene ("Loading Screen");
 	}
 }
