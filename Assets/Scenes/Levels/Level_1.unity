@@ -1703,7 +1703,7 @@ GameObject:
   - 65: {fileID: 77788294}
   m_Layer: 0
   m_Name: CoverInduA_003 (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967231
@@ -2127,7 +2127,7 @@ GameObject:
   - 65: {fileID: 99592324}
   m_Layer: 0
   m_Name: WallA_002 (4)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6426,7 +6426,7 @@ GameObject:
   - 65: {fileID: 296870352}
   m_Layer: 0
   m_Name: WallA_002 (7)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -9875,7 +9875,7 @@ GameObject:
   - 65: {fileID: 466523746}
   m_Layer: 0
   m_Name: WallA_002 (3)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -11230,7 +11230,7 @@ GameObject:
   - 65: {fileID: 493726406}
   m_Layer: 0
   m_Name: WallA_002 (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12213,7 +12213,7 @@ GameObject:
   - 65: {fileID: 523444937}
   m_Layer: 0
   m_Name: WallA_002 (6)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -15890,7 +15890,7 @@ GameObject:
   - 65: {fileID: 696380786}
   m_Layer: 0
   m_Name: WallA_002
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -16336,7 +16336,7 @@ GameObject:
   - 65: {fileID: 712714502}
   m_Layer: 0
   m_Name: WallA_002 (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -18681,7 +18681,7 @@ GameObject:
   - 65: {fileID: 812113268}
   m_Layer: 0
   m_Name: WallA_002 (10)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19496,7 +19496,7 @@ GameObject:
   - 65: {fileID: 858543721}
   m_Layer: 0
   m_Name: WallA_002 (8)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -20339,7 +20339,7 @@ GameObject:
   - 65: {fileID: 898157206}
   m_Layer: 0
   m_Name: WallA_002
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -25846,7 +25846,7 @@ GameObject:
   - 65: {fileID: 1133165407}
   m_Layer: 0
   m_Name: WallA_002 (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -27743,7 +27743,7 @@ GameObject:
   - 65: {fileID: 1239205358}
   m_Layer: 0
   m_Name: WallA_002
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -31147,7 +31147,7 @@ GameObject:
   - 65: {fileID: 1411466001}
   m_Layer: 0
   m_Name: WallA_002 (5)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -38461,7 +38461,7 @@ GameObject:
   - 65: {fileID: 1665471383}
   m_Layer: 0
   m_Name: WallA_002 (9)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -40958,7 +40958,7 @@ GameObject:
   - 65: {fileID: 1783176900}
   m_Layer: 0
   m_Name: WallA_002 (11)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -41711,7 +41711,7 @@ GameObject:
   - 65: {fileID: 1813408547}
   m_Layer: 0
   m_Name: CoverInduA_004
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967231
