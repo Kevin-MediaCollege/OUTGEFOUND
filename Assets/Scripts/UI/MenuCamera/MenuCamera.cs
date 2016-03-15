@@ -45,7 +45,7 @@ public class MenuCamera : MonoBehaviour
 		prepareB = _b;
 	}
 
-	public IEnumerator flyFromTo(string _a, string _b)
+	public IEnumerator flyFromTo(string _a, string _b, float _speed = 1f)
 	{
 		if(string.IsNullOrEmpty(_a) && string.IsNullOrEmpty(_b)) 
 		{
@@ -67,11 +67,11 @@ public class MenuCamera : MonoBehaviour
 		bool inverted = path.start == start ? false : true;
 		float progress = 0f;
 
-		HOTweenHelper.Rotate(cam.transform, inverted ? path.start.transform.rotation : path.end.transform.rotation, 1f, 0f, Holoville.HOTween.EaseType.EaseInOutCubic);
+		HOTweenHelper.Rotate(cam.transform, inverted ? path.start.transform.rotation : path.end.transform.rotation, 1f * _speed, 0f, Holoville.HOTween.EaseType.EaseInOutCubic);
 
 		while(progress < 1f)
 		{
-			progress += Time.deltaTime;	
+			progress += Time.deltaTime / _speed;	
 			updateCamera(inverted ? 1f - progress : progress, curve);
 
 			yield return null;

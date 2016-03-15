@@ -325,7 +325,7 @@ MonoBehaviour:
   reloadSpeed: 1
   clipEmptyAudio: {fileID: 0}
   damage: 1
-  bulletSpread: 0.01
+  bulletSpread: 0.1
   range: 1000
   roundsPerMinute: 900
 --- !u!212 &21262448
@@ -412,6 +412,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: fireModes
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: bulletSpread
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

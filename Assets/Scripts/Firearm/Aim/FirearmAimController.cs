@@ -7,5 +7,5 @@ public abstract class FirearmAimController : MonoBehaviour
 {
 	[SerializeField] protected LayerMask layerMask;
 
-	public abstract Vector3 GetAimDirection(Firearm firearm, out RaycastHit hit);
+	public abstract Vector3 GetAimDirection(Firearm firearm, out RaycastHit hit, float recoilOffset);
 }

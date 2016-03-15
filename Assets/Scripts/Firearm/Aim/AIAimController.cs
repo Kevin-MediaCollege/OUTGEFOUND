@@ -5,7 +5,7 @@
 /// </summary>
 public class AIAimController : FirearmAimController
 {
-	public override Vector3 GetAimDirection(Firearm firearm, out RaycastHit hit)
+	public override Vector3 GetAimDirection(Firearm firearm, out RaycastHit hit, float recoilOffset)
 	{
 		Vector3 barrel = firearm.Barrel.position;
 		Vector3 direction = (EnemyUtils.PlayerCenter - barrel).normalized;
@@ -13,6 +13,9 @@ public class AIAimController : FirearmAimController
 		// Apply bullet spread
 		Vector3 spread = Random.insideUnitCircle;
 		direction += spread * firearm.BulletSpread;
+
+		// Apply recoil offset
+		direction.y += recoilOffset;
 
 		Ray ray = new Ray(barrel, direction);
 		RaycastHit[] hits = Physics.RaycastAll(ray, firearm.Range, layerMask);
