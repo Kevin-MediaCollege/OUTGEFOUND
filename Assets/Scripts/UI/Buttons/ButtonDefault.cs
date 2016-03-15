@@ -10,7 +10,6 @@ public class ButtonDefault : MonoBehaviour
 
 	void Start () 
 	{
-		Debug.Log("init");
 		onExit(null, null);
 		touchable.OnPointerEnterEvent += onEnter;
 		touchable.OnPointerExitEvent += onExit;

@@ -29,7 +29,7 @@ public class ScreenStart : ScreenBase
 
 	public override IEnumerator OnScreenFadeIn()
 	{
-		yield return new WaitForSeconds (0.1f);
+		yield return new WaitForSeconds (1f);
 
 		HOTweenHelper.Fade(overlay, 1f, 0f, 0.5f, 0f);
 
@@ -39,7 +39,7 @@ public class ScreenStart : ScreenBase
 	{
 		HOTweenHelper.Fade(group, 1f, 0f, 0.2f, 0f);
 
-		yield return MenuCamera.instance.flyFromTo("Start", "Menu");
+		//yield return MenuCamera.instance.flyFromTo("Start", "Menu");
 
 		yield break;
 	}
