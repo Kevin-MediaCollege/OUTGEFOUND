@@ -19,4 +19,9 @@ public static class EntityExtensions
 	{
 		return entity.transform.Find("Eyes");
 	}
+
+	public static EntityHealth GetHealth(this Entity entity)
+	{
+		return entity.GetComponentInChildren<EntityHealth>();
+	}
 }
