@@ -74,7 +74,7 @@ public class Stockpile : WeaponComponent
 
 	public void FillMagazine()
 	{
-		int amount = Mathf.Min(magazine.Capacity, max);
+		int amount = Mathf.Min(magazine.Capacity, Remaining);
 		magazine.Add(amount);
 
 		if(!unlimited)
