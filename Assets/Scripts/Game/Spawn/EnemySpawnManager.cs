@@ -52,5 +52,6 @@ public class EnemySpawnManager : MonoBehaviour
 
 	public Vector3 getRandomSpawnpoint()
 	{
+		return Vector3.zero;
 	}
 }
