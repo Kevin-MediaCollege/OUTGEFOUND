@@ -15,6 +15,19 @@ MonoBehaviour:
   - {fileID: 11436668}
   - {fileID: 11467124}
   - {fileID: 11458196}
+  - {fileID: 11453004}
+--- !u!114 &11401794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4251722f79d40994ea1d228b47bf6047, type: 3}
+  m_Name: LinkCondition (New Node => Game (EventReceivedCondition))
+  m_EditorClassIdentifier: 
+  event: StateContinueEvent
 --- !u!114 &11408892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30,7 +43,19 @@ MonoBehaviour:
   to: {fileID: 11467124}
   conditions:
   - {fileID: 11496588}
---- !u!114 &11429044
+--- !u!114 &11410338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4251722f79d40994ea1d228b47bf6047, type: 3}
+  m_Name: LinkCondition (Menu => New Node (EventReceivedCondition))
+  m_EditorClassIdentifier: 
+  event: StateStartGameEvent
+--- !u!114 &11418282
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -42,9 +67,24 @@ MonoBehaviour:
   m_Name: Link
   m_EditorClassIdentifier: 
   from: {fileID: 11467124}
+  to: {fileID: 11453004}
+  conditions:
+  - {fileID: 11410338}
+--- !u!114 &11431650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 365a50b20d802244a909f05e4dac1623, type: 3}
+  m_Name: Link
+  m_EditorClassIdentifier: 
+  from: {fileID: 11453004}
   to: {fileID: 11458196}
   conditions:
-  - {fileID: 11475546}
+  - {fileID: 11401794}
 --- !u!114 &11436668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +104,25 @@ MonoBehaviour:
   - Common
   nodeName: Splash Screen
   entryPoint: 1
+--- !u!114 &11453004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37de2f61cbb65314e9bf8f96d66b2a2a, type: 3}
+  m_Name: Node
+  m_EditorClassIdentifier: 
+  links:
+  - {fileID: 11431650}
+  position: {x: 538, y: 221}
+  sceneName: Loading Screen
+  additionalScenes:
+  - Common
+  nodeName: New Node
+  entryPoint: 0
 --- !u!114 &11458196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,10 +136,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   links:
   - {fileID: 11491046}
-  position: {x: 372, y: 208}
+  position: {x: 230, y: 208}
   sceneName: Level_1
   additionalScenes:
   - Common
+  - Loading Screen
   nodeName: Game
   entryPoint: 0
 --- !u!114 &11467124
@@ -95,25 +155,13 @@ MonoBehaviour:
   m_Name: Node
   m_EditorClassIdentifier: 
   links:
-  - {fileID: 11429044}
+  - {fileID: 11418282}
   position: {x: 371, y: 58}
   sceneName: Menus
   additionalScenes:
   - Common
   nodeName: Menu
   entryPoint: 0
---- !u!114 &11475546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4251722f79d40994ea1d228b47bf6047, type: 3}
-  m_Name: LinkCondition (Menu => Game (EventReceivedCondition))
-  m_EditorClassIdentifier: 
-  event: StateStartGameEvent
 --- !u!114 &11478118
 MonoBehaviour:
   m_ObjectHideFlags: 0

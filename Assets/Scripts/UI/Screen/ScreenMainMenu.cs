@@ -4,7 +4,7 @@ using System.Collections;
 using System;
 using UnityEngine.Serialization;
 
-public class ScreenMainMenu : ScreenBase
+public class ScreenMainMenu : ScreenBase, ICommunicant
 {
 	public override string Name
 	{
@@ -14,47 +14,51 @@ public class ScreenMainMenu : ScreenBase
 		}
 	}
 
-	public CanvasGroup group;
-	public RectTransform rect;
+	[SerializeField] private CanvasGroup group;
+	[SerializeField] private RectTransform rect;
 
-	public Touchable buttonLevel;
-	public Touchable buttonOptions;
-	public Touchable buttonCredits;
+	[SerializeField] private Touchable buttonLevel;
+	[SerializeField] private Touchable buttonOptions;
+	[SerializeField] private Touchable buttonCredits;
 
-	public Animator door_credits;
-	public Animator door_options;
-	public Animator door_play;
+	[SerializeField] private Animator door_credits;
+	[SerializeField] private Animator door_options;
+	[SerializeField] private Animator door_play;
 
-	public CanvasGroup overlay;
+	[SerializeField] private CanvasGroup overlay;
 
-	void Awake()
+	private IEventDispatcher eventDispatcher;
+
+	protected void Awake()
 	{
-		buttonLevel.OnPointerDownEvent += onButtonLevel;
-		buttonOptions.OnPointerDownEvent += onButtonOptions;
-		buttonCredits.OnPointerDownEvent += onButtonCredits;
-		overlay.gameObject.SetActive (false);
+		buttonLevel.OnPointerDownEvent += OnButtonLevel;
+		buttonOptions.OnPointerDownEvent += OnButtonOptions;
+		buttonCredits.OnPointerDownEvent += OnButtonCredits;
+
+		overlay.gameObject.SetActive(false);
 	}
 
-	void Update()
+	public void RegisterEventDispatcher(IEventDispatcher eventDispatcher)
 	{
+		this.eventDispatcher = eventDispatcher;
 	}
 
-	void onButtonLevel (Touchable _sender, UnityEngine.EventSystems.PointerEventData _eventData)
+	void OnButtonLevel (Touchable _sender, UnityEngine.EventSystems.PointerEventData _eventData)
 	{
 		buttonLevel.Interactable = false;
 		buttonOptions.Interactable = false;
 		buttonCredits.Interactable = false;
-		StartCoroutine("startLevel");
+		StartCoroutine("StartLevel");
 	}
 
-	void onButtonOptions (Touchable _sender, UnityEngine.EventSystems.PointerEventData _eventData)
+	void OnButtonOptions (Touchable _sender, UnityEngine.EventSystems.PointerEventData _eventData)
 	{
 		door_options.SetBool("Open", true);
 		MenuCamera.instance.prepare("Menu", "Options");
 		ScreenManager.Instance.SetScreen("ScreenOptions");
 	}
 
-	void onButtonCredits (Touchable _sender, UnityEngine.EventSystems.PointerEventData _eventData)
+	void OnButtonCredits (Touchable _sender, UnityEngine.EventSystems.PointerEventData _eventData)
 	{
 		door_credits.SetBool("Open", true);
 		MenuCamera.instance.prepare("Menu", "Credits");
@@ -85,16 +89,16 @@ public class ScreenMainMenu : ScreenBase
 		yield return MenuCamera.instance.flyFromTo("", "");
 	}
 
-	public IEnumerator startLevel()
+	public IEnumerator StartLevel()
 	{
 		HOTweenHelper.Fade(group, 1f, 0f, 0.2f, 0f);
 		HOTweenHelper.Position(rect, new Vector3(-620f, 0f, 0f), 0.2f, 0f, Holoville.HOTween.EaseType.EaseOutCubic);
 		yield return new WaitForSeconds(0.1f);
-		StartCoroutine("openDoorDelayed");
+		StartCoroutine("OpenDoorDelayed");
 		yield return MenuCamera.instance.flyFromTo("Menu", "Play", 4f);
 	}
 
-	public IEnumerator openDoorDelayed()
+	public IEnumerator OpenDoorDelayed()
 	{
 		yield return new WaitForSeconds(2f);
 		door_play.SetBool("Open", true);
@@ -102,6 +106,7 @@ public class ScreenMainMenu : ScreenBase
 		overlay.gameObject.SetActive (true);
 		HOTweenHelper.Fade (overlay, 0f, 1f, 0.4f, 0f);
 		yield return new WaitForSeconds(0.4f);
-		SceneManager.LoadScene ("Loading Screen");
+
+		eventDispatcher.Invoke(new StateStartGameEvent());
 	}
 }

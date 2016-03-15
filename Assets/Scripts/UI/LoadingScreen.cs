@@ -1,37 +1,50 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class LoadingScreen : MonoBehaviour 
+public class LoadingScreen : MonoBehaviour, ICommunicant
 {
-	public CanvasGroup group;
+	[SerializeField] private CanvasGroup fadeInGroup;
+	[SerializeField] private CanvasGroup fadeOutGroup;
 
-	void Awake () 
+	[SerializeField] private new Camera camera;
+
+	private IEventDispatcher eventDispatcher;
+
+	protected void Start() 
 	{
-		StartCoroutine ("fadeIn");
+		StartCoroutine("FadeIn");
 	}
 
-	public IEnumerator fadeIn()
+	public void RegisterEventDispatcher(IEventDispatcher eventDispatcher)
 	{
-		HOTweenHelper.Fade (group, 1f, 0f, 1f, 0f);
+		this.eventDispatcher = eventDispatcher;
+	}
 
-		yield return new WaitForSeconds (1.5f);
+	private IEnumerator FadeIn()
+	{
+		HOTweenHelper.Fade(fadeInGroup, 1f, 0f, 1f, 0f);
 
-		/*
-		 *  EN UNCOMMENCT DIT OOK EFFE KROL
-		 
-		AsyncOperation loader = SceneManager.LoadSceneAsync ("");
+		yield return new WaitForSeconds(1.5f);
 
-		while(!loader.isDone)
-		{
-			yield return null;
-		}
+		GlobalEvents.AddListener<GameStartedEvent>(OnGameStartedEvent);
+		
+		eventDispatcher.Invoke(new StateContinueEvent());
+	}
 
-		HOTweenHelper.Fade (group, 0f, 1f, 0.7f, 0f);
+	private IEnumerator FadeOut()
+	{
+		HOTweenHelper.Fade(fadeInGroup, 1f, 0f, 0.7f, 0f);
 
-		yield return new WaitForSeconds (0.7f);
-		*/
+		yield return new WaitForSeconds(0.7f);
 
-		//HE KEVIN DOE HIER DE GAME AAN
+		gameObject.SetActive(false);
+		camera.gameObject.SetActive(false);
+	}
+
+	private void OnGameStartedEvent(GameStartedEvent evt)
+	{
+		GlobalEvents.RemoveListener<GameStartedEvent>(OnGameStartedEvent);
+		
+		StartCoroutine("FadeOut");
 	}
 }

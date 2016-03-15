@@ -1,6 +1,6 @@
 ﻿/// <summary>
-/// The ICommunicant interface is an interface you can implement if you want your <see cref="Utils.Dependencies.IStateDependency"/>
-/// or <see cref="UnityEngine.MonoBehaviour"/> in a state to be able to send and receive events on the state machine channel.
+/// The ICommunicant interface is an interface you can implement if you want to be able
+/// to send and receive events on the state machine channel.
 /// </summary>
 public interface ICommunicant
 {
