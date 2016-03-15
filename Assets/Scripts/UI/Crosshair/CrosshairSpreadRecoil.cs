@@ -9,7 +9,7 @@ public class CrosshairSpreadRecoil : CrosshairSpreadComponent
 		{
 			if(AssignFirearm())
 			{
-				return firearm.RecoilOffset;
+				//return firearm.RecoilOffset;
 			}
 
 			return 0;

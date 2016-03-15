@@ -10,9 +10,9 @@ public static class EntityExtensions
 		return entity.GetComponentInChildren<Magazine>();
 	}
 
-	public static AmmoStockPile GetStockPile(this Entity entity)
+	public static Stockpile GetStockPile(this Entity entity)
 	{
-		return entity.GetComponentInChildren<AmmoStockPile>();
+		return entity.GetComponentInChildren<Stockpile>();
 	}
 
 	public static Transform GetEyes(this Entity entity)

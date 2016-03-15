@@ -51,16 +51,8 @@ public class PlayerInputController : InputController
 
 		if(Input.GetMouseButtonDown(1))
 		{
-			if(!Dependency.Get<AimDownSightController>().IsAimingDownSight)
-			{
-				Entity.Events.Invoke(new StartAimDownSightEvent());
-			}
-			else
-			{
-				Entity.Events.Invoke(new StopAimDownSightEvent());
-			}
-		}
-		
+			Entity.Events.Invoke(new ToggleAimDownSightEvent());
+		}		
 
 		if(Input.GetKeyDown(KeyCode.V))
 		{
@@ -69,7 +61,7 @@ public class PlayerInputController : InputController
 
 		if(Input.GetKeyDown(KeyCode.R))
 		{
-			Entity.Events.Invoke(new ReloadEvent());
+			Entity.Events.Invoke(new AttemptReloadEvent());
 		}
 	}
 }

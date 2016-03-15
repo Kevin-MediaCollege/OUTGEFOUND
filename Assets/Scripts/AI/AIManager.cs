@@ -23,25 +23,25 @@ public class AIManager : IGameDependency
 
 	public void Start()
 	{
-		GlobalEvents.AddListener<FireEvent>(OnWeaponFireEvent);
+		GlobalEvents.AddListener<WeaponFireEvent>(OnWeaponFireEvent);
 		GlobalEvents.AddListener<EntityActivatedEvent>(OnEntityActivatedEvent);
 		GlobalEvents.AddListener<EntityDeactivatedEvent>(OnEntityDeactivatedEvent);
 	}
 
 	public void Stop()
 	{
-		GlobalEvents.AddListener<FireEvent>(OnWeaponFireEvent);
+		GlobalEvents.AddListener<WeaponFireEvent>(OnWeaponFireEvent);
 		GlobalEvents.AddListener<EntityActivatedEvent>(OnEntityActivatedEvent);
 		GlobalEvents.AddListener<EntityDeactivatedEvent>(OnEntityDeactivatedEvent);
 
 		all.Clear();
 	}
 
-	private void OnWeaponFireEvent(FireEvent evt)
+	private void OnWeaponFireEvent(WeaponFireEvent evt)
 	{
-		if(evt.Firearm.Wielder.HasTag("Player"))
+		if(evt.Weapon.Wielder.HasTag("Player"))
 		{
-			lastKnownPosition.Position = evt.Firearm.Wielder.transform.position;
+			lastKnownPosition.Position = evt.Weapon.Wielder.transform.position;
 		}
 	}
 

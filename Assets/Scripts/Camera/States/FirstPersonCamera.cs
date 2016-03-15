@@ -35,8 +35,6 @@ public class FirstPersonCamera : MonoBehaviour
 
 	protected void FixedUpdate()
 	{
-		Firearm firearm = player.GetComponentInChildren<Firearm>();
-
 		// Rotate the player
 		player.Rotate(0, Input.GetAxis("Mouse X") * sensitivity.x, 0);
 
@@ -49,11 +47,5 @@ public class FirstPersonCamera : MonoBehaviour
 		// Move the camera to the player's eyes
 		Camera.main.transform.position = eyes.position;
 		Camera.main.transform.rotation = eyes.rotation;
-
-		if(firearm != null && firearm.Firing)
-		{
-			Vector3 shake = UnityEngine.Random.insideUnitCircle * 0.15f;
-			Camera.main.transform.position += shake;
-		}		
 	}
 }

@@ -24,7 +24,7 @@ public class TaskHumanShootCover : TaskHuman
 
 			if(_ai.Entity.GetMagazine().Remaining == 0)
 			{
-				_ai.Entity.Events.Invoke(new ReloadEvent());
+				_ai.Entity.Events.Invoke(new AttemptReloadEvent());
 				break;
 			}
 		}

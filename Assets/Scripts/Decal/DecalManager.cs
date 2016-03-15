@@ -20,4 +20,15 @@ public class DecalManager : IGameDependency
 			Object.Destroy(helper.gameObject);
 		}
 	}
+
+	public void AddDecal(Vector3 point, Vector3 normal, string tag)
+	{
+		if(helper == null)
+		{
+			Debug.LogWarning("No decal manager found");
+			return;
+		}
+
+		helper.AddDecal(point, normal, tag);
+	}
 }

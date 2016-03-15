@@ -4,7 +4,7 @@
 /// Allows an entity to die. Sends an event when the health <= 0
 /// </summary>
 [RequireComponent(typeof(EntityHealth))]
-public class EntityDeath : BaseEntityAddon
+public class EntityDeath : EntityAddon
 {
 	private EntityHealth health;
 
@@ -47,10 +47,10 @@ public class EntityDeath : BaseEntityAddon
 	[ContextMenu("Kill")]
 	private void Kill()
 	{
-		HitInfo hitInfo = new HitInfo(Entity, Entity);
+		HitInfo hitInfo = new HitInfo(Entity, Entity, Vector3.zero, Vector3.zero, "Untagged");
 		DamageInfo damageInfo = new DamageInfo(hitInfo, health.CurrentHealth);
 
-		GlobalEvents.Invoke(new DamageEvent(damageInfo));
+		GlobalEvents.Invoke(new WeaponDamageEvent(null, damageInfo));
 	}
 #endif
 }

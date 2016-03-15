@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 		IEnumerable<Type> types = Reflection.AllTypesFrom<IGameDependency>();
 		foreach(Type type in types)
 		{
-			IGameDependency dependency = Activator.CreateInstance(type) as IGameDependency;
+			IGameDependency dependency = Dependency.Get(type) as IGameDependency;
 
 			dependencies.Add(dependency);
 			dependency.Start();

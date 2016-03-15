@@ -12,16 +12,19 @@ public class Dependency
 
 	public static T Get<T>() where T : IDependency, new()
 	{
-		Type type = typeof(T);
+		return (T)Get(typeof(T));
+	}
 
+	public static IDependency Get(Type type)
+	{
 		if(dependencies.ContainsKey(type))
 		{
-			return (T)dependencies[type];
+			return dependencies[type];
 		}
 
-		IDependency dependency = Activator.CreateInstance<T>();
+		IDependency dependency = Activator.CreateInstance(type) as IDependency;
 		dependencies.Add(type, dependency);
 
-		return (T)dependency;
+		return dependency;
 	}
 }

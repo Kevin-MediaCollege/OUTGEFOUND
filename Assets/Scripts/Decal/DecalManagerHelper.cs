@@ -70,16 +70,6 @@ public class DecalManagerHelper : MonoBehaviour
 		mesh.bounds = new Bounds(new Vector3(0f, 0f, 0f), new Vector3(1000f, 1000f, 1000f));
 	}
 
-	protected void OnEnable()
-	{
-		GlobalEvents.AddListener<SpawnDecalEvent>(OnSpawnDecalEvent);
-	}
-
-	protected void OnDisable()
-	{
-		GlobalEvents.RemoveListener<SpawnDecalEvent>(OnSpawnDecalEvent);
-	}
-
 	protected void Update()
 	{
 		if(meshUpdated)
@@ -90,17 +80,17 @@ public class DecalManagerHelper : MonoBehaviour
 		}
 	}
 
-	private void OnSpawnDecalEvent(SpawnDecalEvent evt)
+	public void AddDecal(Vector3 point, Vector3 normal, string tag)
 	{
-		if(evt.Normal == Vector3.zero || evt.Tag != "Wall") { return; }
+		if(normal == Vector3.zero || tag != "Wall") { return; }
 
-		float size = 0.07f + UnityEngine.Random.Range(0f, 0.02f);
-		Quaternion q = Quaternion.LookRotation (-evt.Normal);
+		float size = 0.07f + Random.Range(0f, 0.02f);
+		Quaternion q = Quaternion.LookRotation (-normal);
 		q.eulerAngles = new Vector3(q.eulerAngles.x, q.eulerAngles.y, q.eulerAngles.z + UnityEngine.Random.Range(0f, 360f));
-		verts[nextPool * 4]     = evt.Position + (q * (Vector3.left * size)) + (q * (Vector3.up * size)) + q * (Vector3.back * 0.01f);
-		verts[nextPool * 4 + 1] = evt.Position + (q * (Vector3.right * size)) + (q * (Vector3.up * size)) + q * (Vector3.back * 0.01f);
-		verts[nextPool * 4 + 2] = evt.Position + (q * (Vector3.left * size)) + (q * (Vector3.down * size)) + q * (Vector3.back * 0.01f);
-		verts[nextPool * 4 + 3] = evt.Position + (q * (Vector3.right * size)) + (q * (Vector3.down * size)) + q * (Vector3.back * 0.01f);
+		verts[nextPool * 4]     = point + (q * (Vector3.left * size)) + (q * (Vector3.up * size)) + q * (Vector3.back * 0.01f);
+		verts[nextPool * 4 + 1] = point + (q * (Vector3.right * size)) + (q * (Vector3.up * size)) + q * (Vector3.back * 0.01f);
+		verts[nextPool * 4 + 2] = point + (q * (Vector3.left * size)) + (q * (Vector3.down * size)) + q * (Vector3.back * 0.01f);
+		verts[nextPool * 4 + 3] = point + (q * (Vector3.right * size)) + (q * (Vector3.down * size)) + q * (Vector3.back * 0.01f);
 		nextPool = nextPool >= poolLenght - 1 ? 0 : nextPool + 1;
 		meshUpdated = true;
 	}

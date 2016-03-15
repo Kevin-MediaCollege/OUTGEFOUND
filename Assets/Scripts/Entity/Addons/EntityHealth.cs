@@ -4,7 +4,7 @@
 /// Give an entity health. This does *not* allow it to die, you need an EntityDead component for that.
 /// EntityHealth just keeps track of the entities current health
 /// </summary>
-public class EntityHealth : BaseEntityAddon
+public class EntityHealth : EntityAddon
 {
 	public delegate void OnDamageReceived(DamageInfo damageInfo);
 	public event OnDamageReceived onDamageReceivedEvent = delegate { };
@@ -32,22 +32,22 @@ public class EntityHealth : BaseEntityAddon
 	{
 		Entity.Events.AddListener<RefillHealthEvent>(OnRefillHealthEvent);
 
-		GlobalEvents.AddListener<DamageEvent>(OnDamageEvent);
+		GlobalEvents.AddListener<WeaponDamageEvent>(OnDamageEvent);
 	}
 
 	protected void OnDisable()
 	{
 		Entity.Events.RemoveListener<RefillHealthEvent>(OnRefillHealthEvent);
 
-		GlobalEvents.RemoveListener<DamageEvent>(OnDamageEvent);
+		GlobalEvents.RemoveListener<WeaponDamageEvent>(OnDamageEvent);
 	}
 
-	private void OnDamageEvent(DamageEvent evt)
+	private void OnDamageEvent(WeaponDamageEvent evt)
 	{
-		if(evt.DamageInfo.Hit.Target == Entity)
+		if(evt.Damage.hit.target == Entity)
 		{
-			CurrentHealth -= evt.DamageInfo.Damage;
-			onDamageReceivedEvent(evt.DamageInfo);
+			CurrentHealth -= evt.Damage.amount;
+			onDamageReceivedEvent(evt.Damage);
 		}
 	}
 
@@ -77,10 +77,10 @@ public class EntityHealth : BaseEntityAddon
 
 	private void Damage(float damage)
 	{
-		HitInfo hitInfo = new HitInfo(Entity, Entity);
+		HitInfo hitInfo = new HitInfo(Entity, Entity, Vector3.zero, Vector3.zero, "Untagged");
 		DamageInfo damageInfo = new DamageInfo(hitInfo, damage);
 
-		GlobalEvents.Invoke(new DamageEvent(damageInfo));
+		GlobalEvents.Invoke(new WeaponDamageEvent(null, damageInfo));
 	}
 #endif
 }

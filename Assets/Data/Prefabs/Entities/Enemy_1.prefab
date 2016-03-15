@@ -123,9 +123,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 408760}
-  - 114: {fileID: 11429006}
-  - 114: {fileID: 11459348}
-  - 114: {fileID: 11458000}
+  - 114: {fileID: 11463378}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -498,18 +496,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 10
---- !u!114 &11429006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 144674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43f057f33995df94892e059d8509cf6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  capacity: 30
 --- !u!114 &11432316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -521,7 +507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 172cb9d6f6a3db14f86cd4be8d555cb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11458000
+--- !u!114 &11463378
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -529,25 +515,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 144674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02aa13506476e534e8d16235c227a0f5, type: 3}
+  m_Script: {fileID: 11500000, guid: 6662cc8dc479f404e8dfaa8c03ec2fe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingWeapon: {fileID: 11435006, guid: a343e63c83d3f46428abc23634985a66, type: 2}
-  anchor: {fileID: 403616}
---- !u!114 &11459348
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 144674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb4a218f8d0780948bb70709a6cb26ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 4097
+  parent: {fileID: 403616}
+  weapon: {fileID: 11425988, guid: a343e63c83d3f46428abc23634985a66, type: 2}
 --- !u!114 &11464590
 MonoBehaviour:
   m_ObjectHideFlags: 1

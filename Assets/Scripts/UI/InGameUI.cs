@@ -7,7 +7,7 @@ public class InGameUI : MonoBehaviour
 {
 	private Entity playerEntity;
 	private Magazine playerMagazine;
-	private AmmoStockPile playerStockPile;
+	private Stockpile playerStockPile;
 	private Currency playerCurrency;
 
 	//CREDITS
@@ -46,7 +46,7 @@ public class InGameUI : MonoBehaviour
 	protected void Update() 
 	{
 		text_ammoCurrent.text = "" + playerMagazine.Remaining;
-		text_ammoLeft.text = "" + playerStockPile.Current;
+		text_ammoLeft.text = "" + playerStockPile.Remaining;
 		text_credits.text = playerCurrency.Amount + " CR";
 	}
 

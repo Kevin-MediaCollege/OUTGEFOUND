@@ -30,9 +30,9 @@ public class Currency : IGameDependency
 			Amount = 0;
 		}
 		// Add currency if the target is an enemy
-		else if(target.HasTag("Enemy") && evt.DamageInfo.Hit.Source.HasTag("Player"))
+		else if(target.HasTag("Enemy") && evt.Damage.hit.source.HasTag("Player"))
 		{
-			string tag = evt.DamageInfo.Hit.Tag;
+			string tag = evt.Damage.hit.tag;
 
 			switch(tag)
 			{
