@@ -42,16 +42,51 @@ public class EnemySpawnManager : MonoBehaviour
 		testDelay -= Time.deltaTime;
 		if(testDelay < 0f)
 		{
-			GameObject g = GameObject.Instantiate (enemyObject);
-			g.transform.SetParent (enemyParent.transform);
-			g.transform.position = points [nextSpawnCheck].transform.position + new Vector3 (0f, 1f, 0f);
-			g.SetActive (true);
-			testDelay = 8f;
+			EnemySpawnPoint s = getRandomSpawnpoint();
+			if(s != null)
+			{
+				GameObject g = GameObject.Instantiate (enemyObject);
+				g.transform.SetParent (enemyParent.transform);
+				g.transform.position = s.transform.position + new Vector3 (0f, 1f, 0f);
+				g.SetActive (true);
+			}
+			testDelay = 6f;
 		}
 	}
 
-	public Vector3 getRandomSpawnpoint()
+	public EnemySpawnPoint getRandomSpawnpoint()
 	{
-		return Vector3.zero;
+		//ik remove dit als er geen errors gebeuren
+		int breaksafe = 0;
+
+		if(pointsLenght == 0)
+		{
+			Debug.LogError("Spawnpoint array lenght is 0");
+			return null;
+		}
+
+		int start = Random.Range(0, pointsLenght - 1);
+		for(int i = start + 1; i != start; i++)
+		{
+			if(i == pointsLenght)
+			{
+				i = 0;
+			}
+
+			if(points[i].safe)
+			{
+				return points[i];
+			}
+
+			//ik remove dit als er geen errors gebeuren
+			breaksafe++;
+			if(breaksafe > 100)
+			{
+				Debug.LogWarning("Failed to find a safe spawnpoint");
+				break;
+			}
+		}
+
+		return null;
 	}
 }
