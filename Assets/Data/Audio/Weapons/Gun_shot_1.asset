@@ -17,5 +17,5 @@ MonoBehaviour:
   volume: 0.3
   pitch: -3
   stereoPan: 0
-  spatialBlend: 0
+  spatialBlend: 1
   reverbZoneMix: 1.1
