@@ -77,7 +77,7 @@ GameObject:
   - 4: {fileID: 406604}
   - 135: {fileID: 13506910}
   - 114: {fileID: 11427106}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Ammo Store
   m_TagString: Untagged
   m_Icon: {fileID: 0}

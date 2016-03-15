@@ -11,6 +11,7 @@ public class FirearmAudio : WeaponComponent
 
 	[SerializeField] private Vector2 gunshotPitchRange;
 
+	[SerializeField] private bool interval;
 	[SerializeField] private float gunshotInterval;
 
 	private AudioManager audioManager;
@@ -50,10 +51,22 @@ public class FirearmAudio : WeaponComponent
 
 	public override void OnFire(HitInfo hit)
 	{
-		if(Time.time - lastGunshotTime > gunshotInterval)
-		{
-			lastGunshotTime = Time.time;
+		bool canFire = true;
 
+		if(interval)
+		{
+			if(Time.time - lastGunshotTime < gunshotInterval)
+			{
+				canFire = false;
+			}
+			else
+			{
+				lastGunshotTime = Time.time;
+			}
+		}
+
+		if(canFire)
+		{		
 			AudioChannel audioChannel = audioManager.PlayAt(gunshot, ((Firearm)Weapon).Position);
 			if(audioChannel != null)
 			{

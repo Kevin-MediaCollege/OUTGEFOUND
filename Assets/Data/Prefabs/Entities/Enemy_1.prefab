@@ -495,7 +495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ae2ad135bcc1f4196ec35c1efb02e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 10
+  startingHealth: 7
 --- !u!114 &11432316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -567,7 +567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7997a47139144df44aaa44f1daab2b6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 4
   jumpSpeed: 0
   navMeshAgent: {fileID: 19584216}
 --- !u!114 &11480096
@@ -738,6 +738,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: startingTags.Array.data[1]
       value: AI
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: speed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: startingHealth
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

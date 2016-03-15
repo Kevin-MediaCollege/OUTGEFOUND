@@ -446,7 +446,7 @@ MonoBehaviour:
     m_Bits: 4097
   damage: 1
   barrel: {fileID: 430286}
-  range: 100
+  range: 1000
 --- !u!114 &11427896
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -523,6 +523,7 @@ MonoBehaviour:
   reload: {fileID: 11400000, guid: 7cbde8978b1b7b24ca575a45a7354bab, type: 2}
   emptyClip: {fileID: 0}
   gunshotPitchRange: {x: 0.8, y: 1.2}
+  interval: 1
   gunshotInterval: 0.1
 --- !u!212 &21262448
 SpriteRenderer:
@@ -627,11 +628,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: range
-      value: 100
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: layers.m_Bits
       value: 4097
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: interval
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
