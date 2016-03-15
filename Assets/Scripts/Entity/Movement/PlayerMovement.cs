@@ -5,8 +5,12 @@
 /// </summary>
 public class PlayerMovement : EntityMovement
 {
+	[SerializeField] private float adsSpeed;
+
 	[SerializeField] private CharacterController characterController;
 	[SerializeField] private PlayerInputController playerInputController;
+
+	private bool ads;
 
 	protected override void Awake()
 	{
@@ -15,10 +19,22 @@ public class PlayerMovement : EntityMovement
 		Dependency.Get<CameraStateManager>().SetToDefaultState();
 	}
 
+	protected void OnEnable()
+	{
+		GlobalEvents.AddListener<StartAimDownSightEvent>(OnStartAimDownSightEvent);
+		GlobalEvents.AddListener<StopAimDownSightEvent>(OnStopAimDownSightEvent);
+	}
+
+	protected void OnDisable()
+	{
+		GlobalEvents.RemoveListener<StartAimDownSightEvent>(OnStartAimDownSightEvent);
+		GlobalEvents.RemoveListener<StopAimDownSightEvent>(OnStopAimDownSightEvent);
+	}
+
 	protected void FixedUpdate()
 	{
-		Vector3 velocityX = transform.right * playerInputController.InputX * speed;
-		Vector3 velocityZ = transform.forward * playerInputController.InputZ * speed;
+		Vector3 velocityX = transform.right * playerInputController.InputX * (ads ? adsSpeed : speed);
+		Vector3 velocityZ = transform.forward * playerInputController.InputZ * (ads ? adsSpeed : speed);
 
 		if(characterController.isGrounded)
 		{
@@ -33,5 +49,15 @@ public class PlayerMovement : EntityMovement
 		velocity.y = verticalSpeed;
 
 		characterController.Move(velocity * Time.deltaTime);
+	}
+
+	private void OnStartAimDownSightEvent(StartAimDownSightEvent evt)
+	{
+		ads = true;
+	}
+
+	private void OnStopAimDownSightEvent(StopAimDownSightEvent evt)
+	{
+		ads = false;
 	}
 }

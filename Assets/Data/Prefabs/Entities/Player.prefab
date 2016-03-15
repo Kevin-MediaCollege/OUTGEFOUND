@@ -431,7 +431,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  jumpSpeed: 6.5
+  jumpSpeed: 4
+  adsSpeed: 2.3
   characterController: {fileID: 14374550}
   playerInputController: {fileID: 11491956}
 --- !u!114 &11440944
