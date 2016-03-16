@@ -16,15 +16,18 @@ public class ScreenStart : ScreenBase
 
 	protected void Update()
 	{
+		/*
 		if(Input.anyKeyDown)
 		{
 			ScreenManager.Instance.SetScreen("ScreenMainMenu");
 		}
+		*/
 	}
 
 	public override void OnScreenEnter()
 	{
 		overlay.alpha = 1f;
+		group.alpha = 0f;
 	}
 
 	public override IEnumerator OnScreenFadeIn()
@@ -34,10 +37,19 @@ public class ScreenStart : ScreenBase
 		HOTweenHelper.Fade(overlay, 1f, 0f, 0.5f, 0f);
 
 		yield return new WaitForSeconds (0.5f);
+
+		StartCoroutine(skip());
 	}
+
+	public IEnumerator skip()
+	{
+		yield return null;
+		ScreenManager.Instance.SetScreen("ScreenMainMenu");
+	}
+
 	public override IEnumerator OnScreenFadeOut()
 	{
-		HOTweenHelper.Fade(group, 1f, 0f, 0.2f, 0f);
+		//HOTweenHelper.Fade(group, 1f, 0f, 0.2f, 0f);
 
 		//yield return MenuCamera.instance.flyFromTo("Start", "Menu");
 

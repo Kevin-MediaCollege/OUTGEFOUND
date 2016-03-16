@@ -4,6 +4,10 @@ using System.Collections;
 using System;
 using UnityEngine.Serialization;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class ScreenMainMenu : ScreenBase, ICommunicant
 {
 	public override string Name
@@ -20,6 +24,7 @@ public class ScreenMainMenu : ScreenBase, ICommunicant
 	[SerializeField] private Touchable buttonLevel;
 	[SerializeField] private Touchable buttonOptions;
 	[SerializeField] private Touchable buttonCredits;
+	[SerializeField] private Touchable buttonQuit;
 
 	[SerializeField] private Animator door_credits;
 	[SerializeField] private Animator door_options;
@@ -34,6 +39,7 @@ public class ScreenMainMenu : ScreenBase, ICommunicant
 		buttonLevel.OnPointerDownEvent += OnButtonLevel;
 		buttonOptions.OnPointerDownEvent += OnButtonOptions;
 		buttonCredits.OnPointerDownEvent += OnButtonCredits;
+		buttonQuit.OnPointerDownEvent += OnButtonQuit;
 
 		overlay.gameObject.SetActive(false);
 	}
@@ -63,6 +69,16 @@ public class ScreenMainMenu : ScreenBase, ICommunicant
 		door_credits.SetBool("Open", true);
 		MenuCamera.instance.prepare("Menu", "Credits");
 		ScreenManager.Instance.SetScreen("ScreenCredits");
+	}
+
+	void OnButtonQuit (Touchable _sender, UnityEngine.EventSystems.PointerEventData _eventData)
+	{
+		#if UNITY_EDITOR
+		Debug.Log("hype");
+		EditorApplication.ExecuteMenuItem("Edit/Play");
+		#else
+		System.Diagnostics.Process.GetCurrentProcess().Kill();
+		#endif
 	}
 
 	public override void OnScreenEnter()
