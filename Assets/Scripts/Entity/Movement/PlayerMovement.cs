@@ -12,13 +12,6 @@ public class PlayerMovement : EntityMovement
 
 	private bool ads;
 
-	protected override void Awake()
-	{
-		base.Awake();
-
-		Dependency.Get<CameraStateManager>().SetToDefaultState();
-	}
-
 	protected void OnEnable()
 	{
 		GlobalEvents.AddListener<StartAimDownSightEvent>(OnStartAimDownSightEvent);

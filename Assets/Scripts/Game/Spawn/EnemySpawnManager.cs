@@ -4,7 +4,7 @@ using System.Collections;
 public class EnemySpawnManager : MonoBehaviour 
 {
 	public LayerMask layer;
-	public GameObject enemyObject;
+	public string enemyObject;
 	public GameObject enemyParent;
 
 	public EnemySpawnPoint[] points;
@@ -19,7 +19,6 @@ public class EnemySpawnManager : MonoBehaviour
 	{
 		pointsLenght = points.Length;
 		nextSpawnCheck = 0;
-		enemyObject.SetActive (false);
 	}
 
 	void Update()
@@ -45,7 +44,7 @@ public class EnemySpawnManager : MonoBehaviour
 			EnemySpawnPoint s = getRandomSpawnpoint();
 			if(s != null)
 			{
-				GameObject g = GameObject.Instantiate (enemyObject);
+				GameObject g = Instantiate(Resources.Load(enemyObject)) as GameObject;
 				g.transform.SetParent (enemyParent.transform);
 				g.transform.position = s.transform.position + new Vector3 (0f, 1f, 0f);
 				g.SetActive (true);

@@ -27,9 +27,6 @@ public class InGameUI : MonoBehaviour
 	{
 		text_scorePopupGroup.alpha = 0f;
 
-		playerEntity = EntityUtils.GetEntityWithTag("Player");
-		playerMagazine = playerEntity.GetMagazine();
-		playerStockPile = playerEntity.GetStockPile();
 		playerCurrency = Dependency.Get<Currency>();
 	}
 
@@ -45,6 +42,26 @@ public class InGameUI : MonoBehaviour
 
 	protected void Update() 
 	{
+		if(playerEntity == null || playerMagazine == null || playerStockPile == null)
+		{
+			playerEntity = EntityUtils.GetEntityWithTag("Player");
+
+			if(playerEntity == null)
+			{
+				Debug.LogError("No player found");
+				return;
+			}
+
+			playerMagazine = playerEntity.GetMagazine();
+			playerStockPile = playerEntity.GetStockPile();
+
+			if(playerMagazine == null || playerStockPile == null)
+			{
+				Debug.LogError("No magazine or stockpile found");
+				return;
+			}
+		}
+
 		text_ammoCurrent.text = "" + playerMagazine.Remaining;
 		text_ammoLeft.text = "" + playerStockPile.Remaining;
 		text_credits.text = playerCurrency.Amount + " CR";

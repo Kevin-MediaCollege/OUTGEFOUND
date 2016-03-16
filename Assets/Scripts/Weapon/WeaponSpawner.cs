@@ -4,14 +4,14 @@
 public class WeaponSpawner : MonoBehaviour
 {
 	[SerializeField] private Transform parent;
-	[SerializeField] private Weapon weapon;
+	[SerializeField] private string weaponName;
 
-	protected void Awake()
+	protected void Start()
 	{
-		GameObject weapon = Instantiate(this.weapon.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
+		GameObject prefab = Resources.Load<GameObject>(weaponName);
+		GameObject weapon = Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
+
 		weapon.transform.SetParent(parent, false);
 		weapon.SetActive(true);
-
-		Destroy(this);
 	}
 }
