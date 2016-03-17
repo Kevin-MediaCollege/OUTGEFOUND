@@ -174,6 +174,7 @@ Transform:
   - {fileID: 445168}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &406494
 Transform:
   m_ObjectHideFlags: 1
@@ -186,6 +187,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 436180}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &407122
 Transform:
   m_ObjectHideFlags: 1
@@ -198,6 +200,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 405450}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &407182
 Transform:
   m_ObjectHideFlags: 1
@@ -210,6 +213,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 405450}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &430286
 Transform:
   m_ObjectHideFlags: 1
@@ -222,6 +226,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 405450}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &436180
 Transform:
   m_ObjectHideFlags: 1
@@ -237,6 +242,7 @@ Transform:
   - {fileID: 496926}
   m_Father: {fileID: 405450}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &445168
 Transform:
   m_ObjectHideFlags: 1
@@ -249,6 +255,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 405450}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &490194
 Transform:
   m_ObjectHideFlags: 1
@@ -261,6 +268,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 436180}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &496926
 Transform:
   m_ObjectHideFlags: 1
@@ -273,6 +281,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 436180}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2307564
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -282,13 +291,14 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: e336b600201f1a8428ffe86e4a0b8b5a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -308,13 +318,14 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: cc155bc7c8cc3b84db49d159994aa575, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -334,13 +345,14 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: bb58bd5f44273ed44af7802c13c8b784, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -412,7 +424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44be5ed674a10cd4b8267d9626d6243c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: 1.3
+  head: 2
   body: 1
   limbs: 0.7
 --- !u!114 &11403432
@@ -589,13 +601,14 @@ SpriteRenderer:
   m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 0
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
