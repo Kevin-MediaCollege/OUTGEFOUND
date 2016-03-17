@@ -6,15 +6,19 @@
 public abstract class Store : MonoBehaviour
 {
 	[SerializeField] private Canvas storeUI;
+	[SerializeField] private new AudioAsset audio;
 	[SerializeField] private int price;
 
 	private Currency currency;
+	private AudioManager audioManager;
 
 	private bool inRange;
 
 	protected void Awake()
 	{
 		currency = Dependency.Get<Currency>();
+		audioManager = Dependency.Get<AudioManager>();
+
 		storeUI.enabled = false;
 	}
 
@@ -63,6 +67,7 @@ public abstract class Store : MonoBehaviour
 			Purchase();
 
 			currency.Amount -= price;
+			audioManager.Play(audio);
 		}
 	}
 }

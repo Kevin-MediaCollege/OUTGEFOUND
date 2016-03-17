@@ -14,7 +14,7 @@ MonoBehaviour:
   audioClip: {fileID: 8300000, guid: 8cabf06599594c14594a94c4a4df05d7, type: 3}
   audioMixerGroup: {fileID: 0}
   type: 0
-  volume: 1
+  volume: 0.7
   pitch: 1
   stereoPan: 0
   spatialBlend: 1
