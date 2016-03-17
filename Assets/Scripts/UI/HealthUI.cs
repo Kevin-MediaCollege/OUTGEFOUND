@@ -9,6 +9,11 @@ public class HealthUI : MonoBehaviour
 	private Entity player;
 	private EntityHealth health;
 
+	protected void Start()
+	{
+		image.material = new Material(image.material);
+	}
+
 	protected void LateUpdate()
 	{
 		if(player == null || health == null)
