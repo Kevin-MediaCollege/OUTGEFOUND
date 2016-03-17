@@ -877,12 +877,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3735644, g: 0.38112032, b: 0.35887682, a: 1}
+  m_IndirectSpecularColor: {r: 0.37356448, g: 0.3811204, b: 0.35887685, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 7
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -911,7 +911,8 @@ LightmapSettings:
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 1024
     m_ReflectionCompression: 2
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000896, guid: 093e74f9532abcf4a8cac3b30a1da84c,
+    type: 2}
   m_RuntimeCPUUsage: 75
 --- !u!196 &4
 NavMeshSettings:
@@ -8570,6 +8571,7 @@ Transform:
   - {fileID: 1501782970}
   - {fileID: 2016770240}
   - {fileID: 230349929}
+  - {fileID: 906855874}
   - {fileID: 1681911342}
   - {fileID: 1504988109}
   - {fileID: 825362021}
@@ -8577,7 +8579,6 @@ Transform:
   - {fileID: 261681180}
   - {fileID: 43790517}
   - {fileID: 774640039}
-  - {fileID: 906855874}
   - {fileID: 1126909550}
   - {fileID: 1628226262}
   - {fileID: 604043085}
@@ -8603,6 +8604,7 @@ Transform:
   - {fileID: 52112244}
   - {fileID: 665358270}
   - {fileID: 2131858509}
+  - {fileID: 742707136}
   - {fileID: 128595986}
   - {fileID: 269056426}
   - {fileID: 509077818}
@@ -8610,7 +8612,6 @@ Transform:
   - {fileID: 1027173476}
   - {fileID: 187640409}
   - {fileID: 1255557124}
-  - {fileID: 742707136}
   - {fileID: 1640594552}
   - {fileID: 1381283694}
   - {fileID: 213835843}
@@ -18098,7 +18099,7 @@ Transform:
   - {fileID: 1021597221}
   - {fileID: 1950372218}
   m_Father: {fileID: 353435448}
-  m_RootOrder: 183
+  m_RootOrder: 176
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &745123022
 Prefab:
@@ -21499,7 +21500,7 @@ Transform:
   - {fileID: 1245716562}
   - {fileID: 2010383444}
   m_Father: {fileID: 353435448}
-  m_RootOrder: 150
+  m_RootOrder: 143
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &908468139
 Prefab:
