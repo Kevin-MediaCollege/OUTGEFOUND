@@ -12,9 +12,9 @@ public class TaskHumanShootCover : TaskHuman
 
 	public override IEnumerator RunTask(AIHuman _ai)
 	{
-		if (cover.GetType () == typeof(CoverObstacle)) 
+		if (cover.GetType () == typeof(CoverWall)) 
 		{
-			CoverObstacle coverObstacle = (CoverObstacle)cover;
+			CoverWall coverObstacle = (CoverWall)cover;
 			if (_ai.Entity.GetMagazine ().Remaining == 0) 
 			{
 				_ai.MoveTo (coverObstacle.transform.position);

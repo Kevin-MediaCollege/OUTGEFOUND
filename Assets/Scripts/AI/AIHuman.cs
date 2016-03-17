@@ -71,9 +71,9 @@ public class AIHuman : AIBase
 				{
 					//Debug.Log("NEW TASK: Walk to cover");
 					CurrentCover.Occupant = Entity;
-					if (CurrentCover.GetType () == typeof(CoverObstacle)) 
+					if (CurrentCover.GetType () == typeof(CoverWall)) 
 					{
-						TaskHumanWalkToCover task = new TaskHumanWalkToCover(((CoverObstacle)CurrentCover).ShootPosition);
+						TaskHumanWalkToCover task = new TaskHumanWalkToCover(((CoverWall)CurrentCover).ShootPosition);
 						yield return task.RunTask(this);
 					} 
 					else 
