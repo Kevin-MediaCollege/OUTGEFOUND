@@ -64,7 +64,10 @@ public class FirearmReloader : WeaponComponent
 
 	private IEnumerator Reload()
 	{
-		Weapon.Wielder.Events.Invoke(new ReloadEvent());
+		if(stockpile.Empty)
+		{
+			yield break;
+		}
 
 		reloading = true;
 
@@ -77,5 +80,7 @@ public class FirearmReloader : WeaponComponent
 		magazineEmpty = false;
 
 		stockpile.FillMagazine();
+
+		Weapon.Wielder.Events.Invoke(new ReloadEvent());
 	}
 }

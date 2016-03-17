@@ -15,6 +15,7 @@ public class FirearmAudio : WeaponComponent
 	[SerializeField] private float gunshotInterval;
 
 	private AudioManager audioManager;
+	private AudioChannel emptyClipAudioChannel;
 
 	private bool magazineEmpty;
 
@@ -45,7 +46,12 @@ public class FirearmAudio : WeaponComponent
 	{
 		if(magazineEmpty)
 		{
-			audioManager.PlayAt(emptyClip, ((Firearm)Weapon).Position);
+			if(emptyClipAudioChannel != null && emptyClipAudioChannel.AudioAsset == emptyClip && emptyClipAudioChannel.IsPlaying)
+			{
+				return;
+			}
+
+			emptyClipAudioChannel = audioManager.PlayAt(emptyClip, ((Firearm)Weapon).Position);
 		}
 	}
 
@@ -84,5 +90,6 @@ public class FirearmAudio : WeaponComponent
 	private void OnMagazineEmptyEvent(MagazineEmptyEvent evt)
 	{
 		magazineEmpty = true;
+		emptyClipAudioChannel = audioManager.PlayAt(emptyClip, ((Firearm)Weapon).Position);
 	}
 }
