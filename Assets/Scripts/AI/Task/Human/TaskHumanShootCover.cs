@@ -70,6 +70,7 @@ public class TaskHumanShootCover : TaskHuman
 
 					if(health.CurrentHealth < startHealth - 2f)
 					{
+						_ai.Entity.Events.Invoke(new StopFireEvent());
 						_ai.MoveTo (coverObstacle.transform.position);
 						for(int j = 0; j < 16; j++)
 						{
@@ -80,7 +81,7 @@ public class TaskHumanShootCover : TaskHuman
 								break;
 							}
 
-							yield return new WaitForSeconds (1f);
+							yield return new WaitForSeconds (2f);
 						}
 						yield break;
 					}
