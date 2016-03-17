@@ -42,6 +42,11 @@ public class PlayerMovement : EntityMovement
 		velocity.y = verticalSpeed;
 
 		characterController.Move(velocity * Time.deltaTime);
+
+		if(characterController.velocity.magnitude > 0)
+		{
+			PlayFootstep();
+		}
 	}
 
 	private void OnStartAimDownSightEvent(StartAimDownSightEvent evt)

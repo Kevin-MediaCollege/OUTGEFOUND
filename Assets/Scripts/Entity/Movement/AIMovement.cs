@@ -15,6 +15,14 @@ public class AIMovement : EntityMovement
 
 	[SerializeField] private NavMeshAgent navMeshAgent;
 
+	protected void FixedUpdate()
+	{
+		if(navMeshAgent.velocity.magnitude > 0)
+		{
+			PlayFootstep();
+		}
+	}
+
 	public bool MoveTo(Vector3 point)
 	{
 		if(navMeshAgent.SetDestination(point))

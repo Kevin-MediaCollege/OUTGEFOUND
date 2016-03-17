@@ -586,6 +586,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   jumpSpeed: 0
+  footstep: {fileID: 11400000, guid: 65d8fe6bd09a0df4bbe1b0e0da2f4d1a, type: 2}
+  footstepInterval: 0.38
   navMeshAgent: {fileID: 19584216}
 --- !u!114 &11480096
 MonoBehaviour:
