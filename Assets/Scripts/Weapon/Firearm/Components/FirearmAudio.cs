@@ -3,7 +3,13 @@
 [AddComponentMenu("Weapon/Firearm/Components/Firearm Audio")]
 public class FirearmAudio : WeaponComponent
 {
-	private static float lastGunshotTime;
+	private enum Mode
+	{
+		TwoD,
+		ThreeD
+	}
+
+	[SerializeField] private Mode mode;
 
 	[SerializeField] private AudioAsset gunshot;
 	[SerializeField] private AudioAsset reload;
@@ -16,6 +22,8 @@ public class FirearmAudio : WeaponComponent
 
 	private AudioManager audioManager;
 	private AudioChannel emptyClipAudioChannel;
+
+	private float lastGunshotTime;
 
 	private bool magazineEmpty;
 
@@ -52,6 +60,7 @@ public class FirearmAudio : WeaponComponent
 			}
 
 			emptyClipAudioChannel = audioManager.PlayAt(emptyClip, ((Firearm)Weapon).Position);
+			SetSpatialBlend(emptyClipAudioChannel);
 		}
 	}
 
@@ -77,19 +86,37 @@ public class FirearmAudio : WeaponComponent
 			if(audioChannel != null)
 			{
 				audioChannel.Pitch = Random.Range(gunshotPitchRange.x, gunshotPitchRange.y);
+				SetSpatialBlend(audioChannel);
 			}
+		}
+	}
+
+	private void SetSpatialBlend(AudioChannel audioChannel)
+	{
+		switch(mode)
+		{
+		case Mode.TwoD:
+			audioChannel.SpatialBlend = 0;
+			break;
+		case Mode.ThreeD:
+			audioChannel.SpatialBlend = 1;
+			break;
 		}
 	}
 
 	private void OnReloadEvent(ReloadEvent evt)
 	{
-		audioManager.PlayAt(reload, ((Firearm)Weapon).Position);
+		AudioChannel channel = audioManager.PlayAt(reload, ((Firearm)Weapon).Position);
+		SetSpatialBlend(channel);
+
 		magazineEmpty = false;
 	}
 
 	private void OnMagazineEmptyEvent(MagazineEmptyEvent evt)
 	{
 		magazineEmpty = true;
+
 		emptyClipAudioChannel = audioManager.PlayAt(emptyClip, ((Firearm)Weapon).Position);
+		SetSpatialBlend(emptyClipAudioChannel);
 	}
 }

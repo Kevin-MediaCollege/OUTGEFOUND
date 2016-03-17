@@ -3,7 +3,14 @@ using System.Collections;
 
 public class RoomAudio : MonoBehaviour
 {
+	private enum Mode
+	{
+		TwoD,
+		ThreeD,
+	}
+
 	[SerializeField] private new AudioAsset audio;
+	[SerializeField] private Mode mode;
 
 	[SerializeField] private float min;
 	[SerializeField] private float max;
@@ -12,8 +19,17 @@ public class RoomAudio : MonoBehaviour
 	{
 		AudioChannel audioChannel = Dependency.Get<AudioManager>().PlayAt(audio, transform.position, true);
 		audioChannel.IsClaimed = true;
-		audioChannel.AudioSource.minDistance = min;
-		audioChannel.AudioSource.maxDistance = max;
+
+		if(mode == Mode.ThreeD)
+		{
+			audioChannel.SpatialBlend = 1;
+			audioChannel.AudioSource.minDistance = min;
+			audioChannel.AudioSource.maxDistance = max;
+		}
+		else
+		{
+			audioChannel.SpatialBlend = 0;
+		}
 	}
 
 	protected void OnDrawGizmosSelected()
