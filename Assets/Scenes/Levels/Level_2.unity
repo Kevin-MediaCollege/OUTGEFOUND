@@ -12935,7 +12935,7 @@ MonoBehaviour:
   points:
   - {fileID: 1818487166}
   - {fileID: 1866884939}
-  testDelay: 5
+  testDelay: 40
 --- !u!4 &1821242730
 Transform:
   m_ObjectHideFlags: 0
