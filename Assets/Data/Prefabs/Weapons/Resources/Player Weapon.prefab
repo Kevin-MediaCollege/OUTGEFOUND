@@ -440,7 +440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magazine: {fileID: 11439358}
-  max: 30
+  max: 240
   unlimited: 0
 --- !u!114 &11412128
 MonoBehaviour:
