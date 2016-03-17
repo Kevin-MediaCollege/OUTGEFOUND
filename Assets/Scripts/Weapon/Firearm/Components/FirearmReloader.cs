@@ -9,6 +9,7 @@ public class FirearmReloader : WeaponComponent
 	private Stockpile stockpile;
 
 	private bool reloading;
+	private bool magazineEmpty;
 
 	protected override void Awake()
 	{
@@ -22,6 +23,7 @@ public class FirearmReloader : WeaponComponent
 		base.OnEnable();
 
 		Weapon.Wielder.Events.AddListener<AttemptReloadEvent>(OnAttemptReloadEvent);
+		Weapon.Wielder.Events.AddListener<MagazineEmptyEvent>(OnMagazineEmptyEvent);
 	}
 
 	protected override void OnDisable()
@@ -29,6 +31,15 @@ public class FirearmReloader : WeaponComponent
 		base.OnDisable();
 
 		Weapon.Wielder.Events.RemoveListener<AttemptReloadEvent>(OnAttemptReloadEvent);
+		Weapon.Wielder.Events.RemoveListener<MagazineEmptyEvent>(OnMagazineEmptyEvent);
+	}
+
+	public override void TryFire()
+	{
+		if(magazineEmpty && !reloading)
+		{
+			StartCoroutine("Reload");
+		}
 	}
 
 	public override bool CanFire()
@@ -46,6 +57,11 @@ public class FirearmReloader : WeaponComponent
 		StartCoroutine("Reload");
 	}
 
+	private void OnMagazineEmptyEvent(MagazineEmptyEvent evt)
+	{
+		magazineEmpty = true;
+	}
+
 	private IEnumerator Reload()
 	{
 		Weapon.Wielder.Events.Invoke(new ReloadEvent());
@@ -58,6 +74,7 @@ public class FirearmReloader : WeaponComponent
 		yield return new WaitForSeconds(reloadSpeed);
 
 		reloading = false;
+		magazineEmpty = false;
 
 		stockpile.FillMagazine();
 	}

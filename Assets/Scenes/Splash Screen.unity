@@ -42,7 +42,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 7
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -841,13 +841,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  isReadyForThreadedCalculations: 1
+  isReadyForThreadedCalculations: 0
   prewarm: 0
   prewarmTime: 1
   prewarmCycles: 16
   particleTimescale: 1
-  localTime: 10.698406
-  localDeltaTime: 2.1406069
+  localTime: 0.14771949
+  localDeltaTime: 0
   previousActiveState: 0
   simulationStarted: 0.1
   loopExceeded: 0
@@ -3781,13 +3781,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  isReadyForThreadedCalculations: 1
+  isReadyForThreadedCalculations: 0
   prewarm: 0
   prewarmTime: 1
   prewarmCycles: 16
   particleTimescale: 1
-  localTime: 10.698406
-  localDeltaTime: 2.1406069
+  localTime: 0.14771949
+  localDeltaTime: 0
   previousActiveState: 0
   simulationStarted: 0.1
   loopExceeded: 0
@@ -7244,15 +7244,15 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  isReadyForThreadedCalculations: 1
+  isReadyForThreadedCalculations: 0
   prewarm: 0
   prewarmTime: 1
   prewarmCycles: 16
   particleTimescale: 1
-  localTime: 10.698406
-  localDeltaTime: 2.1406069
+  localTime: 0.14771949
+  localDeltaTime: 0
   previousActiveState: 0
-  simulationStarted: 0.17342076
+  simulationStarted: 0.2477195
   loopExceeded: 0
   loopExceededOnParticle: -1
 --- !u!199 &1768829364
@@ -9822,15 +9822,15 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  isReadyForThreadedCalculations: 1
+  isReadyForThreadedCalculations: 0
   prewarm: 0
   prewarmTime: 1
   prewarmCycles: 16
   particleTimescale: 1
-  localTime: 10.698406
-  localDeltaTime: 2.1406069
+  localTime: 0.14771949
+  localDeltaTime: 0
   previousActiveState: 0
-  simulationStarted: 0.17342076
+  simulationStarted: 0.2477195
   loopExceeded: 0
   loopExceededOnParticle: -1
 --- !u!199 &1825011691
@@ -12400,15 +12400,15 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  isReadyForThreadedCalculations: 1
+  isReadyForThreadedCalculations: 0
   prewarm: 0
   prewarmTime: 1
   prewarmCycles: 16
   particleTimescale: 1
-  localTime: 10.698406
-  localDeltaTime: 2.1406069
+  localTime: 0.14771949
+  localDeltaTime: 0
   previousActiveState: 0
-  simulationStarted: 0.17342076
+  simulationStarted: 0.2477195
   loopExceeded: 0
   loopExceededOnParticle: -1
 --- !u!199 &1849297070
