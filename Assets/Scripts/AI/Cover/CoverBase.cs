@@ -3,82 +3,29 @@ using System.Collections;
 
 public class CoverBase : MonoBehaviour 
 {
-	public Vector2 Size
-	{
-		get
-		{
-			return new Vector2(coverSizeX, coverSizeY);
-		}
-	}
-
+	protected Vector2 Size { get { return new Vector2(coverSizeX, coverSizeY); } }
 	public Entity Occupant { set; get; }
-
-	public float CoverAngle
-	{
-		get
-		{
-			return coverAngle;
-		}
-	}
-
-	public float Angle
-	{
-		get
-		{
-			return transform.eulerAngles.y;
-		}
-	}
-
+	public float CoverRotation { get { return transform.eulerAngles.y; } }
 	public bool IsSafe { set; get; }
-
 	public bool IsUsefull { set; get; }
-
-	public bool IsOccupied
-	{
-		get
-		{
-			return Occupant != null;
-		}
-	}
+	public bool IsOccupied { get { return Occupant != null; } }
+	public Vector3 RayPosition { get { return rayPosition; } }
 
 	[Header("Height of the cover.")]
 	[Range(0.2f, 3f)]
-	[SerializeField] private float coverSizeX;
+	[SerializeField] protected float coverSizeX = 0.7f;
 
 	[Header("Width of the cover.")]
 	[Range(0.2f, 3f)]
-	[SerializeField] private float coverSizeY;
+	[SerializeField] protected float coverSizeY = 1f;
 
 	[Header("Distance from player position to cover")]
 	[Range(0.3f, 1.5f)]
-	[SerializeField] private float coverOffset;
+	[SerializeField] protected float coverOffset = 0.8f;
 
-	[Header("Safe to take cover angle")]
-	[Range(10f, 90f)]
-	[SerializeField] private float coverAngle;
+	protected Vector3 rayPosition;
 
-	protected void Awake()
+	public virtual void UpdateCover(Vector3 _playerPos, Vector3 _playerHead)
 	{
-		Dependency.Get<CoverManager>().AddCover(this);
-	}
-
-	protected void OnDrawGizmosSelected()
-	{
-		Vector3 left = gameObject.transform.position + (gameObject.transform.forward * coverOffset) + (gameObject.transform.right * coverSizeX);
-		Vector3 right = gameObject.transform.position + (gameObject.transform.forward * coverOffset) + (-(gameObject.transform.right * coverSizeX));
-		Vector3 height = new Vector3(0f, coverSizeY, 0f);
-
-		Gizmos.color = new Color(1f, 0f, 0f);
-		Gizmos.DrawLine(left, right);
-		Gizmos.DrawLine(left, left + height);
-		Gizmos.DrawLine(right, right + height);
-		Gizmos.DrawLine(left + height, right + height);
-
-		Gizmos.color = new Color(0f, 0f, 1f);
-		Gizmos.DrawLine(gameObject.transform.position, gameObject.transform.position + new Vector3(Mathf.Sin((gameObject.transform.eulerAngles.y + coverAngle) * Mathf.PI / 180f) * 5f, 0f, Mathf.Cos((gameObject.transform.eulerAngles.y + coverAngle) * Mathf.PI / 180f) * 5f));
-		Gizmos.DrawLine(gameObject.transform.position, gameObject.transform.position + new Vector3(Mathf.Sin((gameObject.transform.eulerAngles.y - coverAngle) * Mathf.PI / 180f) * 5f, 0f, Mathf.Cos((gameObject.transform.eulerAngles.y - coverAngle) * Mathf.PI / 180f) * 5f));
-
-		Gizmos.color = new Color(1f, 0f, 0f);
-		Gizmos.DrawLine(gameObject.transform.position, gameObject.transform.position + new Vector3(0f, coverSizeY + 0.5f, 0f));
 	}
 }
