@@ -86,7 +86,7 @@ public class Weapon : MonoBehaviour
 
 	public void StartFire()
 	{
-		if(!firing && CanFire())
+		if(!firing)
 		{
 			firing = true;
 
