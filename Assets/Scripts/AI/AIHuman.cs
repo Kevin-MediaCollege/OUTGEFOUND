@@ -57,7 +57,7 @@ public class AIHuman : AIBase
 				{
 					//Debug.Log("NEW TASK: shoot at player from cover");
 					testShooting = true;
-					yield return (new TaskHumanShootCover()).RunTask(this);
+					yield return (new TaskHumanShootCover(CurrentCover)).RunTask(this);
 				}
 				else
 				{
@@ -71,9 +71,16 @@ public class AIHuman : AIBase
 				{
 					//Debug.Log("NEW TASK: Walk to cover");
 					CurrentCover.Occupant = Entity;
-
-					TaskHumanWalkToCover task = new TaskHumanWalkToCover(CurrentCover.transform.position);
-					yield return task.RunTask(this);
+					if (CurrentCover.GetType () == typeof(CoverObstacle)) 
+					{
+						TaskHumanWalkToCover task = new TaskHumanWalkToCover(((CoverObstacle)CurrentCover).ShootPosition);
+						yield return task.RunTask(this);
+					} 
+					else 
+					{
+						TaskHumanWalkToCover task = new TaskHumanWalkToCover(CurrentCover.transform.position);
+						yield return task.RunTask(this);
+					}
 				}
 				else
 				{

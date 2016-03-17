@@ -27,6 +27,11 @@ public abstract class AIBase : MonoBehaviour
 		return movement.MoveTo(point);
 	}
 
+	public bool IsMoving()
+	{
+		return (movement.RemainingDistance > 0.1f);
+	}
+
 	public void Stop()
 	{
 		movement.Stop();

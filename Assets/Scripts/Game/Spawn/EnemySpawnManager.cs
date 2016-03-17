@@ -14,6 +14,7 @@ public class EnemySpawnManager : MonoBehaviour
 	private Entity e;
 
 	public float testDelay = 8f;
+	private float delay = 8f;
 
 	void Awake () 
 	{
@@ -38,8 +39,8 @@ public class EnemySpawnManager : MonoBehaviour
 		nextSpawnCheck++;
 		//=====================================================
 
-		testDelay -= Time.deltaTime;
-		if(testDelay < 0f)
+		delay -= Time.deltaTime;
+		if(delay < 0f)
 		{
 			EnemySpawnPoint s = getRandomSpawnpoint();
 			if(s != null)
@@ -49,7 +50,7 @@ public class EnemySpawnManager : MonoBehaviour
 				g.transform.position = s.transform.position + new Vector3 (0f, 1f, 0f);
 				g.SetActive (true);
 			}
-			testDelay = 6f;
+			delay = testDelay;
 		}
 	}
 
@@ -81,7 +82,7 @@ public class EnemySpawnManager : MonoBehaviour
 			breaksafe++;
 			if(breaksafe > 100)
 			{
-				Debug.LogWarning("Failed to find a safe spawnpoint");
+				//Debug.LogWarning("Failed to find a safe spawnpoint");
 				break;
 			}
 		}

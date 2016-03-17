@@ -32,38 +32,43 @@ public class CoverManager : IGameDependency
 
 	private IEnumerator Update()
 	{
-		if(updatingEnabled)
+		while(true)
 		{
-			nextCover = nextCover >= all.Count ? 0 : nextCover;
-			int end = nextCover + updatesPerFrame;
-			end = end >= all.Count ? all.Count : end;
-			Vector3 playerFeet = EnemyUtils.Player.transform.position;
-			Vector3 playerHead = EnemyUtils.Player.GetEyes().position;
-
-			for(int i = nextCover; i < end; i++)
+			if(updatingEnabled)
 			{
-				UpdateCover(all[i], playerFeet, playerHead);
-				nextCover++;
-			}
 
-			int c = 0;
-			int c2 = 0;
+				nextCover = nextCover >= all.Count ? 0 : nextCover;
+				int end = nextCover + updatesPerFrame;
+				end = end >= all.Count ? all.Count : end;
+				Vector3 playerFeet = EnemyUtils.Player.transform.position;
+				Vector3 playerHead = EnemyUtils.Player.GetEyes().position;
 
-			foreach(CoverBase cover in all)
-			{
-				if(cover.IsUsefull)
+				for(int i = nextCover; i < end; i++)
 				{
-					c++;
+					all[i].UpdateCover(playerFeet, playerHead);
+					//Debug.Log ("safe=" + all[i].IsSafe + " usefull=" + all[i].IsUsefull);
 
-					if(cover.IsSafe)
+					nextCover++;
+				}
+
+				int c = 0;
+				int c2 = 0;
+
+				foreach(CoverBase cover in all)
+				{
+					if(cover.IsUsefull)
 					{
-						c2++;
+						c++;
+
+						if(cover.IsSafe)
+						{
+							c2++;
+						}
 					}
 				}
 			}
+			yield return null;
 		}
-
-		yield return null;
 	}
 
 	public void AddCover(CoverBase _cover)
@@ -90,40 +95,5 @@ public class CoverManager : IGameDependency
 		}
 
 		return cover;
-	}
-
-	public void UpdateCover(CoverBase _cover, Vector3 _playerPos, Vector3 _playerHead)
-	{
-		_cover.IsUsefull = true;
-		Vector3 start = _cover.transform.position + new Vector3(0f, _cover.Size.y + 0.5f, 0f);
-		float dist = Vector3.Distance(start, _playerHead);
-
-		if(dist < 5f)
-		{
-			_cover.IsSafe = false;
-			_cover.IsUsefull = false;
-			return;
-		}
-
-		_cover.IsSafe = Mathf.Abs ((_cover.Angle - RotationHelper.fixRotation (_cover.Angle, 
-			RotationHelper.rotationToPoint (_cover.gameObject.transform.position, _playerPos)))) < _cover.CoverAngle ? true : false;
-
-		if(!_cover.IsSafe)
-		{
-			_cover.IsUsefull = false;
-			return;
-		}
-
-		_cover.IsUsefull = true;
-		RaycastHit[] hits = Physics.RaycastAll(start, _playerHead - start, dist);
-		int l = hits.Length;
-		for(int i = 0; i < l; i++)
-		{
-			if(hits[i].collider.gameObject.CompareTag("Wall"))
-			{
-				_cover.IsUsefull = false;
-				break;
-			}
-		}
 	}
 }
