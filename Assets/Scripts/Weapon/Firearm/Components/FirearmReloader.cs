@@ -70,6 +70,7 @@ public class FirearmReloader : WeaponComponent
 		}
 
 		reloading = true;
+		Weapon.Wielder.Events.Invoke(new ReloadEvent());
 
 		stockpile.Add(stockpile.Magazine.Remaining);
 		stockpile.Magazine.Remove(stockpile.Magazine.Remaining);
@@ -80,7 +81,5 @@ public class FirearmReloader : WeaponComponent
 		magazineEmpty = false;
 
 		stockpile.FillMagazine();
-
-		Weapon.Wielder.Events.Invoke(new ReloadEvent());
 	}
 }
