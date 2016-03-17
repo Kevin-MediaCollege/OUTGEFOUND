@@ -19,24 +19,24 @@ public class EntityDeath : EntityAddon
 
 	protected void OnEnable()
 	{
-		health.onDamageReceivedEvent += OnDamageReceived;
+		Entity.Events.AddListener<WeaponDamageEvent>(OnDamageReceived);
 	}
 
 	protected void OnDisable()
 	{
-		health.onDamageReceivedEvent -= OnDamageReceived;
+		Entity.Events.RemoveListener<WeaponDamageEvent>(OnDamageReceived);
 	}
 
-	private void OnDamageReceived(DamageInfo damageInfo)
+	private void OnDamageReceived(WeaponDamageEvent evt)
 	{
 		if(!dead && health.CurrentHealth <= 0)
 		{
 			dead = true;
 			
-			EntityDiedEvent evt = new EntityDiedEvent(damageInfo, Entity);
+			EntityDiedEvent diedEvent = new EntityDiedEvent(evt.Damage, Entity);
 
-			GlobalEvents.Invoke(evt);
-			Entity.Events.Invoke(evt);
+			GlobalEvents.Invoke(diedEvent);
+			Entity.Events.Invoke(diedEvent);
 
 			// Mark the entity as dead
 			Entity.AddTag("Dead");

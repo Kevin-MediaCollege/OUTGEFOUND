@@ -6,9 +6,6 @@
 /// </summary>
 public class EntityHealth : EntityAddon
 {
-	public delegate void OnDamageReceived(DamageInfo damageInfo);
-	public event OnDamageReceived onDamageReceivedEvent = delegate { };
-
 	public float StartingHealth
 	{
 		get
@@ -47,7 +44,6 @@ public class EntityHealth : EntityAddon
 		if(evt.Damage.hit.target == Entity)
 		{
 			CurrentHealth -= evt.Damage.amount;
-			onDamageReceivedEvent(evt.Damage);
 		}
 	}
 
