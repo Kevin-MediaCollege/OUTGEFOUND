@@ -4,8 +4,10 @@ using System.Collections;
 public class DamageBehaviour : EntityAddon
 {
 	[SerializeField] private AudioAssetGroup damageSounds;
+	[SerializeField] private float delay = 2;
 
 	private AudioManager audioManager;
+	private float lastTime;
 
 	protected override void Awake()
 	{
@@ -26,6 +28,10 @@ public class DamageBehaviour : EntityAddon
 
 	private void OnDamageReceived(WeaponDamageEvent evt)
 	{
-		audioManager.PlayRandomAt(damageSounds, Entity.transform.position);
+		if(Time.time - lastTime >= delay)
+		{
+			lastTime = Time.time;
+			audioManager.PlayRandomAt(damageSounds, Entity.transform.position);
+		}		
 	}
 }
