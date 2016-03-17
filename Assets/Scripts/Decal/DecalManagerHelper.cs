@@ -17,12 +17,26 @@ public class DecalManagerHelper : MonoBehaviour
 
 	private bool meshUpdated;
 
+	private BulletImpact[] particlePool;
+	private int particlePoolLength;
+	private int nextParticle;
+
 	protected void Awake()
 	{
 		meshFilter = gameObject.AddComponent<MeshFilter>();
 		meshRenderer = gameObject.AddComponent<MeshRenderer>();
 		meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 		meshRenderer.material = Resources.Load("DecalMaterial") as Material;
+
+		nextParticle = 0;
+		particlePoolLength = 15;
+		particlePool = new BulletImpact[particlePoolLength];
+		GameObject bulletImpactPrefab = (GameObject)Resources.Load("BulletImpact");
+		for(int i = 0; i < particlePoolLength; i++)
+		{
+			particlePool[i] = ((GameObject)GameObject.Instantiate(bulletImpactPrefab, new Vector3(0f, -1000f, 0f), Quaternion.identity)).GetComponent<BulletImpact>();
+			particlePool[i].transform.SetParent(gameObject.transform);
+		}
 
 		createMesh();
 	}
@@ -86,6 +100,13 @@ public class DecalManagerHelper : MonoBehaviour
 
 		float size = 0.07f + Random.Range(0f, 0.02f);
 		Quaternion q = Quaternion.LookRotation (-normal);
+
+		particlePool[nextParticle].transform.position = point;
+		particlePool[nextParticle].transform.eulerAngles = new Vector3(q.eulerAngles.x - 90f, q.eulerAngles.y, q.eulerAngles.z);
+		particlePool[nextParticle].init();
+		nextParticle++;
+		if(nextParticle >= particlePoolLength) { nextParticle = 0; }
+
 		q.eulerAngles = new Vector3(q.eulerAngles.x, q.eulerAngles.y, q.eulerAngles.z + UnityEngine.Random.Range(0f, 360f));
 		verts[nextPool * 4]     = point + (q * (Vector3.left * size)) + (q * (Vector3.up * size)) + q * (Vector3.back * 0.01f);
 		verts[nextPool * 4 + 1] = point + (q * (Vector3.right * size)) + (q * (Vector3.up * size)) + q * (Vector3.back * 0.01f);
