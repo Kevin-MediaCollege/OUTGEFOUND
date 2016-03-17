@@ -439,7 +439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magazine: {fileID: 11439358}
-  max: 240
+  max: 30
   unlimited: 0
 --- !u!114 &11412128
 MonoBehaviour:
@@ -485,7 +485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunshot: {fileID: 11400000, guid: d02eb87387469bd45929e5444c36bde2, type: 2}
   reload: {fileID: 11400000, guid: 7cbde8978b1b7b24ca575a45a7354bab, type: 2}
-  emptyClip: {fileID: 0}
+  emptyClip: {fileID: 11400000, guid: 88558ab7977d8134493c7d1ce3969fa2, type: 2}
   gunshotPitchRange: {x: 0.8, y: 1.2}
   interval: 0
   gunshotInterval: 0.1
