@@ -65,6 +65,19 @@ public class AudioManager : IDependency
 		return Play(target, loop);
 	}
 
+	public AudioChannel PlayRandomAt(AudioAssetGroup audioAssetGroup, Vector3 point, bool loop = false)
+	{
+		if(audioAssetGroup == null)
+		{
+			return null;
+		}
+
+		List<AudioAsset> audioAssets = new List<AudioAsset>(audioAssetGroup.AudioAssets);
+		AudioAsset target = audioAssets[Random.Range(0, audioAssets.Count)];
+
+		return PlayAt(target, point, loop);
+	}
+
 	public void StopAll(AudioAssetType type, bool includeClaimedChannels = false)
 	{
 		foreach(AudioChannel channel in channels)
