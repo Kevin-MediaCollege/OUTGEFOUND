@@ -255,7 +255,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_Mesh: {fileID: 4300000, guid: 99e0dcef81f72b94b8cbcaf16fde3bdf, type: 3}
 --- !u!65 &65000013422386462
 BoxCollider:
