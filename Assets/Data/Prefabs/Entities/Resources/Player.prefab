@@ -159,6 +159,7 @@ GameObject:
   - 114: {fileID: 11431412}
   - 114: {fileID: 11421806}
   - 114: {fileID: 11431522}
+  - 114: {fileID: 114000013764636246}
   m_Layer: 11
   m_Name: Addons
   m_TagString: Untagged
@@ -597,3 +598,15 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 144936}
   m_IsPrefabParent: 1
+--- !u!114 &114000013764636246
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 190908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1994aad81745f84b890a359f890f84f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audio: {fileID: 11400000, guid: e4f402ceda72ae647976b11caa3ea718, type: 2}
