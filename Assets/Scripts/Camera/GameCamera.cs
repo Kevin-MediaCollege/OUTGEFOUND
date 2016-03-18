@@ -5,6 +5,8 @@
 /// </summary>
 public class GameCamera : MonoBehaviour
 {
+	public static Vector3 offset;
+
 	[SerializeField] private Vector2 yConstraint;
 	[SerializeField] private Vector2 sensitivity;
 
@@ -64,11 +66,16 @@ public class GameCamera : MonoBehaviour
 	{
 		rotationX += Input.GetAxis("Mouse X") * sensitivity.x;
 		rotationY += Input.GetAxis("Mouse Y") * sensitivity.y;
+
+		rotationX += offset.x;
+		rotationY += offset.y;
 		rotationY = Mathf.Clamp(rotationY, yConstraint.x, yConstraint.y);
 
 		player.rotation = Quaternion.AngleAxis(rotationX, Vector3.up);
 
 		eyes.rotation = Quaternion.AngleAxis(rotationX, Vector3.up);
 		eyes.rotation *= Quaternion.AngleAxis(rotationY, Vector3.left);
+
+		offset = Vector3.zero;
 	}
 }
