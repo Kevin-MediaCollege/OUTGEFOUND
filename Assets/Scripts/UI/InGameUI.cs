@@ -22,11 +22,17 @@ public class InGameUI : MonoBehaviour
 	//AMMO
 	public Text text_ammoCurrent;
 	public Text text_ammoLeft;
+
+	//RELOAD
 	public Text text_reload;
+	private float text_reloadAnim;
+	public CanvasGroup groupReload;
 
 	protected void Awake()
 	{
 		text_scorePopupGroup.alpha = 0f;
+		groupReload.alpha = 0f;
+		text_reloadAnim = -1f;
 
 		playerCurrency = Dependency.Get<Currency>();
 	}
@@ -53,6 +59,7 @@ public class InGameUI : MonoBehaviour
 				return;
 			}
 
+			playerEntity.Events.AddListener<ReloadEvent> (onReloadEvent);
 			playerMagazine = playerEntity.GetMagazine();
 			playerStockPile = playerEntity.GetStockPile();
 
@@ -66,7 +73,37 @@ public class InGameUI : MonoBehaviour
 		text_ammoCurrent.text = "" + playerMagazine.Remaining;
 		text_ammoLeft.text = "" + playerStockPile.Remaining;
 		text_credits.text = playerCurrency.Amount + " CR";
-		text_reload.enabled = playerMagazine.Remaining < 6 ? true : false;
+
+		if(text_reloadAnim > 0f)
+		{
+			text_reloadAnim -= Time.deltaTime;
+		}
+
+		if((playerMagazine.Remaining < 11) != text_reload.enabled && text_reloadAnim <= 0f)
+		{
+			StartCoroutine (SwitchReloadText((playerMagazine.Remaining < 11)));
+		}
+	}
+
+	private void onReloadEvent(ReloadEvent _event)
+	{
+		if (!text_reload.enabled) 
+		{
+			text_reloadAnim = 2f;
+		} 
+		else
+		{
+			StartCoroutine (SwitchReloadText(false, 2f));
+		}
+	}
+
+	private IEnumerator SwitchReloadText(bool _newState, float delay = 0.25f)
+	{
+		if(_newState) { text_reload.enabled = true; }
+		text_reloadAnim = delay;
+		HOTweenHelper.Fade (groupReload, _newState ? 0f : 1f, _newState ? 1f : 0f, 0.25f);
+		yield return new WaitForSeconds (0.2f);
+		if(!_newState) { text_reload.enabled = false; }
 	}
 
 	private IEnumerator ShowScorePopup()

@@ -6190,7 +6190,7 @@ CanvasGroup:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 872625543}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -6214,7 +6214,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 872625543}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
@@ -7914,6 +7914,7 @@ MonoBehaviour:
   text_ammoCurrent: {fileID: 1124232154}
   text_ammoLeft: {fileID: 1241361951}
   text_reload: {fileID: 872625547}
+  groupReload: {fileID: 872625545}
 --- !u!114 &1153957861
 MonoBehaviour:
   m_ObjectHideFlags: 0
