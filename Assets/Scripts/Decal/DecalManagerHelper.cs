@@ -17,9 +17,13 @@ public class DecalManagerHelper : MonoBehaviour
 
 	private bool meshUpdated;
 
-	private BulletImpact[] particlePool;
-	private int particlePoolLength;
-	private int nextParticle;
+	private BulletImpact[] particleBulletPool;
+	private int particleBulletPoolLength;
+	private int nextParticleBullet;
+
+	private BloodImpact[] particleBloodPool;
+	private int particleBloodPoolLength;
+	private int nextParticleBlood;
 
 	protected void Awake()
 	{
@@ -28,14 +32,24 @@ public class DecalManagerHelper : MonoBehaviour
 		meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 		meshRenderer.material = Resources.Load("DecalMaterial") as Material;
 
-		nextParticle = 0;
-		particlePoolLength = 15;
-		particlePool = new BulletImpact[particlePoolLength];
+		nextParticleBullet = 0;
+		particleBulletPoolLength = 15;
+		particleBulletPool = new BulletImpact[particleBulletPoolLength];
 		GameObject bulletImpactPrefab = (GameObject)Resources.Load("BulletImpact");
-		for(int i = 0; i < particlePoolLength; i++)
+		for(int i = 0; i < particleBulletPoolLength; i++)
 		{
-			particlePool[i] = ((GameObject)GameObject.Instantiate(bulletImpactPrefab, new Vector3(0f, -1000f, 0f), Quaternion.identity)).GetComponent<BulletImpact>();
-			particlePool[i].transform.SetParent(gameObject.transform);
+			particleBulletPool[i] = ((GameObject)GameObject.Instantiate(bulletImpactPrefab, new Vector3(0f, -1000f, 0f), Quaternion.identity)).GetComponent<BulletImpact>();
+			particleBulletPool[i].transform.SetParent(gameObject.transform);
+		}
+
+		nextParticleBlood = 0;
+		particleBloodPoolLength = 15;
+		particleBloodPool = new BloodImpact[particleBloodPoolLength];
+		GameObject bloodImpactPrefab = (GameObject)Resources.Load("BloodImpact");
+		for(int i = 0; i < particleBloodPoolLength; i++)
+		{
+			particleBloodPool[i] = ((GameObject)GameObject.Instantiate(bloodImpactPrefab, new Vector3(0f, -1000f, 0f), Quaternion.identity)).GetComponent<BloodImpact>();
+			particleBloodPool[i].transform.SetParent(gameObject.transform);
 		}
 
 		createMesh();
@@ -94,25 +108,37 @@ public class DecalManagerHelper : MonoBehaviour
 		}
 	}
 
-	public void AddDecal(Vector3 point, Vector3 normal, string tag)
+	public void AddDecal(Vector3 point, Vector3 normal, string tag, Entity target)
 	{
-		if(normal == Vector3.zero || tag != "Wall") { return; }
+		if(normal == Vector3.zero) { return; }
 
-		float size = 0.07f + Random.Range(0f, 0.02f);
-		Quaternion q = Quaternion.LookRotation (-normal);
+		if (tag == "Wall")
+		{
+			float size = 0.07f + Random.Range (0f, 0.02f);
+			Quaternion q = Quaternion.LookRotation (-normal);
 
-		particlePool[nextParticle].transform.position = point;
-		particlePool[nextParticle].transform.eulerAngles = new Vector3(q.eulerAngles.x - 90f, q.eulerAngles.y, q.eulerAngles.z);
-		particlePool[nextParticle].init();
-		nextParticle++;
-		if(nextParticle >= particlePoolLength) { nextParticle = 0; }
+			particleBulletPool[nextParticleBullet].transform.position = point;
+			particleBulletPool[nextParticleBullet].transform.eulerAngles = new Vector3(q.eulerAngles.x - 90f, q.eulerAngles.y, q.eulerAngles.z);
+			particleBulletPool[nextParticleBullet].init();
+			nextParticleBullet++;
+			if(nextParticleBullet >= particleBulletPoolLength) { nextParticleBullet = 0; }
 
-		q.eulerAngles = new Vector3(q.eulerAngles.x, q.eulerAngles.y, q.eulerAngles.z + UnityEngine.Random.Range(0f, 360f));
-		verts[nextPool * 4]     = point + (q * (Vector3.left * size)) + (q * (Vector3.up * size)) + q * (Vector3.back * 0.01f);
-		verts[nextPool * 4 + 1] = point + (q * (Vector3.right * size)) + (q * (Vector3.up * size)) + q * (Vector3.back * 0.01f);
-		verts[nextPool * 4 + 2] = point + (q * (Vector3.left * size)) + (q * (Vector3.down * size)) + q * (Vector3.back * 0.01f);
-		verts[nextPool * 4 + 3] = point + (q * (Vector3.right * size)) + (q * (Vector3.down * size)) + q * (Vector3.back * 0.01f);
-		nextPool = nextPool >= poolLenght - 1 ? 0 : nextPool + 1;
-		meshUpdated = true;
+			q.eulerAngles = new Vector3 (q.eulerAngles.x, q.eulerAngles.y, q.eulerAngles.z + UnityEngine.Random.Range (0f, 360f));
+			verts [nextPool * 4] = point + (q * (Vector3.left * size)) + (q * (Vector3.up * size)) + q * (Vector3.back * 0.01f);
+			verts [nextPool * 4 + 1] = point + (q * (Vector3.right * size)) + (q * (Vector3.up * size)) + q * (Vector3.back * 0.01f);
+			verts [nextPool * 4 + 2] = point + (q * (Vector3.left * size)) + (q * (Vector3.down * size)) + q * (Vector3.back * 0.01f);
+			verts [nextPool * 4 + 3] = point + (q * (Vector3.right * size)) + (q * (Vector3.down * size)) + q * (Vector3.back * 0.01f);
+			nextPool = nextPool >= poolLenght - 1 ? 0 : nextPool + 1;
+			meshUpdated = true;
+		} 
+		else if((tag == "Body" || tag == "Head" || tag == "Limbs") && target.HasTag("Enemy"))
+		{
+			Quaternion q = Quaternion.LookRotation (-normal);
+			particleBloodPool [nextParticleBlood].transform.position = point;
+			particleBloodPool [nextParticleBlood].transform.eulerAngles = new Vector3 (q.eulerAngles.x - 90f, q.eulerAngles.y, q.eulerAngles.z);
+			particleBloodPool [nextParticleBlood].init ();
+			nextParticleBlood++;
+			if (nextParticleBlood >= particleBloodPoolLength) { nextParticleBlood = 0; }
+		}
 	}
 }
