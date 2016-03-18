@@ -95,6 +95,7 @@ GameObject:
   - 4: {fileID: 443042}
   - 114: {fileID: 11455220}
   - 114: {fileID: 11440944}
+  - 114: {fileID: 114000013866345310}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -610,3 +611,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audio: {fileID: 11400000, guid: e4f402ceda72ae647976b11caa3ea718, type: 2}
+--- !u!114 &114000013866345310
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d2f95304362d6147ab52639ecde7df1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
