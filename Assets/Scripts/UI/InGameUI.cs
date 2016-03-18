@@ -22,6 +22,7 @@ public class InGameUI : MonoBehaviour
 	//AMMO
 	public Text text_ammoCurrent;
 	public Text text_ammoLeft;
+	public Text text_reload;
 
 	protected void Awake()
 	{
@@ -65,6 +66,7 @@ public class InGameUI : MonoBehaviour
 		text_ammoCurrent.text = "" + playerMagazine.Remaining;
 		text_ammoLeft.text = "" + playerStockPile.Remaining;
 		text_credits.text = playerCurrency.Amount + " CR";
+		text_reload.enabled = playerMagazine.Remaining < 6 ? true : false;
 	}
 
 	private IEnumerator ShowScorePopup()
