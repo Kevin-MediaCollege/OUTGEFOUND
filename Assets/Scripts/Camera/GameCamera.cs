@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System;
 
 /// <summary>
 /// The first-person camera behaviour
@@ -14,7 +12,7 @@ public class GameCamera : MonoBehaviour
 	private Transform player;
 	private Transform eyes;
 
-	private float yRotation;
+	private float rotationY;
 
 	protected void OnEnable()
 	{
@@ -29,18 +27,6 @@ public class GameCamera : MonoBehaviour
 	}
 
 	protected void Update()
-	{
-		if(Cursor.visible || Cursor.lockState != CursorLockMode.Locked)
-		{
-			if(Input.GetMouseButtonDown(0))
-			{
-				Cursor.lockState = CursorLockMode.Locked;
-				Cursor.visible = false;
-			}
-		}
-	}
-
-	protected void FixedUpdate()
 	{
 		if(player == null || weapon == null || eyes == null)
 		{
@@ -57,17 +43,29 @@ public class GameCamera : MonoBehaviour
 			eyes = player.Find("Eyes");
 		}
 
-		// Rotate the player
-		player.Rotate(0, (Input.GetAxis("Mouse X") * sensitivity.x) * Time.deltaTime, 0);
+		if(Cursor.visible || Cursor.lockState != CursorLockMode.Locked)
+		{
+			if(Input.GetMouseButtonDown(0))
+			{
+				Cursor.lockState = CursorLockMode.Locked;
+				Cursor.visible = false;
+			}
+		}
 
-		yRotation += (Input.GetAxis("Mouse Y") * sensitivity.y) * Time.deltaTime;
-		yRotation = Mathf.Clamp(yRotation, yConstraint.x, yConstraint.y);
-
-		eyes.localEulerAngles = new Vector3(-yRotation, transform.localEulerAngles.y, 0);
-		weapon.localEulerAngles = new Vector3(-yRotation, weapon.localEulerAngles.y, 0);
+		UpdateCamera();
 
 		// Move the camera to the player's eyes
 		Camera.main.transform.position = eyes.position;
 		Camera.main.transform.rotation = eyes.rotation;
+	}
+
+	private void UpdateCamera()
+	{
+		float rotationX = player.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivity.x;
+
+		rotationY += Input.GetAxis("Mouse Y") * sensitivity.y;
+		rotationY = Mathf.Clamp(rotationY, yConstraint.x, yConstraint.y);
+
+		player.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
 	}
 }
