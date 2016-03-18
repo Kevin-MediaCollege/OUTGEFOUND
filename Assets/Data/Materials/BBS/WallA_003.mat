@@ -6,20 +6,19 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: waterplas
+  m_Name: WallA_003
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _ALPHABLEND_ON _EMISSION _NORMALMAP
+  m_ShaderKeywords: _EMISSION _METALLICGLOSSMAP _NORMALMAP
   m_LightmapFlags: 1
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
     - first:
         name: _BumpMap
       second:
-        m_Texture: {fileID: 2800000, guid: 1203e38ae704e3a40af4c3b275701934, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7f9caa76fa5a3e443a5186fceba087ec, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -49,13 +48,13 @@ Material:
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 2800000, guid: cb84dc7d6f8d23940af5b4d6bb53b55a, type: 3}
+        m_Texture: {fileID: 2800000, guid: d33de3d1414e19b42a466a1b8d0c80a6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _MetallicGlossMap
       second:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 7baebaf1c62835d4084613d5e59d9cd0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -82,13 +81,13 @@ Material:
       second: 1
     - first:
         name: _DstBlend
-      second: 10
+      second: 0
     - first:
         name: _GlossMapScale
       second: 1
     - first:
         name: _Glossiness
-      second: 1
+      second: 0.5
     - first:
         name: _GlossyReflections
       second: 1
@@ -97,7 +96,7 @@ Material:
       second: 0
     - first:
         name: _Mode
-      second: 2
+      second: 0
     - first:
         name: _OcclusionStrength
       second: 1
@@ -112,17 +111,17 @@ Material:
       second: 1
     - first:
         name: _SrcBlend
-      second: 5
+      second: 1
     - first:
         name: _UVSec
       second: 0
     - first:
         name: _ZWrite
-      second: 0
+      second: 1
     m_Colors:
     - first:
         name: _Color
-      second: {r: 1, g: 1, b: 1, a: 0.166}
+      second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}
