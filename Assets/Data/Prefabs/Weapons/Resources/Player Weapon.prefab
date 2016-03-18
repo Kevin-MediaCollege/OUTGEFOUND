@@ -425,9 +425,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44be5ed674a10cd4b8267d9626d6243c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: 2
-  body: 1
-  limbs: 0.7
+  head: 2.5
+  body: 1.5
+  limbs: 1
 --- !u!114 &11403432
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -484,6 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c50dd6bbab676419a4da70600fe9ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mode: 0
   gunshot: {fileID: 11400000, guid: d02eb87387469bd45929e5444c36bde2, type: 2}
   reload: {fileID: 11400000, guid: 7cbde8978b1b7b24ca575a45a7354bab, type: 2}
   emptyClip: {fileID: 11400000, guid: 88558ab7977d8134493c7d1ce3969fa2, type: 2}
