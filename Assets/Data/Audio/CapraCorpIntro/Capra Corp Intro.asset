@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d0f8624c5765fa4e9add859478a0866, type: 3}
+  m_Name: Capra Corp Intro
+  m_EditorClassIdentifier: 
+  audioAssets:
+  - {fileID: 11400000, guid: 6150bbec847ae354a9e5fa8617f53a04, type: 2}
+  - {fileID: 11400000, guid: f3c18434561e6644c97d19791c7308f5, type: 2}
+  - {fileID: 11400000, guid: 5d4ffe69c4a36d74ea39e244e989db58, type: 2}
+  - {fileID: 11400000, guid: 6f54d52366c04bd4c9d10778c93ab718, type: 2}
+  - {fileID: 11400000, guid: f1d987a19e638574e8b3c7bc19836c27, type: 2}
+  - {fileID: 11400000, guid: ebcdc9112eed0f44e9a079121b24aa4a, type: 2}
+  - {fileID: 11400000, guid: c3fee9c1b95ca464a80595e95ef7d6f1, type: 2}
+  - {fileID: 11400000, guid: d9314d0622bc0684ea62148e7846e158, type: 2}
+  - {fileID: 11400000, guid: 2ac97720680a2de4b90f33f7112235b0, type: 2}

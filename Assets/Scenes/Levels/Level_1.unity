@@ -21810,6 +21810,48 @@ Transform:
   m_PrefabParentObject: {fileID: 4000012758848304, guid: 61bef8191929da743a8c4cb80c3a9f10,
     type: 2}
   m_PrefabInternal: {fileID: 769160146}
+--- !u!1 &769382424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 769382425}
+  - 114: {fileID: 769382426}
+  m_Layer: 0
+  m_Name: Capra Corp Intro
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &769382425
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 769382424}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1036725152}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &769382426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 769382424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de85a0b1d0be8a44ba9a55145431a573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audio: {fileID: 11400000, guid: 6d1ffa0e5b3859946b4989cda4c660cb, type: 2}
+  interval: 90
 --- !u!4 &774640039 stripped
 Transform:
   m_PrefabParentObject: {fileID: 437692, guid: 857e842b6794deb4385c584c231f313a, type: 2}
@@ -28362,6 +28404,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1012261535}
+  - {fileID: 769382425}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
