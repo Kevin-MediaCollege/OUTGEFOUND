@@ -32,7 +32,10 @@ public class FirearmMuzzleFlash : WeaponComponent
 
 		yield return new WaitForSeconds(duration / 2);
 
-		spriteRenderer.sprite = target.smoke;
+		if(target.smoke != null)
+		{
+			spriteRenderer.sprite = target.smoke;
+		}
 
 		yield return new WaitForSeconds(duration / 2);
 
