@@ -21,7 +21,7 @@ public class DecalManager : IGameDependency
 		}
 	}
 
-	public void AddDecal(Vector3 point, Vector3 normal, string tag)
+	public void AddDecal(Vector3 point, Vector3 normal, string tag, Entity target)
 	{
 		if(helper == null)
 		{
@@ -29,6 +29,6 @@ public class DecalManager : IGameDependency
 			return;
 		}
 
-		helper.AddDecal(point, normal, tag);
+		helper.AddDecal(point, normal, tag, target);
 	}
 }

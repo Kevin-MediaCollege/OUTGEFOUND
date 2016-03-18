@@ -14,6 +14,6 @@ public class FirearmDecal : WeaponComponent
 
 	public override void OnFire(HitInfo hit)
 	{
-		decalManager.AddDecal(hit.point, hit.normal, hit.tag);
+		decalManager.AddDecal(hit.point, hit.normal, hit.tag, hit.target);
 	}
 }
