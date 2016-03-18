@@ -15606,7 +15606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yConstraint: {x: -90, y: 90}
-  sensitivity: {x: 7, y: 7}
+  sensitivity: {x: 4, y: 4}
 --- !u!1001 &540027959
 Prefab:
   m_ObjectHideFlags: 0

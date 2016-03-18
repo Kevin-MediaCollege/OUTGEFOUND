@@ -12,6 +12,7 @@ public class GameCamera : MonoBehaviour
 	private Transform player;
 	private Transform eyes;
 
+	private float rotationX;
 	private float rotationY;
 
 	protected void OnEnable()
@@ -61,11 +62,13 @@ public class GameCamera : MonoBehaviour
 
 	private void UpdateCamera()
 	{
-		float rotationX = player.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivity.x;
-
+		rotationX += Input.GetAxis("Mouse X") * sensitivity.x;
 		rotationY += Input.GetAxis("Mouse Y") * sensitivity.y;
 		rotationY = Mathf.Clamp(rotationY, yConstraint.x, yConstraint.y);
 
-		player.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
+		player.rotation = Quaternion.AngleAxis(rotationX, Vector3.up);
+
+		eyes.rotation = Quaternion.AngleAxis(rotationX, Vector3.up);
+		eyes.rotation *= Quaternion.AngleAxis(rotationY, Vector3.left);
 	}
 }
