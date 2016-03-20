@@ -26,7 +26,7 @@ public class PlayerInputController : InputController
 	{
 		get
 		{
-			return Input.GetKey(KeyCode.Space);
+			return Input.GetKeyDown(KeyCode.Space);
 		}
 	}
 
@@ -34,7 +34,7 @@ public class PlayerInputController : InputController
 	{
 		get
 		{
-			return Input.GetKey(KeyCode.C);
+			return Input.GetKeyDown(KeyCode.C);
 		}
 	}
 

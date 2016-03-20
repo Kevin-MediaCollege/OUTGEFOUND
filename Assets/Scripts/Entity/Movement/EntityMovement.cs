@@ -23,13 +23,7 @@ public abstract class EntityMovement : MonoBehaviour
 		}
 	}
 
-	public bool Crouching
-	{
-		get
-		{
-			return crouching;
-		}
-	}
+	public bool Crouching { set; get; }
 
 	[SerializeField] protected float speed;
 	[SerializeField] protected float jumpSpeed;
@@ -40,8 +34,6 @@ public abstract class EntityMovement : MonoBehaviour
 	private AudioManager audioManager;
 
 	protected float verticalSpeed;
-
-	protected bool crouching;
 
 	private float lastFootstepTime;
 

@@ -43,9 +43,16 @@ public class PlayerMovement : EntityMovement
 
 		characterController.Move(velocity * Time.deltaTime);
 
-		if(characterController.velocity.magnitude > 0)
+		// Play footstep audio
+		if(characterController.velocity.magnitude > 0.3f)
 		{
 			PlayFootstep();
+		}
+
+		// Toggle crouching
+		if(playerInputController.Crouch)
+		{
+			Crouching = !Crouching;
 		}
 	}
 

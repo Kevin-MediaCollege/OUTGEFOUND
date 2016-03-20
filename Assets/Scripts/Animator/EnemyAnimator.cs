@@ -3,6 +3,7 @@ using System.Collections;
 
 public class EnemyAnimator : MonoBehaviour
 {
+	private EntityMovement movement;
 	private NavMeshAgent agent;
 	private Animator animator;
 	private Entity entity;
@@ -12,6 +13,7 @@ public class EnemyAnimator : MonoBehaviour
 		animator = GetComponent<Animator>();
 		entity = GetComponentInParent<Entity>();
 		agent = entity.GetComponent<NavMeshAgent>();
+		movement = entity.GetComponent<EntityMovement>();
 	}
 
 	protected void OnEnable()
@@ -29,6 +31,7 @@ public class EnemyAnimator : MonoBehaviour
 	protected void LateUpdate()
 	{
 		animator.SetFloat("Velocity", agent.velocity.magnitude);
+		animator.SetBool("Crouching", movement.Crouching);
 	}
 
 	private void OnReloadEvent(ReloadEvent evt)

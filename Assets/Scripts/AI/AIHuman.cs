@@ -71,10 +71,13 @@ public class AIHuman : AIBase
 				{
 					//Debug.Log("NEW TASK: Walk to cover");
 					CurrentCover.Occupant = Entity;
-					if (CurrentCover.GetType () == typeof(CoverWall)) 
+
+					if (CurrentCover.GetType() == typeof(CoverWall)) 
 					{
 						TaskHumanWalkToCover task = new TaskHumanWalkToCover(((CoverWall)CurrentCover).ShootPosition);
 						yield return task.RunTask(this);
+
+						Movement.Crouching = true;
 					} 
 					else 
 					{
@@ -130,6 +133,11 @@ public class AIHuman : AIBase
 	{
 		if(CurrentCover != null)
 		{
+			if(CurrentCover is CoverWall)
+			{
+				Movement.Crouching = false;
+			}
+
 			CurrentCover.Occupant = null;
 			CurrentCover = null;
 		}
