@@ -462,6 +462,9 @@ MonoBehaviour:
   adsSpeed: 2.3
   characterController: {fileID: 14374550}
   playerInputController: {fileID: 11491956}
+  bulletCollider: {fileID: 13692308}
+  standingHeight: 1.8
+  crouchingHeight: 1
 --- !u!114 &11440944
 MonoBehaviour:
   m_ObjectHideFlags: 1

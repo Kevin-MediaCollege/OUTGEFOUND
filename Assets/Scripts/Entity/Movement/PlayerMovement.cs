@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 /// <summary>
 /// Player movement controller
@@ -10,6 +11,12 @@ public class PlayerMovement : EntityMovement
 	[SerializeField] private CharacterController characterController;
 	[SerializeField] private PlayerInputController playerInputController;
 
+	[SerializeField] private CapsuleCollider bulletCollider;
+
+	[SerializeField] private float standingHeight;
+	[SerializeField] private float crouchingHeight;
+
+	private float tweenStart;
 	private bool ads;
 
 	protected void OnEnable()
@@ -24,19 +31,34 @@ public class PlayerMovement : EntityMovement
 		GlobalEvents.RemoveListener<StopAimDownSightEvent>(OnStopAimDownSightEvent);
 	}
 
+	protected void Update()
+	{
+		if(characterController.isGrounded)
+		{
+			verticalSpeed = 0;
+
+			if(playerInputController.Jump)
+			{
+				verticalSpeed = jumpSpeed;
+			}
+		}
+
+		// Toggle crouching
+		if(playerInputController.Crouch)
+		{
+			Crouching = !Crouching;
+
+			StopCoroutine("HandleCrouch");
+			StartCoroutine("HandleCrouch");
+		}
+	}
+
 	protected void FixedUpdate()
 	{
 		Vector3 velocityX = transform.right * playerInputController.InputX * (ads ? adsSpeed : speed);
 		Vector3 velocityZ = transform.forward * playerInputController.InputZ * (ads ? adsSpeed : speed);
 
-		if(characterController.isGrounded)
-		{
-			verticalSpeed = playerInputController.Jump ? jumpSpeed : 0;
-		}
-		else
-		{
-			verticalSpeed += Physics.gravity.y * Time.deltaTime;
-		}
+		verticalSpeed += Physics.gravity.y * Time.deltaTime;
 
 		Vector3 velocity = velocityX + velocityZ;
 		velocity.y = verticalSpeed;
@@ -48,12 +70,6 @@ public class PlayerMovement : EntityMovement
 		{
 			PlayFootstep();
 		}
-
-		// Toggle crouching
-		if(playerInputController.Crouch)
-		{
-			Crouching = !Crouching;
-		}
 	}
 
 	private void OnStartAimDownSightEvent(StartAimDownSightEvent evt)
@@ -64,5 +80,22 @@ public class PlayerMovement : EntityMovement
 	private void OnStopAimDownSightEvent(StopAimDownSightEvent evt)
 	{
 		ads = false;
+	}
+
+	private IEnumerator HandleCrouch()
+	{
+		float height = Crouching ? crouchingHeight : standingHeight;
+		tweenStart = Time.time;
+
+		float target = 0;
+		while(target != height)
+		{
+			target = Mathf.Lerp(characterController.height, height, (Time.time - tweenStart) * 2);
+
+			characterController.height = target;
+			bulletCollider.height = target;
+
+			yield return null;
+		}
 	}
 }
