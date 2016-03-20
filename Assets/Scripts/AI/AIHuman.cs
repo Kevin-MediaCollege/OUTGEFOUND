@@ -78,6 +78,8 @@ public class AIHuman : AIBase
 						yield return task.RunTask(this);
 
 						Movement.Crouching = true;
+						Movement.Agent.height = 1.5f;
+						Movement.Agent.baseOffset = 0.4f;
 					} 
 					else 
 					{
@@ -104,6 +106,13 @@ public class AIHuman : AIBase
 				//Debug.Log("NEW TASK: track player");
 				CheckRemoveCover();
 				yield return (new TaskHumanTrack()).RunTask(this);
+			}
+
+			if(CurrentCover == null)
+			{
+				Movement.Crouching = false;
+				Movement.Agent.height = 2f;
+				Movement.Agent.baseOffset = 1f;
 			}
 			
 			yield return null;
@@ -133,11 +142,6 @@ public class AIHuman : AIBase
 	{
 		if(CurrentCover != null)
 		{
-			if(CurrentCover is CoverWall)
-			{
-				Movement.Crouching = false;
-			}
-
 			CurrentCover.Occupant = null;
 			CurrentCover = null;
 		}

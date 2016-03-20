@@ -5,6 +5,14 @@
 /// </summary>
 public class AIMovement : EntityMovement
 {
+	public NavMeshAgent Agent
+	{
+		get
+		{
+			return navMeshAgent;
+		}
+	}
+
 	public float RemainingDistance
 	{
 		get

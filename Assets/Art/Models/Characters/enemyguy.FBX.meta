@@ -49,6 +49,18 @@ ModelImporter:
     100082: default001
     100084: //RootNode
     100086: X2
+    100088: Bone015
+    100090: X1
+    100092: X3
+    100094: Bip001 HeadNub
+    100096: Bip001 L Finger0Nub
+    100098: Bip001 L Finger1Nub
+    100100: Bip001 L Toe0Nub
+    100102: Bip001 R Finger0Nub
+    100104: Bip001 R Finger1Nub
+    100106: Bip001 R Toe0Nub
+    100108: Bone014
+    100110: Bone029(mirrored)
     400000: Bip001
     400002: Bip001 Footsteps
     400004: Bip001 Head
@@ -93,10 +105,24 @@ ModelImporter:
     400082: default001
     400084: //RootNode
     400086: X2
+    400088: Bone015
+    400090: X1
+    400092: X3
+    400094: Bip001 HeadNub
+    400096: Bip001 L Finger0Nub
+    400098: Bip001 L Finger1Nub
+    400100: Bip001 L Toe0Nub
+    400102: Bip001 R Finger0Nub
+    400104: Bip001 R Finger1Nub
+    400106: Bip001 R Toe0Nub
+    400108: Bone014
+    400110: Bone029(mirrored)
     2300000: X2
     3300000: X2
     4300000: default001
     4300002: X2
+    4300004: X3
+    4300006: X1
     7400000: Single Shot Recoil
     7400002: Walk Cycle
     7400004: Standing -> Crouch
@@ -104,8 +130,20 @@ ModelImporter:
     7400008: Reload
     7400010: Idle
     7400012: Crouch Idle
+    7400014: Single Shot Recoil Standing
+    7400016: Idle Standing
+    7400018: Standing to Crouch
+    7400020: Crouch to Standing
+    7400022: Single Walk Cycle
+    7400024: Reload Standing
+    7400026: Single Shot Recoil Crouching
+    7400028: Idle Crouch
+    7400030: Reload Crouching
     9500000: //RootNode
     13700000: default001
+    13700002: X1
+    13700004: X2
+    13700006: X3
   materials:
     importMaterials: 0
     materialName: 0
@@ -121,23 +159,24 @@ ModelImporter:
       might lower retargeting quality:\n\t'Bip001 Spine2' is inbetween humanoid transforms
       and has rotation animation that will be discarded.\n\t'Bip001 Spine3' is inbetween
       humanoid transforms and has rotation animation that will be discarded.\n\t'Bip001
-      L Thigh' has translation animation that will be discarded.\n\t'Bip001 R Thigh'
-      has translation animation that will be discarded.\n"
+      R Clavicle' has translation animation that will be discarded.\n\t'Bip001 L Thigh'
+      has translation animation that will be discarded.\n\t'Bip001 R Thigh' has translation
+      animation that will be discarded.\n"
     animationRetargetingWarnings: "\nRetargeting quality report for clip 'Take 001':\n\tLeftLowerLeg
-      average position error 2.6 mm and maximum position error 10.3 mm at time 4:17
-      (71.7%) Frame 137\n\tLeftFoot average position error 2.6 mm and maximum position
-      error 10.3 mm at time 4:17 (71.7%) Frame 137\n\tRightLowerLeg average position
-      error 2.6 mm and maximum position error 11.4 mm at time 4:18 (72.3%) Frame 138\n\tRightFoot
-      average position error 2.6 mm and maximum position error 11.4 mm at time 4:18
-      (72.3%) Frame 138\n\tLeftUpperArm average position error 62.7 mm and maximum
-      position error 152.4 mm at time 2:16 (39.8%) Frame 76\n\tLeftLowerArm average
-      position error 62.8 mm and maximum position error 152.4 mm at time 2:16 (39.8%)
-      Frame 76\n\tLeftHand average position error 62.7 mm and maximum position error
-      152.4 mm at time 2:16 (39.8%) Frame 76\n\tRightUpperArm average position error
-      56.8 mm and maximum position error 88.8 mm at time 4:17 (71.7%) Frame 137\n\tRightLowerArm
-      average position error 57.0 mm and maximum position error 88.7 mm at time 4:16
-      (71.2%) Frame 136\n\tRightHand average position error 56.9 mm and maximum position
-      error 88.8 mm at time 4:17 (71.7%) Frame 137\n"
+      average position error 14.0 mm and maximum position error 45.9 mm at time 6:16
+      (55.8%) Frame 196\n\tLeftFoot average position error 14.0 mm and maximum position
+      error 45.9 mm at time 6:16 (55.8%) Frame 196\n\tRightLowerLeg average position
+      error 12.8 mm and maximum position error 33.1 mm at time 4:20 (39.9%) Frame
+      140\n\tRightFoot average position error 12.8 mm and maximum position error 33.1
+      mm at time 4:20 (39.9%) Frame 140\n\tLeftUpperArm average position error 46.7
+      mm and maximum position error 82.3 mm at time 4:20 (39.9%) Frame 140\n\tLeftLowerArm
+      average position error 46.8 mm and maximum position error 82.3 mm at time 4:20
+      (39.9%) Frame 140\n\tLeftHand average position error 46.7 mm and maximum position
+      error 82.3 mm at time 4:20 (39.9%) Frame 140\n\tRightUpperArm average position
+      error 45.8 mm and maximum position error 74.4 mm at time 4:20 (39.9%) Frame
+      140\n\tRightLowerArm average position error 46.0 mm and maximum position error
+      74.3 mm at time 4:20 (39.9%) Frame 140\n\tRightHand average position error 45.9
+      mm and maximum position error 74.4 mm at time 4:20 (39.9%) Frame 140\n"
     animationDoRetargetingWarnings: 1
     animationCompression: 3
     animationRotationError: 0.5
@@ -147,10 +186,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Single Shot Recoil
+      name: Single Shot Recoil Standing
       takeName: Take 001
-      firstFrame: 5
-      lastFrame: 15
+      firstFrame: 10
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -300,18 +339,24 @@ ModelImporter:
           Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm/Bip001
           R Hand/Bip001 R Finger1/Bip001 R Finger11/Bip001 R Finger12
         weight: 1
+      - path: Bone015
+        weight: 0
       - path: default001
         weight: 0
+      - path: X1
+        weight: 0
       - path: X2
+        weight: 0
+      - path: X3
         weight: 0
       maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Walk Cycle
+      name: Idle Standing
       takeName: Take 001
-      firstFrame: 25
-      lastFrame: 45
+      firstFrame: 30
+      lastFrame: 80
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -461,18 +506,24 @@ ModelImporter:
           Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm/Bip001
           R Hand/Bip001 R Finger1/Bip001 R Finger11/Bip001 R Finger12
         weight: 1
+      - path: Bone015
+        weight: 0
       - path: default001
         weight: 0
+      - path: X1
+        weight: 0
       - path: X2
+        weight: 0
+      - path: X3
         weight: 0
       maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Standing -> Crouch
+      name: Standing to Crouch
       takeName: Take 001
-      firstFrame: 55
-      lastFrame: 65
+      firstFrame: 90
+      lastFrame: 100
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -622,18 +673,24 @@ ModelImporter:
           Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm/Bip001
           R Hand/Bip001 R Finger1/Bip001 R Finger11/Bip001 R Finger12
         weight: 1
+      - path: Bone015
+        weight: 0
       - path: default001
         weight: 0
+      - path: X1
+        weight: 0
       - path: X2
+        weight: 0
+      - path: X3
         weight: 0
       maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Crouch -> Standing
+      name: Crouch to Standing
       takeName: Take 001
-      firstFrame: 75
-      lastFrame: 85
+      firstFrame: 110
+      lastFrame: 120
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -783,18 +840,191 @@ ModelImporter:
           Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm/Bip001
           R Hand/Bip001 R Finger1/Bip001 R Finger11/Bip001 R Finger12
         weight: 1
+      - path: Bone015
+        weight: 0
       - path: default001
         weight: 0
+      - path: X1
+        weight: 0
       - path: X2
+        weight: 0
+      - path: X3
         weight: 0
       maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Reload
+      name: Single Walk Cycle
       takeName: Take 001
-      firstFrame: 100
-      lastFrame: 190
+      firstFrame: 130
+      lastFrame: 150
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bip001
+        weight: 1
+      - path: Bip001/Bip001 Footsteps
+        weight: 0
+      - path: Bip001/Bip001 Pelvis
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 L Thigh
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 L Thigh/Bip001 L Calf
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 L Thigh/Bip001 L Calf/Bip001
+          L Foot
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 L Thigh/Bip001 L Calf/Bip001
+          L Foot/Bip001 L Toe0
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 L Thigh/Bip001 L Calf/Bip001
+          L Foot/Bip001 L Toe0/Bip001 L Toe01
+        weight: 0
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 L Thigh/Bip001 L Calf/Bip001
+          L Foot/Bip001 L Toe0/Bip001 L Toe01/Bip001 L Toe02
+        weight: 0
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 R Thigh
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 R Thigh/Bip001 R Calf
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 R Thigh/Bip001 R Calf/Bip001
+          R Foot
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 R Thigh/Bip001 R Calf/Bip001
+          R Foot/Bip001 R Toe0
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 R Thigh/Bip001 R Calf/Bip001
+          R Foot/Bip001 R Toe0/Bip001 R Toe01
+        weight: 0
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 R Thigh/Bip001 R Calf/Bip001
+          R Foot/Bip001 R Toe0/Bip001 R Toe01/Bip001 R Toe02
+        weight: 0
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 Head
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 L Clavicle
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 L Clavicle/Bip001 L UpperArm
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 L Clavicle/Bip001 L UpperArm/Bip001 L Forearm
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 L Clavicle/Bip001 L UpperArm/Bip001 L Forearm/Bip001
+          L Hand
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 L Clavicle/Bip001 L UpperArm/Bip001 L Forearm/Bip001
+          L Hand/Bip001 L Finger0
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 L Clavicle/Bip001 L UpperArm/Bip001 L Forearm/Bip001
+          L Hand/Bip001 L Finger0/Bip001 L Finger01
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 L Clavicle/Bip001 L UpperArm/Bip001 L Forearm/Bip001
+          L Hand/Bip001 L Finger0/Bip001 L Finger01/Bip001 L Finger02
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 L Clavicle/Bip001 L UpperArm/Bip001 L Forearm/Bip001
+          L Hand/Bip001 L Finger1
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 L Clavicle/Bip001 L UpperArm/Bip001 L Forearm/Bip001
+          L Hand/Bip001 L Finger1/Bip001 L Finger11
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 L Clavicle/Bip001 L UpperArm/Bip001 L Forearm/Bip001
+          L Hand/Bip001 L Finger1/Bip001 L Finger11/Bip001 L Finger12
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 R Clavicle
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm/Bip001
+          R Hand
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm/Bip001
+          R Hand/Bip001 R Finger0
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm/Bip001
+          R Hand/Bip001 R Finger0/Bip001 R Finger01
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm/Bip001
+          R Hand/Bip001 R Finger0/Bip001 R Finger01/Bip001 R Finger02
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm/Bip001
+          R Hand/Bip001 R Finger1
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm/Bip001
+          R Hand/Bip001 R Finger1/Bip001 R Finger11
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm/Bip001
+          R Hand/Bip001 R Finger1/Bip001 R Finger11/Bip001 R Finger12
+        weight: 1
+      - path: Bone015
+        weight: 0
+      - path: default001
+        weight: 0
+      - path: X1
+        weight: 0
+      - path: X2
+        weight: 0
+      - path: X3
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Reload Standing
+      takeName: Take 001
+      firstFrame: 160
+      lastFrame: 210
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -944,18 +1174,24 @@ ModelImporter:
           Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm/Bip001
           R Hand/Bip001 R Finger1/Bip001 R Finger11/Bip001 R Finger12
         weight: 1
+      - path: Bone015
+        weight: 0
       - path: default001
         weight: 0
+      - path: X1
+        weight: 0
       - path: X2
+        weight: 0
+      - path: X3
         weight: 0
       maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Idle
+      name: Single Shot Recoil Crouching
       takeName: Take 001
-      firstFrame: 25
-      lastFrame: 26
+      firstFrame: 220
+      lastFrame: 230
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1105,18 +1341,191 @@ ModelImporter:
           Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm/Bip001
           R Hand/Bip001 R Finger1/Bip001 R Finger11/Bip001 R Finger12
         weight: 1
+      - path: Bone015
+        weight: 0
       - path: default001
         weight: 0
+      - path: X1
+        weight: 0
       - path: X2
+        weight: 0
+      - path: X3
         weight: 0
       maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Crouch Idle
+      name: Idle Crouch
       takeName: Take 001
-      firstFrame: 65
-      lastFrame: 66
+      firstFrame: 240
+      lastFrame: 290
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bip001
+        weight: 1
+      - path: Bip001/Bip001 Footsteps
+        weight: 0
+      - path: Bip001/Bip001 Pelvis
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 L Thigh
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 L Thigh/Bip001 L Calf
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 L Thigh/Bip001 L Calf/Bip001
+          L Foot
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 L Thigh/Bip001 L Calf/Bip001
+          L Foot/Bip001 L Toe0
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 L Thigh/Bip001 L Calf/Bip001
+          L Foot/Bip001 L Toe0/Bip001 L Toe01
+        weight: 0
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 L Thigh/Bip001 L Calf/Bip001
+          L Foot/Bip001 L Toe0/Bip001 L Toe01/Bip001 L Toe02
+        weight: 0
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 R Thigh
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 R Thigh/Bip001 R Calf
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 R Thigh/Bip001 R Calf/Bip001
+          R Foot
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 R Thigh/Bip001 R Calf/Bip001
+          R Foot/Bip001 R Toe0
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 R Thigh/Bip001 R Calf/Bip001
+          R Foot/Bip001 R Toe0/Bip001 R Toe01
+        weight: 0
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 R Thigh/Bip001 R Calf/Bip001
+          R Foot/Bip001 R Toe0/Bip001 R Toe01/Bip001 R Toe02
+        weight: 0
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 Head
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 L Clavicle
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 L Clavicle/Bip001 L UpperArm
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 L Clavicle/Bip001 L UpperArm/Bip001 L Forearm
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 L Clavicle/Bip001 L UpperArm/Bip001 L Forearm/Bip001
+          L Hand
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 L Clavicle/Bip001 L UpperArm/Bip001 L Forearm/Bip001
+          L Hand/Bip001 L Finger0
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 L Clavicle/Bip001 L UpperArm/Bip001 L Forearm/Bip001
+          L Hand/Bip001 L Finger0/Bip001 L Finger01
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 L Clavicle/Bip001 L UpperArm/Bip001 L Forearm/Bip001
+          L Hand/Bip001 L Finger0/Bip001 L Finger01/Bip001 L Finger02
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 L Clavicle/Bip001 L UpperArm/Bip001 L Forearm/Bip001
+          L Hand/Bip001 L Finger1
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 L Clavicle/Bip001 L UpperArm/Bip001 L Forearm/Bip001
+          L Hand/Bip001 L Finger1/Bip001 L Finger11
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 L Clavicle/Bip001 L UpperArm/Bip001 L Forearm/Bip001
+          L Hand/Bip001 L Finger1/Bip001 L Finger11/Bip001 L Finger12
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 R Clavicle
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm/Bip001
+          R Hand
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm/Bip001
+          R Hand/Bip001 R Finger0
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm/Bip001
+          R Hand/Bip001 R Finger0/Bip001 R Finger01
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm/Bip001
+          R Hand/Bip001 R Finger0/Bip001 R Finger01/Bip001 R Finger02
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm/Bip001
+          R Hand/Bip001 R Finger1
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm/Bip001
+          R Hand/Bip001 R Finger1/Bip001 R Finger11
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001
+          Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm/Bip001
+          R Hand/Bip001 R Finger1/Bip001 R Finger11/Bip001 R Finger12
+        weight: 1
+      - path: Bone015
+        weight: 0
+      - path: default001
+        weight: 0
+      - path: X1
+        weight: 0
+      - path: X2
+        weight: 0
+      - path: X3
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Reload Crouching
+      takeName: Take 001
+      firstFrame: 300
+      lastFrame: 350
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1266,9 +1675,15 @@ ModelImporter:
           Spine3/Bip001 Neck/Bip001 R Clavicle/Bip001 R UpperArm/Bip001 R Forearm/Bip001
           R Hand/Bip001 R Finger1/Bip001 R Finger11/Bip001 R Finger12
         weight: 1
+      - path: Bone015
+        weight: 0
       - path: default001
         weight: 0
+      - path: X1
+        weight: 0
       - path: X2
+        weight: 0
+      - path: X3
         weight: 0
       maskType: 0
       maskSource: {instanceID: 0}
