@@ -11,6 +11,7 @@ GameObject:
   - 95: {fileID: 9594366}
   - 114: {fileID: 11421006}
   - 114: {fileID: 11446438}
+  - 114: {fileID: 114000012204167168}
   m_Layer: 9
   m_Name: Player Weapon
   m_TagString: Untagged
@@ -175,7 +176,7 @@ Transform:
   - {fileID: 445168}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 44.996002, y: 0, z: 0}
 --- !u!4 &406494
 Transform:
   m_ObjectHideFlags: 1
@@ -769,6 +770,18 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 106854}
   m_IsPrefabParent: 1
+--- !u!114 &114000012204167168
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafed639aff23f64c807feb0cdf5bd90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 9594366}
 --- !u!114 &114000014011604512
 MonoBehaviour:
   m_ObjectHideFlags: 1
