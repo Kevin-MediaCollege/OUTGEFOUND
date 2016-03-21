@@ -83,12 +83,18 @@ public class FirearmSway : MonoBehaviour
 			weapon = player.GetComponentInChildren<Weapon>().transform.parent;
 			eyes = player.transform.Find("Eyes");
 
-			/*
 			delay = new Vector3(0f, 0f, 0f);
 			previous = new Vector2(eyes.rotation.eulerAngles.x, player.transform.rotation.eulerAngles.y);
 			target = previous;
-			*/
 		}
+
+		previous = target;
+		target = new Vector2(eyes.rotation.eulerAngles.x, player.transform.rotation.eulerAngles.y);
+		if(previous.x > 270f && target.x < 90f) { previous.x -= 360f; }
+		else if(previous.x < 90f && target.x > 270f) { previous.x += 360f; }
+		if(previous.y > 270f && target.y < 90f) { previous.y -= 360f; }
+		else if(previous.y < 90f && target.y > 270f) { previous.y += 360f; }
+		delay = Vector3.Slerp (delay, new Vector3 (previous.x - target.x, previous.y - target.y, 0f), 0.1f);
 
 		walking = player.GetComponent<CharacterController> ().velocity != Vector3.zero;
 	}
@@ -129,72 +135,11 @@ public class FirearmSway : MonoBehaviour
 					walkAnim = Vector3.Lerp (walkAnim, Vector3.zero, 0.2f);
 				}
 	
-				weapon.localPosition = (walkAnim * 0.01f) + normalAnim.localPosition;
-				weaponAds.localPosition = (walkAnim * 0.002f) + adsAnim.localPosition;
+				weapon.localPosition = (walkAnim * 0.01f) + normalAnim.localPosition + (new Vector3(delay.y * 0.003f, delay.x * 0.003f, 0f));
+				weaponAds.localPosition = (walkAnim * 0.002f) + adsAnim.localPosition + (new Vector3(delay.y * 0.0005f, delay.x * 0.0005f, 0f));
 			}
 
 			yield return null;
 		}
 	}
-
-	/*
-	private Vector3 delay = new Vector3(0f, 0f, 0f);
-	private Vector2 target;
-	private Vector2 previous;
-
-	protected void OnEnable()
-	{
-		StartCoroutine("Lerp");
-	}
-
-	protected void OnDisable()
-	{
-		StopCoroutine("Lerp");
-	}
-
-	protected void Update()
-	{
-		if(player == null || weapon == null)
-		{
-			player = EntityUtils.GetEntityWithTag("Player");
-
-			if(player == null)
-			{
-				return;
-			}
-
-			weapon = player.GetComponentInChildren<Weapon>().transform.parent;
-			eyes = player.transform.Find("Eyes");
-
-			delay = new Vector3(0f, 0f, 0f);
-			previous = new Vector2(eyes.rotation.eulerAngles.x, player.transform.rotation.eulerAngles.y);
-			target = previous;
-		}
-
-		previous = target;
-		float targetX = eyes.rotation.eulerAngles.x;
-		float targetY = player.transform.rotation.eulerAngles.y;
-		target = new Vector2(targetX, targetY);
-		delay = Vector3.Slerp (delay, new Vector3 (previous.x - target.x, previous.y - target.y, 0f), 0.05f);
-	}
-
-	private IEnumerator	Lerp()
-	{
-		while(true)
-		{
-			if(weapon != null)
-			{
-				//Quaternion newRotation = Quaternion.Euler(delay);
-				//weapon.localRotation.eulerAngles = delay;//Quaternion.Slerp(weapon.localRotation, newRotation, (Time.time * 0.1f));
-
-				Quaternion rot = weapon.localRotation;
-				Debug.Log (delay.x + "");
-				rot.eulerAngles = new Vector3(rot.eulerAngles.x, rot.eulerAngles.y, rot.eulerAngles.z);
-				weapon.localRotation = rot;
-			}
-
-			yield return null;
-		}
-	}
-	*/
 }
