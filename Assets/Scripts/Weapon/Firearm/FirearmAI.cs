@@ -21,7 +21,7 @@ public class FirearmAI : Firearm
 				{
 					continue;
 				}
-				//Debug.Log(hit.collider.tag, hit.collider);
+
 				Debug.DrawRay(Position, direction * hit.distance, entity != null ? Color.green : Color.red, 3);
 				return new HitInfo(Wielder, entity, hit.point, hit.normal, tag);
 			}
