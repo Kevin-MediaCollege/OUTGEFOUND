@@ -19,13 +19,15 @@ public class EnemyAnimator : MonoBehaviour
 	protected void OnEnable()
 	{
 		entity.Events.AddListener<ReloadEvent>(OnReloadEvent);
-		entity.Events.AddListener<WeaponFireEvent>(OnWeaponFireEvent);
+
+		GlobalEvents.AddListener<WeaponFireEvent>(OnWeaponFireEvent);
 	}
 
 	protected void OnDisable()
 	{
 		entity.Events.RemoveListener<ReloadEvent>(OnReloadEvent);
-		entity.Events.RemoveListener<WeaponFireEvent>(OnWeaponFireEvent);
+
+		GlobalEvents.RemoveListener<WeaponFireEvent>(OnWeaponFireEvent);
 	}
 
 	protected void LateUpdate()
@@ -41,6 +43,9 @@ public class EnemyAnimator : MonoBehaviour
 
 	private void OnWeaponFireEvent(WeaponFireEvent evt)
 	{
-		animator.SetTrigger("Shoot");
+		if(evt.Hit.source == entity)
+		{
+			animator.SetTrigger("Shoot");
+		}
 	}
 }
