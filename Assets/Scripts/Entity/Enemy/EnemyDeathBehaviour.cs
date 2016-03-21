@@ -7,6 +7,7 @@ using System.Collections;
 public class EnemyDeathBehaviour : MonoBehaviour
 {
 	[SerializeField] private AudioAssetGroup deathSounds;
+	[SerializeField] private GameObject ragdoll;
 
 	private AudioManager audioManager;
 	private Entity entity;
@@ -31,6 +32,7 @@ public class EnemyDeathBehaviour : MonoBehaviour
 	{
 		audioManager.PlayRandomAt(deathSounds, entity.transform.position);
 
+		Instantiate(ragdoll, entity.transform.position, entity.transform.rotation);
 		Destroy(entity.gameObject);
 	}
 }
