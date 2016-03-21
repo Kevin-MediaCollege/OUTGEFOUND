@@ -14,6 +14,11 @@ public class Door : MonoBehaviour
 
 		foreach(Entity entity in Entity.All)
 		{
+			if(!entity.HasTag("Player") && !entity.HasTag("Enemy"))
+			{
+				continue;
+			}
+
 			float distance2 = (transform.position - entity.transform.position).sqrMagnitude;
 
 			if(distance2 < range * range)
