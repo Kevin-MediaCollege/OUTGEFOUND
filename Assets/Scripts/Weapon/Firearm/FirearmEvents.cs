@@ -10,6 +10,10 @@ public class ReloadEvent : IEvent
 {
 }
 
+public class ReloadDoneEvent : IEvent
+{
+}
+
 public class ToggleAimDownSightEvent : IEvent
 {
 }

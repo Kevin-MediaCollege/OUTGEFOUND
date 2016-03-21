@@ -81,5 +81,7 @@ public class FirearmReloader : WeaponComponent
 		magazineEmpty = false;
 
 		stockpile.FillMagazine();
+
+		Weapon.Wielder.Events.Invoke(new ReloadDoneEvent());
 	}
 }
