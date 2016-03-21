@@ -49,7 +49,7 @@ public class CapraCorpAudio : MonoBehaviour
 
 			foreach(Transform speaker in speakers)
 			{
-				AudioChannel audioChannel = audioManager.PlayAt(target, speaker.position, true);
+				AudioChannel audioChannel = audioManager.PlayAt(target, speaker.position);
 				audioChannel.AudioSource.minDistance = min;
 				audioChannel.AudioSource.maxDistance = max;
 			}
