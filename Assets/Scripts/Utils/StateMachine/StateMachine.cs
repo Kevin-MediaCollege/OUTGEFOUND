@@ -125,13 +125,6 @@ public class StateMachine : MonoBehaviour
 			}
 		}
 
-		AsyncOperation main = SceneManager.LoadSceneAsync(node.SceneName, LoadSceneMode.Additive);
-		main.allowSceneActivation = false;
-		while(main.progress < 0.9f)
-		{
-			yield return null;
-		}
-
 		List<AsyncOperation> additional = new List<AsyncOperation>();
 		foreach(string scene in node.AdditionalScenes)
 		{
@@ -147,7 +140,7 @@ public class StateMachine : MonoBehaviour
 
 			foreach(AsyncOperation async in additional)
 			{
-				done = done && (async.progress >= 0.9f);
+				done = done && async.isDone;
 			}
 
 			if(done)
@@ -157,9 +150,8 @@ public class StateMachine : MonoBehaviour
 
 			yield return null;
 		}
-			
-		main.allowSceneActivation = true;
 
+		AsyncOperation main = SceneManager.LoadSceneAsync(node.SceneName, LoadSceneMode.Additive);
 		while(!main.isDone)
 		{
 			yield return null;
