@@ -55,8 +55,10 @@ public class PlayerMovement : EntityMovement
 
 	protected void FixedUpdate()
 	{
-		Vector3 velocityX = transform.right * playerInputController.InputX * (ads ? adsSpeed : speed);
-		Vector3 velocityZ = transform.forward * playerInputController.InputZ * (ads ? adsSpeed : speed);
+		bool useAdsSpeed = ads || Crouching;
+
+		Vector3 velocityX = transform.right * playerInputController.InputX * (useAdsSpeed ? adsSpeed : speed);
+		Vector3 velocityZ = transform.forward * playerInputController.InputZ * (useAdsSpeed ? adsSpeed : speed);
 
 		verticalSpeed += Physics.gravity.y * Time.deltaTime;
 
