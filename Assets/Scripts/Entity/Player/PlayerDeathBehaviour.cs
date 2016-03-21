@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Listens for the death of it's parent entity, and does something when that happens
@@ -33,6 +34,7 @@ public class PlayerDeathBehaviour : MonoBehaviour, ICommunicant
 
 	private void OnDead(EntityDiedEvent evt)
 	{
-		eventDispatcher.Invoke(new StateGoToMenuEvent());
+		//eventDispatcher.Invoke(new StateGoToMenuEvent());
+		SceneManager.LoadScene("Level_1");
 	}
 }
