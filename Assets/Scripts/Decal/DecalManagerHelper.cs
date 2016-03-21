@@ -131,6 +131,16 @@ public class DecalManagerHelper : MonoBehaviour
 			nextPool = nextPool >= poolLenght - 1 ? 0 : nextPool + 1;
 			meshUpdated = true;
 		} 
+		else if(tag == "Obstacle")
+		{
+			Quaternion q = Quaternion.LookRotation(-normal);
+
+			particleBulletPool[nextParticleBullet].transform.position = point;
+			particleBulletPool[nextParticleBullet].transform.eulerAngles = new Vector3(q.eulerAngles.x - 90f, q.eulerAngles.y, q.eulerAngles.z);
+			particleBulletPool[nextParticleBullet].init();
+			nextParticleBullet++;
+			if(nextParticleBullet >= particleBulletPoolLength) { nextParticleBullet = 0; }
+		}
 		else if((tag == "Body" || tag == "Head" || tag == "Limbs") && target.HasTag("Enemy"))
 		{
 			Quaternion q = Quaternion.LookRotation (-normal);
