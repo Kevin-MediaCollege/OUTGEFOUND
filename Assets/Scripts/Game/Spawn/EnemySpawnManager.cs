@@ -13,13 +13,15 @@ public class EnemySpawnManager : MonoBehaviour
 
 	private Entity e;
 
-	public float testDelay = 8f;
+	public float startDelay = 8f;
 	private float delay = 8f;
 
 	void Awake () 
 	{
 		pointsLenght = points.Length;
 		nextSpawnCheck = 0;
+		delay = 1f;
+		if(startDelay < 3f) { startDelay = 3f; }
 	}
 
 	void Update()
@@ -50,7 +52,23 @@ public class EnemySpawnManager : MonoBehaviour
 				g.transform.position = s.transform.position + new Vector3 (0f, 1f, 0f);
 				g.SetActive (true);
 			}
-			delay = testDelay;
+
+			if(startDelay > 6f)
+			{
+				startDelay -= 0.2f;
+				Debug.Log ("" + startDelay);
+			}
+			else if(startDelay > 4.5f)
+			{
+				startDelay -= 0.05f;
+				Debug.Log ("" + startDelay);
+			}
+			else if(startDelay > 3.5f)
+			{
+				startDelay -= 0.02f;
+				Debug.Log ("" + startDelay);
+			}
+			delay = startDelay;
 		}
 	}
 
