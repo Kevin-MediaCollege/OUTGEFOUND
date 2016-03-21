@@ -11,7 +11,7 @@ public class CoroutineRunner : IDependency
 			if(coroutineRunnerHelper == null)
 			{
 				GameObject coroutineRunnerObject = new GameObject("CoroutineRunner");
-				Object.DontDestroyOnLoad(coroutineRunnerObject);
+				//Object.DontDestroyOnLoad(coroutineRunnerObject);
 
 				coroutineRunnerHelper = coroutineRunnerObject.AddComponent<CoroutineRunnerHelper>();
 			}

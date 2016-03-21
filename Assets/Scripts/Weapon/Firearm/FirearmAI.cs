@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
+using System.Collections.Generic;
 
 public class FirearmAI : Firearm
 {
@@ -7,25 +9,22 @@ public class FirearmAI : Firearm
 	{
 		Ray ray = new Ray(Position, direction);
 		RaycastHit[] hits = Physics.RaycastAll(ray, range, layers);
+		IEnumerable<RaycastHit> query = hits.OrderBy(hit => hit.distance);
 
-		foreach(RaycastHit hit in hits)
+		foreach(RaycastHit hit in query)
 		{
-			Entity target = null;
-			string tag = "Untagged";
-
 			if(hit.collider != null)
 			{
-				target = hit.collider.GetComponentInParent<Entity>();
-				tag = hit.collider.tag;
+				Entity entity = hit.collider.GetComponentInParent<Entity>();
 
-				if(target != null && target.HasTag("Enemy"))
+				if(entity != null && entity.HasTag("Enemy"))
 				{
 					continue;
 				}
-			}
 
-			Debug.DrawRay(Position, direction * hit.distance, target != null ? Color.green : Color.red, 3);
-			return new HitInfo(Wielder, target, hit.point, hit.normal, tag);
+				Debug.DrawRay(Position, direction * hit.distance, entity != null ? Color.green : Color.red, 3);
+				return new HitInfo(Wielder, entity, hit.point, hit.normal, tag);
+			}
 		}
 
 		Debug.DrawRay(Position, direction * range, Color.red, 3);
