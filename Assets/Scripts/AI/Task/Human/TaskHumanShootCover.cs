@@ -90,6 +90,7 @@ public class TaskHumanShootCover : TaskHuman
 		} 
 		else 
 		{
+			crouch (false, _ai);
 			_ai.transform.LookAt(EnemyUtils.PlayerCenter);
 			Vector3 euler = _ai.transform.rotation.eulerAngles;
 			euler.x = 0;
@@ -108,10 +109,28 @@ public class TaskHumanShootCover : TaskHuman
 
 				if(_ai.Entity.GetMagazine().Remaining == 0)
 				{
+					crouch (true, _ai);
+					yield return new WaitForSeconds (0.5f);
 					_ai.Entity.Events.Invoke(new AttemptReloadEvent());
 					break;
 				}
 			}
+		}
+	}
+
+	public void crouch(bool _state, AIHuman _ai)
+	{
+		if (_state) 
+		{
+			_ai.Movement.Crouching = true;
+			_ai.Movement.Agent.height = 1.5f;
+			_ai.Movement.Agent.baseOffset = 0.4f;
+		} 
+		else 
+		{
+			_ai.Movement.Crouching = false;
+			_ai.Movement.Agent.height = 2f;
+			_ai.Movement.Agent.baseOffset = 1f;
 		}
 	}
 }

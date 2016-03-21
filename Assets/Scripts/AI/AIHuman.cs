@@ -76,10 +76,6 @@ public class AIHuman : AIBase
 					{
 						TaskHumanWalkToCover task = new TaskHumanWalkToCover(((CoverWall)CurrentCover).ShootPosition);
 						yield return task.RunTask(this);
-
-						Movement.Crouching = true;
-						Movement.Agent.height = 1.5f;
-						Movement.Agent.baseOffset = 0.4f;
 					} 
 					else 
 					{
@@ -107,14 +103,6 @@ public class AIHuman : AIBase
 				CheckRemoveCover();
 				yield return (new TaskHumanTrack()).RunTask(this);
 			}
-
-			if(CurrentCover == null)
-			{
-				Movement.Crouching = false;
-				Movement.Agent.height = 2f;
-				Movement.Agent.baseOffset = 1f;
-			}
-			
 			yield return null;
 		}
 	}
