@@ -32,7 +32,9 @@ public class EnemyDeathBehaviour : MonoBehaviour
 	{
 		audioManager.PlayRandomAt(deathSounds, entity.transform.position);
 
-		Instantiate(ragdoll, entity.transform.position, entity.transform.rotation);
+		GameObject go = Instantiate(ragdoll, entity.transform.position, entity.transform.rotation) as GameObject;
+		go.transform.SetParent(entity.transform.parent);
+
 		Destroy(entity.gameObject);
 	}
 }
