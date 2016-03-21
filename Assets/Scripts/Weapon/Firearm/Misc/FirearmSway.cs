@@ -86,6 +86,8 @@ public class FirearmSway : MonoBehaviour
 			delay = new Vector3(0f, 0f, 0f);
 			previous = new Vector2(eyes.rotation.eulerAngles.x, player.transform.rotation.eulerAngles.y);
 			target = previous;
+			normalAnim.localPosition = baseNormal;
+			adsAnim.localPosition = baseAds;
 		}
 
 		previous = target;
