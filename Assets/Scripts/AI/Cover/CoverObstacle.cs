@@ -16,6 +16,11 @@ public class CoverObstacle : CoverBase
 
 	public override void UpdateCover(Vector3 _playerPos, Vector3 _playerHead)
 	{
+		if(this == null)
+		{
+			return;
+		}
+
 		IsUsefull = true;
 		IsSafe = true;
 		Vector3 start = transform.position + new Vector3(0f, Size.y + 0.5f, 0f);

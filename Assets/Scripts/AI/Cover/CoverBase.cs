@@ -5,7 +5,7 @@ public class CoverBase : MonoBehaviour
 {
 	protected Vector2 Size { get { return new Vector2(coverSizeX, coverSizeY); } }
 	public Entity Occupant { set; get; }
-	public float CoverRotation { get { return transform.eulerAngles.y; } }
+	public float CoverRotation { get { return this != null ? transform.eulerAngles.y : 0; } }
 	public bool IsSafe { set; get; }
 	public bool IsUsefull { set; get; }
 	public bool IsOccupied { get { return Occupant != null; } }
