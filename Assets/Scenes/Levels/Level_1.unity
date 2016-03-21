@@ -18206,7 +18206,8 @@ Prefab:
       propertyPath: m_Name
       value: WallDoorA_001 (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11480402, guid: c618c5d8fa1d6744eaf3be49caa74bdf, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c618c5d8fa1d6744eaf3be49caa74bdf, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &629912600 stripped
@@ -29965,7 +29966,8 @@ Prefab:
       propertyPath: m_Name
       value: WallDoorA_001 (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11480402, guid: c618c5d8fa1d6744eaf3be49caa74bdf, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c618c5d8fa1d6744eaf3be49caa74bdf, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1088741029 stripped
@@ -41361,7 +41363,8 @@ Prefab:
       propertyPath: m_Name
       value: WallDoorA_001 (5)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11480402, guid: c618c5d8fa1d6744eaf3be49caa74bdf, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c618c5d8fa1d6744eaf3be49caa74bdf, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1514699709
@@ -43076,7 +43079,8 @@ Prefab:
       propertyPath: m_Name
       value: WallDoorA_001 (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11480402, guid: c618c5d8fa1d6744eaf3be49caa74bdf, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c618c5d8fa1d6744eaf3be49caa74bdf, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1565832200
