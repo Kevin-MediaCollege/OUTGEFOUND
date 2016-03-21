@@ -118,8 +118,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  sizeMin: 0.2674677
-  sizeMax: 0.4083128
+  sizeMin: 0.2
+  sizeMax: 0.3
   scale: 1
   initialRotationMin: -360
   initialRotationMax: 360
@@ -404,13 +404,13 @@ MonoBehaviour:
   lifetimeColor:
     key0:
       serializedVersion: 2
-      rgba: 15790320
+      rgba: 9737364
     key1:
       serializedVersion: 2
-      rgba: 4290756543
+      rgba: 2845086868
     key2:
       serializedVersion: 2
-      rgba: 2684354560
+      rgba: 1845493760
     key3:
       serializedVersion: 2
       rgba: 0
@@ -438,7 +438,7 @@ MonoBehaviour:
     atime1: 3059
     atime2: 29298
     atime3: 65535
-    atime4: 0
+    atime4: 65535
     atime5: 0
     atime6: 0
     atime7: 0
@@ -630,7 +630,7 @@ MonoBehaviour:
   sourceTransform: {fileID: 4000010680936862}
   sourceTransforms:
   - transform: {fileID: 4000010680936862}
-    instanceID: -2990686
+    instanceID: -1226636
     available: 1
     position: {x: 0, y: 0, z: 5.54}
     localPosition: {x: 0, y: 0, z: 0}
@@ -800,10 +800,10 @@ MonoBehaviour:
   prewarmTime: 1
   prewarmCycles: 16
   particleTimescale: 1
-  localTime: 84.03632
-  localDeltaTime: 0.017219543
+  localTime: 380.0222
+  localDeltaTime: 0.029296875
   previousActiveState: 0
-  simulationStarted: 83.59517
+  simulationStarted: 374.76505
   loopExceeded: 1
   loopExceededOnParticle: -1
 --- !u!114 &114000012007042902
