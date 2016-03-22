@@ -33,7 +33,10 @@ public class Door : MonoBehaviour
 
 	protected void OnDrawGizmos()
 	{
-		Gizmos.color = Color.cyan;
-		Gizmos.DrawWireSphere(transform.position, range);
+		if(enabled)
+		{
+			Gizmos.color = Color.cyan;
+			Gizmos.DrawWireSphere(transform.position, range);
+		}
 	}
 }
