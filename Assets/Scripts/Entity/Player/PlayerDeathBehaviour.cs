@@ -35,6 +35,6 @@ public class PlayerDeathBehaviour : MonoBehaviour, ICommunicant
 	private void OnDead(EntityDiedEvent evt)
 	{
 		//eventDispatcher.Invoke(new StateGoToMenuEvent());
-		SceneManager.LoadScene("Level_1");
+		SceneManager.LoadScene("Level_7");
 	}
 }
