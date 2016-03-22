@@ -91,6 +91,7 @@ public class TaskHumanShootCover : TaskHuman
 		else 
 		{
 			crouch (false, _ai);
+			yield return new WaitForSeconds (0.5f);
 			_ai.transform.LookAt(EnemyUtils.PlayerCenter);
 			Vector3 euler = _ai.transform.rotation.eulerAngles;
 			euler.x = 0;
@@ -110,7 +111,7 @@ public class TaskHumanShootCover : TaskHuman
 				if(_ai.Entity.GetMagazine().Remaining == 0)
 				{
 					crouch (true, _ai);
-					yield return new WaitForSeconds (0.5f);
+					yield return new WaitForSeconds (1f);
 					_ai.Entity.Events.Invoke(new AttemptReloadEvent());
 					break;
 				}
