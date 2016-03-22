@@ -26,7 +26,7 @@ public class CoverObstacle : CoverBase
 		Vector3 start = transform.position + new Vector3(0f, Size.y + 0.5f, 0f);
 		float dist = Vector3.Distance(start, _playerHead);
 
-		if(dist < 5f)
+		if(dist < 3f || dist > 30f)
 		{
 			IsSafe = false;
 			IsUsefull = false;

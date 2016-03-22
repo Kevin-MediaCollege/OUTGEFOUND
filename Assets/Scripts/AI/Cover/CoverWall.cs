@@ -39,7 +39,7 @@ public class CoverWall : CoverBase
 		IsSafe = true;
 		float dist = Vector3.Distance(rayPosition, _playerHead);
 
-		if(dist < 3f)
+		if(dist < 3f || dist > 30f)
 		{
 			IsSafe = false;
 			IsUsefull = false;
