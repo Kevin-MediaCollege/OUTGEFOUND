@@ -55,17 +55,17 @@ public class EnemySpawnManager : MonoBehaviour
 
 			if(startDelay > 6f)
 			{
-				startDelay -= 0.2f;
+				startDelay -= 0.1f;
 				//Debug.Log ("" + startDelay);
 			}
 			else if(startDelay > 4.5f)
 			{
-				startDelay -= 0.05f;
+				startDelay -= 0.03f;
 				//Debug.Log ("" + startDelay);
 			}
 			else if(startDelay > 3.5f)
 			{
-				startDelay -= 0.02f;
+				startDelay -= 0.01f;
 				//Debug.Log ("" + startDelay);
 			}
 			delay = startDelay;
