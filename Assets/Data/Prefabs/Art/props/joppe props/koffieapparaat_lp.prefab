@@ -40,7 +40,7 @@ GameObject:
   - 65: {fileID: 65000011705472406}
   m_Layer: 0
   m_Name: koffieapparaat_lp
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967231
@@ -57,7 +57,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000012106722992}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
 --- !u!4 &4000012106722992
 Transform:
   m_ObjectHideFlags: 1

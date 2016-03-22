@@ -35,11 +35,11 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000013418948982}
   - 33: {fileID: 33000012592743754}
-  - 64: {fileID: 64000011685708536}
+  - 64: {fileID: 64000012374131526}
   - 23: {fileID: 23000012270874662}
   m_Layer: 0
   m_Name: Quad
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -50,14 +50,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012368473242}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.63823855, y: -0.30427155, z: 0.30420357, w: 0.6383813}
+  m_LocalPosition: {x: -12.675, y: 0.242, z: 51.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4000013418948982}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 89.981, y: 0, z: 50.693}
 --- !u!4 &4000013418948982
 Transform:
   m_ObjectHideFlags: 1
@@ -105,7 +105,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013876328666}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &64000011685708536
+--- !u!64 &64000012374131526
 MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
