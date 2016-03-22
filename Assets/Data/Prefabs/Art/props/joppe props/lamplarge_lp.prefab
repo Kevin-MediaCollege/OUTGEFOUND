@@ -36,11 +36,10 @@ GameObject:
   - 4: {fileID: 4000010605259636}
   - 33: {fileID: 33000010143592266}
   - 23: {fileID: 23000012617362214}
-  - 95: {fileID: 95000014272294424}
   - 65: {fileID: 65000013755617118}
   m_Layer: 0
   m_Name: lamplarge_lp
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -118,20 +117,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.9941576, y: 0.20267163, z: 0.068688944}
   m_Center: {x: -0.000000029802322, y: 0, z: 0}
---- !u!95 &95000014272294424
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013223770642}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: df2fc34b7b2f6134492cb7ed465f5822, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
