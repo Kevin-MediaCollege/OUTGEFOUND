@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
-public class ScreenSplashUnity : ScreenBase , ICommunicant
+public class ScreenSplashUnity : ScreenBase
 {
 	public override string Name
 	{
@@ -22,19 +23,12 @@ public class ScreenSplashUnity : ScreenBase , ICommunicant
 	//-2.6, 14.85, 26.9
 	//26.4359, 347.54, 0
 
-	private IEventDispatcher eventDispatcher;
-
 	protected void Update()
 	{
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
-			eventDispatcher.Invoke(new StateContinueEvent());
+			SceneManager.LoadSceneAsync("Menus");
 		}
-	}
-
-	public void RegisterEventDispatcher(IEventDispatcher eventDispatcher)
-	{
-		this.eventDispatcher = eventDispatcher;
 	}
 
 	public override void OnScreenEnter()
@@ -80,6 +74,6 @@ public class ScreenSplashUnity : ScreenBase , ICommunicant
 
 		yield return new WaitForSeconds (1.5f);
 
-		eventDispatcher.Invoke(new StateContinueEvent());
+		SceneManager.LoadSceneAsync("Menus");
 	}
 }

@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 using UnityEditor;
 #endif
 
-public class ScreenMainMenu : ScreenBase, ICommunicant
+public class ScreenMainMenu : ScreenBase
 {
 	public override string Name
 	{
@@ -32,8 +32,6 @@ public class ScreenMainMenu : ScreenBase, ICommunicant
 
 	[SerializeField] private CanvasGroup overlay;
 
-	private IEventDispatcher eventDispatcher;
-
 	protected void Awake()
 	{
 		buttonLevel.OnPointerDownEvent += OnButtonLevel;
@@ -42,11 +40,6 @@ public class ScreenMainMenu : ScreenBase, ICommunicant
 		buttonQuit.OnPointerDownEvent += OnButtonQuit;
 
 		overlay.gameObject.SetActive(false);
-	}
-
-	public void RegisterEventDispatcher(IEventDispatcher eventDispatcher)
-	{
-		this.eventDispatcher = eventDispatcher;
 	}
 
 	void OnButtonLevel (Touchable _sender, UnityEngine.EventSystems.PointerEventData _eventData)
@@ -74,10 +67,9 @@ public class ScreenMainMenu : ScreenBase, ICommunicant
 	void OnButtonQuit (Touchable _sender, UnityEngine.EventSystems.PointerEventData _eventData)
 	{
 		#if UNITY_EDITOR
-		Debug.Log("hype");
 		EditorApplication.ExecuteMenuItem("Edit/Play");
 		#else
-		System.Diagnostics.Process.GetCurrentProcess().Kill();
+		Application.Quit();
 		#endif
 	}
 
@@ -123,6 +115,6 @@ public class ScreenMainMenu : ScreenBase, ICommunicant
 		HOTweenHelper.Fade (overlay, 0f, 1f, 0.4f, 0f);
 		yield return new WaitForSeconds(0.4f);
 
-		eventDispatcher.Invoke(new StateStartGameEvent());
+		SceneManager.LoadScene("Loading Screen");
 	}
 }

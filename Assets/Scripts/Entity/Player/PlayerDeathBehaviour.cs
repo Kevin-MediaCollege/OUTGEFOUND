@@ -6,10 +6,8 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Listens for the death of it's parent entity, and does something when that happens
 /// </summary>
-public class PlayerDeathBehaviour : MonoBehaviour, ICommunicant
+public class PlayerDeathBehaviour : MonoBehaviour
 {
-	private IEventDispatcher eventDispatcher;
-
 	private Entity entity;
 
 	protected void Awake()
@@ -27,14 +25,8 @@ public class PlayerDeathBehaviour : MonoBehaviour, ICommunicant
 		entity.Events.RemoveListener<EntityDiedEvent>(OnDead);
 	}
 
-	public void RegisterEventDispatcher(IEventDispatcher eventDispatcher)
-	{
-		this.eventDispatcher = eventDispatcher;
-	}
-
 	private void OnDead(EntityDiedEvent evt)
 	{
-		//eventDispatcher.Invoke(new StateGoToMenuEvent());
-		SceneManager.LoadScene("Level_7");
+		SceneManager.LoadScene("Menus");
 	}
 }
