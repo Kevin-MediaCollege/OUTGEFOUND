@@ -214,8 +214,6 @@ ModelImporter:
         weight: 1
       - path: Bip001
         weight: 1
-      - path: Bip001/Bip001 Footsteps
-        weight: 0
       - path: Bip001/Bip001 Pelvis
         weight: 1
       - path: Bip001/Bip001 Pelvis/Bip001 Spine
