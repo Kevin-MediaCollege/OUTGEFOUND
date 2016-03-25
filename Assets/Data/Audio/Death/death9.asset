@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: death9
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 8cabf06599594c14594a94c4a4df05d7, type: 3}
-  audioMixerGroup: {fileID: 243000011020468368, guid: 42dd3235bcd36ce4581c7e18bc627bef,
+  audioMixerGroup: {fileID: 243000013553846678, guid: 42dd3235bcd36ce4581c7e18bc627bef,
     type: 2}
   type: 0
   volume: 0.7
