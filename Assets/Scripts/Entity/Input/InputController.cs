@@ -11,7 +11,7 @@ public abstract class InputController : MonoBehaviour
 
 	public abstract bool Crouch { get; }
 
-	protected void Awake()
+	protected virtual void Awake()
 	{
 		Entity = GetComponent<Entity>() ?? GetComponentInParent<Entity>();
 	}

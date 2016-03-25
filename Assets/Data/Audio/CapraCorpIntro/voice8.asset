@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Name: voice8
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: af08a47c2f6a6a14998b0a7331a4ef6c, type: 3}
-  audioMixerGroup: {fileID: 0}
+  audioMixerGroup: {fileID: 243000011020468368, guid: 42dd3235bcd36ce4581c7e18bc627bef,
+    type: 2}
   type: 0
   volume: 1
   pitch: 1

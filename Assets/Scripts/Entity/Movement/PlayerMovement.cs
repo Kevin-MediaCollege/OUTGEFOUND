@@ -44,12 +44,32 @@ public class PlayerMovement : EntityMovement
 		}
 
 		// Toggle crouching
-		if(playerInputController.Crouch)
+		if(playerInputController.Crouch && playerInputController.ToggleCrouch)
 		{
 			Crouching = !Crouching;
 
 			StopCoroutine("HandleCrouch");
 			StartCoroutine("HandleCrouch");
+		}
+		else if(playerInputController.Crouch && !playerInputController.ToggleCrouch)
+		{
+			if(!Crouching)
+			{
+				Crouching = true;
+
+				StopCoroutine("HandleCrouch");
+				StartCoroutine("HandleCrouch");
+			}
+		}
+		else if(!playerInputController.Crouch && !playerInputController.ToggleCrouch)
+		{
+			if(Crouching)
+			{
+				Crouching = false;
+
+				StopCoroutine("HandleCrouch");
+				StartCoroutine("HandleCrouch");
+			}
 		}
 	}
 

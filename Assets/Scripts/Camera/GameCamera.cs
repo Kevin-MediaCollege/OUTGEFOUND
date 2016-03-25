@@ -7,8 +7,9 @@ public class GameCamera : MonoBehaviour
 {
 	public static Vector3 offset;
 
+	public Vector2 Sensitivity { set; get; }
+
 	[SerializeField] private Vector2 yConstraint;
-	[SerializeField] private Vector2 sensitivity;
 
 	private Transform weapon;
 	private Transform player;
@@ -64,8 +65,8 @@ public class GameCamera : MonoBehaviour
 
 	private void UpdateCamera()
 	{
-		rotationX += Input.GetAxis("Mouse X") * sensitivity.x;
-		rotationY += Input.GetAxis("Mouse Y") * sensitivity.y;
+		rotationX += Input.GetAxis("Mouse X") * Sensitivity.x;
+		rotationY += Input.GetAxis("Mouse Y") * Sensitivity.y;
 
 		rotationX += offset.x;
 		rotationY += offset.y;

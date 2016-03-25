@@ -78,6 +78,8 @@ GameObject:
   - 114: {fileID: 11491956}
   - 114: {fileID: 11404734}
   - 114: {fileID: 11457416}
+  - 114: {fileID: 114000011294155532}
+  - 114: {fileID: 114000013185602316}
   m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
@@ -660,6 +662,34 @@ Transform:
   m_Father: {fileID: 443042}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114000011294155532
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b056fbfa77ae546a50a5b26e14a0e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: SETTINGS_GAME_ADS_TOGGLE
+  object: {fileID: 11491956}
+  default: 1
+--- !u!114 &114000013185602316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b35706664ea60a84c9d394670c56faf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: SETTINGS_GAME_CROUCH_TOGGLE
+  object: {fileID: 11491956}
+  default: 1
 --- !u!114 &114000013764636246
 MonoBehaviour:
   m_ObjectHideFlags: 1

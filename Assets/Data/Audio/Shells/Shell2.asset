@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Name: Shell2
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 5bbe6de65fc4b1247a100e372619b98e, type: 3}
-  audioMixerGroup: {fileID: 0}
+  audioMixerGroup: {fileID: 243000011020468368, guid: 42dd3235bcd36ce4581c7e18bc627bef,
+    type: 2}
   type: 0
   volume: 1
   pitch: 1

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Name: pain01
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: ef1d6d64529171840bfaab3564e582d7, type: 3}
-  audioMixerGroup: {fileID: 0}
+  audioMixerGroup: {fileID: 243000011020468368, guid: 42dd3235bcd36ce4581c7e18bc627bef,
+    type: 2}
   type: 0
   volume: 1
   pitch: 1

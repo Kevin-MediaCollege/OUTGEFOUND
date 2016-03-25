@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Name: Gun_reload_1
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 7abcb5f460a65454e93479a30ebdd822, type: 3}
-  audioMixerGroup: {fileID: 0}
+  audioMixerGroup: {fileID: 243000011020468368, guid: 42dd3235bcd36ce4581c7e18bc627bef,
+    type: 2}
   type: 0
   volume: 0.3
   pitch: 1
