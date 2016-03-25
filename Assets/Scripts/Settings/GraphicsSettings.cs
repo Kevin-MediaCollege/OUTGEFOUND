@@ -83,6 +83,11 @@ public class GraphicsSettings : ScriptableObjectSingleton<GraphicsSettings>
 	[SerializeField] private bool defaultTiltShift;
 	[SerializeField] private AntiAliasingLevel defaultAntiAliasing;
 
+	protected void OnEnable()
+	{
+		Load();
+	}
+
 #if UNITY_EDITOR
 	[UnityEditor.MenuItem("Assets/Create/Settings/Graphics")]
 	private static void Create()

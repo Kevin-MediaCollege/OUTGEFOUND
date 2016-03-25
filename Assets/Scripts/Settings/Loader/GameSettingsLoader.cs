@@ -23,6 +23,7 @@ public class GameSettingsLoader : MonoBehaviour
 	private void ApplySettings()
 	{
 		gameCamera.Sensitivity = new Vector2(GameSettings.MouseSensitivityX, GameSettings.MouseSensitivityY);
+		
 		playerInputController.ToggleADS = GameSettings.ToggleADS;
 		playerInputController.ToggleCrouch = GameSettings.ToggleCrouch;
 	}

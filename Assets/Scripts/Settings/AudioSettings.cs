@@ -47,6 +47,11 @@ public class AudioSettings : ScriptableObjectSingleton<AudioSettings>
 	[SerializeField] private float defaultUiVolume;
 	[SerializeField] private float defaultSpeechVolume;
 
+	protected void OnEnable()
+	{
+		Load();
+	}
+
 #if UNITY_EDITOR
 	[UnityEditor.MenuItem("Assets/Create/Settings/Audio")]
 	private static void Create()

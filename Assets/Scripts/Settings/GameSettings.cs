@@ -38,6 +38,11 @@ public class GameSettings : ScriptableObjectSingleton<GameSettings>
 	[SerializeField] private bool defaultToggleADS;
 	[SerializeField] private bool defaultToggleCrouch;
 
+	protected void OnEnable()
+	{
+		Load();
+	}
+
 #if UNITY_EDITOR
 	[UnityEditor.MenuItem("Assets/Create/Settings/Game")]
 	private static void Create()
