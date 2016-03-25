@@ -16,6 +16,13 @@ public class ScreenSound : ScreenBase
 
 	public Touchable buttonBack;
 
+	public ComponentSlider slider_master;
+	public ComponentSlider slider_music;
+	public ComponentSlider slider_ui;
+	public ComponentSlider slider_sfx;
+	public ComponentSlider slider_ambient;
+	public ComponentSlider slider_speech;
+
 	void Awake()
 	{
 		buttonBack.OnPointerDownEvent += OnBackButton;
@@ -29,7 +36,15 @@ public class ScreenSound : ScreenBase
 
 	public override void OnScreenEnter()
 	{
-		rect.anchoredPosition3D = new Vector3(-620f, 0f, 0f);
+		//load settings:
+		slider_master.init(50f);
+		slider_music.init(50f);
+		slider_ui.init(50f);
+		slider_sfx.init(50f);
+		slider_ambient.init(50f);
+		slider_speech.init(50f);
+
+		rect.anchoredPosition3D = new Vector3(-1920f, 0f, 0f);
 		HOTweenHelper.Fade(group, 0f, 1f, 0.2f, 0f);
 		HOTweenHelper.Position(rect, new Vector3(0f, 0f, 0f), 0.2f, 0f, Holoville.HOTween.EaseType.EaseOutCubic);
 	}
@@ -46,7 +61,7 @@ public class ScreenSound : ScreenBase
 	public override IEnumerator OnScreenFadeOut()
 	{
 		HOTweenHelper.Fade(group, 1f, 0f, 0.2f, 0f);
-		HOTweenHelper.Position(rect, new Vector3(-620f, 0f, 0f), 0.2f, 0f, Holoville.HOTween.EaseType.EaseOutCubic);
+		HOTweenHelper.Position(rect, new Vector3(-1920f, 0f, 0f), 0.2f, 0f, Holoville.HOTween.EaseType.EaseOutCubic);
 		yield return new WaitForSeconds(0.1f);
 		yield return MenuCamera.instance.flyFromTo("", "");
 	}
