@@ -23,6 +23,8 @@ public class AudioSettings : ScriptableObjectSingleton<AudioSettings>
 		PlayerPrefs.SetFloat("SETTING_AUDIO_AMBIENT_VOLUME", AmbientVolume);
 		PlayerPrefs.SetFloat("SETTING_AUDIO_UI_VOLUME", UIVolume);
 		PlayerPrefs.SetFloat("SETTING_AUDIO_SPEECH_VOLUME", SpeechVolume);
+
+		GlobalEvents.Invoke(new ReloadSettingsEvent());
 	}
 
 	public static void Load()

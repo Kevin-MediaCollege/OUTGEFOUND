@@ -51,6 +51,8 @@ public class GraphicsSettings : ScriptableObjectSingleton<GraphicsSettings>
 		PlayerPrefs.SetInt("SETTING_GRAPHICS_SSAO", SSAO ? 1 : 0);
 		PlayerPrefs.SetInt("SETTING_GRAPHICS_TILT_SHIFT", TiltShift ? 1 : 0);
 		PlayerPrefs.SetInt("SETTING_GRAPHICS_ANTI_ALIASING", (int)AntiAliasing);
+
+		GlobalEvents.Invoke(new ReloadSettingsEvent());
 	}
 
 	public static void Load()

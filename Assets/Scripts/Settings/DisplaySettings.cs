@@ -20,6 +20,8 @@ public class DisplaySettings : ScriptableObjectSingleton<DisplaySettings>
 		PlayerPrefs.SetInt("SETTING_DISPLAY_VSYNC", Convert.ToInt32(VSync));
 		PlayerPrefs.SetInt("SETTING_DISPLAY_WINDOWED", Convert.ToInt32(Windowed));
 		PlayerPrefs.SetFloat("SETTING_DISPLAY_FIELD_OF_VIEW", FieldOfView);
+
+		GlobalEvents.Invoke(new ReloadSettingsEvent());
 	}
 
 	public static void Load()

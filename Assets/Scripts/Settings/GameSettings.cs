@@ -18,6 +18,8 @@ public class GameSettings : ScriptableObjectSingleton<GameSettings>
 		PlayerPrefs.SetFloat("SETTING_GAME_MOUSE_SENSITIVITY_Y", MouseSensitivityY);
 		PlayerPrefs.SetInt("SETTING_GAME_MOUSE_TOGGLE_ADS", Convert.ToInt32(ToggleADS));
 		PlayerPrefs.SetInt("SETTING_GAME_MOUSE_TOGGLE_CROUCH", Convert.ToInt32(ToggleCrouch));
+
+		GlobalEvents.Invoke(new ReloadSettingsEvent());
 	}
 
 	public static void Load()
