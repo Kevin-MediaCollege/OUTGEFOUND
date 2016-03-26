@@ -22,9 +22,9 @@ GameObject:
   - 33: {fileID: 33000013613296454}
   - 64: {fileID: 64000011472983430}
   - 23: {fileID: 23000010693696990}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Quad
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -37,7 +37,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000014007121634}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: decal 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - 33: {fileID: 33000012351014818}
   - 64: {fileID: 64000011549923514}
   - 23: {fileID: 23000011872758010}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Quad
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012638753294}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000029504295}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -12.999259, y: 0.525, z: 8.897827}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4000013134151792}
