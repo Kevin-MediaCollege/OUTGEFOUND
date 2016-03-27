@@ -78,8 +78,6 @@ GameObject:
   - 114: {fileID: 11491956}
   - 114: {fileID: 11404734}
   - 114: {fileID: 11457416}
-  - 114: {fileID: 114000011294155532}
-  - 114: {fileID: 114000013185602316}
   m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
@@ -190,7 +188,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 144936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.066, y: 1.067, z: 44.435}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children:
   - {fileID: 447320}
@@ -357,7 +355,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 3a6c7e58259704d42b8605ea584565f8, type: 2}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -662,34 +660,6 @@ Transform:
   m_Father: {fileID: 443042}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114000011294155532
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 144936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2b056fbfa77ae546a50a5b26e14a0e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: SETTINGS_GAME_ADS_TOGGLE
-  object: {fileID: 11491956}
-  default: 1
---- !u!114 &114000013185602316
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 144936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b35706664ea60a84c9d394670c56faf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: SETTINGS_GAME_CROUCH_TOGGLE
-  object: {fileID: 11491956}
-  default: 1
 --- !u!114 &114000013764636246
 MonoBehaviour:
   m_ObjectHideFlags: 1

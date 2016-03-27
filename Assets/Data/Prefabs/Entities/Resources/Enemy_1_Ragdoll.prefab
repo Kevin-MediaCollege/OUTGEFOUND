@@ -1224,7 +1224,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012994724180}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.689846, y: 1.634, z: 18.876}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4000012897262982}
@@ -2107,8 +2107,8 @@ SkinnedMeshRenderer:
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
-  m_UpdateWhenOffscreen: 0
-  m_Mesh: {fileID: 4300000, guid: 69c3beafee9ceb449a56a75006b2e0d6, type: 3}
+  m_UpdateWhenOffscreen: 1
+  m_Mesh: {fileID: 4300000, guid: d0d5ff05cc8680145b054ce6ac6c77b0, type: 3}
   m_Bones:
   - {fileID: 4000013891271740}
   - {fileID: 4000010707848148}

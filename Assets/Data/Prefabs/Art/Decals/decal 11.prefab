@@ -22,7 +22,7 @@ GameObject:
   - 33: {fileID: 33000012789123900}
   - 64: {fileID: 64000013427214722}
   - 23: {fileID: 23000010788501828}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Quad
   m_TagString: Wall
   m_Icon: {fileID: 0}

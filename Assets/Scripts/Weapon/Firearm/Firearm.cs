@@ -7,7 +7,7 @@ public class Firearm : Weapon
 	{
 		get
 		{
-			return barrel.position;
+			return Wielder.GetEyes().position;
 		}
 	}
 
@@ -15,11 +15,9 @@ public class Firearm : Weapon
 	{
 		get
 		{
-			return barrel.rotation;
+			return Wielder.GetEyes().rotation;
 		}
 	}
-
-	[SerializeField] protected Transform barrel;
 
 	[SerializeField] protected float range;
 
