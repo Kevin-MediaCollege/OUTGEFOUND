@@ -15,31 +15,31 @@ public class HOTweenHelper
 
 	public static Tweener Size(RectTransform _rect, Vector2 _targetSize, float _time, float _delay, Holoville.HOTween.EaseType _easeType = Holoville.HOTween.EaseType.EaseOutElastic)
 	{
-		return HOTween.To (_rect, _time, new TweenParms ().Prop ("sizeDelta", new PlugVector2 (_targetSize)).Ease (_easeType));
+		return HOTween.To (_rect, _time, new TweenParms ().Prop ("sizeDelta", new PlugVector2 (_targetSize)).Ease (_easeType).Delay(_delay));
 	}
 
 	public static Tweener Scale(RectTransform _rect, Vector3 _targetScale, float _time, float _delay, Holoville.HOTween.EaseType _easeType = Holoville.HOTween.EaseType.EaseOutElastic)
 	{
-		return HOTween.To (_rect, _time, new TweenParms ().Prop ("localScale", new PlugVector3 (_targetScale)).Ease (_easeType));
+		return HOTween.To (_rect, _time, new TweenParms ().Prop ("localScale", new PlugVector3 (_targetScale)).Ease (_easeType).Delay(_delay));
 	}
 
 	public static Tweener Position(RectTransform _rect, Vector3 _targetPosition, float _time, float _delay, Holoville.HOTween.EaseType _easeType = Holoville.HOTween.EaseType.EaseOutElastic)
 	{
-		return HOTween.To (_rect, _time, new TweenParms ().Prop ("anchoredPosition3D", new PlugVector3 (_targetPosition)).Ease (_easeType));
+		return HOTween.To (_rect, _time, new TweenParms ().Prop ("anchoredPosition3D", new PlugVector3 (_targetPosition)).Ease (_easeType).Delay(_delay));
 	}
 
 	public static Tweener TransformPosition(Transform _trans, Vector3 _targetPosition, float _time, float _delay, Holoville.HOTween.EaseType _easeType = Holoville.HOTween.EaseType.EaseOutElastic)
 	{
-		return HOTween.To (_trans, _time, new TweenParms ().Prop ("position", new PlugVector3 (_targetPosition)).Ease (_easeType));
+		return HOTween.To (_trans, _time, new TweenParms ().Prop ("position", new PlugVector3 (_targetPosition)).Ease (_easeType).Delay(_delay));
 	}
 
 	public static Tweener TransformLocalPosition(Transform _trans, Vector3 _targetPosition, float _time, float _delay, Holoville.HOTween.EaseType _easeType = Holoville.HOTween.EaseType.EaseOutElastic)
 	{
-		return HOTween.To (_trans, _time, new TweenParms ().Prop ("localPosition", new PlugVector3 (_targetPosition)).Ease (_easeType));
+		return HOTween.To (_trans, _time, new TweenParms ().Prop ("localPosition", new PlugVector3 (_targetPosition)).Ease (_easeType).Delay(_delay));
 	}
 
 	public static Tweener Rotate(Transform _trans, Quaternion _targetQuaternion, float _time, float _delay, Holoville.HOTween.EaseType _easeType = Holoville.HOTween.EaseType.EaseInOutCubic)
 	{
-		return HOTween.To (_trans, _time, new TweenParms ().Prop ("rotation", new PlugQuaternion (_targetQuaternion)).Ease (_easeType));
+		return HOTween.To (_trans, _time, new TweenParms ().Prop ("rotation", new PlugQuaternion (_targetQuaternion)).Ease (_easeType).Delay(_delay));
 	}
 }
