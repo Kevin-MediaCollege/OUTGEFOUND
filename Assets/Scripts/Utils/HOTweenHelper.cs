@@ -1,45 +1,41 @@
-﻿using UnityEngine;
-using System.Collections;
-using Holoville.HOTween;
-using Holoville.HOTween.Core.Easing;
-using Holoville.HOTween.Plugins;
-using Holoville.HOTween.Plugins.Core;
+﻿using DG.Tweening;
+using UnityEngine;
 
-public class HOTweenHelper 
+public static class HOTweenHelper 
 {
-	public static Tweener Fade(CanvasGroup _group, float _alphaStart, float _alphaTarget, float _time, float _delay = 0f)
+	public static Tweener Fade(CanvasGroup group, float alphaStart, float alphaTarget, float time, float delay = 0f)
 	{
-		_group.alpha = _alphaStart;
-		return HOTween.To( _group, _time, new TweenParms().Prop( "alpha", _alphaTarget ).Ease( EaseType.Linear ).Delay( _delay ));
+		group.alpha = alphaStart;
+		return DOTween.To(() => alphaStart, a => group.alpha = a, alphaTarget, time).SetEase(Ease.Linear).SetDelay(delay);
 	}
 
-	public static Tweener Size(RectTransform _rect, Vector2 _targetSize, float _time, float _delay, Holoville.HOTween.EaseType _easeType = Holoville.HOTween.EaseType.EaseOutElastic)
+	public static Tweener Size(RectTransform rect, Vector2 targetSize, float time, float delay, Ease ease = Ease.OutElastic)
 	{
-		return HOTween.To (_rect, _time, new TweenParms ().Prop ("sizeDelta", new PlugVector2 (_targetSize)).Ease (_easeType).Delay(_delay));
+		return DOTween.To(() => rect.sizeDelta, a => rect.sizeDelta = a, targetSize, time).SetEase(ease).SetDelay(delay);
 	}
 
-	public static Tweener Scale(RectTransform _rect, Vector3 _targetScale, float _time, float _delay, Holoville.HOTween.EaseType _easeType = Holoville.HOTween.EaseType.EaseOutElastic)
+	public static Tweener Scale(RectTransform rect, Vector3 targetScale, float time, float delay, Ease ease = Ease.OutElastic)
 	{
-		return HOTween.To (_rect, _time, new TweenParms ().Prop ("localScale", new PlugVector3 (_targetScale)).Ease (_easeType).Delay(_delay));
+		return rect.DOScale(targetScale, time).SetEase(ease).SetDelay(delay);
 	}
 
-	public static Tweener Position(RectTransform _rect, Vector3 _targetPosition, float _time, float _delay, Holoville.HOTween.EaseType _easeType = Holoville.HOTween.EaseType.EaseOutElastic)
+	public static Tweener Position(RectTransform rect, Vector3 targetPosition, float time, float delay, Ease ease = Ease.OutElastic)
 	{
-		return HOTween.To (_rect, _time, new TweenParms ().Prop ("anchoredPosition3D", new PlugVector3 (_targetPosition)).Ease (_easeType).Delay(_delay));
+		return DOTween.To(() => rect.anchoredPosition3D, a => rect.anchoredPosition3D = a, targetPosition, time).SetEase(ease).SetDelay(delay);
 	}
 
-	public static Tweener TransformPosition(Transform _trans, Vector3 _targetPosition, float _time, float _delay, Holoville.HOTween.EaseType _easeType = Holoville.HOTween.EaseType.EaseOutElastic)
+	public static Tweener TransformPosition(Transform trans, Vector3 targetPosition, float time, float delay, Ease ease = Ease.OutElastic)
 	{
-		return HOTween.To (_trans, _time, new TweenParms ().Prop ("position", new PlugVector3 (_targetPosition)).Ease (_easeType).Delay(_delay));
+		return trans.DOMove(targetPosition, time).SetEase(ease).SetDelay(delay);
 	}
 
-	public static Tweener TransformLocalPosition(Transform _trans, Vector3 _targetPosition, float _time, float _delay, Holoville.HOTween.EaseType _easeType = Holoville.HOTween.EaseType.EaseOutElastic)
+	public static Tweener TransformLocalPosition(Transform trans, Vector3 targetPosition, float time, float delay, Ease ease = Ease.OutElastic)
 	{
-		return HOTween.To (_trans, _time, new TweenParms ().Prop ("localPosition", new PlugVector3 (_targetPosition)).Ease (_easeType).Delay(_delay));
+		return DOTween.To(() => trans.localPosition, a => trans.localPosition = a, targetPosition, time).SetEase(ease).SetDelay(delay);
 	}
 
-	public static Tweener Rotate(Transform _trans, Quaternion _targetQuaternion, float _time, float _delay, Holoville.HOTween.EaseType _easeType = Holoville.HOTween.EaseType.EaseInOutCubic)
+	public static Tweener Rotate(Transform trans, Quaternion targetQuaternion, float time, float delay, Ease ease = Ease.InOutCubic)
 	{
-		return HOTween.To (_trans, _time, new TweenParms ().Prop ("rotation", new PlugQuaternion (_targetQuaternion)).Ease (_easeType).Delay(_delay));
+		return trans.DORotateQuaternion(targetQuaternion, time).SetEase(ease).SetDelay(delay);
 	}
 }

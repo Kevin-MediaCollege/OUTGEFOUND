@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using Holoville.HOTween;
-using Holoville.HOTween.Plugins.Core;
+﻿using DG.Tweening;
 
 public static class AudioUtils
 {
-	public static void FadeTo(AudioChannel channel, float time, float volume, EaseType easeType = EaseType.Linear)
+	public static void FadeTo(AudioChannel channel, float time, float volume, Ease ease = Ease.Linear)
 	{
-		HOTween.To(channel.AudioSource, time, new TweenParms().Prop("volume", new PlugFloat(volume)).Ease(easeType));
+		DOTween.To(() => channel.AudioSource.volume, a => channel.AudioSource.volume = a, volume, time).SetEase(ease);
 	}
 
-	public static void FadeIn(AudioChannel channel, float time, EaseType easeType = EaseType.Linear)
+	public static void FadeIn(AudioChannel channel, float time, Ease ease = Ease.Linear)
 	{
-		FadeTo(channel, time, 1, easeType);
+		FadeTo(channel, time, 1, ease);
 	}
 
-	public static void FadeOut(AudioChannel channel, float time, EaseType easeType = EaseType.Linear)
+	public static void FadeOut(AudioChannel channel, float time, Ease ease = Ease.Linear)
 	{
-		FadeTo(channel, time, 0, easeType);
+		FadeTo(channel, time, 0, ease);
 	}
 }

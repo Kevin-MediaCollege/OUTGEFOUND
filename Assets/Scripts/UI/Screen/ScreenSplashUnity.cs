@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class ScreenSplashUnity : ScreenBase
 {
@@ -56,7 +57,7 @@ public class ScreenSplashUnity : ScreenBase
 	{
 		camera.position = new Vector3(-15.1f, 14.85f, 21.8f);
 
-		HOTweenHelper.TransformPosition (camera, new Vector3(-15.1f, 5.5f, 31.6f), 6f, 0f, Holoville.HOTween.EaseType.EaseOutCubic);
+		HOTweenHelper.TransformPosition (camera, new Vector3(-15.1f, 5.5f, 31.6f), 6f, 0f, Ease.OutCubic);
 
 		HOTweenHelper.Fade (overlay, 1f, 0f, 2.5f, 0f);
 

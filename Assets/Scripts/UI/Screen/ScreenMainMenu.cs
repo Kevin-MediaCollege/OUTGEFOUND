@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System;
 using UnityEngine.Serialization;
+using DG.Tweening;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -77,7 +78,7 @@ public class ScreenMainMenu : ScreenBase
 	{
 		rect.anchoredPosition3D = new Vector3(-620f, 0f, 0f);
 		HOTweenHelper.Fade(group, 0f, 1f, 0.2f, 0f);
-		HOTweenHelper.Position(rect, new Vector3(0f, 0f, 0f), 0.2f, 0f, Holoville.HOTween.EaseType.EaseOutCubic);
+		HOTweenHelper.Position(rect, new Vector3(0f, 0f, 0f), 0.2f, 0f, Ease.OutCubic);
 	}
 
 	public override void OnScreenExit()
@@ -92,7 +93,7 @@ public class ScreenMainMenu : ScreenBase
 	public override IEnumerator OnScreenFadeOut()
 	{
 		HOTweenHelper.Fade(group, 1f, 0f, 0.2f, 0f);
-		HOTweenHelper.Position(rect, new Vector3(-620f, 0f, 0f), 0.2f, 0f, Holoville.HOTween.EaseType.EaseOutCubic);
+		HOTweenHelper.Position(rect, new Vector3(-620f, 0f, 0f), 0.2f, 0f, Ease.OutCubic);
 		yield return new WaitForSeconds(0.1f);
 		yield return MenuCamera.instance.flyFromTo("", "");
 	}
@@ -100,7 +101,7 @@ public class ScreenMainMenu : ScreenBase
 	public IEnumerator StartLevel()
 	{
 		HOTweenHelper.Fade(group, 1f, 0f, 0.2f, 0f);
-		HOTweenHelper.Position(rect, new Vector3(-620f, 0f, 0f), 0.2f, 0f, Holoville.HOTween.EaseType.EaseOutCubic);
+		HOTweenHelper.Position(rect, new Vector3(-620f, 0f, 0f), 0.2f, 0f, Ease.OutCubic);
 		yield return new WaitForSeconds(0.1f);
 		StartCoroutine("OpenDoorDelayed");
 		yield return MenuCamera.instance.flyFromTo("Menu", "Play", 4f);

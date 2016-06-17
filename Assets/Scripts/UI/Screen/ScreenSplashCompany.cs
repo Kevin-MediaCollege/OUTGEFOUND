@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System;
+using DG.Tweening;
 
 public class ScreenSplashCompany : ScreenBase 
 {
@@ -58,8 +59,8 @@ public class ScreenSplashCompany : ScreenBase
 		backgroundRect.anchoredPosition3D = new Vector3 (0f, 0f, 0f);
 		background2Rect.anchoredPosition3D = new Vector3 (0f, 200f, 0f);
 
-		HOTweenHelper.Position (backgroundRect, new Vector3 (0f, -200f, 0f), 6.4f, 0f, Holoville.HOTween.EaseType.Linear);
-		HOTweenHelper.Position (background2Rect, new Vector3 (0f, -100f, 0f), 6.4f, 0f, Holoville.HOTween.EaseType.Linear);
+		HOTweenHelper.Position (backgroundRect, new Vector3 (0f, -200f, 0f), 6.4f, 0f, Ease.Linear);
+		HOTweenHelper.Position (background2Rect, new Vector3 (0f, -100f, 0f), 6.4f, 0f, Ease.Linear);
 
 		yield return new WaitForSeconds(1f);
 
@@ -76,7 +77,7 @@ public class ScreenSplashCompany : ScreenBase
 
 		logoBaseGroup.alpha = 1f;
 		logoBaseRect.sizeDelta = new Vector2 (0f, 0f);
-		HOTweenHelper.Size (logoBaseRect, new Vector2 (1380f, 156f), 0.6f, 0f, Holoville.HOTween.EaseType.EaseOutElastic);
+		HOTweenHelper.Size (logoBaseRect, new Vector2 (1380f, 156f), 0.6f, 0f, Ease.OutElastic);
 
 		yield return new WaitForSeconds(0.2f);
 
@@ -88,27 +89,27 @@ public class ScreenSplashCompany : ScreenBase
 		yield return new WaitForSeconds(0.3f);
 
 		groupList [0].alpha = 1f;
-		HOTweenHelper.Size (rectList [0], goatPrintSize, 0.3f, 0f, Holoville.HOTween.EaseType.EaseOutBounce);
+		HOTweenHelper.Size (rectList [0], goatPrintSize, 0.3f, 0f, Ease.OutBounce);
 
 		yield return new WaitForSeconds(0.1f);
 
 		groupList [1].alpha = 1f;
-		HOTweenHelper.Size (rectList [1], goatPrintSize, 0.3f, 0f, Holoville.HOTween.EaseType.EaseOutBounce);
+		HOTweenHelper.Size (rectList [1], goatPrintSize, 0.3f, 0f, Ease.OutBounce);
 
 		yield return new WaitForSeconds(0.1f);
 
 		groupList [2].alpha = 1f;
-		HOTweenHelper.Size (rectList [2], goatPrintSize, 0.3f, 0f, Holoville.HOTween.EaseType.EaseOutBounce);
+		HOTweenHelper.Size (rectList [2], goatPrintSize, 0.3f, 0f, Ease.OutBounce);
 
 		yield return new WaitForSeconds(0.1f);
 
 		groupList [3].alpha = 1f;
-		HOTweenHelper.Size (rectList [3], goatPrintSize, 0.3f, 0f, Holoville.HOTween.EaseType.EaseOutBounce);
+		HOTweenHelper.Size (rectList [3], goatPrintSize, 0.3f, 0f, Ease.OutBounce);
 
 		yield return new WaitForSeconds(0.1f);
 
 		groupList [4].alpha = 1f;
-		HOTweenHelper.Size (rectList [4], goatPrintSize, 0.3f, 0f, Holoville.HOTween.EaseType.EaseOutBounce);
+		HOTweenHelper.Size (rectList [4], goatPrintSize, 0.3f, 0f, Ease.OutBounce);
 
 		yield return new WaitForSeconds(0.3f);
 

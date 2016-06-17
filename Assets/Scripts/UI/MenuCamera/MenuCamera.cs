@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public class MenuCamera : MonoBehaviour 
 {
@@ -67,7 +68,7 @@ public class MenuCamera : MonoBehaviour
 		bool inverted = path.start == start ? false : true;
 		float progress = 0f;
 
-		HOTweenHelper.Rotate(cam.transform, inverted ? path.start.transform.rotation : path.end.transform.rotation, 1f * _speed, 0f, Holoville.HOTween.EaseType.EaseInOutCubic);
+		HOTweenHelper.Rotate(cam.transform, inverted ? path.start.transform.rotation : path.end.transform.rotation, 1f * _speed, 0f, Ease.InOutCubic);
 
 		while(progress < 1f)
 		{

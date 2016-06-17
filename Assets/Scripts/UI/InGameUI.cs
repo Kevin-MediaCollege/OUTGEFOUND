@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using Holoville.HOTween;
+using DG.Tweening;
 
 public class InGameUI : MonoBehaviour 
 {
@@ -108,19 +108,19 @@ public class InGameUI : MonoBehaviour
 
 	private IEnumerator ShowScorePopup()
 	{
-		if(text_scorePopupScaleTween != null && !text_scorePopupScaleTween.isComplete)
+		if(text_scorePopupScaleTween != null && !text_scorePopupScaleTween.IsComplete())
 		{
 			text_scorePopupScaleTween.Kill ();
 		}
 
-		if(text_scorePopupFadeTween != null && !text_scorePopupFadeTween.isComplete)
+		if(text_scorePopupFadeTween != null && !text_scorePopupFadeTween.IsComplete())
 		{
 			text_scorePopupFadeTween.Kill ();
 		}
 
 		text_scorePopupGroup.alpha = 1f;
 		text_scorePopup.rectTransform.localScale = new Vector3 (1.8f, 1.8f, 1.8f);
-		text_scorePopupScaleTween = HOTweenHelper.Scale(text_scorePopup.rectTransform, new Vector3(1f, 1f, 1f), 0.2f, 0f, Holoville.HOTween.EaseType.EaseOutCubic);
+		text_scorePopupScaleTween = HOTweenHelper.Scale(text_scorePopup.rectTransform, new Vector3(1f, 1f, 1f), 0.2f, 0f, Ease.OutCubic);
 
 		yield return new WaitForSeconds (1f);
 

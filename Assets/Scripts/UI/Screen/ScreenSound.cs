@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public class ScreenSound : ScreenBase 
 {
@@ -46,7 +47,7 @@ public class ScreenSound : ScreenBase
 
 		rect.anchoredPosition3D = new Vector3(-1920f, 0f, 0f);
 		HOTweenHelper.Fade(group, 0f, 1f, 0.2f, 0f);
-		HOTweenHelper.Position(rect, new Vector3(0f, 0f, 0f), 0.2f, 0f, Holoville.HOTween.EaseType.EaseOutCubic);
+		HOTweenHelper.Position(rect, new Vector3(0f, 0f, 0f), 0.2f, 0f, Ease.OutCubic);
 	}
 
 	public override void OnScreenExit()
@@ -61,7 +62,7 @@ public class ScreenSound : ScreenBase
 	public override IEnumerator OnScreenFadeOut()
 	{
 		HOTweenHelper.Fade(group, 1f, 0f, 0.2f, 0f);
-		HOTweenHelper.Position(rect, new Vector3(-1920f, 0f, 0f), 0.2f, 0f, Holoville.HOTween.EaseType.EaseOutCubic);
+		HOTweenHelper.Position(rect, new Vector3(-1920f, 0f, 0f), 0.2f, 0f, Ease.OutCubic);
 		yield return new WaitForSeconds(0.1f);
 		yield return MenuCamera.instance.flyFromTo("", "");
 	}

@@ -1,7 +1,6 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using Holoville.HOTween;
 
 public class FlightCamera : MonoBehaviour 
 {
@@ -150,8 +149,8 @@ public class FlightCamera : MonoBehaviour
 				cam.transform.position = slideStart.transform.position;
 				cam.transform.rotation = slideStart.transform.rotation;
 
-				positionTween = HOTweenHelper.TransformPosition(cam.transform, slideEnd.transform.position, tweenLenght, 0.5f, linearTween ? Holoville.HOTween.EaseType.Linear : Holoville.HOTween.EaseType.EaseInOutCubic);
-				rotationTween = HOTweenHelper.Rotate(cam.transform, slideEnd.transform.rotation, tweenLenght, 0.5f, linearTween ? Holoville.HOTween.EaseType.Linear : Holoville.HOTween.EaseType.EaseInOutCubic);
+				positionTween = HOTweenHelper.TransformPosition(cam.transform, slideEnd.transform.position, tweenLenght, 0.5f, linearTween ? Ease.Linear : Ease.InOutCubic);
+				rotationTween = HOTweenHelper.Rotate(cam.transform, slideEnd.transform.rotation, tweenLenght, 0.5f, linearTween ? Ease.Linear : Ease.InOutCubic);
 
 				slideStart.SetActive(false);
 				slideLine.SetActive(false);

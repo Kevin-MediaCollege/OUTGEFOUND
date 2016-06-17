@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public class FirearmSway : MonoBehaviour
 {
@@ -59,14 +60,14 @@ public class FirearmSway : MonoBehaviour
 	{
 		adsAnim.transform.localPosition = baseNormal;
 		normalAnim.transform.localPosition = baseAds;
-		HOTweenHelper.TransformLocalPosition (adsAnim, baseAds, 0.1f, 0f, Holoville.HOTween.EaseType.Linear);
+		HOTweenHelper.TransformLocalPosition (adsAnim, baseAds, 0.1f, 0f, Ease.Linear);
 	}
 
 	private void OnStopAimDownSight(StopAimDownSightEvent evt)
 	{
 		normalAnim.transform.localPosition = baseAds;
 		adsAnim.transform.localPosition = baseNormal;
-		HOTweenHelper.TransformLocalPosition (normalAnim, baseNormal, 0.1f, 0f, Holoville.HOTween.EaseType.Linear);
+		HOTweenHelper.TransformLocalPosition (normalAnim, baseNormal, 0.1f, 0f, Ease.Linear);
 	}
 
 	protected void Update()
