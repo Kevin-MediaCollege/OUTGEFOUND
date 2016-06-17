@@ -43,7 +43,7 @@ public class ScreenSplashCompany : ScreenBase
 				naughtyGoatAudioChannel.Stop();
 			}
 
-			ScreenManager.Instance.SetScreen("ScreenSplashUnity", true);
+			SceneManager.LoadSceneAsync("Menus");
 		}
 	}
 
@@ -126,9 +126,9 @@ public class ScreenSplashCompany : ScreenBase
 
 		HOTweenHelper.Fade (overlay, 0f, 1f, 0.3f, 0f);
 
-		yield return new WaitForSeconds(0.3f); 
+		yield return new WaitForSeconds(0.3f);
 
-		ScreenManager.Instance.SetScreen("ScreenSplashUnity");
+		SceneManager.LoadSceneAsync("Menus");
 	}
 
 	private IEnumerator PlayNaughtyGoatAudioDelayed()
