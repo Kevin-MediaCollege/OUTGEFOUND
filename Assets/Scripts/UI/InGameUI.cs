@@ -28,11 +28,22 @@ public class InGameUI : MonoBehaviour
 	private float text_reloadAnim;
 	public CanvasGroup groupReload;
 
+	// Kills
+	public Text text_kills;
+	private int numKills;
+
+	// Time
+	public Text text_time;
+	private float startTime;
+
 	protected void Awake()
 	{
 		text_scorePopupGroup.alpha = 0f;
 		groupReload.alpha = 0f;
 		text_reloadAnim = -1f;
+		numKills = 0;
+		startTime = Time.time;
+		text_kills.text = "0 KILLS";
 
 		playerCurrency = Dependency.Get<Currency>();
 	}
@@ -40,11 +51,13 @@ public class InGameUI : MonoBehaviour
 	protected void OnEnable()
 	{
 		GlobalEvents.AddListener<CurrencyReceivedEvent>(OnCurrencyReceivedEvent);
+		GlobalEvents.AddListener<EntityDiedEvent>(OnEntityDiedEvent);
 	}
 
 	protected void OnDisable()
 	{
 		GlobalEvents.RemoveListener<CurrencyReceivedEvent>(OnCurrencyReceivedEvent);
+		GlobalEvents.RemoveListener<EntityDiedEvent>(OnEntityDiedEvent);
 	}
 
 	protected void Update() 
@@ -69,6 +82,15 @@ public class InGameUI : MonoBehaviour
 				return;
 			}
 		}
+
+		float currentTime = Time.time;
+		int minutes = Mathf.FloorToInt((currentTime - startTime) / 60f);
+		int seconds = Mathf.FloorToInt((currentTime - startTime) % 60f);
+		text_time.text = "";
+
+		text_time.text += minutes < 10 ? "0" + minutes : minutes.ToString();
+		text_time.text += ":";
+		text_time.text += seconds < 10 ? "0" + seconds : seconds.ToString();
 
 		text_ammoCurrent.text = "" + playerMagazine.Remaining;
 		text_ammoLeft.text = "" + playerStockPile.Remaining;
@@ -133,5 +155,16 @@ public class InGameUI : MonoBehaviour
 
 		StopCoroutine("ShowScorePopup");
 		StartCoroutine("ShowScorePopup");
+	}
+
+	private void OnEntityDiedEvent(EntityDiedEvent evt)
+	{
+		if(evt.Entity.HasTag("Enemy"))
+		{
+			numKills++;
+
+			string suffix = numKills == 1 ? "KILL" : "KILLS";			
+			text_kills.text = numKills + " " + suffix;
+		}
 	}
 }
