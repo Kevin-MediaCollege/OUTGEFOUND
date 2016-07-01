@@ -15,8 +15,8 @@ MonoBehaviour:
   audioMixerGroup: {fileID: 243000013553846678, guid: 42dd3235bcd36ce4581c7e18bc627bef,
     type: 2}
   type: 0
-  volume: 1
-  pitch: 1
+  volume: 0.8
+  pitch: 0.9
   stereoPan: 0
   spatialBlend: 1
   reverbZoneMix: 1
