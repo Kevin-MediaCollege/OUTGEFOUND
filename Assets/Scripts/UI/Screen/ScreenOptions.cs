@@ -23,13 +23,19 @@ public class ScreenOptions : ScreenBase
 
 	public Animator door;
 
-	void Awake()
+	void OnEnable()
 	{
 		buttonSound.OnPointerDownEvent += OnSoundButton;
-		buttonGameplay.OnPointerDownEvent += OnGameplayButton;
-		buttonDisplay.OnPointerDownEvent += OnDisplayButton;
-		buttonGraphics.OnPointerDownEvent += OnGraphicsButton;
+		//buttonGameplay.OnPointerDownEvent += OnGameplayButton;
+		//buttonDisplay.OnPointerDownEvent += OnDisplayButton;
+		//buttonGraphics.OnPointerDownEvent += OnGraphicsButton;
 		buttonBack.OnPointerDownEvent += OnBackButton;
+	}
+
+	void OnDisable()
+	{
+		buttonSound.OnPointerDownEvent -= OnSoundButton;
+		buttonBack.OnPointerDownEvent -= OnBackButton;
 	}
 
 	void OnSoundButton (Touchable _sender, UnityEngine.EventSystems.PointerEventData _eventData)

@@ -19,6 +19,6 @@ public class LoadingScreen : MonoBehaviour
 
 		yield return new WaitForSeconds(1.5f);
 
-		SceneManager.LoadSceneAsync("Level_7");
+		SceneManager.LoadSceneAsync("Level_1");
 	}
 }

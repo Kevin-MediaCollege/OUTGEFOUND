@@ -21,10 +21,15 @@ public class ScreenCredits : ScreenBase
 	public Animator door_credits;
 	public Animator door_easter;
 
-	void Awake()
+	void OnEnable()
 	{
 		buttonBack.OnPointerDownEvent += OnBackButton;
-		buttonEaster.OnPointerDownEvent += OnEasterButton;
+		//buttonEaster.OnPointerDownEvent += OnEasterButton;
+	}
+
+	void OnDisable()
+	{
+		buttonBack.OnPointerDownEvent -= OnBackButton;
 	}
 
 	void OnBackButton (Touchable _sender, UnityEngine.EventSystems.PointerEventData _eventData)
